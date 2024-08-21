@@ -1,12 +1,7 @@
-
+import Router from "../src/utils/Router";
 
 function App() {
-  
-
-  return (
-    <>
-    </>
-  )
+  return <Router />;
 }
 
-export default App
+export default App;
