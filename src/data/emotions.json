@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "Gefühlsfamilie": "eins",
+    "Untergefühle": []
+  },
+  {
+    "id": 2,
+    "Gefühlsfamilie": "zwei",
+    "Untergefühle": []
+  },
+  {
+    "id": 3,
+    "Gefühlsfamilie": "zwei",
+    "Untergefühle": []
+  },
+  {
+    "id": 4,
+    "Gefühlsfamilie": "zwei",
+    "Untergefühle": []
+  },
+  {
+    "id": 5,
+    "Gefühlsfamilie": "gemischte Gefühle",
+    "Untergefühle": []
+  }
+]
