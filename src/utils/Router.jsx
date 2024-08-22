@@ -8,7 +8,7 @@ import LoginPage from "../pages/LoginPage";
 import MetricsPage from "../pages/MetricsPage";
 import RecordPage from "../pages/RecordPage";
 import RegisterPage from "../pages/RegisterPage";
-import StartPage from "../pages/StartPage";
+import DashboardPage from "../pages/DashboardPage";
 import UserDataPage from "../pages/UserDataPage";
 
 const Router = () => {
@@ -16,21 +16,22 @@ const Router = () => {
     {
       path: "/",
       element: <Layout />,
+      errorElement: <ErrorPage />,
       children: [
         {
           path: "/",
           element: <HomePage />,
         },
         {
-          path: "/login",
+          path: "/anmeldung",
           element: <LoginPage />,
         },
         {
-          path: "/register",
+          path: "/registrierung",
           element: <RegisterPage />,
         },
         {
-          path: "/configuration",
+          path: "/konfiguration",
           element: <ConfigPage />,
         },
         {
@@ -38,24 +39,20 @@ const Router = () => {
           element: <UserDataPage />,
         },
         {
-          path: "/start", // hier vielleicht später den App-Namen nutzen?
-          element: <StartPage />,
+          path: "/dashboard",
+          element: <DashboardPage />,
         },
         {
           path: "/emotionalesWohlbefindenErfassen", // vielleicht auch noch einmal Namen ändern?
           element: <RecordPage />,
         },
         {
-          path: "/meineStatistiken", //vllt. ohne meine?
+          path: "/meineStatistiken",
           element: <MetricsPage />,
         },
         {
-          path: "/meinGefühlstagebuch", //vllt. ohne meine?
+          path: "/meinJournal",
           element: <JournalPage />,
-        },
-        {
-          path: "*",
-          element: <ErrorPage />,
         },
       ],
     },
