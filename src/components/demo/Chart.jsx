@@ -2,7 +2,7 @@ import { Bar, BarChart } from "recharts";
 
 import { ChartContainer } from "@/components/ui/chart";
 
-// chartData wird in dieser Basisversion nicht genutzt
+// month von chartData wird in dieser Basisversion nicht genutzt
 const chartData = [
   { month: "January", desktop: 186, mobile: 80 },
   { month: "February", desktop: 305, mobile: 200 },
