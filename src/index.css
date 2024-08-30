@@ -1,12 +1,19 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Importing Tailwind Layers: */
+@tailwind base; /* tailwinds base styles */
+@tailwind components; /* tailwind component classes (e.g. form elements, buttons) */
+@tailwind utilities; /* tailwind utility classes (e.g. "mt-4", "text-center) */
 
 @layer base {
+  /* 1. Add a new layer to the base layer, which then will be processed with tailwinds base styles */
+  /* Here, we can define the values for our variables: */
+
   :root {
-    --background: 0 0% 100%;
+    /* variables used around the stylesheet:
+    These variables are then referenced in tailwind.config.js to generate utility classes like bg-background, text-foreground, etc. */
+    /* Important: If we change the name of the variable here, we have to change the key in the tailwind.config.js as well! */
+    --background: 358 100% 93%; /* #ffd9da */
     --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
+    --card: 0 0% 100%; /* #ffffff */
     --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
@@ -29,10 +36,14 @@
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
+    /* custom test */
+    --customtest: 180 100% 50%; /* cyan */
+    --customtest-foreground: 0 0% 100%; /* white */
   }
 
+  /* Dark Mode */
   .dark {
-    --background: 222.2 84% 4.9%;
+    --background: 217 48% 39%; /* #345995 */
     --foreground: 210 40% 98%;
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
@@ -59,11 +70,46 @@
   }
 }
 
+/* 2. Applying Styles Using Tailwind-Utilities for consistent styling across multiple elements without having to write repetitive CSS */
+
+@layer base {
+  /* this adds another layer to the base layer */
+  * {
+    /* apply to all elements */
+
+    @apply border-border;
+    /* This applies the border-border utility class to all elements. This sets the border color to --border. */
+  }
+  body {
+    @apply bg-background text-foreground;
+    /* Applies the bg-background and text-foreground utility classes to the body. This sets the background color to --background and the text color to --foreground. */
+  }
+}
+
+/* By using @apply, we ensure that the same styles are consistently applied across multiple elements. If we need to change a style, we can update it in one place (in our CSS variables or utility classes), and it will reflect across all elements using @apply */
+
+/* Instead of using the universal selector (*), we can target specific elements where we want for example the border-border utility to be applied:
+
+e.g.:
+
+A) Apply border only to specific elements:
+
+@layer base {
+  div, p, h1, h2, h3, h4, h5, h6, .card, .container {
+    @apply border-border;
+  }
+
+
+B) Exclude buttons by overriding their border style
+
+
 @layer base {
   * {
     @apply border-border;
   }
-  body {
-    @apply bg-background text-foreground;
+  
+  button {
+    border-color: transparent;
   }
 }
+ */
