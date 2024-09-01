@@ -14,6 +14,7 @@ import InfoIcon from "/src/assets/icons/information-svgrepo-com.svg";
 import LogoutIcon from "/src/assets/icons/walk-svgrepo-com.svg";
 
 // NOTICE: Component NavMenubar.jsx warsch. löschen
+// NOTICE: Iconfarbe noch auf schwarz anpassen oder durch scharze Icons ersetzten
 
 export const NavMenu = () => {
   // routes:
