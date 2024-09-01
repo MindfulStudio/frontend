@@ -4,7 +4,30 @@
 @tailwind utilities; /* tailwind utility classes (e.g. "mt-4", "text-center) */
 
 @layer base {
-  /* 1. Add a new layer to the base layer, which then will be processed with tailwinds base styles */
+  /* 1. Add a new layer to the base layer, which then will be added and processed with tailwinds base styles */
+
+  /* Font Faces to use locally stored google fonts */
+  @font-face {
+    font-family: "Cantarell";
+    src: url("./assets/fonts/Cantarell/Cantarell-Regular.woff") format("woff2");
+    font-style: normal;
+    font-weight: 400;
+  }
+
+  @font-face {
+    font-family: "Cantarell";
+    src: url("./assets/fonts/Cantarell/Cantarell-Bold.woff") format("woff2");
+    font-style: bold;
+    font-weight: 700;
+  }
+
+  @font-face {
+    font-family: "Yatra One";
+    src: url("./assets/fonts/Yatra_One/YatraOne-Regular.woff") format("woff2");
+    font-style: normal;
+    font-weight: 400;
+  }
+
   /* Here, we can define the values for our variables: */
 
   :root {
@@ -39,6 +62,9 @@
     /* custom test */
     --customtest: 180 100% 50%; /* cyan */
     --customtest-foreground: 0 0% 100%; /* white */
+    /* custom google fonts */
+    --font-primary: "Cantarell", sans-serif;
+    --font-display: "Yatra One", sans-serif;
   }
 
   /* Dark Mode */
@@ -67,6 +93,9 @@
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+    /* custom google fonts */
+    --font-primary: "Cantarell", sans-serif;
+    --font-display: "Yatra One", sans-serif;
   }
 }
 
@@ -81,8 +110,8 @@
     /* This applies the border-border utility class to all elements. This sets the border color to --border. */
   }
   body {
-    @apply bg-background text-foreground;
-    /* Applies the bg-background and text-foreground utility classes to the body. This sets the background color to --background and the text color to --foreground. */
+    @apply bg-background text-foreground font-primary;
+    /* This sets the background color to --background, the text color to --foreground and the --font-primary is the font-family by default for all elements, unless you change them in the components. */
   }
 }
 
