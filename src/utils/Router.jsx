@@ -10,6 +10,7 @@ import RecordPage from "../pages/RecordPage";
 import RegisterPage from "../pages/RegisterPage";
 import DashboardPage from "../pages/DashboardPage";
 import UserDataPage from "../pages/UserDataPage";
+import InfoPage from "../pages/InfoPage";
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -53,6 +54,10 @@ const Router = () => {
         {
           path: "/meinJournal",
           element: <JournalPage />,
+        },
+        {
+          path: "/Info",
+          element: <InfoPage />,
         },
       ],
     },
