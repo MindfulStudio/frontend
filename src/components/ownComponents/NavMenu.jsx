@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-// import pages
+// pages import:
 import DashboardPage from "@/pages/DashboardPage";
 import InfoPage from "@/pages/InfoPage";
 import JournalPage from "@/pages/JournalPage";
@@ -14,7 +14,6 @@ import InfoIcon from "/src/assets/icons/information-svgrepo-com.svg";
 import LogoutIcon from "/src/assets/icons/walk-svgrepo-com.svg";
 
 // NOTICE: Component NavMenubar.jsx warsch. löschen
-// NOTICE: Iconfarbe noch auf schwarz anpassen oder durch scharze Icons ersetzten
 
 export const NavMenu = () => {
   // routes:
@@ -22,7 +21,7 @@ export const NavMenu = () => {
     {
       id: 1,
       name: "profilImg",
-      icon: <InfoIcon className="h-[23.393px] w-auto" />, // muss noch angepasst werden! => d.h. component für prfil-img
+      icon: <InfoIcon className="h-[23.393px] w-auto" />, // muss noch angepasst werden! => d.h. component für porfil-img
       to: "/meineDaten",
       element: <UserDataPage />,
     },
@@ -43,7 +42,7 @@ export const NavMenu = () => {
     {
       id: 4,
       name: "Journal",
-      icon: <JouranlIcon className="h-[23.393px] w-6" />,
+      icon: <JouranlIcon className="h-[23.393px] w-6 " />,
       to: "/meinJournal",
       element: <JournalPage />,
     },
@@ -60,32 +59,47 @@ export const NavMenu = () => {
   const handleLogout = async () => {}; // muss noch implementiert werden
 
   return (
+    // container nav-bar:
     <div className="flex h-[60.821px] items-center rounded-md border bg-background gap-[2px] flex-shrink-0 border-none w-[393px] justify-center">
+      {/* creating nav-bar elements with map */}
       {routes.map((route) => (
+        // container nav-element
         <div key={route.id}>
+          {/* nav-link */}
           <NavLink
             to={route.to}
             className="w-[57px] h-[61px] items-center pt-[4px] pb-[13px] px-[12px] flex justify-center gap-[7.798px] flex-shrink-0 aria-[current=page]:bg-white rounded-md" // hover nutzen? => hover:text-[#345995]
           >
+            {/* container nav-link element */}
             <div className="flex flex-col select-none items-center rounded-sm px-3 py-1.5 outline-none text-[10px] ">
+              {/* nav-icon */}
               {route.icon}
+              {/* nav-title */}
               {route.name}
             </div>
           </NavLink>
         </div>
       ))}
 
-      {/* Wo soll es bei Lougout final hingehen? */}
+      {/* logout-"button" in nav-bar */}
+      {/* Wo soll es bei Logout final hingehen? */}
+
+      {/* container nav-element */}
       <div className="items-center">
+        {/* nav-link */}
         <NavLink
           to={"/"}
           onClick={handleLogout}
           className="w-[57px] h-[61px] items-center pt-[4px] pb-[13px] px-[12px] flex justify-center gap-[7.798px] flex-shrink-0 aria-[current=page]:bg-white rounded-md"
         >
           {/* handle logout muss noch richtig implementiert werden */}
+
+          {/* container nav-link element */}
           <div className="flex flex-col select-none items-center rounded-sm px-3 py-1.5 outline-none text-[10px] ">
+            {/* nav-icon */}
             <LogoutIcon className="h-[23.393px] w-6" />
-            Logout
+            {/* nav-title */}
+            <p>Logout</p>
           </div>
         </NavLink>
       </div>
