@@ -83,7 +83,7 @@ module.exports = {
       // Font Family Extensions:
       fontFamily: {
         primary: ["var(--font-primary)"],
-        display: ["var(--font-display)"],
+        highlight: ["var(--font-highlight)"],
       },
       // Custom Font Size Extensions:
       fontSize: {

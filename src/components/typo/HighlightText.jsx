@@ -4,7 +4,7 @@ import React from "react";
 
 const HighlightText = ({ highlighttext, fontsize }) => {
   return (
-    <h2 className={`font-display ${fontsize} leading-30 tracking-tight`}>
+    <h2 className={`font-highlight ${fontsize} leading-30 tracking-tight`}>
       {highlighttext}
     </h2>
   );

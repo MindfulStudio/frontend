@@ -64,7 +64,7 @@
     --customtest-foreground: 0 0% 100%; /* white */
     /* custom google fonts */
     --font-primary: "Cantarell", sans-serif;
-    --font-display: "Yatra One", sans-serif;
+    --font-highlight: "Yatra One", sans-serif;
   }
 
   /* Dark Mode */
