@@ -9,7 +9,7 @@ const ErrorPage = () => {
       <PageTitle pagetitle="ErrorPage" />
 
       {/* directly styled element: */}
-      <h2 className="border-b pt-2 text-lg font-primary tracking-tight">
+      <h2 className="border-b pt-2 text-lg tracking-tight">
         404 - Page not found
       </h2>
 
@@ -18,10 +18,15 @@ const ErrorPage = () => {
 
       <p className="font-display pb-5">Just go back to Home.</p>
 
+      <p>Heute hast du dich</p>
+      <p className="font-bold">müde</p>
+      <p>gefühlt</p>
+
       <p>Here we test some font style components:</p>
 
       {/* re-usable highlight text component: pass the text and the font size as props */}
       <HighlightText highlighttext="I´m a big Highlight!" fontsize="text-lg" />
+
       <HighlightText
         highlighttext="I´m a medium Highlight!"
         fontsize="text-md"
