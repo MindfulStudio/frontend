@@ -80,6 +80,31 @@ module.exports = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      // Font Family Extensions:
+      fontFamily: {
+        primary: ["var(--font-primary)"],
+        highlight: ["var(--font-highlight)"],
+      },
+      // Custom Font Size Extensions:
+      fontSize: {
+        xs: "0.625rem", // 10px
+        sm: "0.75rem", // 12px
+        md: "1.25rem", // 20px
+        lg: "2.5rem", // 40px
+        xl: "3.75rem", // 60px
+      },
+      // Custom Line Height Extensions:
+      lineHeight: {
+        16: "1rem", // 16px
+        20: "1.25rem", // 20px
+        26: "1.625rem", // 26px
+        30: "1.875rem", // 30px
+      },
+      // Custom Spacing Extensions:
+      letterSpacing: {
+        tight: "-0.022em", // -0.22px
+      },
+
       // Keyframes for animations Extensions:
       keyframes: {
         "accordion-down": {
