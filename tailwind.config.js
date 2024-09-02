@@ -97,8 +97,8 @@ module.exports = {
       lineHeight: {
         16: "1rem", // 16px
         20: "1.25rem", // 20px
-        26: "1.625", // 26px
-        30: "1.875", // 30px
+        26: "1.625rem", // 26px
+        30: "1.875rem", // 30px
       },
       // Custom Spacing Extensions:
       letterSpacing: {
