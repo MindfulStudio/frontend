@@ -12,18 +12,24 @@ const GreetingComponent = () => {
   //   const [checkedIn, setCheckedIn] = useState(false);
   const [checkedIn, setCheckedIn] = useState(true);
 
+  // TODO: Verbindung Provider
+  //TODO: Fetching in Provider und States einrichten
+
   return (
-    <div className="w-auto">
+    <div className="w-[293px]">
+      {/* greeting */}
       <h1 className="text-lg font-bold">Hello {usernameFake}!</h1>
+
+      {/* individual message */}
       {checkedIn ? (
         <div className="pl-1">
           {/* wann Umbrüche? */}
           <p>
             Heute hast du dich bisher{" "}
             <span className="font-bold">{fakeFeelings[0]}</span>,{" "}
-            <span className="font-bold">{fakeFeelings[0]}</span>, ... gefühlt.
+            <span className="font-bold">{fakeFeelings[1]}</span>, ... gefühlt.
           </p>
-          {/* fakeFellings noch richtig einbinden und ... brauchen noch funktionalität um alle Gefühle anzuzeigen */}
+          {/* TODO: fakeFellings noch richtig einbinden und ... brauchen noch funktionalität um alle Gefühle anzuzeigen */}
           <p className="font-bold mt-5">Was fühlst du gerade?</p>
         </div>
       ) : (
