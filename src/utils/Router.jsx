@@ -11,6 +11,7 @@ import RegisterPage from "../pages/RegisterPage";
 import DashboardPage from "../pages/DashboardPage";
 import UserDataPage from "../pages/UserDataPage";
 import InfoPage from "../pages/InfoPage";
+import EmotionsProvider from "./EmotionsProvider";
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -64,9 +65,11 @@ const Router = () => {
   ]);
 
   return (
-    <RouterProvider router={router}>
-      <Layout />
-    </RouterProvider>
+    <EmotionsProvider>
+      <RouterProvider router={router}>
+        <Layout />
+      </RouterProvider>
+    </EmotionsProvider>
   );
 };
 
