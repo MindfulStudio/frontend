@@ -68,10 +68,10 @@ export const NavMenu = () => {
           {/* nav-link */}
           <NavLink
             to={route.to}
-            className="w-[57px] h-[61px] items-center pt-[4px] pb-[13px] px-[12px] flex justify-center gap-[7.798px] flex-shrink-0 aria-[current=page]:bg-white rounded-md" // hover nutzen? => hover:text-[#345995]
+            className="w-[57px] h-[61px] items-center  px-[12px] flex justify-center gap-[7.798px] flex-shrink-0 aria-[current=page]:bg-white rounded-md" // hover nutzen? => hover:text-[#345995]
           >
             {/* container nav-link element */}
-            <div className="flex flex-col select-none items-center rounded-sm px-3 py-1.5 outline-none text-[10px] ">
+            <div className="flex flex-col select-none items-center justify-center rounded-sm px-3 py-1.5 outline-none text-[10px] ">
               {/* nav-icon */}
               {route.icon}
               {/* nav-title */}
@@ -90,7 +90,7 @@ export const NavMenu = () => {
         <NavLink
           to={"/"}
           onClick={handleLogout}
-          className="w-[57px] h-[61px] items-center pt-[4px] pb-[13px] px-[12px] flex justify-center gap-[7.798px] flex-shrink-0 aria-[current=page]:bg-white rounded-md"
+          className="w-[57px] h-[61px] items-center px-[12px] flex justify-center gap-[7.798px] flex-shrink-0 aria-[current=page]:bg-white rounded-md"
         >
           {/* handle logout muss noch richtig implementiert werden */}
 
