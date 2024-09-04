@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import Element from "../assets/elements/floralElement.svg";
 
 const HomePage = () => {
+  // TODO: style anpassen
   return (
     <main className="flex flex-col items-center w-full h-screen">
       {/* login */}
