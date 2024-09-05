@@ -15,6 +15,26 @@ import EmotionsProvider from "./EmotionsProvider";
 
 const Router = () => {
   const router = createBrowserRouter([
+    // pages without layout (navBar)
+    {
+      path: "/",
+      errorElement: <ErrorPage />,
+      children: [
+        {
+          path: "/",
+          element: <HomePage />,
+        },
+        {
+          path: "/anmeldung",
+          element: <LoginPage />,
+        },
+        {
+          path: "/registrierung",
+          element: <RegisterPage />,
+        },
+      ],
+    },
+    // pages with layout (navBar)
     {
       path: "/",
       element: <Layout />,
