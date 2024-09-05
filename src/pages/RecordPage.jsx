@@ -32,7 +32,11 @@ const RecordPage = () => {
   }, []);
 
   // When the user selects a family, fetch the sub-feelings for the selected family:
+
   // we need a familyId to identify the selected family and fetch the corresponding sub-feelings; familyId is the id of the selected family (this id comes from the data in emotions.json)
+
+  // TODO: Implement extra logic for fetching the custom-subfeelings and mixed feelings from the backend
+
   const handleFamilySelect = (familyId) => {
     setSelectedFamily(familyId); // store the selected family in a state
 
@@ -94,17 +98,11 @@ const RecordPage = () => {
           <FeelingsFamilyButton
             feelingsFamilies={feelingsFamilies}
             onSelectedFamily={handleFamilySelect}
+            selectedFamily={selectedFamily}
+            subFeelings={subFeelings}
+            onSelectFeeling={handleFeelingSelect}
           />
         )}
-
-        <div className="mt-6">
-          {selectedFamily && (
-            <SubFeelingsSelector
-              subFeelings={subFeelings}
-              onSelectFeeling={handleFeelingSelect}
-            />
-          )}
-        </div>
       </div>
     </main>
   );
