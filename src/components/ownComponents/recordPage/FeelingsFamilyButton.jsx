@@ -30,7 +30,7 @@ const FeelingsFamilyButton = ({
         >
           <div className="flex flex-col items-center">
             <IlluAnspannung
-              className=" w-[50px] h-[51px]"
+              className=" w-[56.5px] h-[57.6px]"
               /* Change Size of the Icon individually */
             />
             <HighlightText highlighttext="Anspannung" fontsize="text-sm" />
@@ -43,7 +43,7 @@ const FeelingsFamilyButton = ({
           key={feelingsFamilies[1].id}
           onClick={() => handleSelection(feelingsFamilies[1].id)}
         >
-          <IlluFreude className="flex-shrink-0 w-[42px] h-[54px]" />
+          <IlluFreude className="flex-shrink-0 w-[49px] h-[61.5px]" />
           <HighlightText highlighttext="Freude" fontsize="text-sm" />
         </button>
       </div>
@@ -60,41 +60,45 @@ const FeelingsFamilyButton = ({
       </div>
       {/* --------------------------------------------------------- */}
 
-      <div className="flex flex-row items-end gap-4">
+      <div className="flex flex-row items-center gap-3">
         {/* gemischte Gefühle */}
         <button
-          className="flex flex-col items-center justify-center"
+          className="flex flex-col items-center justify-center min-w-[33%]"
           key={feelingsFamilies[4].id}
           onClick={() => handleSelection(feelingsFamilies[4].id)}
         >
           <div className="flex flex-col items-center">
-            <IlluGemischteGefühle className="flex-shrink-0 w-[27px] h-[41px]" />
-            <HighlightText
-              /*  className="whitespace-nowrap"
-               */ highlighttext="gemischte Gefühle"
-              fontsize="text-sm"
-            />
+            <IlluGemischteGefühle className=" w-[33.2px] h-[47.8px]" />
+            <div className="  transform -translate-x-1/6 whitespace-nowrap">
+              {" "}
+              {/* solution to position the text with a small overflow beyond the limits of the flexbox */}
+              <HighlightText
+                className="text-center"
+                highlighttext="gemischte Gefühle"
+                fontsize="text-sm"
+              />
+            </div>
           </div>
         </button>
 
         {/* Entspannung */}
         <button
-          className="flex flex-col items-center justify-center  pb-[63px]"
+          className="flex flex-col items-center justify-center  pb-[63px] min-w-[33%]"
           key={feelingsFamilies[2].id}
           onClick={() => handleSelection(feelingsFamilies[2].id)}
         >
-          <IlluEntspannung className="flex-shrink-0 w-[106.2px] h-[13.6px]" />
+          <IlluEntspannung className=" w-[112.2px] h-[19.6px] " />
           <HighlightText highlighttext="Entspannung" fontsize="text-sm" />
         </button>
 
         {/* Trauer */}
         <button
-          className="flex flex-col items-center justify-center"
+          className="flex flex-col items-center justify-center min-w-[33%]"
           key={feelingsFamilies[3].id}
           onClick={() => handleSelection(feelingsFamilies[3].id)}
         >
-          <IlluTrauer className="flex-shrink-0 w-[18px] h-[55px]" />
-          <HighlightText highlighttext="Trauer" fontsize="text-sm" />
+          <IlluTrauer className="flex-shrink-0 w-[24.7px] h-[61px] ml-3" />
+          <HighlightText highlighttext="Trauer" fontsize="text-sm ml-3" />
         </button>
       </div>
     </div>
