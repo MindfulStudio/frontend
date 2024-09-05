@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import FeelingsFamilyButton from "@/components/ownComponents/recordPage/FeelingsFamilyButton";
-import SubFeelingsSelector from "@/components/ownComponents/recordPage/SubFeelingsSelector";
 
 const RecordPage = () => {
   const [feelingsFamilies, setFeelingsFamilies] = useState([]);
@@ -19,7 +18,7 @@ const RecordPage = () => {
         const families = data.map((family) => ({
           id: family.emotionFamily,
           name: family.emotionFamily,
-          // Every emotionfamily object gets an id and name property with the same value: the emotion family name; this is done to make the data structure compatible with the FeelingsFamilyButton component
+          // this step creates an Array with several emotionfamily-objects. Every emotionfamily object gets an id and name property with the same value: the emotion family name; this is done to make the data structure compatible with the FeelingsFamilyButton component
         }));
 
         setFeelingsFamilies(families); // Set the extracted emotion families in the state variable feelingsFamilies to use them in the FeelingsFamilyButton component
@@ -93,7 +92,7 @@ const RecordPage = () => {
 
   return (
     <main className="pt-[109px] px-[50px] flex flex-col items-center">
-      <div className="p-6 flex flex-col items-center">
+      <div className="flex flex-col items-center">
         {feelingsFamilies.length > 0 && (
           <FeelingsFamilyButton
             feelingsFamilies={feelingsFamilies}
