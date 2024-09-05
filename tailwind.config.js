@@ -34,6 +34,9 @@ module.exports = {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
 
+        // Custom Colors:
+        "selected-subemotion": "hsl(var(--selected-subemotion))",
+
         // Color for specific purposes Extensions:
 
         // shadcn/ui purposes: primary, secondary, destructive, muted, accent, popover, card
@@ -105,6 +108,15 @@ module.exports = {
         tight: "-0.022em", // -0.22px
       },
 
+      // Custom Rotate Extension for rotate(-2.065deg) --rotate-on-hover in index.css
+      rotate: {
+        "-2.065": "-2.065deg",
+      },
+
+      transform: {
+        "rotate-on-hover": "rotate(-2.065deg)",
+      },
+
       // Keyframes for animations Extensions:
       keyframes: {
         "accordion-down": {
@@ -123,5 +135,21 @@ module.exports = {
     },
   },
   // Plugins (to add third party plugins to tailwindcss)
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    function ({ addUtilities }) {
+      addUtilities(
+        {
+          /* custom rotation for selected subemotions */
+          ".rotate-on-hover": {
+            "&:hover": {
+              transform: "rotate(-2.065deg)",
+              transitionDuration: "0.2s",
+            },
+          },
+        },
+        ["responsive", "hover"]
+      );
+    },
+  ],
 };

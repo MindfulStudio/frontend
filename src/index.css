@@ -65,6 +65,7 @@
     /* custom google fonts */
     --font-primary: "Cantarell", sans-serif;
     --font-highlight: "Yatra One", sans-serif;
+    --selected-subemotion:  /* #FFD9DA */ 358 100% 93%;
   }
 
   /* Dark Mode */
