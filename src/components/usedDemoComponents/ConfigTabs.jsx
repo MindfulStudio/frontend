@@ -9,27 +9,31 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent } from "@/components/ui/tabs";
+import { Switch } from "@radix-ui/react-switch";
+import { ConfigSwitch } from "./ConfigSwitch";
 
-export function LoginTabs() {
+export function ConfigTabs() {
   return (
     <Tabs defaultValue="account" className="w-[350px]">
       <TabsContent value="account">
         <Card>
           <CardHeader>
-            <CardTitle>Login</CardTitle>
+            <CardTitle>Konfiguration</CardTitle>
           </CardHeader>
           <CardContent className="space-y-2">
             <div className="space-y-1">
-              <Label htmlFor="username">Username</Label>
-              <Input id="username" placeholder="Username" />
+              <ConfigSwitch name={"Schlaf"} id={"sleep"} />
             </div>
             <div className="space-y-1">
-              <Label htmlFor="password">Passwort</Label>
-              <Input id="password" placeholder="Passwort" />
+              <ConfigSwitch name={"körperliche Aktivität"} id={"sport"} />
+            </div>
+            <div className="space-y-1">
+              <ConfigSwitch name={"Wetter"} id={"weather"} />
             </div>
           </CardContent>
           <CardFooter>
-            <Button>Login</Button>
+            <Button>weiter</Button>
+            {/* weiter oder bestätigen? */}
           </CardFooter>
         </Card>
       </TabsContent>

@@ -12,9 +12,8 @@ import { Tabs, TabsContent } from "@/components/ui/tabs";
 import { CheckboxTherms } from "./Checkbox";
 
 export function RegisterTabs() {
-
   return (
-    <Tabs defaultValue="account" className="w-[400px]">
+    <Tabs defaultValue="account" className="w-[350px]">
       <TabsContent value="account">
         <Card>
           <CardHeader>

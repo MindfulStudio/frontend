@@ -8,7 +8,7 @@ const HomePage = () => {
   return (
     <main className="flex flex-col items-center w-full h-screen">
       {/* login */}
-      <div className="  pt-[109px] px-[50px] flex flex-col items-center pb-10">
+      <div className="  pt-[109px] px-[50px] flex flex-col items-center pb-10 w-[400px]">
         <HighlightText highlighttext={"Welcome"} fontsize="text-lg" />
         <p className=" pt-3 pb-6">
           Diese App soll ein Werkzeug sein, um die eigenen Gedanken und Gefühle
