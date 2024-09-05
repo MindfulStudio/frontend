@@ -79,5 +79,10 @@
       "entmutigt",
       "enttäuscht"
     ]
+  },
+  {
+    "id": 5,
+    "emotionFamily": "Gemischte Gefühle",
+    "singleEmotions": ["ambivalent"]
   }
 ]
