@@ -92,14 +92,14 @@ const RecordPage = () => {
 
   return (
     <main className="pt-[109px] px-[50px] flex flex-col items-center">
-      <div className="flex flex-col items-center">
+      <div>
         {feelingsFamilies.length > 0 && (
           <FeelingsFamilyButton
             feelingsFamilies={feelingsFamilies}
             onSelectedFamily={handleFamilySelect}
             selectedFamily={selectedFamily}
             subFeelings={subFeelings}
-            onSelectFeeling={handleFeelingSelect}
+            onSelectedFeeling={handleFeelingSelect}
           />
         )}
       </div>

@@ -11,7 +11,7 @@ const FeelingsFamilyButton = ({
   feelingsFamilies, // = an array of emotionfamily-objects with id and name properties
   onSelectedFamily,
   subFeelings,
-  handleFeelingSelect,
+  onSelectedFeeling,
   selectedFamily,
 }) => {
   const handleSelection = (familyId) => {
@@ -20,7 +20,7 @@ const FeelingsFamilyButton = ({
 
   return (
     <div className="flex flex-col items-center">
-      <div className="flex flex-row gap-4">
+      <div className="flex flex-row gap-[182px]">
         {/* Anspannung */}
         <button
           className="flex flex-col items-start row-span-2 col-span-2 justify-end"
@@ -29,7 +29,10 @@ const FeelingsFamilyButton = ({
           /* feelingsFamilies[0].id = the value for id in the first emotionobject in the array called feelingsFamilies, which comes from the fetchFeelings function and the setFeelingsFamilies-State*/
         >
           <div className="flex flex-col items-center">
-            <IlluAnspannung className="flex-shrink-0" />
+            <IlluAnspannung
+              className=" w-[50px] h-[51px]"
+              /* Change Size of the Icon individually */
+            />
             <HighlightText highlighttext="Anspannung" fontsize="text-sm" />
           </div>
         </button>
@@ -40,33 +43,35 @@ const FeelingsFamilyButton = ({
           key={feelingsFamilies[1].id}
           onClick={() => handleSelection(feelingsFamilies[1].id)}
         >
-          <IlluFreude className="flex-shrink-0" />
+          <IlluFreude className="flex-shrink-0 w-[42px] h-[54px]" />
           <HighlightText highlighttext="Freude" fontsize="text-sm" />
         </button>
       </div>
 
       {/* -----------------SubFeelingsSelector--------------------- */}
+      {/* Styling is inside the component */}
       <div>
         {selectedFamily && (
           <SubFeelingsSelector
             subFeelings={subFeelings}
-            onSelectFeeling={handleFeelingSelect}
+            onSelectedFeeling={onSelectedFeeling}
           />
         )}
       </div>
       {/* --------------------------------------------------------- */}
 
-      <div className="flex flex-row gap-4 items-end">
+      <div className="flex flex-row items-end gap-4">
         {/* gemischte Gefühle */}
         <button
-          className="flex flex-col items-center justify-center pl-7"
+          className="flex flex-col items-center justify-center"
           key={feelingsFamilies[4].id}
           onClick={() => handleSelection(feelingsFamilies[4].id)}
         >
           <div className="flex flex-col items-center">
-            <IlluGemischteGefühle className="flex-shrink-0" />
+            <IlluGemischteGefühle className="flex-shrink-0 w-[27px] h-[41px]" />
             <HighlightText
-              highlighttext="gemischte Gefühle"
+              /*  className="whitespace-nowrap"
+               */ highlighttext="gemischte Gefühle"
               fontsize="text-sm"
             />
           </div>
@@ -74,11 +79,11 @@ const FeelingsFamilyButton = ({
 
         {/* Entspannung */}
         <button
-          className="flex flex-col items-center justify-center pl-7 mb-4"
+          className="flex flex-col items-center justify-center  pb-[63px]"
           key={feelingsFamilies[2].id}
           onClick={() => handleSelection(feelingsFamilies[2].id)}
         >
-          <IlluEntspannung className="flex-shrink-0" />
+          <IlluEntspannung className="flex-shrink-0 w-[106.2px] h-[13.6px]" />
           <HighlightText highlighttext="Entspannung" fontsize="text-sm" />
         </button>
 
@@ -88,7 +93,7 @@ const FeelingsFamilyButton = ({
           key={feelingsFamilies[3].id}
           onClick={() => handleSelection(feelingsFamilies[3].id)}
         >
-          <IlluTrauer className="flex-shrink-0" />
+          <IlluTrauer className="flex-shrink-0 w-[18px] h-[55px]" />
           <HighlightText highlighttext="Trauer" fontsize="text-sm" />
         </button>
       </div>
