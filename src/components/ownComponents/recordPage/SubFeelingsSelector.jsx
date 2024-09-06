@@ -3,7 +3,7 @@ import { useState } from "react";
 const SubFeelingsSelector = ({
   subFeelings,
   onSelectedFeeling,
-  onAddNewCustomFeeling,
+  /* onAddNewCustomFeeling */
 }) => {
   const [newCustomFeeling, setNewCustomFeeling] = useState("");
 
@@ -11,7 +11,10 @@ const SubFeelingsSelector = ({
     if (newCustomFeeling.trim() === "") {
       return; // early exit if the input is empty
     }
-    onAddNewCustomFeeling(newCustomFeeling);
+    /*NOTICE:  Logic for updating the custom feelings missing */
+    /*   onAddNewCustomFeeling(newCustomFeeling);  */
+    // function for passing the new feeling on (not sure where to pass yet and not implemented yet)
+
     setNewCustomFeeling(""); // clear the input field
   };
 

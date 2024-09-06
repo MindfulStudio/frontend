@@ -85,9 +85,9 @@ const RecordPage = () => {
   };
 
   // When the user selects a feeling, store the selected feeling in the state variable selectedFeeling
-  const handleFeelingSelect = (feeling) => {
-    setSelectedFeeling(feeling);
-    console.log("Selected Feeling:", feeling);
+  const handleFeelingSelect = (subfeeling) => {
+    setSelectedFeeling(subfeeling);
+    console.log("Selected Feeling:", subfeeling);
   };
 
   return (
