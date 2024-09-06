@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent } from "@/components/ui/tabs";
 import { CheckboxTherms } from "./Checkbox";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export function RegisterTabs() {
   // activate button after checkox ist checked:
