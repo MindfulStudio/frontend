@@ -2,14 +2,13 @@ import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
+  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+
 import { Tabs, TabsContent } from "@/components/ui/tabs";
-import { Switch } from "@radix-ui/react-switch";
 import { ConfigSwitch } from "./ConfigSwitch";
 
 export function ConfigTabs() {
@@ -19,6 +18,9 @@ export function ConfigTabs() {
         <Card>
           <CardHeader>
             <CardTitle>Konfiguration</CardTitle>
+            <CardDescription>
+              Was möchtest du noch zusätzlich erfassen?
+            </CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
             <div className="space-y-1">
