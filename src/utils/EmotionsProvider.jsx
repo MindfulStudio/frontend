@@ -9,7 +9,10 @@ const EmotionsProvider = ({ children }) => {
   const [selectedFamily, setSelectedFamily] = useState(null);
   const [subFeelings, setSubFeelings] = useState([]);
   const [selectedFeeling, setSelectedFeeling] = useState(null);
-  const [customFeelings, setCustomFeelings] = useState([]); //NOTICE: not sure yet, if it needs to be an array here?
+  const [customFeelings, setCustomFeelings] = useState([]);
+  // NOTICE: This is an array of objects with id and name properties to store the new custom feelings; We must check, if this is the best way to store the custom feelings and create a two-way-connection between the frontend and the backend
+  const [newFeeling, setNewFeeling] = useState("");
+  // this is for the new custom feeling itself, which we retrieve from the input field
 
   // ---------------------Fetching Frontend Data------------------------
 
@@ -17,6 +20,10 @@ const EmotionsProvider = ({ children }) => {
   const fetchFeelings = async () => {
     try {
       const response = await fetch("/src/data/emotions.json");
+
+      if (!response.ok) {
+        throw new Error(`Error fetching emotions data`);
+      }
       const data = await response.json(); // Parse JSON data and store it in data, which is an array of objects; every object represents an emotion family
       // Extract the emotion families from the data, to use them for the FeelingsFamilyButton component:
       const families = data.map((family) => ({
@@ -29,12 +36,13 @@ const EmotionsProvider = ({ children }) => {
     } catch (error) {
       console.error("Error fetching emotions data:", error);
     }
-
-    // call the fetchFeelings function when the component is mounted:
-    useEffect(() => {
-      fetchFeelings();
-    }, []);
   };
+
+  // call the fetchFeelings function when the component is mounted:
+  useEffect(() => {
+    fetchFeelings();
+  }, []);
+
   // --------------------- Handle family selection -----------------------------
 
   // Function to handle the selection of a family and their sub-feelings
@@ -43,7 +51,10 @@ const EmotionsProvider = ({ children }) => {
     // we need a familyId to identify the selected family and fetch the corresponding sub-feelings; familyId is the id of the selected family (this id comes from the data in emotions.json)
     setSelectedFamily(familyId); // store the selected family in a state
 
-    // When the user has selected a family, fetch the sub-feelings for the selected family:
+    // Right after the user has selected a family, fetch the sub-feelings for the selected family:
+
+    // NOTICE: This is a second fetch request by purpose, which is triggered by the user´s action; the first fetch request is triggered by the useEffect-Hook, which fetches the data when the component is mounted; We could refactor this later, to avoid fetching the same data twice
+
     fetch("/src/data/emotions.json")
       .then((response) => response.json())
       .then((data) => {
@@ -108,20 +119,22 @@ const EmotionsProvider = ({ children }) => {
       return; // early exit if the input is empty
     }
 
+    // TODO: Logic for checking if the new feeling is already in the database and prevent duplicates, also check for not allowed characters etc.
+
     // As we have objects for the standard subfeelings to list them in the SubfeelingsContainer, it might be useful to create an object for the custom feeling as well:
     const customFeelingsObject = {
-      id: customFeelings.length, //TODO: Assigning a unique id? For the Standard-Subfeelings, it is the index of the array, because this array won´t change. But for the custom feelings, we might need a different approach?
+      id: Date.now(), //TODO: Assigning an unique and useful id; For the Standard-Subfeelings, it is the index of the array, because this array won´t change. But for the custom feelings, we might need a different approach? I suggest Date.now() for now, but we should discuss this to find a better solution.
       name: newFeeling,
     };
 
-    // TODO: here we need more logic, to pass the new feeling on (not sure where to pass it yet)
-
-    setCustomFeelings([...customFeelings, customFeelingsObject]); // add the new feeling to the existing array of custom feelings
+    setCustomFeelings([...customFeelings, customFeelingsObject]); // add the new feeling to the existing array of custom feelings;
     console.log("New custom feeling added:", newFeeling);
 
-    setCustomFeelings("");
-    // this clears the input field; the newly stored feeling will still be stored in the state variable newCustomFeeling, so no worries :-)
+    setNewFeeling(""); // this clears the input field;
+
     // if we do not clear the input field, the user might think, that the feeling was not added, because the input field is still filled etc.
+
+    // TODO: here we need more logic, to pass the new feeling on to the backend and store it there
   };
 
   return (
@@ -132,6 +145,8 @@ const EmotionsProvider = ({ children }) => {
         subFeelings,
         selectedFeeling,
         customFeelings,
+        newFeeling,
+        setNewFeeling,
         fetchFeelings,
         handleFamilySelect,
         handleFeelingSelect,
