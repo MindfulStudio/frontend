@@ -10,8 +10,16 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent } from "@/components/ui/tabs";
 import { CheckboxTherms } from "./Checkbox";
+import { useState } from "react";
 
 export function RegisterTabs() {
+  // activate button after checkox ist checked:
+  const [activeButton, setActiveButton] = useState(false);
+
+  const activateButton = () => {
+    setActiveButton(!activeButton);
+  };
+
   return (
     <Tabs defaultValue="account" className="w-[350px]">
       <TabsContent value="account">
@@ -32,10 +40,11 @@ export function RegisterTabs() {
               <Label htmlFor="password">Passwort</Label>
               <Input id="password" placeholder="Passwort" />
             </div>
-            <CheckboxTherms />
+            <CheckboxTherms ontoggle={activateButton} />
           </CardContent>
           <CardFooter>
-            <Button>Registrieren</Button>
+            {/* {activeButton && <Button>Registrieren</Button>} */}
+            <Button disabled={!activeButton}>Registrieren</Button>
           </CardFooter>
         </Card>
       </TabsContent>
