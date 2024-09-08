@@ -12,7 +12,8 @@ import { Tabs, TabsContent } from "@/components/ui/tabs";
 import { CheckboxTherms } from "./Checkbox";
 import EyeOpenIcon from "/src/assets/icons/eye-svgrepo-com.svg";
 import EyeClosedIcon from "/src/assets/icons/eye-close-svgrepo-com.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import UserFeedbackText from "../typo/UserFeedbackText";
 
 // TODO: captcha
 // TODO: frontend validation
@@ -22,6 +23,13 @@ export function RegisterTabs() {
   const [activeButton, setActiveButton] = useState(false);
   // show/hide password
   const [showPassword, setShowPassword] = useState(false);
+  // userData
+  const [userData, setUserData] = useState({
+    email: "",
+    username: "",
+    password: "",
+  });
+  const [errorsVal, setErrorsVal] = useState({});
 
   // activate button after checkox ist checked:
   const activateButton = () => {
@@ -33,6 +41,50 @@ export function RegisterTabs() {
     setShowPassword(!showPassword);
   };
 
+  // track input:
+  const handleChange = (e) => {
+    setUserData({ ...userData, [e.target.id]: e.target.value });
+  };
+
+  // validate input:
+  const validateFormInput = (formData) => {
+    let valErrors = {};
+
+    Object.keys(formData).forEach((key) => {
+      switch (key) {
+        case "email":
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(formData[key])) {
+            valErrors[key] = "Email is not valid.";
+          }
+          break;
+        case "username":
+          const usernameRegex = /^[a-zA-Z0-9_]+$/;
+          if (!usernameRegex.test(formData[key])) {
+            valErrors[key] = "Only letters and numbers are allowed.";
+          }
+          break;
+        case "password":
+          if (formData[key].length < 12) {
+            valErrors[key] = "Password must be at least 12 characters long.";
+          }
+          break;
+        default:
+          valErrors[key] = "invalid input";
+          break;
+      }
+    });
+    return valErrors;
+  };
+
+  useEffect(() => {
+    const validateErrors = validateFormInput(userData);
+    console.log({ validateErrors });
+    if (Object.keys(validateErrors).length > 0) {
+      setErrorsVal(validateErrors);
+    }
+  }, [userData]);
+
   // submit Input - register POST
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,8 +93,33 @@ export function RegisterTabs() {
     registerDataToSend.append("email", registerDataToSend.email);
     registerDataToSend.append("username", registerDataToSend.username);
     registerDataToSend.append("password", registerDataToSend.password);
+    console.log("userdata", registerDataToSend);
+
+    try {
+      const baseURL = import.meta.env.VITE_baseURL;
+      const pathURL = import.meta.env.VITE_basePathOne;
+      const response = await fetch(`${baseURL}${pathURL}register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(registerDataToSend),
+        credentials: "include",
+      });
+      console.log("response: ", response);
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "registration failed");
+      }
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
   };
-  console.log("userdata", registerDataToSend);
+
+  // NOTICE: test hat Fehlermeldung wegen Verbindungsproblemen ausgegeben => vllt weil MongoDB nicht gestartet?
 
   return (
     <Tabs defaultValue="account" className="w-[350px]">
@@ -55,11 +132,35 @@ export function RegisterTabs() {
             <CardContent className="space-y-2">
               <div className="space-y-1">
                 <Label htmlFor="email">Email</Label>
-                <Input id="email" placeholder="Email" type="email" />
+                <Input
+                  id="email"
+                  placeholder="Email"
+                  type="email"
+                  onChange={handleChange}
+                  required
+                />
+                {errorsVal.email && (
+                  <UserFeedbackText
+                    content={errorsVal.email}
+                    type={"validation"} // vllt. bei validation noch farben ändern? ist nicht gut zu erkennen
+                  />
+                )}
               </div>
               <div className="space-y-1">
                 <Label htmlFor="username">Username</Label>
-                <Input id="username" placeholder="Username" type="text" />
+                <Input
+                  id="username"
+                  placeholder="Username"
+                  type="text"
+                  onChange={handleChange}
+                  required
+                />
+                {errorsVal.username && (
+                  <UserFeedbackText
+                    content={errorsVal.username}
+                    type={"validation"} // vllt. bei validation noch farben ändern? ist nicht gut zu erkennen
+                  />
+                )}
               </div>
               <div className="space-y-1 relative">
                 <Label htmlFor="password">Passwort</Label>
@@ -67,6 +168,9 @@ export function RegisterTabs() {
                   id="password"
                   placeholder="Passwort"
                   type={showPassword ? "text" : "password"}
+                  name="passwird"
+                  onChange={handleChange}
+                  required
                 />
                 {showPassword ? (
                   <EyeOpenIcon
@@ -77,6 +181,13 @@ export function RegisterTabs() {
                   <EyeClosedIcon
                     className="w-5 h-auto absolute right-4 top-9"
                     onClick={handleShowPassword}
+                  />
+                )}
+
+                {errorsVal.password && (
+                  <UserFeedbackText
+                    content={errorsVal.password}
+                    type={"validation"} // vllt. bei validation noch farben ändern? ist nicht gut zu erkennen
                   />
                 )}
               </div>
