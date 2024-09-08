@@ -14,7 +14,6 @@ import EyeOpenIcon from "/src/assets/icons/eye-svgrepo-com.svg";
 import EyeClosedIcon from "/src/assets/icons/eye-close-svgrepo-com.svg";
 import { useEffect, useState } from "react";
 import UserFeedbackText from "../typo/UserFeedbackText";
-import { Turtle } from "lucide-react";
 
 // TODO: captcha
 // TODO: frontend validation
