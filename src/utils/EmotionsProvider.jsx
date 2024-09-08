@@ -1,4 +1,3 @@
-import { set, sub } from "date-fns";
 import { createContext, useContext, useState, useEffect } from "react";
 
 const EmotionsContext = createContext();
@@ -103,13 +102,23 @@ const EmotionsProvider = ({ children }) => {
 
   // ------------------------------------------------------------------------
 
-  // TODO: Implement extra logic for fetching the custom-subfeelings and mixed feelings from the backend
+  // TODO: Implement extra logic for fetching all the custom-subfeelings
+
+  // NOTICE: This fetch should be added to the useEffect-Hook, which is already here (above after fetchFeelings), to fetch the data when the component is mounted
 
   // --------------------- Handle subfeeling Selection ------------------------
 
-  const handleFeelingSelect = (subfeeling) => {
+  // When the user selects a feeling, store the selected feeling in the state variable selectedFeeling
+
+  /*  const handleFeelingSelect = (subfeeling) => {
     setSelectedFeeling(subfeeling);
     console.log("Selected Feeling:", subfeeling);
+  }; */ // This only worked for the standard subfeelings
+
+  // Extending the handleFeelingSelect function so that it can recognize from which list the feeling was selected (standard oder custom). One possibility is to pass an additional parameter that specifies the origin of the feeling: fromCustomFeelings = false (default value)
+  const handleFeelingSelect = (feeling, fromCustomFeelings = false) => {
+    setSelectedFeeling({ ...feeling, fromCustomFeelings });
+    console.log("Selected Feeling:", feeling);
   };
 
   // --------------------- Handle Add Custom Feelings ------------------------
