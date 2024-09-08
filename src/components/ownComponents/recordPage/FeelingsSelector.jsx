@@ -3,7 +3,7 @@ import { useEffect } from "react";
 //++ import EmotionsProvider
 import { useEmotionsContext } from "@/utils/EmotionsProvider";
 
-const SubFeelingsSelector = () => {
+const FeelingsSelector = () => {
   const {
     subFeelings,
     handleFeelingSelect,
@@ -71,7 +71,7 @@ const SubFeelingsSelector = () => {
   );
 };
 
-export default SubFeelingsSelector;
+export default FeelingsSelector;
 
 /* NOTICE: hover:bg-selected-subemotion is a custom color, which is defined in tailwind-config.js */
 /* NOTICE: hover:rotate-on-hover is a custom class, which is defined in tailwind-config.js! */

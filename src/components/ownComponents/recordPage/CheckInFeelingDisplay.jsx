@@ -5,7 +5,7 @@ import IlluFreude from "/src/assets/feelingsFamilies/Vector_Freude.svg";
 import IlluGemischteGefühle from "/src/assets/feelingsFamilies/Vector_gemGefühle.svg";
 import IlluTrauer from "/src/assets/feelingsFamilies/Vector_Trauer.svg";
 
-import SubFeelingsSelector from "./SubFeelingsSelector.jsx";
+import FeelingsSelector from "./FeelingsSelector.jsx";
 
 //++ import EmotionsProvider
 import { useEmotionsContext } from "@/utils/EmotionsProvider";
@@ -47,11 +47,11 @@ const CheckInFeelingDisplay = () => {
         </button>
       </div>
 
-      {/* -----------------SubFeelingsSelector--------------------- */}
+      {/* -----------------FeelingsSelector--------------------- */}
       {/* Styling is inside the component */}
       <div>
-        {selectedFamily && <SubFeelingsSelector />}
-        {/* NOTICE: SubFeelingsSelector component is only rendered, when a family is selected; this is done by checking if the selectedFamily state is not null; if a family is selected, the SubFeelingsSelector component is rendered, which displays the sub-feelings of the selected family */}
+        {selectedFamily && <FeelingsSelector />}
+        {/* NOTICE: FeelingsSelector component is only rendered, when a family is selected; this is done by checking if the selectedFamily state is not null; if a family is selected, the FeelingsSelector component is rendered, which displays the sub-feelings of the selected family */}
         {/* TODO:  Implement the family selection, so that it already happens on the dashboard page*/}
       </div>
       {/* --------------------------------------------------------- */}
