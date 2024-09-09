@@ -106,7 +106,7 @@ export function RegisterTabs() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ registerDataToSend }),
-        credentials: "include",
+        // credentials: "include", // ist das hier nötig?
       });
       console.log("response: ", response);
 
