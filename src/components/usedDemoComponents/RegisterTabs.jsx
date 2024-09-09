@@ -16,7 +16,7 @@ import { useEffect, useState } from "react";
 import UserFeedbackText from "../typo/UserFeedbackText";
 
 // TODO: captcha
-// TODO: frontend validation
+
 
 export function RegisterTabs() {
   // activate button after checkox ist checked:
