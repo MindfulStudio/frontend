@@ -25,6 +25,7 @@ const buttonVariants = cva(
           "bg-accent-foreground text-accent hover:text-accent-foreground hover:bg-accent text-[14px] font-primary font-bold",
         homeBlack:
           "bg-accent text-accent-foreground hover:bg-primary hover:text-primary-foreground text-[14px] font-primary font-bold",
+        arrow: "bg-white text-primary-foreground rounded-full border", // transparent button for arrow in progress bar (RecordPage)
       },
       size: {
         default: "h-10 px-4 py-2",

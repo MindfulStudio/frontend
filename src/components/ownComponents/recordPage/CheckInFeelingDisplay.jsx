@@ -62,8 +62,7 @@ const CheckInFeelingDisplay = () => {
         >
           <div className="flex flex-col items-center">
             <IlluGemischteGefühle className=" w-[33.2px] h-[47.8px]" />
-            <div className="  transform -translate-x-1/6 whitespace-nowrap">
-              {" "}
+            <div className="transform -translate-x-1/6 whitespace-nowrap">
               {/* solution to position the text with a small overflow beyond the limits of the flexbox */}
               <HighlightText
                 className="text-center"
