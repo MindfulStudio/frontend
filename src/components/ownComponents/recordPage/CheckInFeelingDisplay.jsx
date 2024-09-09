@@ -23,7 +23,6 @@ const CheckInFeelingDisplay = () => {
         {/* Anspannung */}
         <button
           className="flex flex-col items-start row-span-2 col-span-2 justify-end"
-          key={feelingsFamilies[0].id}
           onClick={() => handleFamilySelect(feelingsFamilies[0].id)}
           /* feelingsFamilies[0].id = the value for id in the first emotionobject in the array called feelingsFamilies, which comes from the fetchFeelings function and the setFeelingsFamilies-State*/
         >
@@ -39,7 +38,6 @@ const CheckInFeelingDisplay = () => {
         {/* Freude */}
         <button
           className="flex flex-col items-center row-span-2 justify-start"
-          key={feelingsFamilies[1].id}
           onClick={() => handleFamilySelect(feelingsFamilies[1].id)}
         >
           <IlluFreude className="flex-shrink-0 w-[49px] h-[61.5px]" />
@@ -60,7 +58,6 @@ const CheckInFeelingDisplay = () => {
         {/* gemischte Gefühle */}
         <button
           className="flex flex-col items-center justify-center min-w-[33%]"
-          key={feelingsFamilies[4].id}
           onClick={() => handleFamilySelect(feelingsFamilies[4].id)}
         >
           <div className="flex flex-col items-center">
@@ -80,7 +77,6 @@ const CheckInFeelingDisplay = () => {
         {/* Entspannung */}
         <button
           className="flex flex-col items-center justify-center  pb-[63px] min-w-[33%]"
-          key={feelingsFamilies[2].id}
           onClick={() => handleFamilySelect(feelingsFamilies[2].id)}
         >
           <IlluEntspannung className=" w-[112.2px] h-[19.6px] " />
@@ -90,7 +86,6 @@ const CheckInFeelingDisplay = () => {
         {/* Trauer */}
         <button
           className="flex flex-col items-center justify-center min-w-[33%]"
-          key={feelingsFamilies[3].id}
           onClick={() => handleFamilySelect(feelingsFamilies[3].id)}
         >
           <IlluTrauer className="flex-shrink-0 w-[24.7px] h-[61px] ml-3" />
