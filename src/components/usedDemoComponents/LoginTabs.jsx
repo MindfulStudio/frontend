@@ -15,17 +15,18 @@ import EyeClosedIcon from "/src/assets/icons/eye-close-svgrepo-com.svg";
 
 import { CheckboxStayLoggedIn } from "./CheckboxStayLoggedIN";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function LoginTabs() {
   // userData from login:
-  const [loginData, setLoginData] = useState({ username: "", password: "" });
+  const [loginData, setLoginData] = useState({ email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
-  // NOTICE: kommt in provider:
-  const [activeUser, setActiveUser] = useState(false);
   // NOTICE: vielleicht auch in provider?
   const [error, setError] = useState(null);
   // NOTICE: soll das noch mitgeschickt werden beim fetchen?:
   const [stayLoggedIn, setStayLoggedIn] = useState(false);
+  // useNavigate:
+  const navigate = useNavigate();
 
   // show/hide password
   const handleShowPassword = () => {
@@ -38,42 +39,78 @@ export function LoginTabs() {
   };
   // console.log({ stayLoggedIn });
 
-  // update Userdata:
+  // update LoginData:
   const handleChange = (e) => {
-    setUserData({ ...userData, [e.target.id]: e.target.value });
+    setLoginData({ ...loginData, [e.target.id]: e.target.value });
     // error wird zurück gesetzt:
     setError(null);
+  };
+
+  // handle error messages from backend:
+  const handleError = (data) => {
+    switch (data.error) {
+      case "missingCredentials":
+        setError({ message: "Bitte Zugangsdaten vollständig eingeben." });
+        break;
+      case "userNotFound":
+        setError({ message: "User nicht gefunden." });
+        break;
+      case "invalidPassword":
+        setError({ message: "Das Passwort ist falsch." });
+        break;
+      case "userNotVerified":
+        setError({
+          message:
+            "Dieses Konto wurde noch nicht verifiziert. Zur Verifizierung bitte dem Link in der E-Mail folgen.",
+        });
+        break;
+      case "envError":
+      case "accTokenError":
+        setError({
+          message:
+            "Ein Serverfehler ist aufgetreten (AccessToken konnte nicht erstellt werden).",
+        });
+        break;
+      default:
+        setError({ message: "Ein unbekannter Fehler ist aufgetreten." });
+        break;
+    }
   };
 
   // login - send loginData to backend:
   const handleLogin = async (e) => {
     e.preventDefault();
-    const { username, password } = loginData;
+    const { email, password } = loginData;
 
-    // check if username and password exist:
-    if (!username || !password) {
-      return setError({ message: "Kein Username oder Passwort." });
+    // check if email and password exist:
+    if (!email || !password) {
+      return setError({ message: "Email oder Passwort fehlt." });
     }
 
-    // fetching userData - POST:
+    // fetching loginData - POST:
     try {
       const baseURL = import.meta.env.VITE_baseURL;
-      const pathURL = import.meta.env.VITE_basePathTwo;
+      const pathURL = import.meta.env.VITE_basePathOne;
       const response = await fetch(`${baseURL}${pathURL}login`, {
         method: "POST",
         headers: {
-          "Contend-type": "application/json",
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ email, password }),
         credentials: "include",
       });
 
-      if (!response.ok) {
-        throw new Error("Network responde not okay");
-      }
-
       const data = await response.json();
-      setActiveUser(true);
+
+      if (!response.ok) {
+        handleError(data);
+        throw new Error(error);
+      }
+      if (data.isConfigured) {
+        navigate("/dashboard");
+      } else {
+        navigate("/konfiguration");
+      }
       return data;
     } catch (error) {
       console.log(error);
@@ -91,12 +128,8 @@ export function LoginTabs() {
 
             <CardContent className="space-y-2">
               <div className="space-y-1">
-                <Label htmlFor="username">Username</Label>
-                <Input
-                  id="username"
-                  placeholder="Username"
-                  onChange={handleChange}
-                />
+                <Label htmlFor="email">Email</Label>
+                <Input id="email" placeholder="Email" onChange={handleChange} />
               </div>
 
               <div className="space-y-1 relative">
@@ -122,15 +155,12 @@ export function LoginTabs() {
                 {/* TODO: Funktionalität für "Passwort vergessen" hinterlegen */}
                 <UserFeedbackText
                   content={"Passwort vergessen?"}
-                  type="info" // vielleicht type anpassen und UserFeedback mekr als "link" gestalten
+                  type="info" // vielleicht type anpassen und UserFeedback mehr als "link" gestalten
                   // NOTICE: Was soll hier passieren? popover? Neue Seite?
                 />
 
                 {error && (
-                  <UserFeedbackText
-                    content={"Username oder Passwort sind falsch"}
-                    type="error"
-                  />
+                  <UserFeedbackText content={error.message} type="error" />
                 )}
               </div>
             </CardContent>
