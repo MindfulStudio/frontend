@@ -32,6 +32,10 @@ const Router = () => {
           path: "/registrierung",
           element: <RegisterPage />,
         },
+        {
+          path: "/recordfeeling",
+          element: <RecordPage />,
+        },
       ],
     },
     // pages with layout (navBar)
@@ -64,10 +68,10 @@ const Router = () => {
           path: "/dashboard",
           element: <DashboardPage />,
         },
-        {
+        /*  {
           path: "/emotionalesWohlbefindenErfassen", // vielleicht auch noch einmal Namen ändern?
           element: <RecordPage />,
-        },
+        }, */
         {
           path: "/meineStatistiken",
           element: <MetricsPage />,

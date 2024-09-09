@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import CheckInFeelingDisplay from "@/components/ownComponents/recordPage/CheckInFeelingDisplay";
 
 //++ import EmotionsProvider
