@@ -36,6 +36,7 @@ module.exports = {
 
         // Custom Colors:
         "selected-subemotion": "hsl(var(--selected-subemotion))",
+        "accent-color": "hsl(var(--accent-color))",
 
         // Color for specific purposes Extensions:
 
