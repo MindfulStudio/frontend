@@ -9,14 +9,15 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent } from "@/components/ui/tabs";
+
 import { CheckboxTherms } from "./CheckboxTherms";
+
 import EyeOpenIcon from "/src/assets/icons/eye-svgrepo-com.svg";
 import EyeClosedIcon from "/src/assets/icons/eye-close-svgrepo-com.svg";
 import { useEffect, useState } from "react";
 import UserFeedbackText from "../typo/UserFeedbackText";
 
 // TODO: captcha
-
 
 export function RegisterTabs() {
   // activate button after checkox ist checked:
@@ -30,6 +31,7 @@ export function RegisterTabs() {
     password: "",
   });
   const [errorsVal, setErrorsVal] = useState({});
+
   //NOTICE: kommt in Provider:
   const [activeUser, setActiveUser] = useState(false);
 
@@ -105,8 +107,10 @@ export function RegisterTabs() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ registerDataToSend }),
+
+       body: JSON.stringify({ registerDataToSend }),
         // credentials: "include", // ist das hier nötig?
+
       });
       console.log("response: ", response);
 
@@ -115,7 +119,9 @@ export function RegisterTabs() {
         throw new Error(errorData.message || "registration failed");
       }
       const data = await response.json();
+
       setActiveUser(true);
+
       return data;
     } catch (error) {
       console.log(error);
@@ -171,7 +177,9 @@ export function RegisterTabs() {
                   id="password"
                   placeholder="Passwort"
                   type={showPassword ? "text" : "password"}
+
                   name="password"
+
                   onChange={handleChange}
                   required
                 />
