@@ -59,22 +59,22 @@ export function RegisterTabs() {
         case "email":
           const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
           if (!emailRegex.test(formData[key])) {
-            valErrors[key] = "Email is not valid.";
+            valErrors[key] = "Die Email ist ungültig.";
           }
           break;
         case "username":
           const usernameRegex = /^[a-zA-Z0-9_]+$/;
           if (!usernameRegex.test(formData[key])) {
-            valErrors[key] = "Only letters and numbers are allowed.";
+            valErrors[key] = "Nur Buchstaben und Zahlen sind erlaubt.";
           }
           break;
         case "password":
           if (formData[key].length < 12) {
-            valErrors[key] = "Password must be at least 12 characters long.";
+            valErrors[key] = "Das Passwort muss mindestens 12 Zeichen lang sein.";
           }
           break;
         default:
-          valErrors[key] = "invalid input";
+          valErrors[key] = "Ungültige Eingabe!";
           break;
       }
     });
