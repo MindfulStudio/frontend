@@ -66,6 +66,7 @@
     --font-primary: "Cantarell", sans-serif;
     --font-highlight: "Yatra One", sans-serif;
     --selected-subemotion:  /* #FFD9DA */ 358 100% 93%;
+    --accent-color:  /* #345995 */ 217 48% 39%;
   }
 
   /* Dark Mode */
