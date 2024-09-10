@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // fetch tags from src/data/standardTags.json
 // TODO: => to be extracted to a Provider

@@ -48,7 +48,11 @@ const FeelingsSelector = () => {
             <li
               key={feeling.id}
               onClick={() => handleFeelingSelect(feeling, true)} // we need to pass true, to indicate that this is a custom feeling
-              className="cursor-pointer rounded-sm p-2 hover:bg-selected-subemotion hover:rotate-on-hover text-md"
+              className={`cursor-pointer  p-2 hover:bg-selected-subemotion hover:rotate-on-hover text-md ${
+                selectedFeeling?.id === feeling.id
+                  ? "bg-selected-subemotion"
+                  : ""
+              }`}
             >
               {feeling.name}
             </li>
@@ -78,5 +82,5 @@ const FeelingsSelector = () => {
 
 export default FeelingsSelector;
 
-/* NOTICE: hover:bg-selected-subemotion is a custom color, which is defined in tailwind-config.js */
-/* NOTICE: hover:rotate-on-hover is a custom class, which is defined in tailwind-config.js! */
+/* NOTICE: bg-selected-subemotion is a custom color, which is defined in tailwind-config.js */
+/* NOTICE: rotate-on-hover is a custom class, which is defined in tailwind-config.js! */
