@@ -34,7 +34,7 @@ const TagsPlaceTimePeople = () => {
     loadStandardTags();
   }, []);
 
-  // The renderTags function takes a category as a parameter (e.g. “when”, “where”) and searches the standardTags array to find the matching object with the desired category. As soon as the matching object has been found, it renders the singleStandardTags as li elements (list of clickable buttons).
+  // The renderTags function takes a category as a parameter (e.g. “when”, “where”) and searches the standardTags array to find the matching object with the desired category. As soon as the matching object has been found, it renders the singleStandardTags as li elements (TODO: make this to a list of clickable toggles).
   const renderTagListbyCategory = (category) => {
     const categoryTags = standardTags.find((tag) => tag.category === category);
 
@@ -42,7 +42,9 @@ const TagsPlaceTimePeople = () => {
       categoryTags.singleStandardTags.map((tag, index) => (
         <li
           key={index}
+          /* styling not yet fixed; for now, I´ve applied same styling as for the feelings */
           className="cursor-pointer p-2 hover:bg-selected-subemotion hover:rotate-on-hover text-smm"
+          // TODO: implement tag selection (toggle group by shadcn ui)
         >
           {tag}
         </li>
