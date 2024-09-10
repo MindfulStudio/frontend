@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 // arrow icons
 import ArrowLeft from "/src/assets/icons/arrow-left-svgrepo-com.svg";
 import ArrowRight from "/src/assets/icons/arrow-right-svgrepo-com.svg";
+import SaveSymbol from "/src/assets/icons/save-2-svgrepo-com.svg";
 
 // import subcomponents for the record page
 import CheckInFeelingDisplay from "@/components/ownComponents/recordPage/CheckInFeelingDisplay.jsx";
@@ -62,16 +63,16 @@ const RecordPage = () => {
   };
 
   return (
-    <main className="pt-[95px] px-[50px] flex flex-col items-center relative">
-      {renderCheckinStepComponent()}
+    <main className="pt-[95px] px-[50px] flex flex-col items-center relative min-h-screen">
+      <div className="flex-grow">{renderCheckinStepComponent()}</div>
 
       <Progress
         value={(checkinStep / totalCheckinSteps) * 100}
-        className="w-[66%] mt-10 relative"
+        className="w-[66%] mb-24 relative"
       />
 
       <div
-        className="absolute bottom-96 left-1/2 transform -translate-x-1/2 flex gap-72"
+        className="absolute bottom-1/2 left-1/2 transform -translate-x-1/2 flex gap-72"
         style={{ zIndex: 10 }}
       >
         <Button
@@ -85,7 +86,9 @@ const RecordPage = () => {
             <ArrowRight />
           </Button>
         ) : (
-          <Button onClick={handleCheckinSubmit}>Speichern</Button>
+          <Button variant="arrow" onClick={handleCheckinSubmit}>
+            <SaveSymbol />
+          </Button>
         )}
       </div>
     </main>
