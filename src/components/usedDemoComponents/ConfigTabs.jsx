@@ -10,7 +10,7 @@ import {
 
 import { Tabs, TabsContent } from "@/components/ui/tabs";
 import { ConfigSwitch } from "./ConfigSwitch";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import UserFeedbackText from "../typo/UserFeedbackText";
 
@@ -25,46 +25,9 @@ export function ConfigTabs() {
     physicalActivity: true,
     weather: true,
   });
-  // NOTICE: Die Toggles sind falsch rum gestyled (checked/true ist ausgegraut und hat den toggle-Kreis links statt rechts). Das kann man z.B. korrigieren, indem man in components/ui/switch.jsx die Wörter unchecked und checked überall jeweils vertauscht (wollte ich nicht einfach so machen ohne es mit euch abzusprechen).
-
-  // get user's configData from backend at mounting
-  useEffect(() => {
-    const getConfigData = async () => {
-      // fetching configData - GET:
-      try {
-        const baseURL = import.meta.env.VITE_baseURL;
-        const pathURL = import.meta.env.VITE_basePathTwo;
-        const response = await fetch(`${baseURL}${pathURL}`, {
-          method: "GET",
-          credentials: "include",
-        });
-        const data = await response.json();
-
-        // In case of userNotFound error:
-        if (!response.ok) {
-          setError({
-            message:
-              "Ein unerwarteter Fehler ist aufgetreten. Bitte loggen Sie sich neu ein.",
-          });
-          return;
-        } else {
-          // Set configData according to backend (isConfigured must be true)
-          setConfigData({
-            ...data.data.config,
-            isConfigured: true,
-          });
-        }
-        return;
-      } catch {
-        // In case of any other server errors:
-        setError({ message: "Ein unerwarteter Serverfehler ist aufgetreten." });
-      }
-    };
-    getConfigData();
-  }, []);
 
   // toggle configData on change:
-  const handleChange = (id) => {
+  const handleToggle = (id) => {
     setConfigData((prevConfig) => ({
       ...prevConfig,
       [id]: !prevConfig[id],
@@ -124,7 +87,7 @@ export function ConfigTabs() {
                 <ConfigSwitch
                   name={"Schlaf"}
                   id={"sleepingHours"}
-                  handleChange={handleChange}
+                  handleToggle={handleToggle}
                   configData={configData}
                 />
               </div>
@@ -132,7 +95,7 @@ export function ConfigTabs() {
                 <ConfigSwitch
                   name={"körperliche Aktivität"}
                   id={"physicalActivity"}
-                  handleChange={handleChange}
+                  handleToggle={handleToggle}
                   configData={configData}
                 />
               </div>
@@ -140,7 +103,7 @@ export function ConfigTabs() {
                 <ConfigSwitch
                   name={"Wetter"}
                   id={"weather"}
-                  handleChange={handleChange}
+                  handleToggle={handleToggle}
                   configData={configData}
                 />
               </div>
