@@ -15,27 +15,20 @@ import TagsContext from "@/components/ownComponents/recordPage/TagsContext.jsx";
 import MakeANote from "@/components/ownComponents/recordPage/MakeANote.jsx";
 import SleepActivityWeather from "@/components/ownComponents/recordPage/SleepActivityWeather.jsx";
 
-//++ import EmotionsProvider
+// import EmotionsProvider
 import { useEmotionsContext } from "@/utils/EmotionsProvider";
+// import useRecordProgressContext
+import { useRecordProgressContext } from "@/utils/RecordProgressProvider";
 
 const RecordPage = () => {
   const { feelingsFamilies } = useEmotionsContext();
 
-  const [checkinStep, setCheckinStep] = useState(1);
-
-  const totalCheckinSteps = 5;
-
-  const nextCheckinStep = () => {
-    if (checkinStep < totalCheckinSteps) {
-      setCheckinStep((checkinStep) => checkinStep + 1);
-    }
-  };
-
-  const previousCheckinStep = () => {
-    if (checkinStep > 1) {
-      setCheckinStep((checkinStep) => checkinStep - 1);
-    }
-  };
+  const {
+    checkinStep,
+    totalCheckinSteps,
+    nextCheckinStep,
+    previousCheckinStep,
+  } = useRecordProgressContext();
 
   const renderCheckinStepComponent = () => {
     switch (checkinStep) {

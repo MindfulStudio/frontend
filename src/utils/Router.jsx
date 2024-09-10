@@ -11,7 +11,9 @@ import RegisterPage from "../pages/RegisterPage";
 import DashboardPage from "../pages/DashboardPage";
 import UserDataPage from "../pages/UserDataPage";
 import InfoPage from "../pages/InfoPage";
+// Providers
 import EmotionsProvider from "./EmotionsProvider";
+import RecordProgressProvider from "./RecordProgressProvider";
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -90,9 +92,11 @@ const Router = () => {
 
   return (
     <EmotionsProvider>
-      <RouterProvider router={router}>
-        <Layout />
-      </RouterProvider>
+      <RecordProgressProvider>
+        <RouterProvider router={router}>
+          <Layout />
+        </RouterProvider>
+      </RecordProgressProvider>
     </EmotionsProvider>
   );
 };
