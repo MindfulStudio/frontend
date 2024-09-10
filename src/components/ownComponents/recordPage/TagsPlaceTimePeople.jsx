@@ -17,7 +17,12 @@ const fetchStandardTags = async () => {
   }
 };
 
+//++ import EmotionsProvider
+import { useEmotionsContext } from "@/utils/EmotionsProvider";
+
 const TagsPlaceTimePeople = () => {
+  const { selectedFeeling } = useEmotionsContext();
+
   const [standardTags, setStandardTags] = useState([]);
   // TODO: implement tag selection
   //const [selectedTags, setSelectedTags] = useState([]);
@@ -55,8 +60,11 @@ const TagsPlaceTimePeople = () => {
 
   return (
     <div className="flex flex-col items-center">
-      <section className="mt-16">
-        <p>Wann hast du dich ... gefühlt?</p>
+      <section className="mt-16 flex flex-col items-center">
+        <h2>
+          Wann hast du dich{" "}
+          <span className="font-bold">{selectedFeeling.name}</span> gefühlt?
+        </h2>
         <div className="w-[290px] bg-white p-[22px] text-center  mt-5 mb-7 h-[423px/3] overflow-y-scroll">
           <ul
             className="flex flex-wrap gap-3 justify-center list-none p-0"
@@ -66,7 +74,10 @@ const TagsPlaceTimePeople = () => {
           </ul>
         </div>
 
-        <p>Wo hast du dich ... gefühlt?</p>
+        <p>
+          Wo hast du dich{" "}
+          <span className="font-bold">{selectedFeeling.name}</span> gefühlt?
+        </p>
         <div className="w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[423px/3] overflow-y-scroll">
           <ul
             className="flex flex-wrap gap-3 justify-center list-none p-0"
@@ -76,7 +87,11 @@ const TagsPlaceTimePeople = () => {
           </ul>
         </div>
 
-        <p>Mit wem hast du dich ... gefühlt?</p>
+        <p>
+          Mit wem hast du dich
+          <span className="font-bold"> {selectedFeeling.name} </span>
+          gefühlt?
+        </p>
         <div className="w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[423px/3] overflow-y-scroll">
           <ul
             className="flex flex-wrap gap-3 justify-center list-none p-0"
