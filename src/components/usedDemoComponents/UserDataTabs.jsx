@@ -30,11 +30,11 @@ export function UserDataTabs() {
   // kommt aus Provider?:
   const [email, setEmail] = useState("test@test.te");
   // kommt aus Provider?:
-  const [sleepingHours, setSleepingHours] = useState(false);
+  const [sleepingHours, setSleepingHours] = useState(true);
   // kommt aus Provider?:
   const [physicalActivity, setPhysicalActivity] = useState(false);
   // kommt aus Provider?:
-  const [weather, setWeather] = useState(true);
+  const [weather, setWeather] = useState(false);
 
   // show/hide old password
   const handleShowOldPassword = () => {
@@ -50,7 +50,17 @@ export function UserDataTabs() {
   const handleToggleSleep = () => {
     setSleepingHours(!sleepingHours);
   };
-  console.log({ sleepingHours });
+  // console.log(sleepingHours);
+
+  // handleToggle phsycialActivity
+  const handleToggleActivity = () => {
+    setPhysicalActivity(!physicalActivity);
+  };
+
+  // handleToggle phsycialWeather
+  const handleToggleWeather = () => {
+    setWeather(!weather);
+  };
 
   return (
     <Tabs defaultValue="account" className="w-[350px]">
@@ -117,15 +127,25 @@ export function UserDataTabs() {
               <ConfigSwitch
                 name={"Schlaf"}
                 id={"sleep"}
-                onClick={handleToggleSleep}
-                
+                isActive={sleepingHours}
+                ontoggle={handleToggleSleep}
               />
             </div>
             <div className="space-y-1">
-              <ConfigSwitch name={"körperliche Aktivität"} id={"sport"} />
+              <ConfigSwitch
+                name={"körperliche Aktivität"}
+                id={"sport"}
+                isActive={physicalActivity}
+                ontoggle={handleToggleActivity}
+              />
             </div>
             <div className="space-y-1">
-              <ConfigSwitch name={"Wetter"} id={"weather"} />
+              <ConfigSwitch
+                name={"Wetter"}
+                id={"weather"}
+                isActive={weather}
+                ontoggle={handleToggleWeather}
+              />
             </div>
           </CardContent>
           <CardFooter>
