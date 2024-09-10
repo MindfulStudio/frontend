@@ -40,15 +40,20 @@ const FeelingsSelector = () => {
       {/* map through all the custom subemotions and display them in another list (user won´t see, that there are two lists); 
       // We could join everything to one list, but this means a bit more complex refactoring and for the moment, this is a more clear, flexible and pragmatic approach */}
       <ul className="flex flex-wrap gap-3 justify-center list-none p-0">
-        {customFeelings.map((feeling) => (
-          <li
-            key={feeling.id}
-            onClick={() => handleFeelingSelect(feeling, true)} // we need to pass true, to indicate that this is a custom feeling
-            className="cursor-pointer rounded-sm p-2 hover:bg-selected-subemotion hover:rotate-on-hover text-md"
-          >
-            {feeling.name}
-          </li>
-        ))}
+        {/* Show the user-defined custom features of the selected family */}
+        {(customFeelings[selectedFamily] || []).map(
+          (
+            feeling // if there are no custom feelings, we map through an empty array, which means, that nothing is displayed
+          ) => (
+            <li
+              key={feeling.id}
+              onClick={() => handleFeelingSelect(feeling, true)} // we need to pass true, to indicate that this is a custom feeling
+              className="cursor-pointer rounded-sm p-2 hover:bg-selected-subemotion hover:rotate-on-hover text-md"
+            >
+              {feeling.name}
+            </li>
+          )
+        )}
       </ul>
 
       {/* Add custom feeling */}

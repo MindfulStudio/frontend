@@ -134,9 +134,20 @@ const EmotionsProvider = ({ children }) => {
     const customFeelingsObject = {
       id: Date.now(), //TODO: Assigning an unique and useful id; For the Standard-Subfeelings, it is the index of the array, because this array won´t change. But for the custom feelings, we might need a different approach? I suggest Date.now() for now, but we should discuss this to find a better solution.
       name: newFeeling,
+      isDefault: false, // this is a custom feeling, so it is not a default feeling
     };
 
-    setCustomFeelings([...customFeelings, customFeelingsObject]); // add the new feeling to the existing array of custom feelings;
+    const updatedCustomFeelings = {
+      ...customFeelings,
+      [selectedFamily]: [
+        ...(customFeelings[selectedFamily] || []),
+        customFeelingsObject,
+      ],
+    };
+
+    setCustomFeelings(updatedCustomFeelings);
+
+    /*     setCustomFeelings([...customFeelings, customFeelingsObject]); */ // add the new feeling to the existing array of custom feelings;
     console.log("New custom feeling added:", newFeeling);
 
     setNewFeeling(""); // this clears the input field;
