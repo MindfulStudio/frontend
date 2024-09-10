@@ -27,13 +27,13 @@ const RecordPage = () => {
 
   const nextCheckinStep = () => {
     if (checkinStep < totalCheckinSteps) {
-      setCheckinStep(checkinStep + 1);
+      setCheckinStep((checkinStep) => checkinStep + 1);
     }
   };
 
   const previousCheckinStep = () => {
     if (checkinStep > 1) {
-      setCheckinStep(checkinStep - 1);
+      setCheckinStep((checkinStep) => checkinStep - 1);
     }
   };
 
@@ -59,35 +59,33 @@ const RecordPage = () => {
   };
 
   return (
-    <>
-      <main className="pt-[109px] px-[50px] flex flex-col items-center relative">
-        <Progress
-          value={(checkinStep / totalCheckinSteps) * 100}
-          className="w-[33%] mb-8"
-        />
+    <main className="pt-[95px] px-[50px] flex flex-col items-center relative">
+      {renderCheckinStepComponent()}
 
-        {renderCheckinStepComponent()}
+      <Progress
+        value={(checkinStep / totalCheckinSteps) * 100}
+        className="w-[33%] mt-10 relative"
+      />
 
-        <div
-          className="absolute bottom-40 left-1/2 transform -translate-x-1/2 flex gap-44"
-          style={{ zIndex: 10 }}
+      <div
+        className="absolute bottom-80 left-1/2 transform -translate-x-1/2 flex gap-72"
+        style={{ zIndex: 10 }}
+      >
+        <Button
+          variant="arrow"
+          onClick={previousCheckinStep} /* disabled={checkinStep === 1} */
         >
-          <Button
-            variant="arrow"
-            onClick={previousCheckinStep} /* disabled={checkinStep === 1} */
-          >
-            <ArrowLeft />
+          <ArrowLeft />
+        </Button>
+        {checkinStep < totalCheckinSteps ? (
+          <Button variant="arrow" onClick={nextCheckinStep}>
+            <ArrowRight />
           </Button>
-          {checkinStep < totalCheckinSteps ? (
-            <Button variant="arrow" onClick={nextCheckinStep}>
-              <ArrowRight />
-            </Button>
-          ) : (
-            <Button onClick={handleCheckinSubmit}>Speichern</Button>
-          )}
-        </div>
-      </main>
-    </>
+        ) : (
+          <Button onClick={handleCheckinSubmit}>Speichern</Button>
+        )}
+      </div>
+    </main>
   );
 };
 

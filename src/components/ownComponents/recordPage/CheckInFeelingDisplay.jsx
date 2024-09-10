@@ -54,7 +54,7 @@ const CheckInFeelingDisplay = () => {
       </div>
       {/* --------------------------------------------------------- */}
 
-      <div className="flex flex-row items-center gap-3">
+      <div className="flex flex-row items-center gap-3 mt-3">
         {/* gemischte Gefühle */}
         <button
           className="flex flex-col items-center justify-center min-w-[33%]"
