@@ -1,8 +1,7 @@
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 
-// import useState
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 // arrow icons
 import ArrowLeft from "/src/assets/icons/arrow-left-svgrepo-com.svg";
@@ -30,6 +29,8 @@ const RecordPage = () => {
     previousCheckinStep,
   } = useRecordProgressContext();
 
+  const navigateBackToDashboard = useNavigate();
+
   const renderCheckinStepComponent = () => {
     switch (checkinStep) {
       case 1:
@@ -47,6 +48,15 @@ const RecordPage = () => {
     }
   };
 
+  const handleBackToDashboard = () => {
+    if (checkinStep === 1) {
+      navigateBackToDashboard("/dashboard");
+      // the user can only redirect to the dashboard page in the first step, otherwise the previous logic remains the same.
+    } else {
+      previousCheckinStep();
+    }
+  };
+
   const handleCheckinSubmit = () => {
     //TODO: further logic for submitting the checkin
   };
@@ -57,16 +67,16 @@ const RecordPage = () => {
 
       <Progress
         value={(checkinStep / totalCheckinSteps) * 100}
-        className="w-[33%] mt-10 relative"
+        className="w-[66%] mt-10 relative"
       />
 
       <div
-        className="absolute bottom-80 left-1/2 transform -translate-x-1/2 flex gap-72"
+        className="absolute bottom-96 left-1/2 transform -translate-x-1/2 flex gap-72"
         style={{ zIndex: 10 }}
       >
         <Button
           variant="arrow"
-          onClick={previousCheckinStep} /* disabled={checkinStep === 1} */
+          onClick={handleBackToDashboard} /* disabled={checkinStep === 1} */
         >
           <ArrowLeft />
         </Button>

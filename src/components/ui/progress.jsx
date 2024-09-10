@@ -16,7 +16,7 @@ const Progress = forwardRef(({ className, value, ...props }, ref) => (
     {...props}
   >
     <ProgressPrimitive.Indicator /* this is the progress inside the bar */
-      className="h-full w-full flex-1 transition-all bg-black"
+      className="h-full w-full flex-1 transition-all bg-[#A8A8A8]"
       style={{
         transform: `translateX(-${100 - (value || 0)}%)`,
       }} /*  this means that the progress bar will be filled from the right to the left; the value is the percentage of the progress bar that is filled; value or 0 means that the value is optional and if it is not provided, the default value is 0 (= no progress) */
