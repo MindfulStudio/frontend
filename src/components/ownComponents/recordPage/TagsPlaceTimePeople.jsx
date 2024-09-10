@@ -19,14 +19,15 @@ const fetchStandardTags = async () => {
 
 //++ import EmotionsProvider
 import { useEmotionsContext } from "@/utils/EmotionsProvider";
+
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 const TagsPlaceTimePeople = () => {
   const { selectedFeeling, selectedFamily } = useEmotionsContext();
 
   const [standardTags, setStandardTags] = useState([]);
-  // TODO: implement tag selection
-  const [selectedTags, setSelectedTags] = useState([]);
+  const [selectedTags, setSelectedTags] = useState([]); //  stores the list of currently selected tags
+
   // TODO: implement custom tag creation
   /* const [customTags, setCustomTags] = useState([]);
   const [newTag, setNewTag] = useState(""); */
@@ -42,10 +43,16 @@ const TagsPlaceTimePeople = () => {
   // Handle selecting/deselecting tags
   const handleTagToggle = (tag) => {
     setSelectedTags((prevSelectedTags) => {
-      if (prevSelectedTags.includes(tag)) {
-        return prevSelectedTags.filter((selectedTag) => selectedTag !== tag);
+      // prevSelectedTags is the previous state of the selectedTags array
+
+      const isSelected = prevSelectedTags.includes(tag); // check if the tag is already selected (it has been clicked before)...
+
+      if (isSelected) {
+        // if the tag is already in the array
+        return prevSelectedTags.filter((selectedTag) => selectedTag !== tag); // ...remove it from the array
+        // This creates a new array that includes all the tags from prevSelectedTags except the one that matches tag. It filters out the selected tag, effectively deselecting it.
       }
-      return [...prevSelectedTags, tag];
+      return [...prevSelectedTags, tag]; // if the tag is not in the array, add it to the array
     });
   };
 
