@@ -56,7 +56,7 @@ export function LoginTabs() {
         setError({ message: "User nicht gefunden." });
         break;
       case "invalidPassword":
-        setError({ message: "Das Passwort ist falsch." });
+        setError({ message: "Email oder Passwort falsch." });
         break;
       case "userNotVerified":
         setError({
@@ -64,15 +64,8 @@ export function LoginTabs() {
             "Dieses Konto wurde noch nicht verifiziert. Zur Verifizierung bitte dem Link in der E-Mail folgen.",
         });
         break;
-      case "envError":
-      case "accTokenError":
-        setError({
-          message:
-            "Ein Serverfehler ist aufgetreten (AccessToken konnte nicht erstellt werden).",
-        });
-        break;
       default:
-        setError({ message: "Ein unbekannter Fehler ist aufgetreten." });
+        setError({ message: "Ein unbekannter Serverfehler ist aufgetreten." });
         break;
     }
   };
