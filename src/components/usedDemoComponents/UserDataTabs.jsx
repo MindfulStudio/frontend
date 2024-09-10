@@ -7,18 +7,50 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import EyeOpenIcon from "/src/assets/icons/eye-svgrepo-com.svg";
+import EyeClosedIcon from "/src/assets/icons/eye-close-svgrepo-com.svg";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ConfigSwitch } from "./ConfigSwitch";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
+import { useState } from "react";
 
 export function UserDataTabs() {
-  // NOTICE: vielleicht input validierung auslagern?
-  // NOTICE: vielleicht das auge auslagern?
-  // TODO: Profilbild auch in nav-bar einfügen
   // TODO: Logik fetchen
-  // TODO: Logik buttons, inputValidation, toggle
+  // TODO: Logik buttons, inputValidation, toggles
+
+  // show/hide old password
+  const [showOldPassword, setShowOldPassword] = useState(false);
+  // show/hide new password
+  const [showNewPassword, setShowNewPassword] = useState(false);
+
+  // kommt aus Provider?:
+  const [username, setUsername] = useState("Luise");
+  // kommt aus Provider?:
+  const [email, setEmail] = useState("test@test.te");
+  // kommt aus Provider?:
+  const [sleepingHours, setSleepingHours] = useState(false);
+  // kommt aus Provider?:
+  const [physicalActivity, setPhysicalActivity] = useState(false);
+  // kommt aus Provider?:
+  const [weather, setWeather] = useState(true);
+
+  // show/hide old password
+  const handleShowOldPassword = () => {
+    setShowOldPassword(!showOldPassword);
+  };
+
+  // show/hide new password
+  const handleShowNewPassword = () => {
+    setShowNewPassword(!showNewPassword);
+  };
+
+  // handleToggle sleep
+  const handleToggleSleep = () => {
+    setSleepingHours(!sleepingHours);
+  };
+  console.log({ sleepingHours });
 
   return (
     <Tabs defaultValue="account" className="w-[350px]">
@@ -35,8 +67,7 @@ export function UserDataTabs() {
           </CardHeader>
           <CardContent className="space-y-2">
             {/* profile-image */}
-            <div className="space-y-1 bg-lime-200 w-24 h-24 rounded-full">
-              {/* Image für Profilbild einfügen */}
+            <div className="space-y-1  w-24 h-24 rounded-full">
               <img
                 src="/src/assets/profileImages/profileImgOne.png"
                 alt="profile Image"
@@ -83,7 +114,12 @@ export function UserDataTabs() {
               Was möchtest du noch zusätzlich erfassen?
             </CardDescription>
             <div className="space-y-1">
-              <ConfigSwitch name={"Schlaf"} id={"sleep"} />
+              <ConfigSwitch
+                name={"Schlaf"}
+                id={"sleep"}
+                onClick={handleToggleSleep}
+                
+              />
             </div>
             <div className="space-y-1">
               <ConfigSwitch name={"körperliche Aktivität"} id={"sport"} />
@@ -98,6 +134,7 @@ export function UserDataTabs() {
           </CardFooter>
         </Card>
       </TabsContent>
+
       {/* password */}
       <TabsContent value="password">
         <Card>
@@ -108,16 +145,38 @@ export function UserDataTabs() {
               abgemeldet.{" "}
             </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-2">
+          <CardContent className="space-y-2 relative">
             {/* TODO: passwort eingabefeld noch mit Auge versehen */}
             <div className="space-y-1">
               <Label htmlFor="current">Aktuelles Passwort</Label>
               <Input id="current" type="password" />
             </div>
+            {showOldPassword ? (
+              <EyeOpenIcon
+                className="w-5 h-auto absolute right-8 top-8"
+                onClick={handleShowOldPassword}
+              />
+            ) : (
+              <EyeClosedIcon
+                className="w-5 h-auto absolute right-8 top-8"
+                onClick={handleShowOldPassword}
+              />
+            )}
             <div className="space-y-1">
               <Label htmlFor="new">Neues Passwort</Label>
               <Input id="new" type="password" />
             </div>
+            {showNewPassword ? (
+              <EyeOpenIcon
+                className="w-5 h-auto absolute right-8 top-[107px]"
+                onClick={handleShowNewPassword}
+              />
+            ) : (
+              <EyeClosedIcon
+                className="w-5 h-auto absolute right-8 top-[107px]"
+                onClick={handleShowNewPassword}
+              />
+            )}
           </CardContent>
           <CardFooter>
             <Button>Passwort speichern</Button>
