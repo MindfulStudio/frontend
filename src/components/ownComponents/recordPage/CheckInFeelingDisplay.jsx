@@ -22,7 +22,12 @@ const CheckInFeelingDisplay = () => {
       <div className="flex flex-row gap-[182px]">
         {/* Anspannung */}
         <button
-          className="flex flex-col items-start row-span-2 col-span-2 justify-end"
+          className={`flex flex-col items-start row-span-2 col-span-2 justify-end  ${
+            selectedFamily === feelingsFamilies[0].id
+              ? "opacity-100"
+              : "opacity-50"
+          }`}
+          // opacity is set dynamically. If selectedFamily matches ID of the feelingsFamily, button receives opacity-100, otherwise opacity-50.
           onClick={() => handleFamilySelect(feelingsFamilies[0].id)}
           /* feelingsFamilies[0].id = the value for id in the first emotionobject in the array called feelingsFamilies, which comes from the fetchFeelings function and the setFeelingsFamilies-State*/
         >
@@ -37,7 +42,11 @@ const CheckInFeelingDisplay = () => {
 
         {/* Freude */}
         <button
-          className="flex flex-col items-center row-span-2 justify-start"
+          className={`flex flex-col items-center row-span-2 justify-start ${
+            selectedFamily === feelingsFamilies[1].id
+              ? "opacity-100"
+              : "opacity-50"
+          }`}
           onClick={() => handleFamilySelect(feelingsFamilies[1].id)}
         >
           <IlluFreude className="flex-shrink-0 w-[49px] h-[61.5px]" />
@@ -54,16 +63,19 @@ const CheckInFeelingDisplay = () => {
       </div>
       {/* --------------------------------------------------------- */}
 
-      <div className="flex flex-row items-center gap-3">
+      <div className="flex flex-row items-center gap-3 mt-3">
         {/* gemischte Gefühle */}
         <button
-          className="flex flex-col items-center justify-center min-w-[33%]"
+          className={`flex flex-col items-center justify-center min-w-[33%] ${
+            selectedFamily === feelingsFamilies[4].id
+              ? "opacity-100"
+              : "opacity-50"
+          }`}
           onClick={() => handleFamilySelect(feelingsFamilies[4].id)}
         >
           <div className="flex flex-col items-center">
             <IlluGemischteGefühle className=" w-[33.2px] h-[47.8px]" />
-            <div className="  transform -translate-x-1/6 whitespace-nowrap">
-              {" "}
+            <div className="transform -translate-x-1/6 whitespace-nowrap">
               {/* solution to position the text with a small overflow beyond the limits of the flexbox */}
               <HighlightText
                 className="text-center"
@@ -76,7 +88,11 @@ const CheckInFeelingDisplay = () => {
 
         {/* Entspannung */}
         <button
-          className="flex flex-col items-center justify-center  pb-[63px] min-w-[33%]"
+          className={`flex flex-col items-center justify-center pb-[63px] min-w-[33%] ${
+            selectedFamily === feelingsFamilies[2].id
+              ? "opacity-100"
+              : "opacity-50"
+          }`}
           onClick={() => handleFamilySelect(feelingsFamilies[2].id)}
         >
           <IlluEntspannung className=" w-[112.2px] h-[19.6px] " />
@@ -85,7 +101,11 @@ const CheckInFeelingDisplay = () => {
 
         {/* Trauer */}
         <button
-          className="flex flex-col items-center justify-center min-w-[33%]"
+          className={`flex flex-col items-center justify-center min-w-[33%] ${
+            selectedFamily === feelingsFamilies[3].id
+              ? "opacity-100"
+              : "opacity-50"
+          }`}
           onClick={() => handleFamilySelect(feelingsFamilies[3].id)}
         >
           <IlluTrauer className="flex-shrink-0 w-[24.7px] h-[61px] ml-3" />

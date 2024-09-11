@@ -24,7 +24,7 @@ const FeelingsFamilyComponent = () => {
     try {
       handleFamilySelect(familyId);
       console.log("handleFamilySelect called");
-      navigate("/emotionalesWohlbefindenErfassen");
+      navigate("/recordfeeling");
     } catch (error) {
       navigate("/error");
     }

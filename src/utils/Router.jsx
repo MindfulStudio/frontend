@@ -11,7 +11,9 @@ import RegisterPage from "../pages/RegisterPage";
 import DashboardPage from "../pages/DashboardPage";
 import UserDataPage from "../pages/UserDataPage";
 import InfoPage from "../pages/InfoPage";
+// Providers
 import EmotionsProvider from "./EmotionsProvider";
+import RecordProgressProvider from "./RecordProgressProvider";
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -31,6 +33,10 @@ const Router = () => {
         {
           path: "/registrierung",
           element: <RegisterPage />,
+        },
+        {
+          path: "/recordfeeling",
+          element: <RecordPage />,
         },
       ],
     },
@@ -64,10 +70,10 @@ const Router = () => {
           path: "/dashboard",
           element: <DashboardPage />,
         },
-        {
+        /*  {
           path: "/emotionalesWohlbefindenErfassen", // vielleicht auch noch einmal Namen ändern?
           element: <RecordPage />,
-        },
+        }, */
         {
           path: "/meineStatistiken",
           element: <MetricsPage />,
@@ -86,9 +92,11 @@ const Router = () => {
 
   return (
     <EmotionsProvider>
-      <RouterProvider router={router}>
-        <Layout />
-      </RouterProvider>
+      <RecordProgressProvider>
+        <RouterProvider router={router}>
+          <Layout />
+        </RouterProvider>
+      </RecordProgressProvider>
     </EmotionsProvider>
   );
 };
