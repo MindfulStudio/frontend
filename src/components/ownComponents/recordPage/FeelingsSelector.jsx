@@ -47,7 +47,7 @@ const FeelingsSelector = () => {
           ) => (
             <li
               key={feeling.id}
-              onClick={() => handleFeelingSelect(feeling, true)} // we need to pass true, to indicate that this is a custom feeling
+              onClick={() => handleFeelingSelect(feeling, false)} // we need to pass false, to indicate that this is a custom feeling
               className={`cursor-pointer  p-2 hover:bg-selected-subemotion hover:rotate-on-hover text-md ${
                 selectedFeeling?.id === feeling.id
                   ? "bg-selected-subemotion"

@@ -99,7 +99,7 @@ export function LoginTabs() {
         handleError(data);
         throw new Error(error);
       }
-      if (data.isConfigured) {
+      if (data.data.isConfigured) {
         navigate("/dashboard");
       } else {
         navigate("/konfiguration");
