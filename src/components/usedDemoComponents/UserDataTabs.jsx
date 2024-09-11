@@ -19,6 +19,7 @@ import { useEffect, useState } from "react";
 
 export function UserDataTabs() {
   // TODO: Logik für "Passwort vergessen" implementieren (Bonus)
+  // TODO: Logik für "Email"-Änderung implementieren (Bonus) => hier wäre verification-Email nötig
 
   // show/hide old password
   const [showOldPassword, setShowOldPassword] = useState(false);
@@ -210,7 +211,7 @@ export function UserDataTabs() {
                   type="email"
                   onChange={(e) => handleChange(e)}
                   value={userData.email}
-                  disabled
+                  disabled // disabled, da bei Passworänderung auch neue Verification-Email notwendig wäre
                 />
               </div>
 
@@ -256,6 +257,7 @@ export function UserDataTabs() {
       </TabsContent>
 
       {/* password */}
+      {/* NOTICE: Es gibt hier noch keine wirkliche Funktionalität - wäre Bonus */}
       <TabsContent value="password">
         <Card>
           <CardHeader>
@@ -266,7 +268,6 @@ export function UserDataTabs() {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-2 relative">
-            {/* TODO: passwort eingabefeld noch mit Auge versehen */}
             <div className="space-y-1">
               <Label htmlFor="current">Aktuelles Passwort</Label>
               <Input id="current" type="password" />
