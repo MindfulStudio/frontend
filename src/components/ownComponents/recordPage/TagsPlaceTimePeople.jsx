@@ -21,7 +21,7 @@ const fetchStandardTags = async () => {
 import { useEmotionsContext } from "@/utils/EmotionsProvider";
 
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { Input } from "postcss";
+
 import InputAndButtonForCustomTag from "./InputAndButtonForCustomTag";
 
 const TagsPlaceTimePeople = () => {
@@ -84,9 +84,15 @@ const TagsPlaceTimePeople = () => {
       </ToggleGroup>
     ) : (
       // styling not yet fixed; for now, I´ve applied same styling as for the feelings
-      // TODO: implement tag selection
       <p>Keine Tags gefunden</p>
     );
+  };
+
+  // TODO: implement tag selection
+
+  const handleTagSelect = (tag) => {
+    setSelectedTags({ ...tag });
+    console.log("Selected Tags:", tag);
   };
 
   return (
@@ -100,10 +106,10 @@ const TagsPlaceTimePeople = () => {
           Wann hast du dich{" "}
           <span className="font-bold">{selectedFeeling.name}</span> gefühlt?
         </h2>
-        <div className="w-[290px] bg-white p-[22px] text-center  mt-5 mb-7 h-[423px/3] overflow-y-scroll">
+        <div className="w-[290px] bg-white p-[22px] text-center  mt-5 mb-7 h-[141px] overflow-y-scroll">
           <ul
             className="flex flex-wrap gap-3 justify-center list-none p-0"
-            onClick={() => console.log("clicked")}
+            onClick={() => handleTagSelect(tags)}
           >
             {renderTagListbyCategory("wann")}
           </ul>
@@ -114,7 +120,7 @@ const TagsPlaceTimePeople = () => {
           Wo hast du dich
           <span className="font-bold"> {selectedFeeling.name}</span> gefühlt?
         </p>
-        <div className="w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[423px/3] overflow-y-scroll">
+        <div className="w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[141px] overflow-y-scroll">
           <ul
             className="flex flex-wrap gap-3 justify-center list-none p-0"
             onClick={() => console.log("clicked")}
@@ -129,7 +135,7 @@ const TagsPlaceTimePeople = () => {
           <span className="font-bold"> {selectedFeeling.name} </span>
           gefühlt?
         </p>
-        <div className="w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[423px/3] overflow-y-scroll">
+        <div className="w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[141px] overflow-y-scroll">
           <ul
             className="flex flex-wrap gap-3 justify-center list-none p-0"
             onClick={() => console.log("clicked")}

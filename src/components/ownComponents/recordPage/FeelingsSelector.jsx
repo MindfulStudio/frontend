@@ -49,7 +49,7 @@ const FeelingsSelector = () => {
               key={feeling.id}
               onClick={() => handleFeelingSelect(feeling, true)} // we need to pass true, to indicate that this is a custom feeling
               className={`cursor-pointer  p-2 hover:bg-selected-subemotion hover:rotate-on-hover text-md ${
-                selectedFeeling?.id === feeling.id
+                selectedFeeling?.id === feeling.id //selectedFeeling? means that we check if selectedFeeling is not null or undefined and then we check if the id of the selected feeling matches the id of the current feeling in the map
                   ? "bg-selected-subemotion"
                   : ""
               }`}
