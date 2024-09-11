@@ -12,6 +12,7 @@ import StatisticIcon from "/src/assets/icons/presentation-2-svgrepo-com.svg";
 import JouranlIcon from "/src/assets/icons/diary-svgrepo-com.svg";
 import InfoIcon from "/src/assets/icons/information-svgrepo-com.svg";
 import LogoutIcon from "/src/assets/icons/walk-svgrepo-com.svg";
+import ProfileImageIcon from "/src/components/ownComponents/navMenu/ProfileImageIcon.jsx";
 
 // NOTICE: Component NavMenubar.jsx warsch. löschen
 
@@ -20,14 +21,14 @@ export const NavMenu = () => {
   const routes = [
     {
       id: 1,
-      name: "profilImg",
-      icon: <InfoIcon className="h-[23.393px] w-auto" />, // muss noch angepasst werden! => d.h. component für porfil-img
+      name: "Profil",
+      icon: <ProfileImageIcon className="h-6 w-6" />, // kann noch angepasst werden! => d.h. vllt. ProfileImg random aussuchen oder wenn viel Zeit ist Auswahl zwischen mehreren Bildern geben
       to: "/meineDaten",
       element: <UserDataPage />,
     },
     {
       id: 2,
-      name: "home",
+      name: "Home",
       icon: <HomeIcon className="h-[23.393px] w-auto" />,
       to: "/dashboard",
       element: <DashboardPage />,
