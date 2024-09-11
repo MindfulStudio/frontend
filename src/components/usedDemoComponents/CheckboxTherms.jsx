@@ -14,7 +14,6 @@ export function CheckboxTherms({ ontoggle, success }) {
     setAcceptAGB(!acceptAGB);
     ontoggle(acceptAGB);
   };
-  // console.log(acceptAGB);
 
   return (
     <div className="flex items-center space-x-2">

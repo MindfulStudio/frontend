@@ -5,8 +5,9 @@ import { Tabs, TabsContent } from "@/components/ui/tabs";
 import { CheckboxTherms } from "./CheckboxTherms";
 import EyeOpenIcon from "/src/assets/icons/eye-svgrepo-com.svg";
 import EyeClosedIcon from "/src/assets/icons/eye-close-svgrepo-com.svg";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import UserFeedbackText from "../typo/UserFeedbackText";
+import ReCAPTCHA from "react-google-recaptcha";
 import {
   Card,
   CardContent,
@@ -30,16 +31,18 @@ export function RegisterTabs() {
   const [errorsVal, setErrorsVal] = useState({});
   const [activeButton, setActiveButton] = useState(false);
   const [warning, setWarning] = useState(null);
-  const [checked, setChecked] = useState(false);
+  const [AGBChecked, setAGBChecked] = useState(false);
   const [success, setSuccess] = useState(false);
   const [countdown, setCountdown] = useState(6);
 
   const navigate = useNavigate();
+  const reCaptchaRef = useRef();
 
   // states for validation errors coming from server
   const [emailWarning, setEmailWarning] = useState(null);
   const [usernameWarning, setUsernameWarning] = useState(null);
   const [passwordWarning, setPasswordWarning] = useState(null);
+  const [reCaptchaChecked, setReCaptchaChecked] = useState(false);
 
   // show/hide password
   const handleShowPassword = () => {
@@ -102,7 +105,6 @@ export function RegisterTabs() {
             valErrors[key] =
               "Der Benutzername darf nur Buchstaben und Zahlen enthalten und muss zwischen 3 und 12 Zeichen lang sein.";
           }
-
           break;
         case "password":
           const passwordRegex =
@@ -113,7 +115,6 @@ export function RegisterTabs() {
               "Das Passwort muss mindestens 8 Zeichen lang sein und mindestens einen Buchstaben, eine Zahl sowie ein Sonderzeichen (@.#$!%*?&^_) enthalten.";
           }
           break;
-
         default:
           valErrors[key] = "Ungültige Eingabe!";
           break;
@@ -127,18 +128,20 @@ export function RegisterTabs() {
     setErrorsVal(Object.keys(validateErrors).length > 0 ? validateErrors : {});
     // activate button if there is no valError && the checkbox is checked
     setActiveButton(
-      Object.entries(validateErrors).length === 0 && checked ? true : false
+      Object.entries(validateErrors).length === 0 && AGBChecked ? true : false
     );
-  }, [userData, checked]);
+  }, [userData, AGBChecked]);
 
   // submit Input - register POST
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // clear all server errors
+
     setEmailWarning(null);
     setUsernameWarning(null);
     setPasswordWarning(null);
     setWarning(null);
+
+    const reCaptchaValue = reCaptchaRef.current.getValue();
 
     try {
       const baseURL = import.meta.env.VITE_baseURL;
@@ -148,8 +151,12 @@ export function RegisterTabs() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(userData),
+        body: JSON.stringify({ ...userData, reCaptchaValue }),
       });
+
+      // reset reCaptcha
+      reCaptchaRef.current.reset();
+      setReCaptchaChecked(false);
 
       if (!response.ok) {
         const errorData = await response.json();
@@ -293,7 +300,7 @@ export function RegisterTabs() {
               </div>
               <CheckboxTherms
                 success={success}
-                ontoggle={() => setChecked((val) => !val)}
+                ontoggle={() => setAGBChecked((val) => !val)}
               />
               {/* show server error message here */}
               {warning && <UserFeedbackText content={warning} type={"info"} />}
@@ -312,9 +319,19 @@ export function RegisterTabs() {
                   />
                 </>
               )}
+              {/* reCAPTCHA */}
+              {!success && (
+                <ReCAPTCHA
+                  ref={reCaptchaRef}
+                  sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+                  onChange={() => setReCaptchaChecked((val) => !val)}
+                />
+              )}
             </CardContent>
             <CardFooter>
-              <Button disabled={!activeButton || success} type="submit">
+              <Button
+                disabled={!activeButton || success || !reCaptchaChecked}
+                type="submit">
                 Registrieren
               </Button>
             </CardFooter>
