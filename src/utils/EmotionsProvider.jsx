@@ -9,9 +9,9 @@ const EmotionsProvider = ({ children }) => {
   const [subFeelings, setSubFeelings] = useState([]);
   const [selectedFeeling, setSelectedFeeling] = useState(null);
   const [customFeelings, setCustomFeelings] = useState([]);
-  // NOTICE: This is an array of objects with id and name properties to store the new custom feelings; We must check, if this is the best way to store the custom feelings and create a two-way-connection between the frontend and the backend
+  // NOTICE: This is an array of objects with id and name properties to store the new custom feelings; In the Frontend it is useful in this format, but for the check-in schema, we need to pull out the referring values and send them in the body with the correct keys to the backend
   const [newFeeling, setNewFeeling] = useState("");
-  // this is for the new custom feeling itself, which we retrieve from the input field
+  // this is for the new custom feeling, which we retrieve from the input field
 
   // ---------------------Fetching Frontend Data------------------------
 
@@ -37,9 +37,53 @@ const EmotionsProvider = ({ children }) => {
     }
   };
 
+  // ---------------------Fetching Backend Data------------------------
+
+  const fetchCustomFeelings = async () => {
+    // fetching all customs - GET:
+    try {
+      const baseURL = import.meta.env.VITE_baseURL;
+      const pathURL = import.meta.env.VITE_basePathThree;
+      const response = await fetch(`${baseURL}${pathURL}customs`, {
+        method: "GET",
+        credentials: "include",
+      });
+      const data = await response.json();
+
+      // In case of userNotFound error:
+      if (!response.ok) {
+        throw new Error(
+          "Ein unerwarteter Fehler ist aufgetreten. Bitte neu einloggen."
+        );
+      }
+      // Transform fetched emotions (for similarity with frontend data):
+      const emotions = data.data.emotions;
+      let transformedEmotions = {};
+      let id = 900; // startingID (900 to make sure that there is no overlap with frontend emotions)
+      emotions.forEach((obj) => {
+        let { family, isActive, isDefault, name } = obj;
+        // If emotion is active, push into the according array of its family:
+        if (isActive) {
+          id++;
+          if (!transformedEmotions[family]) {
+            transformedEmotions[family] = [];
+          }
+          transformedEmotions[family].push({ id, name, isDefault, isActive });
+        }
+      });
+      setCustomFeelings(transformedEmotions);
+      return;
+    } catch (error) {
+      // In case of any other server errors:
+      console.log(error);
+      console.log(error || "Ein unerwarteter Serverfehler ist aufgetreten.");
+    }
+  };
+
   // call the fetchFeelings function when the component is mounted:
   useEffect(() => {
     fetchFeelings();
+    fetchCustomFeelings();
   }, []);
 
   // --------------------- Handle family selection -----------------------------
@@ -100,12 +144,6 @@ const EmotionsProvider = ({ children }) => {
       });
   }; // end of the function handleFamilySelect
 
-  // ------------------------------------------------------------------------
-
-  // TODO: Implement extra logic for fetching all the custom-subfeelings
-
-  // NOTICE: This fetch should be added to the useEffect-Hook, which is already here (above after fetchFeelings), to fetch the data when the component is mounted
-
   // --------------------- Handle subfeeling Selection ------------------------
 
   // When the user selects a feeling, store the selected feeling in the state variable selectedFeeling
@@ -115,35 +153,75 @@ const EmotionsProvider = ({ children }) => {
     console.log("Selected Feeling:", subfeeling);
   }; */ // This only worked for the standard subfeelings
 
-  // Extending the handleFeelingSelect function so that it can recognize from which list the feeling was selected (standard oder custom). One possibility is to pass an additional parameter that specifies the origin of the feeling: fromCustomFeelings = false (default value)
-  const handleFeelingSelect = (feeling, fromCustomFeelings = false) => {
-    setSelectedFeeling({ ...feeling, fromCustomFeelings });
+  // Extending the handleFeelingSelect function so that it can recognize from which list the feeling was selected (standard oder custom): Pass an additional parameter that specifies the origin of the feeling: isDefault = true (default value)
+
+  const handleFeelingSelect = (feeling, isDefault = true) => {
+    setSelectedFeeling({ ...feeling, isDefault });
     console.log("Selected Feeling:", feeling);
   };
 
   // --------------------- Handle Add Custom Feelings ------------------------
 
   const handleAddCustomFeeling = (newFeeling) => {
+    // CHECKS FOR VALID INPUT:
+
     if (newFeeling.trim() === "") {
       return; // early exit if the input is empty
     }
 
-    // TODO: Logic for checking if the new feeling is already in the database and prevent duplicates, also check for not allowed characters etc.
+    // remove whitespaces:
+    newFeeling = newFeeling.trim();
+
+    // only allow letters
+    const regex = /^[a-zA-ZäöüÄÖÜß]+$/;
+    if (!regex.test(newFeeling)) {
+      // TODO: Implement User Feedback in the UI
+      console.log("Invalid input:", newFeeling);
+      return;
+    }
+
+    // allowed length of the feeling
+    if (newFeeling.length < 3 || newFeeling.length > 18) {
+      // TODO: Implement User Feedback in the UI
+      console.log("Invalid length:", newFeeling);
+      return;
+    }
+
+    // Check for duplicates within the customfeelings for the selected family
+    // TODO: Refactor Logic for checking if the new feeling is already in the database and prevent duplicates, also check for not allowed characters etc.
+    const isDuplicate = (customFeelings[selectedFamily] || []).some(
+      (feeling) => feeling.name.toLowerCase() === newFeeling.toLowerCase()
+    );
+    if (isDuplicate) {
+      console.log("Feeling already exists:", newFeeling);
+      // TODO: Implement User Feedback in the UI
+      return; // early exit if the feeling already exists
+    }
+
+    // CREATE A NEW OBJECT FOR THE NEW CUSTOM FEELING:
 
     // As we have objects for the standard subfeelings to list them in the SubfeelingsContainer, it might be useful to create an object for the custom feeling as well:
+
     const customFeelingsObject = {
       id: Date.now(), //TODO: Assigning an unique and useful id; For the Standard-Subfeelings, it is the index of the array, because this array won´t change. But for the custom feelings, we might need a different approach? I suggest Date.now() for now, but we should discuss this to find a better solution.
       name: newFeeling,
+      isDefault: false, // this is a custom feeling, so it is not a default feeling
     };
 
-    setCustomFeelings([...customFeelings, customFeelingsObject]); // add the new feeling to the existing array of custom feelings;
+    const updatedCustomFeelings = {
+      ...customFeelings,
+      [selectedFamily]: [
+        ...(customFeelings[selectedFamily] || []),
+        customFeelingsObject,
+      ],
+    };
+
+    setCustomFeelings(updatedCustomFeelings); // add the new feeling to the existing array of custom feelings;
+
     console.log("New custom feeling added:", newFeeling);
 
     setNewFeeling(""); // this clears the input field;
-
     // if we do not clear the input field, the user might think, that the feeling was not added, because the input field is still filled etc.
-
-    // TODO: here we need more logic, to pass the new feeling on to the backend and store it there
   };
 
   return (
