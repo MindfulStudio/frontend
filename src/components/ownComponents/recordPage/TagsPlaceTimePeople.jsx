@@ -21,14 +21,17 @@ const fetchStandardTags = async () => {
 import { useEmotionsContext } from "@/utils/EmotionsProvider";
 
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { Input } from "postcss";
+import InputAndButtonForCustomTag from "./InputAndButtonForCustomTag";
 
 const TagsPlaceTimePeople = () => {
   const { selectedFeeling, selectedFamily } = useEmotionsContext();
 
+  // TODO: extract to a Provider
   const [standardTags, setStandardTags] = useState([]);
   const [selectedTags, setSelectedTags] = useState([]); //  stores the list of currently selected tags
 
-  // TODO: implement custom tag creation
+  // TODO: implement custom tag creation (maybe later on in the Provider)
   /* const [customTags, setCustomTags] = useState([]);
   const [newTag, setNewTag] = useState(""); */
 
@@ -41,6 +44,7 @@ const TagsPlaceTimePeople = () => {
   }, []);
 
   // Handle selecting/deselecting tags
+  // TODO: this function will be provided by the Provider later on, because we also use it in TagsContext.jsx
   const handleTagToggle = (tag) => {
     setSelectedTags((prevSelectedTags) => {
       // prevSelectedTags is the previous state of the selectedTags array
@@ -56,7 +60,8 @@ const TagsPlaceTimePeople = () => {
     });
   };
 
-  // The renderTags function takes a category as a parameter (e.g. “when”, “where”) and searches the standardTags array to find the matching object with the desired category. As soon as the matching object has been found, it renders the singleStandardTags as li elements (TODO: make this to a list of clickable toggles).
+  // The renderTags function takes a category as a parameter (e.g. “when”, “where”) and searches the standardTags array to find the matching object with the desired category. As soon as the matching object has been found, it renders the singleStandardTags as li elements
+  // TODO: extract to a Provider, we use this function in TagsContext.jsx as well
   const renderTagListbyCategory = (category) => {
     const categoryTags = standardTags.find((tag) => tag.category === category);
 
@@ -74,6 +79,7 @@ const TagsPlaceTimePeople = () => {
           >
             {tag}
           </ToggleGroupItem>
+          /* TODO: Add another ToggleGroupItem for the customtags */
         ))}
       </ToggleGroup>
     ) : (
@@ -101,6 +107,7 @@ const TagsPlaceTimePeople = () => {
           >
             {renderTagListbyCategory("wann")}
           </ul>
+          <InputAndButtonForCustomTag />
         </div>
 
         <p>
@@ -114,6 +121,7 @@ const TagsPlaceTimePeople = () => {
           >
             {renderTagListbyCategory("wo")}
           </ul>
+          <InputAndButtonForCustomTag />
         </div>
 
         <p>
@@ -128,6 +136,7 @@ const TagsPlaceTimePeople = () => {
           >
             {renderTagListbyCategory("mitWem")}
           </ul>
+          <InputAndButtonForCustomTag />
         </div>
       </section>
     </div>

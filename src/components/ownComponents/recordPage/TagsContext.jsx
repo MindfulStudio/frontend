@@ -1,8 +1,15 @@
 import React from "react";
 import { useEffect, useState } from "react";
 
+//++ import EmotionsProvider
+import { useEmotionsContext } from "@/utils/EmotionsProvider";
+
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+
+import { InputAndButtonForCustomTag } from "@/components/ownComponents/recordPage/InputAndButtonForCustomTag.jsx";
+
 // fetch tags from src/data/standardTags.json
-// TODO: => to be extracted to a Provider
+// TODO: => this is a duplicate of the fetchfunction in TagsPlaceTimePeople.jsx; to be extracted to a Provider
 const fetchStandardTags = async () => {
   try {
     const response = await fetch("/src/data/standardTags.json");
@@ -19,18 +26,14 @@ const fetchStandardTags = async () => {
   }
 };
 
-//++ import EmotionsProvider
-import { useEmotionsContext } from "@/utils/EmotionsProvider";
-
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-
 const TagsContext = () => {
   const { selectedFeeling, selectedFamily } = useEmotionsContext();
 
+  // TODO: extract to a Provider
   const [standardContextTags, setStandardContextTags] = useState([]); // state will be the same as in TagsPlaceTimePeople.jsx (=> standardTags), when we extracted all the states for all the tags to a Provider
   const [selectedContextTags, setSelectedContextTags] = useState([]); // state will be the same as in TagsPlaceTimePeople.jsx (=> selected Tags), when we extracted all the states for all the tags to a Provider
 
-  //TODO: implement custom tag creation
+  //TODO: implement custom tag creation (maybe later on in the Provider)
   // state will be the same as in TagsPlaceTimePeople.jsx, when we extracted all the states for all the tags to a Provider
 
   useEffect(() => {
@@ -42,6 +45,7 @@ const TagsContext = () => {
   }, []);
 
   // Handle selecting/deselecting tags (this function will be provided by the Provider later on, because we also use it in TagsPlaceTimePeople.jsx)
+  // TODO: this function will be provided by the Provider later on, because we also use it in TagsPlaceTimePeople.jsx
   const handleTagToggle = (tag) => {
     setSelectedContextTags((prevSelectedTags) => {
       const isSelected = prevSelectedTags.includes(tag);
@@ -53,6 +57,7 @@ const TagsContext = () => {
     });
   };
 
+  // TODO: extract to a Provider, we use this function in TagsPlaceTimePeople.jsx as well
   const renderTagListbyCategory = (category) => {
     const categoryTags = standardContextTags.find(
       (tag) => tag.category === category
@@ -72,6 +77,7 @@ const TagsContext = () => {
           >
             {tag}
           </ToggleGroupItem>
+          /* TODO: Add another ToggleGroupItem for the customtags */
         ))}
       </ToggleGroup>
     ) : (
@@ -94,6 +100,9 @@ const TagsContext = () => {
         </h2>
         <div className="w-[290px] bg-white p-[22px] text-center mt-16 h-[423px] overflow-y-scroll">
           {renderTagListbyCategory("was")}
+
+          {/* Add custom tags */}
+          <InputAndButtonForCustomTag />
         </div>
       </section>
     </div>
