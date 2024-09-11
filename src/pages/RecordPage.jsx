@@ -73,7 +73,7 @@ const RecordPage = () => {
 
       <div
         className="absolute bottom-1/2 left-1/2 transform -translate-x-1/2 flex gap-72"
-        style={{ zIndex: 10 }}
+        /* style={{ zIndex: 10 }} */
       >
         <Button
           variant="arrow"

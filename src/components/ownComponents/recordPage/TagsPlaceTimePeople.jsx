@@ -22,13 +22,16 @@ import { useEmotionsContext } from "@/utils/EmotionsProvider";
 
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
+import InputAndButtonForCustomTag from "./InputAndButtonForCustomTag";
+
 const TagsPlaceTimePeople = () => {
   const { selectedFeeling, selectedFamily } = useEmotionsContext();
 
+  // TODO: extract to a Provider
   const [standardTags, setStandardTags] = useState([]);
   const [selectedTags, setSelectedTags] = useState([]); //  stores the list of currently selected tags
 
-  // TODO: implement custom tag creation
+  // TODO: implement custom tag creation (maybe later on in the Provider)
   /* const [customTags, setCustomTags] = useState([]);
   const [newTag, setNewTag] = useState(""); */
 
@@ -41,6 +44,7 @@ const TagsPlaceTimePeople = () => {
   }, []);
 
   // Handle selecting/deselecting tags
+  // TODO: this function will be provided by the Provider later on, because we also use it in TagsContext.jsx
   const handleTagToggle = (tag) => {
     setSelectedTags((prevSelectedTags) => {
       // prevSelectedTags is the previous state of the selectedTags array
@@ -56,7 +60,8 @@ const TagsPlaceTimePeople = () => {
     });
   };
 
-  // The renderTags function takes a category as a parameter (e.g. “when”, “where”) and searches the standardTags array to find the matching object with the desired category. As soon as the matching object has been found, it renders the singleStandardTags as li elements (TODO: make this to a list of clickable toggles).
+  // The renderTags function takes a category as a parameter (e.g. “when”, “where”) and searches the standardTags array to find the matching object with the desired category. As soon as the matching object has been found, it renders the singleStandardTags as li elements
+  // TODO: extract to a Provider, we use this function in TagsContext.jsx as well
   const renderTagListbyCategory = (category) => {
     const categoryTags = standardTags.find((tag) => tag.category === category);
 
@@ -74,43 +79,55 @@ const TagsPlaceTimePeople = () => {
           >
             {tag}
           </ToggleGroupItem>
+          /* TODO: Add another ToggleGroupItem for the customtags */
         ))}
       </ToggleGroup>
     ) : (
       // styling not yet fixed; for now, I´ve applied same styling as for the feelings
-      // TODO: implement tag selection
       <p>Keine Tags gefunden</p>
     );
+  };
+
+  // TODO: implement tag selection
+
+  const handleTagSelect = (tag) => {
+    setSelectedTags({ ...tag });
+    console.log("Selected Tags:", tag);
   };
 
   return (
     <div className="flex flex-col items-center">
       {/* <h2> {selectedFamily}</h2> for debugging*/}
-      <section className="mt-16 flex flex-col items-center">
+      <section
+        className="mt-16 flex flex-col items-center"
+        style={{ zIndex: 10 }}
+      >
         <h2>
           Wann hast du dich{" "}
           <span className="font-bold">{selectedFeeling.name}</span> gefühlt?
         </h2>
-        <div className="w-[290px] bg-white p-[22px] text-center  mt-5 mb-7 h-[423px/3] overflow-y-scroll">
+        <div className="w-[290px] bg-white p-[22px] text-center  mt-5 mb-7 h-[141px] overflow-y-scroll">
           <ul
             className="flex flex-wrap gap-3 justify-center list-none p-0"
-            onClick={() => console.log("clicked")}
+            onClick={() => handleTagSelect(tags)}
           >
             {renderTagListbyCategory("wann")}
           </ul>
+          <InputAndButtonForCustomTag />
         </div>
 
         <p>
           Wo hast du dich
           <span className="font-bold"> {selectedFeeling.name}</span> gefühlt?
         </p>
-        <div className="w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[423px/3] overflow-y-scroll">
+        <div className="w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[141px] overflow-y-scroll">
           <ul
             className="flex flex-wrap gap-3 justify-center list-none p-0"
             onClick={() => console.log("clicked")}
           >
             {renderTagListbyCategory("wo")}
           </ul>
+          <InputAndButtonForCustomTag />
         </div>
 
         <p>
@@ -118,13 +135,14 @@ const TagsPlaceTimePeople = () => {
           <span className="font-bold"> {selectedFeeling.name} </span>
           gefühlt?
         </p>
-        <div className="w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[423px/3] overflow-y-scroll">
+        <div className="w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[141px] overflow-y-scroll">
           <ul
             className="flex flex-wrap gap-3 justify-center list-none p-0"
             onClick={() => console.log("clicked")}
           >
             {renderTagListbyCategory("mitWem")}
           </ul>
+          <InputAndButtonForCustomTag />
         </div>
       </section>
     </div>
