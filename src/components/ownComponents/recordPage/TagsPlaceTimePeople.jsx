@@ -86,7 +86,10 @@ const TagsPlaceTimePeople = () => {
   return (
     <div className="flex flex-col items-center">
       {/* <h2> {selectedFamily}</h2> for debugging*/}
-      <section className="mt-16 flex flex-col items-center">
+      <section
+        className="mt-16 flex flex-col items-center"
+        style={{ zIndex: 10 }}
+      >
         <h2>
           Wann hast du dich{" "}
           <span className="font-bold">{selectedFeeling.name}</span> gefühlt?
