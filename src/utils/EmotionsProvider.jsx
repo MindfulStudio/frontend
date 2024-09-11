@@ -37,9 +37,53 @@ const EmotionsProvider = ({ children }) => {
     }
   };
 
+  // ---------------------Fetching Backend Data------------------------
+
+  const fetchCustomFeelings = async () => {
+    // fetching all customs - GET:
+    try {
+      const baseURL = import.meta.env.VITE_baseURL;
+      const pathURL = import.meta.env.VITE_basePathThree;
+      const response = await fetch(`${baseURL}${pathURL}customs`, {
+        method: "GET",
+        credentials: "include",
+      });
+      const data = await response.json();
+
+      // In case of userNotFound error:
+      if (!response.ok) {
+        throw new Error(
+          "Ein unerwarteter Fehler ist aufgetreten. Bitte neu einloggen."
+        );
+      }
+      // Transform fetched emotions (for similarity with frontend data):
+      const emotions = data.data.emotions;
+      let transformedEmotions = {};
+      let id = 900; // startingID (900 to make sure that there is no overlap with frontend emotions)
+      emotions.forEach((obj) => {
+        let { family, isActive, isDefault, name } = obj;
+        // If emotion is active, push into the according array of its family:
+        if (isActive) {
+          id++;
+          if (!transformedEmotions[family]) {
+            transformedEmotions[family] = [];
+          }
+          transformedEmotions[family].push({ id, name, isDefault, isActive });
+        }
+      });
+      setCustomFeelings(transformedEmotions);
+      return;
+    } catch (error) {
+      // In case of any other server errors:
+      console.log(error);
+      console.log(error || "Ein unerwarteter Serverfehler ist aufgetreten.");
+    }
+  };
+
   // call the fetchFeelings function when the component is mounted:
   useEffect(() => {
     fetchFeelings();
+    fetchCustomFeelings();
   }, []);
 
   // --------------------- Handle family selection -----------------------------
@@ -100,12 +144,6 @@ const EmotionsProvider = ({ children }) => {
       });
   }; // end of the function handleFamilySelect
 
-  // ------------------------------------------------------------------------
-
-  // TODO: Implement extra logic for fetching all the custom-subfeelings (getAllCustoms > emotions)
-
-  // NOTICE: This fetch can be added to the useEffect-Hook, which is already here (above after fetchFeelings), to fetch the data when the component is mounted
-
   // --------------------- Handle subfeeling Selection ------------------------
 
   // When the user selects a feeling, store the selected feeling in the state variable selectedFeeling
@@ -115,10 +153,10 @@ const EmotionsProvider = ({ children }) => {
     console.log("Selected Feeling:", subfeeling);
   }; */ // This only worked for the standard subfeelings
 
-  // Extending the handleFeelingSelect function so that it can recognize from which list the feeling was selected (standard oder custom): Pass an additional parameter that specifies the origin of the feeling: fromCustomFeelings = false (default value)
+  // Extending the handleFeelingSelect function so that it can recognize from which list the feeling was selected (standard oder custom): Pass an additional parameter that specifies the origin of the feeling: isDefault = true (default value)
 
-  const handleFeelingSelect = (feeling, fromCustomFeelings = false) => {
-    setSelectedFeeling({ ...feeling, fromCustomFeelings });
+  const handleFeelingSelect = (feeling, isDefault = true) => {
+    setSelectedFeeling({ ...feeling, isDefault });
     console.log("Selected Feeling:", feeling);
   };
 
