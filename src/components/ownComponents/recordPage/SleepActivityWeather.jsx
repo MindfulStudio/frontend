@@ -9,6 +9,17 @@
 // The user should be able to change the data for the current checkin, but not for the previous ones.
 // It also should be possible, that the user can skip this part of the check in or skip selected parts of it (e.g. only check in the weather, but not the sleep time; only change the sleep time, but not the acitvity, etc.) > Does every section need an own skip button? Or is it enough to allow the skip for this whole part of the recordprocess?
 
+import StormyBlack from "/src/assets/icons/cloud-lightning-svgrepo-com-b.svg";
+import RainyBlack from "/src/assets/icons/rain-svgrepo-com.svg";
+import WindyBlack from "/src/assets/icons/wind-svgrepo-com.svg";
+import CloudyBlack from "/src/assets/icons/sun-cloudy-svgrepo-com.svg";
+import SunnyBlack from "/src/assets/icons/sun-svgrepo-com-1.svg";
+import StormyWhite from "/src/assets/icons/cloud-lightning-svgrepo-com-w.svg";
+import RainyWhite from "/src/assets/icons/rain-svgrepo-com-1.svg";
+import WindyWhite from "/src/assets/icons/wind-svgrepo-com-1.svg";
+import CloudyWhite from "/src/assets/icons/sun-cloudy-svgrepo-com-1.svg";
+import SunnyWhite from "/src/assets/icons/sun-svgrepo-com-2.svg";
+
 import { ToggleGroup } from "@/components/ui/toggle-group";
 
 const SleepActivityWeather = () => {
