@@ -21,6 +21,7 @@ import CloudyWhite from "/src/assets/icons/sun-cloudy-svgrepo-com-1.svg";
 import SunnyWhite from "/src/assets/icons/sun-svgrepo-com-2.svg";
 
 import { ToggleGroup } from "@/components/ui/toggle-group";
+import { ToggleGroupConfigData } from "@/components/usedDemoComponents/ToggleGroupConfigData";
 
 const SleepActivityWeather = () => {
   return (
@@ -38,6 +39,7 @@ const SleepActivityWeather = () => {
         <p>Das Wetter ist...</p>
         <div className="w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[423px/3] overflow-y-scroll">
           {/* Weather */}
+          <ToggleGroupConfigData />
         </div>
       </section>
     </div>
