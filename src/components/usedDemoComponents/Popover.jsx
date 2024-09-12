@@ -38,8 +38,7 @@ export function PopoverDots({
                   <span
                     key={index}
                     className="inline-block"
-                    style={{ marginLeft: "0.2rem" }}
-                  >
+                    style={{ marginLeft: "0.2rem" }}>
                     {item}
                     {comma}
                   </span>
