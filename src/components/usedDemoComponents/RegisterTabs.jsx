@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -18,11 +17,8 @@ import {
 } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 
-
 export function RegisterTabs() {
-  // show/hide password
   const [showPassword, setShowPassword] = useState(false);
-  // userData
   const [userData, setUserData] = useState({
     email: "",
     username: "",
@@ -35,14 +31,49 @@ export function RegisterTabs() {
   const [success, setSuccess] = useState(false);
   const [countdown, setCountdown] = useState(6);
 
-  const navigate = useNavigate();
-  const reCaptchaRef = useRef();
-
   // states for validation errors coming from server
   const [emailWarning, setEmailWarning] = useState(null);
   const [usernameWarning, setUsernameWarning] = useState(null);
   const [passwordWarning, setPasswordWarning] = useState(null);
   const [reCaptchaChecked, setReCaptchaChecked] = useState(false);
+
+  const navigate = useNavigate();
+  const reCaptchaRef = useRef();
+
+  useEffect(() => {
+    const validateErrors = validateFormInput(userData);
+    setErrorsVal(Object.keys(validateErrors).length > 0 ? validateErrors : {});
+    // activate button if there is no valError && the checkbox is checked
+    setActiveButton(
+      Object.entries(validateErrors).length === 0 && AGBChecked ? true : false
+    );
+  }, [userData, AGBChecked]);
+
+  // countdown
+  useEffect(() => {
+    if (success) {
+      const interval = setInterval(() => {
+        setCountdown((prev) => {
+          if (prev <= 0) {
+            clearInterval(interval);
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+      // clean-up
+      return () => clearInterval(interval);
+    }
+  }, [success]);
+
+  // redirecting
+  useEffect(() => {
+    if (countdown === 0) {
+      navigate("/anmeldung");
+    }
+  }, [countdown]);
+
+  // ############### FUNCTIONS ###############
 
   // show/hide password
   const handleShowPassword = () => {
@@ -61,31 +92,6 @@ export function RegisterTabs() {
       ? setPasswordWarning(null)
       : null;
   };
-
-  // countdown
-  useEffect(() => {
-    if (success) {
-      const interval = setInterval(() => {
-        setCountdown((prev) => {
-          if (prev <= 0) {
-            clearInterval(interval);
-            return 0;
-          }
-          return prev - 1;
-        });
-      }, 1000);
-
-      // clean-up
-      return () => clearInterval(interval);
-    }
-  }, [success]);
-
-  // redirecting
-  useEffect(() => {
-    if (countdown === 0) {
-      navigate("/anmeldung");
-    }
-  }, [countdown]);
 
   // validate input:
   const validateFormInput = (formData) => {
@@ -123,16 +129,7 @@ export function RegisterTabs() {
     return valErrors;
   };
 
-  useEffect(() => {
-    const validateErrors = validateFormInput(userData);
-    setErrorsVal(Object.keys(validateErrors).length > 0 ? validateErrors : {});
-    // activate button if there is no valError && the checkbox is checked
-    setActiveButton(
-      Object.entries(validateErrors).length === 0 && AGBChecked ? true : false
-    );
-  }, [userData, AGBChecked]);
-
-  // submit Input - register POST
+  // submit input - register POST
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -153,10 +150,7 @@ export function RegisterTabs() {
         },
         body: JSON.stringify({ ...userData, reCaptchaValue }),
       });
-
-      // reset reCaptcha
-      reCaptchaRef.current.reset();
-      setReCaptchaChecked(false);
+      resetReCaptcha();
 
       if (!response.ok) {
         const errorData = await response.json();
@@ -196,9 +190,8 @@ export function RegisterTabs() {
         }
 
         // handle other server errors
-        setWarning(
-          "Ein unerwarteter Fehler ist aufgetreten. Bitte versuche es später noch einmal."
-        );
+        handleServerErrors();
+
         throw new Error(errorData.message || "registration failed");
       }
 
@@ -210,8 +203,24 @@ export function RegisterTabs() {
       // activate success message
       setSuccess(true);
     } catch (error) {
+      // handle other server errors
+      handleServerErrors();
       console.log(error);
+      resetReCaptcha();
     }
+  };
+
+  // reset reCaptcha
+  const resetReCaptcha = () => {
+    reCaptchaRef.current.reset();
+    setReCaptchaChecked(false);
+  };
+
+  // show server errors
+  const handleServerErrors = () => {
+    setWarning(
+      "Ein unerwarteter Fehler ist aufgetreten. Bitte versuche es später noch einmal."
+    );
   };
 
   return (
