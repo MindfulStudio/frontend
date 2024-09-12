@@ -10,10 +10,11 @@ const feedbackStyles = {
   tooltip: "text-green-500 bg-green-100 border-green-300",
 };
 
-function UserFeedbackText({ content, type }) {
+function UserFeedbackText({ content, type, onClick }) {
   return (
     <p
       className={`font-primary text-xs leading-16 border p-2 rounded ${feedbackStyles[type]}`}
+      onClick={onClick} // the textcomponent now accepts an onClick function
     >
       {content}
     </p>
