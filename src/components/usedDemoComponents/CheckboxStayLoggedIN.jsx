@@ -13,7 +13,7 @@ export function CheckboxStayLoggedIn({ ontoggle }) {
     setStayLoggedIn(!stayLoggedIn);
     ontoggle(stayLoggedIn);
   };
-  console.log(stayLoggedIn);
+  // console.log(stayLoggedIn);
 
   return (
     <div className="flex items-center space-x-2 pb-2">
@@ -25,8 +25,7 @@ export function CheckboxStayLoggedIn({ ontoggle }) {
       <p className="text-sm">eingeloggt bleiben</p>
       <label
         htmlFor="terms"
-        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-      ></label>
+        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"></label>
     </div>
   );
 }
