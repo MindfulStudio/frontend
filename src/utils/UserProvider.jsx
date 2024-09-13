@@ -5,6 +5,7 @@ const UserContext = createContext();
 const UserProvider = ({ children }) => {
   const [customFeelings, setCustomFeelings] = useState([]);
   const [customTags, setCustomTags] = useState([]);
+  const [sleepingHours, setSleepingHours] = useState("");
 
   const [checkinData, setCheckinData] = useState({
     emotion: {},
@@ -86,6 +87,8 @@ const UserProvider = ({ children }) => {
         fetchAllCustoms,
         checkinData,
         setCheckinData,
+        sleepingHours,
+        setSleepingHours,
       }}
     >
       {children}

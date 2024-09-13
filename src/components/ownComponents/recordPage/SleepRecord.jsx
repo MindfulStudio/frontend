@@ -1,12 +1,16 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 
 // TODO: change time unit from am/pm to units used in germany
+
+import { useUserContext } from "../../../utils/UserProvider";
 
 const SleepRecord = () => {
   const [sleepStart, setSleepStart] = useState(""); // not send to the backend
   const [sleepEnd, setSleepEnd] = useState(""); // not send to the backend
-  const [sleepingHours, setSleepingHours] = useState(""); // this state will be send to the backend
+  // NOTICE: IN USERPROVIDER => const [sleepingHours, setSleepingHours] = useState("");
+
+  const { sleepingHours, setSleepingHours } = useUserContext();
 
   useEffect(() => {
     if (sleepStart && sleepEnd) {
