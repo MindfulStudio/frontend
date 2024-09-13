@@ -6,11 +6,14 @@ import { useState, useEffect, useContext } from "react";
 import { useUserContext } from "../../../utils/UserProvider";
 
 const SleepRecord = () => {
-  const [sleepStart, setSleepStart] = useState(""); // not send to the backend
-  const [sleepEnd, setSleepEnd] = useState(""); // not send to the backend
-  // NOTICE: IN USERPROVIDER => const [sleepingHours, setSleepingHours] = useState("");
-
-  const { sleepingHours, setSleepingHours } = useUserContext();
+  const {
+    sleepStart,
+    setSleepStart,
+    sleepEnd,
+    setSleepEnd,
+    sleepingHours,
+    setSleepingHours,
+  } = useUserContext();
 
   useEffect(() => {
     if (sleepStart && sleepEnd) {
@@ -22,11 +25,15 @@ const SleepRecord = () => {
       const minutes = Math.floor((duration % (1000 * 60 * 60)) / (1000 * 60));
 
       setSleepingHours(`${hours} Stunden ${minutes} Minuten`);
-      console.log("Schlaf:" + sleepingHours);
     } else {
       setSleepingHours("");
     }
   }, [sleepStart, sleepEnd]);
+
+  // second useEffect to check if the changes of sleepingHours are correct (for debugging); can be deleted later
+  useEffect(() => {
+    console.log("Schlaf:" + sleepingHours); // for debugging
+  }, [sleepingHours]);
 
   return (
     <div>

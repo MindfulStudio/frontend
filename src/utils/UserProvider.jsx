@@ -3,9 +3,9 @@ import { createContext, useContext, useState } from "react";
 const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
+  // States for customs:
   const [customFeelings, setCustomFeelings] = useState([]);
   const [customTags, setCustomTags] = useState([]);
-  const [sleepingHours, setSleepingHours] = useState("");
 
   const [checkinData, setCheckinData] = useState({
     emotion: {},
@@ -23,6 +23,19 @@ const UserProvider = ({ children }) => {
   //   comment: "blabla",
   //   config: { sleepingHours: 7, physicalActivity: true, weather: "sonnig" },
   // };
+
+  // States for MakeANote.jsx
+
+  // States for SleepActivityWeather.jsx + Subcompontens
+  const [sleepStart, setSleepStart] = useState(""); // not send to the backend
+  const [sleepEnd, setSleepEnd] = useState(""); // not send to the backend
+  const [sleepingHours, setSleepingHours] = useState("");
+  // sleepStart & sleepEnd? -> SleepRecord.jsx
+
+  const [isActive, setIsActive] = useState(false);
+  // switchId? -> ActivitySwitch.jsx
+
+  const [selectedWeather, setSelectedWeather] = useState("");
 
   // ---------------------CUSTOMS: Fetching & preparation------------------------
 
@@ -87,8 +100,17 @@ const UserProvider = ({ children }) => {
         fetchAllCustoms,
         checkinData,
         setCheckinData,
+        sleepStart,
+        setSleepStart,
+        sleepEnd,
+        setSleepEnd,
         sleepingHours,
         setSleepingHours,
+        setSleepingHours,
+        isActive,
+        setIsActive,
+        selectedWeather,
+        setSelectedWeather,
       }}
     >
       {children}

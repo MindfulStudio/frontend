@@ -15,12 +15,14 @@ import CloudyWhite from "/src/assets/icons/sun-cloudy-svgrepo-com-1.svg";
 import SunnyWhite from "/src/assets/icons/sun-svgrepo-com-2.svg";
 import SnowWhite from "/src/assets/icons/snow-svgrepo-com-3.svg";
 
-export function ToggleGroupWeatherData() {
-  const [selectedWeather, setSelectedWeather] = useState("");
+import { useUserContext } from "@/utils/UserProvider";
 
-  const handleWeatherChange = (value) => {
-    setSelectedWeather(value);
-    console.log("Selected Weather:", selectedWeather);
+export function ToggleGroupWeatherData() {
+  const { selectedWeather, setSelectedWeather } = useUserContext();
+
+  const handleWeatherChange = (weather) => {
+    setSelectedWeather(weather);
+    console.log("Selected Weather:", weather); // for debugging
   };
 
   return (

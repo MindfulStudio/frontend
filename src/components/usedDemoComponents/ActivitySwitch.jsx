@@ -1,15 +1,16 @@
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 
-import { useState } from "react";
+import { useUserContext } from "@/utils/UserProvider";
 
 export function ActivitySwitch({}) {
-  const [isActive, setIsActive] = useState(false);
   const switchId = "activityswitch";
+
+  const { isActive, setIsActive } = useUserContext();
 
   const handleSwitchChange = (checked) => {
     setIsActive(checked);
-    console.log("Activity:", isActive);
+    console.log("Activity:", isActive); // for debugging
   };
 
   return (
