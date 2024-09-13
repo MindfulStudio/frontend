@@ -10,9 +10,39 @@ import RecordPage from "../pages/RecordPage";
 import RegisterPage from "../pages/RegisterPage";
 import DashboardPage from "../pages/DashboardPage";
 import UserDataPage from "../pages/UserDataPage";
+import InfoPage from "../pages/InfoPage";
+// Providers
+import EmotionsProvider from "./EmotionsProvider";
+import TagProvider from "./TagProvider";
+import RecordProgressProvider from "./RecordProgressProvider";
+import UserProvider from "./UserProvider";
 
 const Router = () => {
   const router = createBrowserRouter([
+    // pages without layout (navBar)
+    {
+      path: "/",
+      errorElement: <ErrorPage />,
+      children: [
+        {
+          path: "/",
+          element: <HomePage />,
+        },
+        {
+          path: "/anmeldung",
+          element: <LoginPage />,
+        },
+        {
+          path: "/registrierung",
+          element: <RegisterPage />,
+        },
+        {
+          path: "/recordfeeling",
+          element: <RecordPage />,
+        },
+      ],
+    },
+    // pages with layout (navBar)
     {
       path: "/",
       element: <Layout />,
@@ -42,10 +72,10 @@ const Router = () => {
           path: "/dashboard",
           element: <DashboardPage />,
         },
-        {
+        /*  {
           path: "/emotionalesWohlbefindenErfassen", // vielleicht auch noch einmal Namen ändern?
           element: <RecordPage />,
-        },
+        }, */
         {
           path: "/meineStatistiken",
           element: <MetricsPage />,
@@ -54,14 +84,26 @@ const Router = () => {
           path: "/meinJournal",
           element: <JournalPage />,
         },
+        {
+          path: "/Info",
+          element: <InfoPage />,
+        },
       ],
     },
   ]);
 
   return (
-    <RouterProvider router={router}>
-      <Layout />
-    </RouterProvider>
+    <UserProvider>
+      <EmotionsProvider>
+        <TagProvider>
+          <RecordProgressProvider>
+            <RouterProvider router={router}>
+              <Layout />
+            </RouterProvider>
+          </RecordProgressProvider>
+        </TagProvider>
+      </EmotionsProvider>
+    </UserProvider>
   );
 };
 
