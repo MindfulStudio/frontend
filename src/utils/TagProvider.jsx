@@ -11,15 +11,18 @@ const TagProvider = ({ children }) => {
   const [standardTags, setStandardTags] = useState(defaultTags);
   const [selectedTags, setSelectedTags] = useState([]); // currently selected tags
   const [newTag, setNewTag] = useState({ name: "", category: "" });
+  const [tagError, setTagError] = useState({ message: "", category: "" });
 
   // States from UserProvider:
   const { customTags, setCustomTags } = useUserContext();
   const { selectedFeeling } = useEmotionsContext();
 
-  // Reset selected tags when a new feeling is selected:
+  // Reset everything when a new feeling is selected:
   useEffect(() => {
     if (selectedFeeling) {
       setSelectedTags([]);
+      setNewTag({ name: "", category: "" });
+      setTagError(null);
     }
   }, [selectedFeeling]);
 
@@ -110,6 +113,10 @@ const TagProvider = ({ children }) => {
     if (!regex.test(newTag.name)) {
       // TODO: Implement User Feedback in the UI
       console.log("Invalid input:", newTag.name);
+      setTagError({
+        message: "Das Stichwort darf nur Buchstaben enthalten.",
+        category,
+      });
       return;
     }
 
@@ -117,6 +124,10 @@ const TagProvider = ({ children }) => {
     if (newTag.name.length < 3 || newTag.name.length > 18) {
       // TODO: Implement User Feedback in the UI
       console.log("Invalid length:", newTag.name);
+      setTagError({
+        message: "Das Stichwort muss zwischen 3 und 18 Zeichen lang sein.",
+        category,
+      });
       return;
     }
 
@@ -127,6 +138,7 @@ const TagProvider = ({ children }) => {
     );
     if (isDuplicate) {
       console.log("Tag already exists:", newTag.name);
+      setTagError({ message: "Dieses Stichwort existiert bereits.", category });
       // TODO: Implement User Feedback in the UI
       return; // early exit if the Tag already exists
     }
@@ -158,7 +170,11 @@ const TagProvider = ({ children }) => {
         handleAddCustomTag,
         newTag,
         setNewTag,
-      }}>
+
+        tagError,
+        setTagError,
+      }}
+    >
       {children}
     </TagContext.Provider>
   );
