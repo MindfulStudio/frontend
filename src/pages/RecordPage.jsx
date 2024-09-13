@@ -19,9 +19,26 @@ import SleepActivityWeather from "@/components/ownComponents/recordPage/SleepAct
 import { useEmotionsContext } from "@/utils/EmotionsProvider";
 // import useRecordProgressContext
 import { useRecordProgressContext } from "@/utils/RecordProgressProvider";
+import { useTagContext } from "@/utils/TagProvider";
+import { useEffect, useState } from "react";
 
 const RecordPage = () => {
-  const { feelingsFamilies } = useEmotionsContext();
+  const { feelingsFamilies, selectedFeeling } = useEmotionsContext();
+  const { selectedTags } = useTagContext();
+  const [selectedTagCaterogories, setSelectedTagCategories] = useState(null);
+
+  // find the unique tag categories
+  useEffect(() => {
+    const findSelectedTagCaterogories = () => {
+      const categories = selectedTags.reduce(
+        (acc, curr) =>
+          acc.includes(curr.category) ? acc : [...acc, curr.category],
+        []
+      );
+      setSelectedTagCategories(categories);
+    };
+    findSelectedTagCaterogories();
+  }, [selectedTags]);
 
   const {
     checkinStep,
@@ -82,7 +99,13 @@ const RecordPage = () => {
           <ArrowLeft />
         </Button>
         {checkinStep < totalCheckinSteps ? (
-          <Button variant="arrow" onClick={nextCheckinStep}>
+          <Button
+            variant="arrow"
+            onClick={nextCheckinStep}
+            disabled={
+              !selectedFeeling ||
+              (checkinStep === 2 && selectedTagCaterogories.length < 3)
+            }>
             <ArrowRight />
           </Button>
         ) : (
