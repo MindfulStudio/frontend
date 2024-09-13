@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 import StormyBlack from "/src/assets/icons/cloud-lightning-svgrepo-com-b.svg";
@@ -17,7 +16,7 @@ import SnowWhite from "/src/assets/icons/snow-svgrepo-com-3.svg";
 
 import { useUserContext } from "@/utils/UserProvider";
 
-export function ToggleGroupWeatherData() {
+export function WeatherToggles() {
   const { selectedWeather, setSelectedWeather } = useUserContext();
 
   const handleWeatherChange = (weather) => {
