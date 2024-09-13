@@ -1,25 +1,26 @@
-import React from "react";
+import { useTagContext } from "@/utils/TagProvider";
 
-{
-  /* TODO: create a state for new custom tags and write a function to add new tags in the Provider, (similarly to handleAddCustomFeelings) and use it here instead for onClick */
-}
-export const InputAndButtonForCustomTag = () => {
+export const InputAndButtonForCustomTag = ({ category }) => {
+  const { handleAddCustomTag, newTag, setNewTag } = useTagContext();
+
   return (
     <div className="mt-4">
       <button
-        onClick={() => console.log("add custom tag")}
+        onClick={() => {
+          if (category === newTag.category) {
+            handleAddCustomTag(newTag, category);
+          }
+        }}
         className="w-7 h-7 border rounded-full"
       >
         +
       </button>
       <input
         type="text"
-        value={
-          "put variable here"
-        } /* replace string with the state variable, i.e. newTag */
-        onChange={(e) =>
-          console.log("new tag")
-        } /* replace clg with setter of the state variable and e.target.value, i.e. setNewTag(e.target.value) */
+        value={category === newTag.category ? newTag.name : ""}
+        onChange={(e) => {
+          setNewTag({ name: e.target.value, category: category });
+        }}
         className="rounded-sm border"
       />
     </div>

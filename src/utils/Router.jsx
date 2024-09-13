@@ -13,7 +13,9 @@ import UserDataPage from "../pages/UserDataPage";
 import InfoPage from "../pages/InfoPage";
 // Providers
 import EmotionsProvider from "./EmotionsProvider";
+import TagProvider from "./TagProvider";
 import RecordProgressProvider from "./RecordProgressProvider";
+import UserProvider from "./UserProvider";
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -91,13 +93,17 @@ const Router = () => {
   ]);
 
   return (
-    <EmotionsProvider>
-      <RecordProgressProvider>
-        <RouterProvider router={router}>
-          <Layout />
-        </RouterProvider>
-      </RecordProgressProvider>
-    </EmotionsProvider>
+    <UserProvider>
+      <EmotionsProvider>
+        <TagProvider>
+          <RecordProgressProvider>
+            <RouterProvider router={router}>
+              <Layout />
+            </RouterProvider>
+          </RecordProgressProvider>
+        </TagProvider>
+      </EmotionsProvider>
+    </UserProvider>
   );
 };
 
