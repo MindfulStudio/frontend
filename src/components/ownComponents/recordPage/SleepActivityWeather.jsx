@@ -22,6 +22,10 @@ import SunnyWhite from "/src/assets/icons/sun-svgrepo-com-2.svg";
 
 import { ToggleGroup } from "@/components/ui/toggle-group";
 import { ToggleGroupConfigData } from "@/components/usedDemoComponents/ToggleGroupConfigData";
+import { ActivitySwitch } from "@/components/usedDemoComponents/ActivitySwitch";
+
+import { useState } from "react";
+import SleepRecord from "./SleepRecord";
 
 const SleepActivityWeather = () => {
   return (
@@ -29,12 +33,12 @@ const SleepActivityWeather = () => {
       <section className="mt-16">
         <p>Deine Schlafzeit</p>
         <div className="w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[423px/3] overflow-y-scroll">
-          Ich habe von <input type="time" /> bis <input type="time" />{" "}
-          geschlafen.
+          <SleepRecord />
         </div>
         <p>Körperliche Bewegung:</p>
         <div className="w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[423px/3] overflow-y-scroll">
-          {/* Toggle */}
+          {/* Switch */}
+          <ActivitySwitch />
         </div>
         <p>Das Wetter ist...</p>
         <div className="w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[423px/3] overflow-y-scroll">
