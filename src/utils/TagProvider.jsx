@@ -68,8 +68,7 @@ const TagProvider = ({ children }) => {
                   isDefault: true,
                   category: category,
                 })
-              }
-            >
+              }>
               {tag}
             </ToggleGroupItem>
           ))}
@@ -85,8 +84,7 @@ const TagProvider = ({ children }) => {
                   ? "bg-selected-subemotion"
                   : ""
               } `}
-              onClick={() => handleTagToggle(tag)}
-            >
+              onClick={() => handleTagToggle(tag)}>
               {tag.name}
             </ToggleGroupItem>
           ))}
@@ -165,12 +163,14 @@ const TagProvider = ({ children }) => {
   return (
     <TagContext.Provider
       value={{
+        selectedTags,
         setSelectedTags,
         renderTagListbyCategory,
         handleTagToggle,
         handleAddCustomTag,
         newTag,
         setNewTag,
+
         tagError,
         setTagError,
       }}
