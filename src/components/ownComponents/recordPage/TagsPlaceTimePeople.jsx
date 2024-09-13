@@ -1,11 +1,12 @@
 import { useTagContext } from "@/utils/TagProvider";
 import { useEmotionsContext } from "@/utils/EmotionsProvider";
 import InputAndButtonForCustomTag from "./InputAndButtonForCustomTag";
+import UserFeedbackText from "@/components/typo/UserFeedbackText";
 
 const TagsPlaceTimePeople = () => {
   // States from Providers:
   const { selectedFeeling } = useEmotionsContext();
-  const { renderTagListbyCategory } = useTagContext();
+  const { renderTagListbyCategory, tagError } = useTagContext();
 
   return (
     <div className="flex flex-col items-center">
@@ -19,26 +20,28 @@ const TagsPlaceTimePeople = () => {
           <span className="font-bold">{selectedFeeling?.name}</span> gefühlt?
         </h2>
         <div className="w-[290px] bg-white p-[22px] text-center  mt-5 mb-7 h-[141px] overflow-y-scroll">
-          <ul
-            className="flex flex-wrap gap-3 justify-center list-none p-0"
-          >
+          <ul className="flex flex-wrap gap-3 justify-center list-none p-0">
             {renderTagListbyCategory("wann")}
           </ul>
-          <InputAndButtonForCustomTag category={"wann"}/>
-        </div>
+          <InputAndButtonForCustomTag category={"wann"} />
+          {tagError?.category === "wann" && (
+          <UserFeedbackText content={tagError.message} type="error" />
+        )} </div>
+       
 
         <p>
           Wo hast du dich
           <span className="font-bold"> {selectedFeeling?.name}</span> gefühlt?
         </p>
         <div className="w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[141px] overflow-y-scroll">
-          <ul
-            className="flex flex-wrap gap-3 justify-center list-none p-0"
-          >
+          <ul className="flex flex-wrap gap-3 justify-center list-none p-0">
             {renderTagListbyCategory("wo")}
           </ul>
-          <InputAndButtonForCustomTag category={"wo"}/>
-        </div>
+          <InputAndButtonForCustomTag category={"wo"} />
+          {tagError?.category === "wo" && (
+          <UserFeedbackText content={tagError.message} type="error" />
+        )} </div>
+       
 
         <p>
           Mit wem hast du dich
@@ -46,12 +49,13 @@ const TagsPlaceTimePeople = () => {
           gefühlt?
         </p>
         <div className="w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[141px] overflow-y-scroll">
-          <ul
-            className="flex flex-wrap gap-3 justify-center list-none p-0"
-          >
+          <ul className="flex flex-wrap gap-3 justify-center list-none p-0">
             {renderTagListbyCategory("mitWem")}
           </ul>
-          <InputAndButtonForCustomTag category={"mitWem"}/>
+          <InputAndButtonForCustomTag category={"mitWem"} />
+          {tagError?.category === "mitWem" && (
+            <UserFeedbackText content={tagError.message} type="error" />
+          )}
         </div>
       </section>
     </div>

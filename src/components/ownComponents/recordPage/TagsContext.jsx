@@ -1,11 +1,12 @@
 import { InputAndButtonForCustomTag } from "@/components/ownComponents/recordPage/InputAndButtonForCustomTag.jsx";
+import UserFeedbackText from "@/components/typo/UserFeedbackText";
 import { useEmotionsContext } from "@/utils/EmotionsProvider";
 import { useTagContext } from "@/utils/TagProvider";
 
 const TagsContext = () => {
   // States from Providers:
   const { selectedFeeling } = useEmotionsContext();
-  const { renderTagListbyCategory } = useTagContext();
+  const { renderTagListbyCategory, tagError } = useTagContext();
 
   return (
     <div className="flex flex-col items-center">
@@ -24,6 +25,9 @@ const TagsContext = () => {
 
           {/* Add custom tags */}
           <InputAndButtonForCustomTag category={"was"} />
+          {tagError?.category === "was" && (
+            <UserFeedbackText content={tagError.message} type="error" />
+          )}
         </div>
       </section>
     </div>

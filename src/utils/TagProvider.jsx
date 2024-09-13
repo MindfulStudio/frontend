@@ -11,17 +11,18 @@ const TagProvider = ({ children }) => {
   const [standardTags, setStandardTags] = useState(defaultTags);
   const [selectedTags, setSelectedTags] = useState([]); // currently selected tags
   const [newTag, setNewTag] = useState({ name: "", category: "" });
+  const [tagError, setTagError] = useState({ message: "", category: "" });
 
   // States from UserProvider:
   const { customTags, setCustomTags } = useUserContext();
   const { selectedFeeling } = useEmotionsContext();
 
-  // Reset selected tags when a new feeling is selected:
+  // Reset everything when a new feeling is selected:
   useEffect(() => {
-    console.log("test");
     if (selectedFeeling) {
-      console.log("hallo");
       setSelectedTags([]);
+      setNewTag({ name: "", category: "" });
+      setTagError(null);
     }
   }, [selectedFeeling]);
 
@@ -41,14 +42,12 @@ const TagProvider = ({ children }) => {
       }
       return [...prevSelectedTags, tag]; // if the tag is not in the array, add it to the array
     });
-    console.log("selected Tags:", selectedTags);
   };
 
   // The renderTags function takes a category as a parameter (e.g. “when”, “where”) and searches the standardTags array to find the matching object with the desired category. As soon as the matching object has been found, it renders the singleStandardTags as li elements
   const renderTagListbyCategory = (category) => {
     const categoryTags = standardTags.find((tag) => tag.category === category);
     const categoryTagsCustom = customTags[category];
-    console.log(categoryTags);
 
     return categoryTags || categoryTagsCustom ? (
       <div>
@@ -59,7 +58,9 @@ const TagProvider = ({ children }) => {
               value={tag}
               aria-label={tag}
               className={`cursor-pointer p-2 border ${
-                selectedTags.includes(tag) ? "bg-selected-subemotion" : ""
+                selectedTags.some((t) => t.name === tag)
+                  ? "bg-selected-subemotion"
+                  : ""
               } `}
               onClick={() =>
                 handleTagToggle({
@@ -67,8 +68,7 @@ const TagProvider = ({ children }) => {
                   isDefault: true,
                   category: category,
                 })
-              }
-            >
+              }>
               {tag}
             </ToggleGroupItem>
           ))}
@@ -80,10 +80,11 @@ const TagProvider = ({ children }) => {
               value={tag.name}
               aria-label={tag.name}
               className={`cursor-pointer p-2 border ${
-                selectedTags.includes(tag) ? "bg-selected-subemotion" : ""
+                selectedTags.some((t) => t.name === tag.name)
+                  ? "bg-selected-subemotion"
+                  : ""
               } `}
-              onClick={() => handleTagToggle(tag)}
-            >
+              onClick={() => handleTagToggle(tag)}>
               {tag.name}
             </ToggleGroupItem>
           ))}
@@ -112,6 +113,10 @@ const TagProvider = ({ children }) => {
     if (!regex.test(newTag.name)) {
       // TODO: Implement User Feedback in the UI
       console.log("Invalid input:", newTag.name);
+      setTagError({
+        message: "Das Stichwort darf nur Buchstaben enthalten.",
+        category,
+      });
       return;
     }
 
@@ -119,6 +124,10 @@ const TagProvider = ({ children }) => {
     if (newTag.name.length < 3 || newTag.name.length > 18) {
       // TODO: Implement User Feedback in the UI
       console.log("Invalid length:", newTag.name);
+      setTagError({
+        message: "Das Stichwort muss zwischen 3 und 18 Zeichen lang sein.",
+        category,
+      });
       return;
     }
 
@@ -129,6 +138,7 @@ const TagProvider = ({ children }) => {
     );
     if (isDuplicate) {
       console.log("Tag already exists:", newTag.name);
+      setTagError({ message: "Dieses Stichwort existiert bereits.", category });
       // TODO: Implement User Feedback in the UI
       return; // early exit if the Tag already exists
     }
@@ -153,12 +163,16 @@ const TagProvider = ({ children }) => {
   return (
     <TagContext.Provider
       value={{
+        selectedTags,
         setSelectedTags,
         renderTagListbyCategory,
         handleTagToggle,
         handleAddCustomTag,
         newTag,
         setNewTag,
+
+        tagError,
+        setTagError,
       }}
     >
       {children}
