@@ -45,7 +45,6 @@ const FeelingsFamilyComponent = () => {
           <HighlightText highlighttext="Anspannung" fontsize="text-md" />
         </div>
       </button>
-
       {/* Freude */}
       <button
         className="flex flex-col items-center row-span-2 justify-start"
