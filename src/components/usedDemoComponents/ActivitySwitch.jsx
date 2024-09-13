@@ -5,26 +5,22 @@ import { useState } from "react";
 
 export function ActivitySwitch({}) {
   const [isActive, setIsActive] = useState(false);
+  const switchId = "activityswitch";
 
   const handleSwitchChange = (checked) => {
     setIsActive(checked);
-    if (onChange) {
-      onChange(checked);
-    }
+    console.log("Activity:", isActive);
   };
 
-  const id = "activity-switch"; //
-
   return (
-    <div className="flex items-center space-x-2">
+    <div className="flex items-center justify-center space-x-2">
       <Switch
-        id={id}
-        //TODO: if  activity for that day already exists (because of other checkins before), check its boolean; otherwise: false:
+        id={switchId}
         checked={isActive}
         onCheckedChange={() => handleSwitchChange(!isActive)}
       />
 
-      <Label htmlFor={id}>{isActive ? "Ja" : "Nein"}</Label>
+      <Label htmlFor={switchId}>{isActive ? "Ja" : "Nein"}</Label>
     </div>
   );
 }
