@@ -18,9 +18,7 @@ const TagProvider = ({ children }) => {
 
   // Reset selected tags when a new feeling is selected:
   useEffect(() => {
-    console.log("test");
     if (selectedFeeling) {
-      console.log("hallo");
       setSelectedTags([]);
     }
   }, [selectedFeeling]);
@@ -41,14 +39,12 @@ const TagProvider = ({ children }) => {
       }
       return [...prevSelectedTags, tag]; // if the tag is not in the array, add it to the array
     });
-    console.log("selected Tags:", selectedTags);
   };
 
   // The renderTags function takes a category as a parameter (e.g. “when”, “where”) and searches the standardTags array to find the matching object with the desired category. As soon as the matching object has been found, it renders the singleStandardTags as li elements
   const renderTagListbyCategory = (category) => {
     const categoryTags = standardTags.find((tag) => tag.category === category);
     const categoryTagsCustom = customTags[category];
-    console.log(categoryTags);
 
     return categoryTags || categoryTagsCustom ? (
       <div>
@@ -59,7 +55,9 @@ const TagProvider = ({ children }) => {
               value={tag}
               aria-label={tag}
               className={`cursor-pointer p-2 border ${
-                selectedTags.includes(tag) ? "bg-selected-subemotion" : ""
+                selectedTags.some((t) => t.name === tag)
+                  ? "bg-selected-subemotion"
+                  : ""
               } `}
               onClick={() =>
                 handleTagToggle({
@@ -80,7 +78,9 @@ const TagProvider = ({ children }) => {
               value={tag.name}
               aria-label={tag.name}
               className={`cursor-pointer p-2 border ${
-                selectedTags.includes(tag) ? "bg-selected-subemotion" : ""
+                selectedTags.some((t) => t.name === tag.name)
+                  ? "bg-selected-subemotion"
+                  : ""
               } `}
               onClick={() => handleTagToggle(tag)}
             >
