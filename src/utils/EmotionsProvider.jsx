@@ -1,89 +1,32 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import { useUserContext } from "./UserProvider";
+import defaultEmotions from "../data/emotions.json";
 
 const EmotionsContext = createContext();
 
 const EmotionsProvider = ({ children }) => {
   // ----------------------------------- States---------------------------------
-  const [feelingsFamilies, setFeelingsFamilies] = useState([]);
+  const [feelingsFamilies, setFeelingsFamilies] = useState();
   const [selectedFamily, setSelectedFamily] = useState(null);
   const [subFeelings, setSubFeelings] = useState([]);
   const [selectedFeeling, setSelectedFeeling] = useState(null);
-  const [customFeelings, setCustomFeelings] = useState([]);
+
+  // get custom feelings from UserProvider:
+  const { customFeelings, setCustomFeelings } = useUserContext();
+
   // NOTICE: This is an array of objects with id and name properties to store the new custom feelings; In the Frontend it is useful in this format, but for the check-in schema, we need to pull out the referring values and send them in the body with the correct keys to the backend
   const [newFeeling, setNewFeeling] = useState("");
   // this is for the new custom feeling, which we retrieve from the input field
 
-  // ---------------------Fetching Frontend Data------------------------
-
-  // Function to fetch frontend emotions data from emotions.json, when loading the Page the first time
-  const fetchFeelings = async () => {
-    try {
-      const response = await fetch("/src/data/emotions.json");
-
-      if (!response.ok) {
-        throw new Error(`Error fetching emotions data`);
-      }
-      const data = await response.json(); // Parse JSON data and store it in data, which is an array of objects; every object represents an emotion family
-      // Extract the emotion families from the data, to use them for the FeelingsFamilyButton component:
-      const families = data.map((family) => ({
-        id: family.emotionFamily,
-        name: family.emotionFamily,
-      })); // this step creates an Array with several emotionfamily-objects. Every emotionfamily object gets an id and name property with the same value: the emotion family name; this is done to make the data structure compatible with the FeelingsFamilyButton component
-
-      setFeelingsFamilies(families); // Set the extracted emotion families in the state variable feelingsFamilies to use them in the FeelingsFamilyButton component
-      // NOTICE: FeelingsFamilyButton will be renamed soon!
-    } catch (error) {
-      console.error("Error fetching emotions data:", error);
-    }
-  };
-
-  // ---------------------Fetching Backend Data------------------------
-
-  const fetchCustomFeelings = async () => {
-    // fetching all customs - GET:
-    try {
-      const baseURL = import.meta.env.VITE_baseURL;
-      const pathURL = import.meta.env.VITE_basePathThree;
-      const response = await fetch(`${baseURL}${pathURL}customs`, {
-        method: "GET",
-        credentials: "include",
-      });
-      const data = await response.json();
-
-      // In case of userNotFound error:
-      if (!response.ok) {
-        throw new Error(
-          "Ein unerwarteter Fehler ist aufgetreten. Bitte neu einloggen."
-        );
-      }
-      // Transform fetched emotions (for similarity with frontend data):
-      const emotions = data.data.emotions;
-      let transformedEmotions = {};
-      let id = 900; // startingID (900 to make sure that there is no overlap with frontend emotions)
-      emotions.forEach((obj) => {
-        let { family, isActive, isDefault, name } = obj;
-        // If emotion is active, push into the according array of its family:
-        if (isActive) {
-          id++;
-          if (!transformedEmotions[family]) {
-            transformedEmotions[family] = [];
-          }
-          transformedEmotions[family].push({ id, name, isDefault, isActive });
-        }
-      });
-      setCustomFeelings(transformedEmotions);
-      return;
-    } catch (error) {
-      // In case of any other server errors:
-      console.log(error);
-      console.log(error || "Ein unerwarteter Serverfehler ist aufgetreten.");
-    }
-  };
-
-  // call the fetchFeelings function when the component is mounted:
   useEffect(() => {
-    fetchFeelings();
-    fetchCustomFeelings();
+    // Extract the emotion families from the data, to use them for the FeelingsFamilyButton component:
+    const families = defaultEmotions.map((family) => ({
+      id: family.emotionFamily,
+      name: family.emotionFamily,
+    }));
+    setFeelingsFamilies(families);
+    // Set the extracted emotion families in the state variable feelingsFamilies to use them in the FeelingsFamilyButton component
+    // NOTICE: FeelingsFamilyButton will be renamed soon!
   }, []);
 
   // --------------------- Handle family selection -----------------------------
@@ -94,54 +37,43 @@ const EmotionsProvider = ({ children }) => {
     // we need a familyId to identify the selected family and fetch the corresponding sub-feelings; familyId is the id of the selected family (this id comes from the data in emotions.json)
     setSelectedFamily(familyId); // store the selected family in a state
 
-    // Right after the user has selected a family, fetch the sub-feelings for the selected family:
+    // Find the corresponding emotions family object in the data array, based on the selected family id:
+    const selectedFamilyData = defaultEmotions.find(
+      (family) => family.emotionFamily === familyId
+      // check every object in the family array, if the emotionFamily property of the object is equal to the selected family id; if yes, return the object
+    );
 
-    // NOTICE: This is a second fetch request by purpose, which is triggered by the user´s action; the first fetch request is triggered by the useEffect-Hook, which fetches the data when the component is mounted; We could refactor this later, to avoid fetching the same data twice
+    if (!selectedFamilyData) {
+      console.error(`No family found for the selected id: ${familyId}`);
+      return; // early exit if no matching family is found
+    }
 
-    fetch("/src/data/emotions.json")
-      .then((response) => response.json())
-      .then((data) => {
-        // find the corresponding emotions family object in the data array, based on the selected family id:
-        const selectedFamilyData = data.find(
-          (family) => family.emotionFamily === familyId
-          // check every object in the family array, if the emotionFamily property of the object is equal to the selected family id; if yes, return the object
-        );
+    // Extract the sub-feelings from the selected family data and create an array of objects with id and name properties:
 
-        if (!selectedFamilyData) {
-          console.error(`No family found for the selected id: ${familyId}`);
-          return; // early exit if no matching family is found
-        }
+    // format of the subfeelings in the selectedFamilyData: ["aufgeschreckt", "ängstlich", "angespannt"]
 
-        // Extract the sub-feelings from the selected family data and create an array of objects with id and name properties:
-
-        // format of the subfeelings in the selectedFamilyData: ["aufgeschreckt", "ängstlich", "angespannt"]
-
-        if (selectedFamilyData) {
-          const subFeelingsObject = selectedFamilyData.singleEmotions.map(
-            (subfeeling, index) => ({
-              id: index,
-              name: subfeeling,
-            })
-          );
-          // expected result:
-          /* [
+    if (selectedFamilyData) {
+      const subFeelingsObject = selectedFamilyData.singleEmotions.map(
+        (subfeeling, index) => ({
+          id: index,
+          name: subfeeling,
+        })
+      );
+      // expected result:
+      /* [
                  { id: 0, name: "aufgeschreckt" },
                  { id: 1, name: "ängstlich" },
                  { id: 2, name: "angespannt" }
                 ]
             */
-          // this is more useful for lists, because we can use the id as key in the list
+      // this is more useful for lists, because we can use the id as key in the list
 
-          // store the sub-feelings of the selected family in the state variable subFeelings
-          setSubFeelings(subFeelingsObject);
-        } else {
-          setSubFeelings([]); // Reset sub-feelings when no family is selected
-        }
-        setSelectedFeeling(null); // reset the selected feeling when a new family is selected; this is not the same as !selectedFamilyData
-      })
-      .catch((error) => {
-        console.error("Error fetching sub-feelings:", error);
-      });
+      // store the sub-feelings of the selected family in the state variable subFeelings
+      setSubFeelings(subFeelingsObject);
+    } else {
+      setSubFeelings([]); // Reset sub-feelings when no family is selected
+    }
+    setSelectedFeeling(null); // reset the selected feeling when a new family is selected; this is not the same as !selectedFamilyData
   }; // end of the function handleFamilySelect
 
   // --------------------- Handle subfeeling Selection ------------------------
@@ -234,7 +166,6 @@ const EmotionsProvider = ({ children }) => {
         customFeelings,
         newFeeling,
         setNewFeeling,
-        fetchFeelings,
         handleFamilySelect,
         handleFeelingSelect,
         handleAddCustomFeeling,
