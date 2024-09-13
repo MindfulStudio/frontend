@@ -1,99 +1,11 @@
-import { useEffect, useState } from "react";
-
-// fetch tags from src/data/standardTags.json
-// TODO: => to be extracted to a Provider
-const fetchStandardTags = async () => {
-  try {
-    const response = await fetch("/src/data/standardTags.json");
-
-    if (!response.ok) {
-      throw new Error(`Error fetching standard tags data`);
-    }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Error fetching standard tags data:", error);
-    return [];
-  }
-};
-
-//++ import EmotionsProvider
+import { useTagContext } from "@/utils/TagProvider";
 import { useEmotionsContext } from "@/utils/EmotionsProvider";
-
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-
 import InputAndButtonForCustomTag from "./InputAndButtonForCustomTag";
 
 const TagsPlaceTimePeople = () => {
-  const { selectedFeeling, selectedFamily } = useEmotionsContext();
-
-  // TODO: extract to a Provider
-  const [standardTags, setStandardTags] = useState([]);
-  const [selectedTags, setSelectedTags] = useState([]); //  stores the list of currently selected tags
-
-  // TODO: implement custom tag creation (maybe later on in the Provider)
-  /* const [customTags, setCustomTags] = useState([]);
-  const [newTag, setNewTag] = useState(""); */
-
-  useEffect(() => {
-    const loadStandardTags = async () => {
-      const data = await fetchStandardTags();
-      setStandardTags(data);
-    };
-    loadStandardTags();
-  }, []);
-
-  // Handle selecting/deselecting tags
-  // TODO: this function will be provided by the Provider later on, because we also use it in TagsContext.jsx
-  const handleTagToggle = (tag) => {
-    setSelectedTags((prevSelectedTags) => {
-      // prevSelectedTags is the previous state of the selectedTags array
-
-      const isSelected = prevSelectedTags.includes(tag); // check if the tag is already selected (it has been clicked before)...
-
-      if (isSelected) {
-        // if the tag is already in the array
-        return prevSelectedTags.filter((selectedTag) => selectedTag !== tag); // ...remove it from the array
-        // This creates a new array that includes all the tags from prevSelectedTags except the one that matches tag. It filters out the selected tag, effectively deselecting it.
-      }
-      return [...prevSelectedTags, tag]; // if the tag is not in the array, add it to the array
-    });
-  };
-
-  // The renderTags function takes a category as a parameter (e.g. “when”, “where”) and searches the standardTags array to find the matching object with the desired category. As soon as the matching object has been found, it renders the singleStandardTags as li elements
-  // TODO: extract to a Provider, we use this function in TagsContext.jsx as well
-  const renderTagListbyCategory = (category) => {
-    const categoryTags = standardTags.find((tag) => tag.category === category);
-
-    return categoryTags ? (
-      <ToggleGroup type="multiple" className="flex flex-wrap gap-3">
-        {categoryTags.singleStandardTags.map((tag, index) => (
-          <ToggleGroupItem
-            key={index}
-            value={tag}
-            aria-label={tag}
-            className={`cursor-pointer p-2 border ${
-              selectedTags.includes(tag) ? "bg-selected-subemotion" : ""
-            } `}
-            onClick={() => handleTagToggle(tag)}
-          >
-            {tag}
-          </ToggleGroupItem>
-          /* TODO: Add another ToggleGroupItem for the customtags */
-        ))}
-      </ToggleGroup>
-    ) : (
-      // styling not yet fixed; for now, I´ve applied same styling as for the feelings
-      <p>Keine Tags gefunden</p>
-    );
-  };
-
-  // TODO: implement tag selection
-
-  const handleTagSelect = (tag) => {
-    setSelectedTags({ ...tag });
-    console.log("Selected Tags:", tag);
-  };
+  // States from Providers:
+  const { selectedFeeling } = useEmotionsContext();
+  const { renderTagListbyCategory } = useTagContext();
 
   return (
     <div className="flex flex-col items-center">
@@ -104,45 +16,42 @@ const TagsPlaceTimePeople = () => {
       >
         <h2>
           Wann hast du dich{" "}
-          <span className="font-bold">{selectedFeeling.name}</span> gefühlt?
+          <span className="font-bold">{selectedFeeling?.name}</span> gefühlt?
         </h2>
         <div className="w-[290px] bg-white p-[22px] text-center  mt-5 mb-7 h-[141px] overflow-y-scroll">
           <ul
             className="flex flex-wrap gap-3 justify-center list-none p-0"
-            onClick={() => handleTagSelect(tags)}
           >
             {renderTagListbyCategory("wann")}
           </ul>
-          <InputAndButtonForCustomTag />
+          <InputAndButtonForCustomTag category={"wann"}/>
         </div>
 
         <p>
           Wo hast du dich
-          <span className="font-bold"> {selectedFeeling.name}</span> gefühlt?
+          <span className="font-bold"> {selectedFeeling?.name}</span> gefühlt?
         </p>
         <div className="w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[141px] overflow-y-scroll">
           <ul
             className="flex flex-wrap gap-3 justify-center list-none p-0"
-            onClick={() => console.log("clicked")}
           >
             {renderTagListbyCategory("wo")}
           </ul>
-          <InputAndButtonForCustomTag />
+          <InputAndButtonForCustomTag category={"wo"}/>
         </div>
 
         <p>
           Mit wem hast du dich
-          <span className="font-bold"> {selectedFeeling.name} </span>
+          <span className="font-bold"> {selectedFeeling?.name} </span>
           gefühlt?
         </p>
         <div className="w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[141px] overflow-y-scroll">
           <ul
             className="flex flex-wrap gap-3 justify-center list-none p-0"
-            onClick={() => console.log("clicked")}
           >
             {renderTagListbyCategory("mitWem")}
           </ul>
-          <InputAndButtonForCustomTag />
+          <InputAndButtonForCustomTag category={"mitWem"}/>
         </div>
       </section>
     </div>

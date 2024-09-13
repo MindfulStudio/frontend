@@ -106,7 +106,11 @@ export function LoginTabs() {
       }
       return data;
     } catch (error) {
-      console.log(error);
+      if (error.name === "TypeError") {
+        setError({
+          message: "Es konnte keine Verbindung zum Server hergestellt werden.",
+        });
+      }
     }
   };
 
