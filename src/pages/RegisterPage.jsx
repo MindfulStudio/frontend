@@ -1,7 +1,6 @@
 import { RegisterTabs } from "@/components/usedDemoComponents/RegisterTabs";
 
 const RegisterPage = () => {
-  // TODO: Logik implementieren
   // TODO: style anpassen
   // NOTICE: vielleicht checkbox und RegsiterTab/LoginTabs dynamisch machen? <= sinnvoll?
   return (
