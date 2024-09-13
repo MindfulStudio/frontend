@@ -1,10 +1,27 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
   const [customFeelings, setCustomFeelings] = useState([]);
   const [customTags, setCustomTags] = useState([]);
+
+  const [checkinData, setCheckinData] = useState({
+    emotion: {},
+    tags: [],
+    comment: "",
+    config: {},
+  });
+  // Final structure of checkinData for POST-request (Example):
+  // {
+  //   emotion: { family: "Freude", name: "begeistert" },
+  //   tags: [
+  //     { category: "mitWem", name: "Hund", isDefault: false },
+  //     { category: "wann", name: "morgens", isDefault: true },
+  //   ],
+  //   comment: "blabla",
+  //   config: { sleepingHours: 7, physicalActivity: true, weather: "sonnig" },
+  // };
 
   // ---------------------CUSTOMS: Fetching & preparation------------------------
 
@@ -57,14 +74,19 @@ const UserProvider = ({ children }) => {
     }
   };
 
-  // fetch customs from backend when the component is mounted:
-  useEffect(() => {
-    fetchAllCustoms();
-  }, []);
+  // ---------------------CHECKIN: Preparation & Post------------------------
 
   return (
     <UserContext.Provider
-      value={{ customTags, setCustomTags, customFeelings, setCustomFeelings }}
+      value={{
+        customTags,
+        setCustomTags,
+        customFeelings,
+        setCustomFeelings,
+        fetchAllCustoms,
+        checkinData,
+        setCheckinData,
+      }}
     >
       {children}
     </UserContext.Provider>
