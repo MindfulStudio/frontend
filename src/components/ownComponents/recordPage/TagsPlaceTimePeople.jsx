@@ -25,9 +25,9 @@ const TagsPlaceTimePeople = () => {
           </ul>
           <InputAndButtonForCustomTag category={"wann"} />
           {tagError?.category === "wann" && (
-          <UserFeedbackText content={tagError.message} type="error" />
-        )} </div>
-       
+            <UserFeedbackText content={tagError.message} type="error" />
+          )}{" "}
+        </div>
 
         <p>
           Wo hast du dich
@@ -39,9 +39,9 @@ const TagsPlaceTimePeople = () => {
           </ul>
           <InputAndButtonForCustomTag category={"wo"} />
           {tagError?.category === "wo" && (
-          <UserFeedbackText content={tagError.message} type="error" />
-        )} </div>
-       
+            <UserFeedbackText content={tagError.message} type="error" />
+          )}{" "}
+        </div>
 
         <p>
           Mit wem hast du dich
@@ -50,9 +50,9 @@ const TagsPlaceTimePeople = () => {
         </p>
         <div className="w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[141px] overflow-y-scroll">
           <ul className="flex flex-wrap gap-3 justify-center list-none p-0">
-            {renderTagListbyCategory("mitWem")}
+            {renderTagListbyCategory("mit wem")}
           </ul>
-          <InputAndButtonForCustomTag category={"mitWem"} />
+          <InputAndButtonForCustomTag category={"mit wem"} />
           {tagError?.category === "mitWem" && (
             <UserFeedbackText content={tagError.message} type="error" />
           )}

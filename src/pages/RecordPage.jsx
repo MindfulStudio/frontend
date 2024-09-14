@@ -2,6 +2,7 @@ import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 // arrow icons
 import ArrowLeft from "/src/assets/icons/arrow-left-svgrepo-com.svg";
@@ -17,15 +18,20 @@ import SleepActivityWeather from "@/components/ownComponents/recordPage/SleepAct
 
 // import EmotionsProvider
 import { useEmotionsContext } from "@/utils/EmotionsProvider";
-// import useRecordProgressContext
+// import useRecordProgressProvider
 import { useRecordProgressContext } from "@/utils/RecordProgressProvider";
+// import TagProvider
 import { useTagContext } from "@/utils/TagProvider";
-import { useEffect, useState } from "react";
+// import CheckinProvider
+import { useCheckinContext } from "@/utils/CheckinProvider";
 
 const RecordPage = () => {
   const { feelingsFamilies, selectedFeeling } = useEmotionsContext();
   const { selectedTags } = useTagContext();
   const [selectedTagCaterogories, setSelectedTagCategories] = useState(null);
+
+  // Context for Submitting the Check-In
+  const { handleCheckinSubmit, isLoading, error } = useCheckinContext();
 
   // find the unique tag categories
   useEffect(() => {
@@ -75,8 +81,14 @@ const RecordPage = () => {
     }
   };
 
-  const handleCheckinSubmit = () => {
-    //TODO: further logic for submitting the checkin
+  const onCheckinSubmit = async () => {
+    try {
+      await handleCheckinSubmit();
+      console.log("Check-in successful");
+      navigateBackToDashboard("/dashboard");
+    } catch (error) {
+      console.error("Error during check-in submission:", error);
+    }
   };
 
   return (
@@ -105,12 +117,17 @@ const RecordPage = () => {
             disabled={
               !selectedFeeling ||
               (checkinStep === 2 && selectedTagCaterogories.length < 3)
-            }>
+            }
+          >
             <ArrowRight />
           </Button>
         ) : (
-          <Button variant="arrow" onClick={handleCheckinSubmit}>
-            <SaveSymbol />
+          <Button
+            variant="arrow"
+            onClick={onCheckinSubmit}
+            disabled={isLoading}
+          >
+            {isLoading ? "Saving..." : <SaveSymbol />}
           </Button>
         )}
       </div>

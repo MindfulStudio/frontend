@@ -1,5 +1,7 @@
 import { createContext, useContext, useState } from "react";
 
+/* import { handleCheckinSubmit } from "./handleCheckinSubmit.js"; */
+
 const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
@@ -7,12 +9,12 @@ const UserProvider = ({ children }) => {
   const [customFeelings, setCustomFeelings] = useState([]);
   const [customTags, setCustomTags] = useState([]);
 
-  const [checkinData, setCheckinData] = useState({
+  /* const [checkinData, setCheckinData] = useState({
     emotion: {},
     tags: [],
     comment: "",
     config: {},
-  });
+  }); */
   // Final structure of checkinData for POST-request (Example):
   // {
   //   emotion: { family: "Freude", name: "begeistert" },
@@ -24,7 +26,9 @@ const UserProvider = ({ children }) => {
   //   config: { sleepingHours: 7, physicalActivity: true, weather: "sonnig" },
   // };
 
-  // States for MakeANote.jsx
+  /*   // States for MakeANote.jsx
+  const [showNoteInfo, setShowNoteInfo] = useState(false);
+  const [comment, setComment] = useState("");
 
   // States for SleepActivityWeather.jsx + Subcompontens
   const [sleepStart, setSleepStart] = useState(""); // not send to the backend
@@ -35,7 +39,7 @@ const UserProvider = ({ children }) => {
   const [isActive, setIsActive] = useState(false);
   // switchId? -> ActivitySwitch.jsx
 
-  const [selectedWeather, setSelectedWeather] = useState("");
+  const [selectedWeather, setSelectedWeather] = useState(""); */
 
   // ---------------------CUSTOMS: Fetching & preparation------------------------
 
@@ -89,6 +93,26 @@ const UserProvider = ({ children }) => {
   };
 
   // ---------------------CHECKIN: Preparation & Post------------------------
+  // NOTICE: handleCheckinSubmit Function does not work here, because UserPrvider is the highest level of the context. It is not possible to access the context for selectedFamily from EmotionsContext (child component) of the UserProvider.
+
+  /*   const onSubmitCheckin = async ({
+    selectedFamily,
+    selectedFeeling,
+    selectedTags,
+  }) => {
+    try {
+      await handleCheckinSubmit({
+        checkinData,
+        setCheckinData,
+        comment,
+        sleepingHours,
+        isActive,
+        selectedWeather,
+      });
+    } catch (error) {
+      console.error("Error during check-in submission:", error);
+    }
+  }; */
 
   return (
     <UserContext.Provider
@@ -98,7 +122,7 @@ const UserProvider = ({ children }) => {
         customFeelings,
         setCustomFeelings,
         fetchAllCustoms,
-        checkinData,
+        /* checkinData,
         setCheckinData,
         sleepStart,
         setSleepStart,
@@ -111,6 +135,11 @@ const UserProvider = ({ children }) => {
         setIsActive,
         selectedWeather,
         setSelectedWeather,
+        showNoteInfo,
+        setShowNoteInfo,
+        comment,
+        setComment, */
+        /*  onSubmitCheckin, */
       }}
     >
       {children}

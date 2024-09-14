@@ -3,7 +3,7 @@ import { useState, useEffect, useContext } from "react";
 
 // TODO: change time unit from am/pm to units used in germany
 
-import { useUserContext } from "../../../utils/UserProvider";
+import { useCheckinContext } from "@/utils/CheckinProvider";
 
 const SleepRecord = () => {
   const {
@@ -13,7 +13,7 @@ const SleepRecord = () => {
     setSleepEnd,
     sleepingHours,
     setSleepingHours,
-  } = useUserContext();
+  } = useCheckinContext();
 
   useEffect(() => {
     if (sleepStart && sleepEnd) {
@@ -23,8 +23,10 @@ const SleepRecord = () => {
 
       const hours = Math.floor(duration / 1000 / 60 / 60);
       const minutes = Math.floor((duration % (1000 * 60 * 60)) / (1000 * 60));
-
-      setSleepingHours(`${hours} Stunden ${minutes} Minuten`);
+      /* 
+      setSleepingHours(`${hours} Stunden ${minutes} Minuten`); */
+      // sleepinghours should be a number, i.e. 7.5
+      setSleepingHours(hours + minutes / 60);
     } else {
       setSleepingHours("");
     }

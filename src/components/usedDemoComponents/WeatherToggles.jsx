@@ -14,10 +14,10 @@ import CloudyWhite from "/src/assets/icons/sun-cloudy-svgrepo-com-1.svg";
 import SunnyWhite from "/src/assets/icons/sun-svgrepo-com-2.svg";
 import SnowWhite from "/src/assets/icons/snow-svgrepo-com-3.svg";
 
-import { useUserContext } from "@/utils/UserProvider";
+import { useCheckinContext } from "@/utils/CheckinProvider";
 
 export function WeatherToggles() {
-  const { selectedWeather, setSelectedWeather } = useUserContext();
+  const { selectedWeather, setSelectedWeather } = useCheckinContext();
 
   const handleWeatherChange = (weather) => {
     setSelectedWeather(weather);
@@ -33,7 +33,7 @@ export function WeatherToggles() {
       className="flex space-x-2"
     >
       <ToggleGroupItem
-        value="sunny"
+        value="sonnig"
         aria-label="Sunny"
         className={`${
           selectedWeather === "sunny" ? "bg-black" : "bg-white"
@@ -47,7 +47,7 @@ export function WeatherToggles() {
       </ToggleGroupItem>
 
       <ToggleGroupItem
-        value="rainy"
+        value="regnerisch"
         aria-label="Rainy"
         className={`${
           selectedWeather === "rainy" ? "bg-black" : "bg-white"
@@ -61,7 +61,7 @@ export function WeatherToggles() {
       </ToggleGroupItem>
 
       <ToggleGroupItem
-        value="cloudy"
+        value="bewölkt"
         aria-label="Cloudy"
         className={`${
           selectedWeather === "cloudy" ? "bg-black" : "bg-white"
@@ -75,7 +75,7 @@ export function WeatherToggles() {
       </ToggleGroupItem>
 
       <ToggleGroupItem
-        value="stormy"
+        value="stürmisch"
         aria-label="Stormy"
         className={`${
           selectedWeather === "stormy" ? "bg-black" : "bg-white"
@@ -89,7 +89,7 @@ export function WeatherToggles() {
       </ToggleGroupItem>
 
       <ToggleGroupItem
-        value="windy"
+        value="windig"
         aria-label="Windy"
         className={`${
           selectedWeather === "windy" ? "bg-black" : "bg-white"
@@ -103,7 +103,7 @@ export function WeatherToggles() {
       </ToggleGroupItem>
 
       <ToggleGroupItem
-        value="snowy"
+        value="schneit"
         aria-label="Snowy"
         className={`${
           selectedWeather === "snowy" ? "bg-black" : "bg-white"
