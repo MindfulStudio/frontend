@@ -9,7 +9,7 @@ import { useEmotionsContext } from "@/utils/EmotionsProvider";
 import { useMetricsContext } from "@/utils/MetricsProvider";
 
 const SelectFeelingsInStatisticOne = () => {
-      // import from EmotionsContext:
+  // import from EmotionsContext:
   const { feelingsFamilies } = useEmotionsContext();
   // import from mreticsContext:
   const { selectedFeelingsFamily, setSelectedFeelingsFamily } =
@@ -17,6 +17,16 @@ const SelectFeelingsInStatisticOne = () => {
 
   console.log({ feelingsFamilies });
   console.log({ selectedFeelingsFamily });
+
+  // select FeelingsFamily:
+  const handleSelectFeelingsFamily = (familyId) => {
+    try {
+      // save selected familyId:
+      setSelectedFeelingsFamily(familyId);
+    } catch (error) {
+      console.log("error: ", error);
+    }
+  };
 
   return (
     <div className="mt-5 grid grid-cols-3 grid-rows-2 ">
@@ -29,7 +39,7 @@ const SelectFeelingsInStatisticOne = () => {
             : "opacity-50"
         }`}
         // opacity is set dynamically. If selectedFamily matches ID of the feelingsFamily, button receives opacity-100, otherwise opacity-50.
-        // onClick={() => handleFamilySelect(feelingsFamilies[0].id)}
+        onClick={() => handleSelectFeelingsFamily(feelingsFamilies[0].id)}
         /* feelingsFamilies[0].id = the value for id in the first emotionobject in the array called feelingsFamilies, which comes from the fetchFeelings function and the setFeelingsFamilies-State*/
       >
         <div className="flex flex-col items-center">
@@ -48,7 +58,7 @@ const SelectFeelingsInStatisticOne = () => {
             ? "opacity-100"
             : "opacity-50"
         }`}
-        // onClick={() => handleFamilySelect(feelingsFamilies[4].id)}
+        onClick={() => handleSelectFeelingsFamily(feelingsFamilies[4].id)}
       >
         <div className="flex flex-col items-center">
           <IlluGemischteGefühle className=" w-[33.2px] h-[47.8px]" />
@@ -70,7 +80,7 @@ const SelectFeelingsInStatisticOne = () => {
             ? "opacity-100"
             : "opacity-50"
         }`}
-        // onClick={() => handleFamilySelect(feelingsFamilies[3].id)}
+        onClick={() => handleSelectFeelingsFamily(feelingsFamilies[3].id)}
       >
         <IlluTrauer className="flex-shrink-0 w-[24.7px] h-[61px] ml-3" />
         <HighlightText highlighttext="Trauer" fontsize="text-sm ml-3" />
@@ -83,7 +93,7 @@ const SelectFeelingsInStatisticOne = () => {
             ? "opacity-100"
             : "opacity-50"
         }`}
-        // onClick={() => handleFamilySelect(feelingsFamilies[2].id)}
+        onClick={() => handleSelectFeelingsFamily(feelingsFamilies[2].id)}
       >
         <IlluEntspannung className=" w-[112.2px] h-[19.6px] " />
         <HighlightText highlighttext="Entspannung" fontsize="text-sm" />
@@ -96,13 +106,13 @@ const SelectFeelingsInStatisticOne = () => {
             ? "opacity-100"
             : "opacity-50"
         }`}
-        // onClick={() => handleFamilySelect(feelingsFamilies[1].id)}
+        onClick={() => handleSelectFeelingsFamily(feelingsFamilies[1].id)}
       >
         <IlluFreude className="flex-shrink-0 w-[49px] h-[61.5px]" />
         <HighlightText highlighttext="Freude" fontsize="text-sm" />
       </button>
     </div>
-  )
-}
+  );
+};
 
-export default SelectFeelingsInStatisticOne
+export default SelectFeelingsInStatisticOne;

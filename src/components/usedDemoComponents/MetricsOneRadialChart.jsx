@@ -76,7 +76,7 @@ export default function MetricsOneRadialChart() {
                           y={viewBox.cy}
                           className="fill-foreground text-4xl font-bold"
                         >
-                          {chartData[0].percentage.toLocaleString()}
+                          {chartData[0].percentage.toLocaleString() + "%"}
                         </tspan>
                         {/* check-ins */}
                         {/* TODO: Wert für check-ins muss dynamisch werden */}
