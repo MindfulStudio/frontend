@@ -23,6 +23,8 @@ const RecordPage = () => {
   const { feelingsFamilies, selectedFeeling } = useEmotionsContext();
   const { selectedTags } = useTagContext();
   const [selectedTagCategories, setSelectedTagCategories] = useState(null);
+  const [isSubmitClicked, setIsSubmitClicked] = useState(false); // to change the button color after submit
+
   const { handleCheckinSubmit, isLoading, error } = useCheckinContext();
   const {
     checkinStep,
@@ -70,6 +72,7 @@ const RecordPage = () => {
   };
 
   const onCheckinSubmit = async () => {
+    setIsSubmitClicked(true);
     try {
       await handleCheckinSubmit();
       console.log("Check-in successful");
@@ -111,12 +114,18 @@ const RecordPage = () => {
                 variant="arrow"
                 onClick={onCheckinSubmit}
                 disabled={isLoading}
-                className="p-2 rounded-full bg-black hover:bg-accent-color disabled:bg-green-300 disabled:cursor-not-allowed"
+                className={`p-2 rounded-full ${
+                  isSubmitClicked || isLoading
+                    ? "bg-black"
+                    : "bg-gray-200 hover:bg-black"
+                } disabled:cursor-not-allowed transition-colors duration-200`}
               >
                 {isLoading ? (
                   <LoadingSymbolWhite className="w-6 h-6" />
-                ) : (
+                ) : isSubmitClicked ? (
                   <SaveSymbolWhite className="w-6 h-6" />
+                ) : (
+                  <SaveSymbol className="w-6 h-6" />
                 )}
               </Button>
             )}
