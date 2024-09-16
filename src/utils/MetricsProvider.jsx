@@ -6,6 +6,7 @@ const MetricsProvider = ({ children }) => {
   // ----------------------------------- States---------------------------------
 
   const [metricsOneStatus, setMetricsOneStatus] = useState(1);
+
   // selected feelingsFamily
   const [selectedFeelingsFamily, setSelectedFeelingsFamily] = useState(null);
 
@@ -18,6 +19,14 @@ const MetricsProvider = ({ children }) => {
 
   // ----------------------------------- Values---------------------------------
   const maxMetricsOneStatus = 2;
+
+  // ----------------------------------- Function -  previous metrics status ---------------------------------
+
+  const previousMetricsOneStep = () => {
+    if (metricsOneStatus > 1) {
+      setMetricsOneStatus((prevStatus) => prevStatus - 1);
+    }
+  };
 
   // ----------------------------------- Function - check if >= 7 check-ins available ---------------------------------
   useEffect(() => {
@@ -38,6 +47,7 @@ const MetricsProvider = ({ children }) => {
         setCheckIn,
         showMetrics,
         setShowMetrics,
+        previousMetricsOneStep
       }}
     >
       {children}

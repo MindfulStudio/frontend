@@ -1,4 +1,3 @@
-import { TrendingUp } from "lucide-react";
 import {
   Label,
   PolarGrid,
@@ -7,7 +6,7 @@ import {
   RadialBarChart,
 } from "recharts";
 
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { ChartContainer } from "@/components/ui/chart";
 
 // static-data:
@@ -30,29 +29,30 @@ const chartConfig = {
 
 // TODO: Größe anpassen => verkleinern
 
-export default function MetricsOneRadialChart() {
+export default function MetricsOneRadialChart({ chartTitle, checkIns }) {
   return (
-    <Card className="flex flex-col border-none shadow-none">
+    <Card className="flex flex-col border-none shadow-none w-[200px] h-[200px]">
       <CardContent className="flex-1 pb-0">
         <ChartContainer
           config={chartConfig}
-          className="mx-auto aspect-square max-h-[250px]"
+          className="mx-auto aspect-square max-h-[150px]"
         >
+          <p className="text-md text-center">{chartTitle}</p>
           {/* radial chart (black - depict percentage) */}
           <RadialBarChart
             data={chartData}
             startAngle={0}
             endAngle={108} // muss dynamisch werden - 360 = 100 %
-            innerRadius={80}
-            outerRadius={110}
+            innerRadius={49} // {80}
+            outerRadius={73} // {110}
           >
             {/* inner circle (chart) */}
             <PolarGrid
               gridType="circle"
               radialLines={false}
-              stroke="none"
-              className="first:fill-muted last:fill-white"
-              polarRadius={[86, 74]}
+              stroke="none" // border circle
+              className="first:fill-background last:fill-white" // first:circle last: space inside circle
+              polarRadius={[53, 44]} //{[86, 74]}
             />
 
             {/* create radial bar: */}
@@ -74,7 +74,7 @@ export default function MetricsOneRadialChart() {
                         <tspan
                           x={viewBox.cx}
                           y={viewBox.cy}
-                          className="fill-foreground text-4xl font-bold"
+                          className="fill-foreground text-3xl font-bold"
                         >
                           {chartData[0].percentage.toLocaleString() + "%"}
                         </tspan>
@@ -85,7 +85,7 @@ export default function MetricsOneRadialChart() {
                           y={(viewBox.cy || 0) + 24}
                           className="fill-muted-foreground"
                         >
-                          1 von 3
+                          {checkIns}
                         </tspan>
                       </text>
                     );
