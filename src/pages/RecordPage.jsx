@@ -1,41 +1,39 @@
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
-
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-
-// arrow icons
 import ArrowLeft from "/src/assets/icons/arrow-left-svgrepo-com.svg";
 import ArrowRight from "/src/assets/icons/arrow-right-svgrepo-com.svg";
 import SaveSymbol from "/src/assets/icons/save-2-svgrepo-com.svg";
+import SaveSymbolWhite from "/src/assets/icons/save-2-svgrepo-com-white.svg";
+import LoadingSymbolWhite from "/src/assets/icons/upload-3-svgrepo-com.svg";
 
-// import subcomponents for the record page
 import CheckInFeelingDisplay from "@/components/ownComponents/recordPage/CheckInFeelingDisplay.jsx";
 import TagsPlaceTimePeople from "@/components/ownComponents/recordPage/TagsPlaceTimePeople.jsx";
 import TagsContext from "@/components/ownComponents/recordPage/TagsContext.jsx";
 import MakeANote from "@/components/ownComponents/recordPage/MakeANote.jsx";
 import SleepActivityWeather from "@/components/ownComponents/recordPage/SleepActivityWeather.jsx";
 
-// import EmotionsProvider
 import { useEmotionsContext } from "@/utils/EmotionsProvider";
-// import useRecordProgressProvider
 import { useRecordProgressContext } from "@/utils/RecordProgressProvider";
-// import TagProvider
 import { useTagContext } from "@/utils/TagProvider";
-// import CheckinProvider
 import { useCheckinContext } from "@/utils/CheckinProvider";
 
 const RecordPage = () => {
   const { feelingsFamilies, selectedFeeling } = useEmotionsContext();
   const { selectedTags } = useTagContext();
-  const [selectedTagCaterogories, setSelectedTagCategories] = useState(null);
-
-  // Context for Submitting the Check-In
+  const [selectedTagCategories, setSelectedTagCategories] = useState(null);
   const { handleCheckinSubmit, isLoading, error } = useCheckinContext();
+  const {
+    checkinStep,
+    totalCheckinSteps,
+    nextCheckinStep,
+    previousCheckinStep,
+  } = useRecordProgressContext();
+  const navigateBackToDashboard = useNavigate();
 
-  // find the unique tag categories
   useEffect(() => {
-    const findSelectedTagCaterogories = () => {
+    const findSelectedTagCategories = () => {
       const categories = selectedTags.reduce(
         (acc, curr) =>
           acc.includes(curr.category) ? acc : [...acc, curr.category],
@@ -43,17 +41,8 @@ const RecordPage = () => {
       );
       setSelectedTagCategories(categories);
     };
-    findSelectedTagCaterogories();
+    findSelectedTagCategories();
   }, [selectedTags]);
-
-  const {
-    checkinStep,
-    totalCheckinSteps,
-    nextCheckinStep,
-    previousCheckinStep,
-  } = useRecordProgressContext();
-
-  const navigateBackToDashboard = useNavigate();
 
   const renderCheckinStepComponent = () => {
     switch (checkinStep) {
@@ -75,7 +64,6 @@ const RecordPage = () => {
   const handleBackToDashboard = () => {
     if (checkinStep === 1) {
       navigateBackToDashboard("/dashboard");
-      // the user can only redirect to the dashboard page in the first step, otherwise the previous logic remains the same.
     } else {
       previousCheckinStep();
     }
@@ -92,44 +80,59 @@ const RecordPage = () => {
   };
 
   return (
-    <main className="pt-[95px] px-[50px] flex flex-col items-center relative min-h-screen">
-      <div className="flex-grow">{renderCheckinStepComponent()}</div>
-
-      <Progress
-        value={(checkinStep / totalCheckinSteps) * 100}
-        className="w-[66%] mb-24 relative"
-      />
-
-      <div
-        className="absolute bottom-1/2 left-1/2 transform -translate-x-1/2 flex gap-72"
-        /* style={{ zIndex: 10 }} */
-      >
-        <Button
-          variant="arrow"
-          onClick={handleBackToDashboard} /* disabled={checkinStep === 1} */
-        >
-          <ArrowLeft />
-        </Button>
-        {checkinStep < totalCheckinSteps ? (
-          <Button
-            variant="arrow"
-            onClick={nextCheckinStep}
-            disabled={
-              !selectedFeeling ||
-              (checkinStep === 2 && selectedTagCaterogories.length < 3)
-            }
-          >
-            <ArrowRight />
-          </Button>
-        ) : (
-          <Button
-            variant="arrow"
-            onClick={onCheckinSubmit}
-            disabled={isLoading}
-          >
-            {isLoading ? "Saving..." : <SaveSymbol />}
-          </Button>
-        )}
+    <main className="pt-[95px] px-[50px] flex flex-col items-center justify-between min-h-screen">
+      <div className="w-full max-w-4xl flex-grow flex flex-col">
+        <div className="flex-grow relative">
+          {renderCheckinStepComponent()}
+          <div className="absolute inset-y-0 left-0 flex items-center -ml-7">
+            <Button
+              variant="arrow"
+              onClick={handleBackToDashboard}
+              className="p-2 rounded-full bg-gray-200 hover:bg-gray-300"
+            >
+              <ArrowLeft className="w-6 h-6" />
+            </Button>
+          </div>
+          <div className="absolute inset-y-0 right-0 flex items-center -mr-7">
+            {checkinStep < totalCheckinSteps ? (
+              <Button
+                variant="arrow"
+                onClick={nextCheckinStep}
+                disabled={
+                  !selectedFeeling ||
+                  (checkinStep === 2 && selectedTagCategories.length < 3)
+                }
+                className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:bg-gray-100 disabled:cursor-not-allowed"
+              >
+                <ArrowRight className="w-6 h-6" />
+              </Button>
+            ) : (
+              <Button
+                variant="arrow"
+                onClick={onCheckinSubmit}
+                disabled={isLoading}
+                className="p-2 rounded-full bg-black hover:bg-accent-color disabled:bg-green-300 disabled:cursor-not-allowed"
+              >
+                {isLoading ? (
+                  <LoadingSymbolWhite className="w-6 h-6" />
+                ) : (
+                  <SaveSymbolWhite className="w-6 h-6" />
+                )}
+              </Button>
+            )}
+          </div>
+        </div>
+        <div className="w-full flex flex-col items-center mb-24">
+          <div className="w-[66%] max-w-[390px]">
+            <Progress
+              value={(checkinStep / totalCheckinSteps) * 100}
+              className="w-full mb-4"
+            />
+            <div className="text-center text-sm text-gray-500">
+              Step {checkinStep} of {totalCheckinSteps}
+            </div>
+          </div>
+        </div>
       </div>
     </main>
   );
