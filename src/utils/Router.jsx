@@ -16,6 +16,7 @@ import EmotionsProvider from "./EmotionsProvider";
 import TagProvider from "./TagProvider";
 import RecordProgressProvider from "./RecordProgressProvider";
 import UserProvider from "./UserProvider";
+import AuthProvider from "./AuthProvider";
 
 import CheckinProvider from "./CheckinProvider";
 
@@ -95,8 +96,8 @@ const Router = () => {
       ],
     },
   ]);
-
   return (
+    <AuthProvider>
     <UserProvider>
       <EmotionsProvider>
         <TagProvider>
@@ -112,6 +113,8 @@ const Router = () => {
         </TagProvider>
       </EmotionsProvider>
     </UserProvider>
+</AuthProvider>
+
   );
 };
 
