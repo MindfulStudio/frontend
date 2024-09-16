@@ -1,5 +1,4 @@
 import { createContext, useContext, useState } from "react";
-
 import { useEmotionsContext } from "./EmotionsProvider";
 import { useTagContext } from "./TagProvider";
 
@@ -85,8 +84,8 @@ export const CheckinProvider = ({ children }) => {
       });
 
       if (!response.ok) {
-        const errorData = await response.json(); // Try to get detailed error message from backend
-        console.error("Error details from backend:", errorData);
+        const errorData = await response.json(); // Try to get detailed error message from backend;
+        console.error("Error details from backend:", errorData); //
         throw new Error(errorData.message || "Failed to submit check-in");
       }
 
