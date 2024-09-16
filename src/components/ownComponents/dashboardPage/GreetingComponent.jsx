@@ -77,7 +77,7 @@ const GreetingComponent = () => {
                 emotionsFromToday.map((feeling, index) => {
                   if (index === 2) return;
                   return (
-                    <p key={index} className="inline-block pr-1">
+                    <p key={index} className="inline-block">
                       {index < 1 ? feeling + ", " : feeling}
                     </p>
                   );
@@ -90,8 +90,7 @@ const GreetingComponent = () => {
                   title={`...`}
                   descriptionPopover={`Du hast heute bisher folgende Gefühle erfasst:`}
                   textPopover={`${emotionsFromToday}`}
-                />
-                {" , "}
+                />{" "}
               </>
             )}
             gefühlt.
