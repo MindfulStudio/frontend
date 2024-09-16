@@ -55,6 +55,7 @@ export const CheckinProvider = ({ children }) => {
       emotion: {
         family: selectedFamily,
         name: selectedFeeling.name,
+        isDefault: selectedFeeling.isDefault,
       },
       tags: selectedTags.map((tag) => ({
         name: tag.name,
@@ -63,9 +64,9 @@ export const CheckinProvider = ({ children }) => {
       })),
       comment: comment,
       config: {
-        sleepingHours: sleepingHours,
-        physicalActivity: isActive,
-        weather: selectedWeather,
+        sleepingHours: sleepingHours || null,
+        physicalActivity: isActive || false,
+        weather: selectedWeather || null,
       },
     };
 
