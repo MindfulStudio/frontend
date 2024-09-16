@@ -68,7 +68,8 @@ const TagProvider = ({ children }) => {
                   isDefault: true,
                   category: category,
                 })
-              }>
+              }
+            >
               {tag}
             </ToggleGroupItem>
           ))}
@@ -84,7 +85,8 @@ const TagProvider = ({ children }) => {
                   ? "bg-selected-subemotion"
                   : ""
               } `}
-              onClick={() => handleTagToggle(tag)}>
+              onClick={() => handleTagToggle(tag)}
+            >
               {tag.name}
             </ToggleGroupItem>
           ))}
@@ -148,6 +150,7 @@ const TagProvider = ({ children }) => {
       id: Date.now(), //TODO: Assigning an unique and useful id; For the Standard-SubTags, it is the index of the array, because this array won´t change. But for the custom Tags, we might need a different approach? I suggest Date.now() for now, but we should discuss this to find a better solution.
       name: newTag.name,
       isDefault: false,
+      category,
     };
 
     const updatedCustomTags = {

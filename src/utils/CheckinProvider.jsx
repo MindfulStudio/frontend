@@ -1,5 +1,4 @@
 import { createContext, useContext, useState } from "react";
-
 import { useEmotionsContext } from "./EmotionsProvider";
 import { useTagContext } from "./TagProvider";
 
@@ -56,6 +55,7 @@ export const CheckinProvider = ({ children }) => {
       emotion: {
         family: selectedFamily,
         name: selectedFeeling.name,
+        isDefault: selectedFeeling.isDefault,
       },
       tags: selectedTags.map((tag) => ({
         name: tag.name,
@@ -64,9 +64,9 @@ export const CheckinProvider = ({ children }) => {
       })),
       comment: comment,
       config: {
-        sleepingHours: sleepingHours,
-        physicalActivity: isActive,
-        weather: selectedWeather,
+        sleepingHours: sleepingHours || null,
+        physicalActivity: isActive || false,
+        weather: selectedWeather || null,
       },
     };
 
@@ -85,8 +85,8 @@ export const CheckinProvider = ({ children }) => {
       });
 
       if (!response.ok) {
-        const errorData = await response.json(); // Try to get detailed error message from backend
-        console.error("Error details from backend:", errorData);
+        const errorData = await response.json(); // Try to get detailed error message from backend;
+        console.error("Error details from backend:", errorData); //
         throw new Error(errorData.message || "Failed to submit check-in");
       }
 
