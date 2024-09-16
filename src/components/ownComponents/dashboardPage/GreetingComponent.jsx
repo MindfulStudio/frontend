@@ -1,6 +1,7 @@
 // import { useEmotionsContext } from "@/utils/EmotionsProvider";
 import { useEffect, useState } from "react";
 import { PopoverDots } from "@/components/usedDemoComponents/Popover";
+import { Slice } from "lucide-react";
 
 // TODO: popover weite und position
 
@@ -74,7 +75,7 @@ const GreetingComponent = () => {
             Heute hast du dich bisher{" "}
             <span>
               {emotionsFromToday &&
-                emotionsFromToday.map((feeling, index) => {
+                emotionsFromToday.slice(0, 2).map((feeling, index) => {
                   if (index === 2) return;
                   return (
                     <p key={index} className="inline-block pr-1">
