@@ -1,27 +1,13 @@
 import { createContext, useContext, useState } from "react";
 
+/* import { handleCheckinSubmit } from "./handleCheckinSubmit.js"; */
+
 const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
+  // States for customs:
   const [customFeelings, setCustomFeelings] = useState([]);
   const [customTags, setCustomTags] = useState([]);
-
-  const [checkinData, setCheckinData] = useState({
-    emotion: {},
-    tags: [],
-    comment: "",
-    config: {},
-  });
-  // Final structure of checkinData for POST-request (Example):
-  // {
-  //   emotion: { family: "Freude", name: "begeistert" },
-  //   tags: [
-  //     { category: "mitWem", name: "Hund", isDefault: false },
-  //     { category: "wann", name: "morgens", isDefault: true },
-  //   ],
-  //   comment: "blabla",
-  //   config: { sleepingHours: 7, physicalActivity: true, weather: "sonnig" },
-  // };
 
   // ---------------------CUSTOMS: Fetching & preparation------------------------
 
@@ -75,6 +61,8 @@ const UserProvider = ({ children }) => {
   };
 
   // ---------------------CHECKIN: Preparation & Post------------------------
+  // NOTICE: handleCheckinSubmit Function does not work here, because UserPrvider is the highest level of the context. It is not possible to access the context for selectedFamily from EmotionsContext (child component) of the UserProvider.
+  // NOTICE: Therefore the check in data is not prepared here, but in the CheckinProvider.jsx!
 
   return (
     <UserContext.Provider
@@ -84,8 +72,6 @@ const UserProvider = ({ children }) => {
         customFeelings,
         setCustomFeelings,
         fetchAllCustoms,
-        checkinData,
-        setCheckinData,
       }}
     >
       {children}

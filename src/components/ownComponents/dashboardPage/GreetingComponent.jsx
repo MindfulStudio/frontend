@@ -90,8 +90,7 @@ const GreetingComponent = () => {
                   title={`...`}
                   descriptionPopover={`Du hast heute bisher folgende Gefühle erfasst:`}
                   textPopover={`${emotionsFromToday}`}
-                />
-                {" , "}
+                />{" "}
               </>
             )}
             gefühlt.
