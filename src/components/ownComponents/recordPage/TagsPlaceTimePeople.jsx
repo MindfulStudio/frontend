@@ -50,9 +50,9 @@ const TagsPlaceTimePeople = () => {
         </p>
         <div className="w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[141px] overflow-y-scroll">
           <ul className="flex flex-wrap gap-3 justify-center list-none p-0">
-            {renderTagListbyCategory("mit wem")}
+            {renderTagListbyCategory("mitWem")}
           </ul>
-          <InputAndButtonForCustomTag category={"mit wem"} />
+          <InputAndButtonForCustomTag category={"mitWem"} />
           {tagError?.category === "mitWem" && (
             <UserFeedbackText content={tagError.message} type="error" />
           )}
