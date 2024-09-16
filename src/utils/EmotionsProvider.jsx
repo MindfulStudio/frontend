@@ -179,4 +179,3 @@ const EmotionsProvider = ({ children }) => {
 export default EmotionsProvider;
 
 export const useEmotionsContext = () => useContext(EmotionsContext);
-3333
