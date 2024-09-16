@@ -9,6 +9,7 @@ import StatisticOne from "../ownComponents/metricsPage/StatisticOne/StatisticOne
 
 import { useMetricsContext } from "@/utils/MetricsProvider";
 import MessageCheckInsM1 from "../ownComponents/metricsPage/StatisticOne/MessageCheckInsM1";
+import { useNavigate } from "react-router-dom";
 
 const StatisticOneTabsContent = () => {
   // import from useEmotionsContext:
@@ -24,8 +25,7 @@ const StatisticOneTabsContent = () => {
     setShowMetrics,
   } = useMetricsContext();
 
-
-
+  
   const renderMetricsOne = () => {
     switch (metricsOneStatus) {
       case 1:
