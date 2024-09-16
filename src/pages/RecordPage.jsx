@@ -2,28 +2,30 @@ import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+// --------------------------- Icon Component Imports ---------------------------
 import ArrowLeft from "/src/assets/icons/arrow-left-svgrepo-com.svg";
 import ArrowRight from "/src/assets/icons/arrow-right-svgrepo-com.svg";
 import SaveSymbol from "/src/assets/icons/save-2-svgrepo-com.svg";
 import SaveSymbolWhite from "/src/assets/icons/save-2-svgrepo-com-white.svg";
 import LoadingSymbolWhite from "/src/assets/icons/upload-3-svgrepo-com.svg";
 
+// --------------------------- Subcomponent Imports ---------------------------
 import CheckInFeelingDisplay from "@/components/ownComponents/recordPage/CheckInFeelingDisplay.jsx";
 import TagsPlaceTimePeople from "@/components/ownComponents/recordPage/TagsPlaceTimePeople.jsx";
 import TagsContext from "@/components/ownComponents/recordPage/TagsContext.jsx";
 import MakeANote from "@/components/ownComponents/recordPage/MakeANote.jsx";
 import SleepActivityWeather from "@/components/ownComponents/recordPage/SleepActivityWeather.jsx";
 
+// --------------------------- Context Imports ----------------------------------
 import { useEmotionsContext } from "@/utils/EmotionsProvider";
 import { useRecordProgressContext } from "@/utils/RecordProgressProvider";
 import { useTagContext } from "@/utils/TagProvider";
 import { useCheckinContext } from "@/utils/CheckinProvider";
 
 const RecordPage = () => {
+  // ------------------------------- States from Context ------------------------
   const { feelingsFamilies, selectedFeeling } = useEmotionsContext();
   const { selectedTags } = useTagContext();
-  const [selectedTagCategories, setSelectedTagCategories] = useState(null);
-  const [isSubmitClicked, setIsSubmitClicked] = useState(false); // to change the button color after submit
 
   const { handleCheckinSubmit, isLoading, error } = useCheckinContext();
   const {
@@ -32,19 +34,16 @@ const RecordPage = () => {
     nextCheckinStep,
     previousCheckinStep,
   } = useRecordProgressContext();
+
   const navigateBackToDashboard = useNavigate();
 
-  useEffect(() => {
-    const findSelectedTagCategories = () => {
-      const categories = selectedTags.reduce(
-        (acc, curr) =>
-          acc.includes(curr.category) ? acc : [...acc, curr.category],
-        []
-      );
-      setSelectedTagCategories(categories);
-    };
-    findSelectedTagCategories();
-  }, [selectedTags]);
+  // ------------------------------- Local States -------------------------------
+  const [selectedTagCategories, setSelectedTagCategories] = useState(null);
+  const [isSubmitClicked, setIsSubmitClicked] = useState(false); // to change the button color after submit
+
+  // ------------------------------- Functions --------------------------------------------------------------------------
+
+  // Function A) Render the correct component based on the current checkinStep:
 
   const renderCheckinStepComponent = () => {
     switch (checkinStep) {
@@ -63,13 +62,33 @@ const RecordPage = () => {
     }
   };
 
+  // Function B) Handle the navigation between the checkin steps:
+
   const handleBackToDashboard = () => {
     if (checkinStep === 1) {
+      // if the user is on the first step, the left arrow can be used to navigate back to the dashboard
       navigateBackToDashboard("/dashboard");
     } else {
-      previousCheckinStep();
+      previousCheckinStep(); // otherwise the user can navigate back to the previous step
     }
   };
+
+  // Function C) Find selected TagCategories based on selected Tags by the user:
+  // To check in the TagsPlaceTimePeople component if the user has selected at least 3 tags in each category
+
+  useEffect(() => {
+    const findSelectedTagCategories = () => {
+      const categories = selectedTags.reduce(
+        (acc, curr) =>
+          acc.includes(curr.category) ? acc : [...acc, curr.category],
+        []
+      );
+      setSelectedTagCategories(categories);
+    };
+    findSelectedTagCategories();
+  }, [selectedTags]);
+
+  // Function D) Handle the submission of the checkin:
 
   const onCheckinSubmit = async () => {
     setIsSubmitClicked(true);
@@ -82,12 +101,15 @@ const RecordPage = () => {
     }
   };
 
+  // ------------------------------- Render --------------------------------------------------------------------------
   return (
     <main className="pt-[95px] px-[50px] flex flex-col items-center justify-between min-h-screen">
       <div className="w-full max-w-4xl flex-grow flex flex-col">
+        {/* Render the current Subcomponent based on the Progress: */}
         <div className="flex-grow relative">
           {renderCheckinStepComponent()}
           <div className="absolute inset-y-0 left-0 flex items-center -ml-7">
+            {/* Arrow to the left */}
             <Button
               variant="arrow"
               onClick={handleBackToDashboard}
@@ -96,8 +118,10 @@ const RecordPage = () => {
               <ArrowLeft className="w-6 h-6" />
             </Button>
           </div>
+
+          {/* Arrow to the right */}
           <div className="absolute inset-y-0 right-0 flex items-center -mr-7">
-            {checkinStep < totalCheckinSteps ? (
+            {checkinStep < totalCheckinSteps ? ( // if the user is not on the last step (5), the right arrow can be used to navigate to the next step
               <Button
                 variant="arrow"
                 onClick={nextCheckinStep}
@@ -120,6 +144,7 @@ const RecordPage = () => {
                     : "bg-gray-200 hover:bg-black"
                 } disabled:cursor-not-allowed transition-colors duration-200`}
               >
+                {/* conditional styling of the submit button */}
                 {isLoading ? (
                   <LoadingSymbolWhite className="w-6 h-6" />
                 ) : isSubmitClicked ? (
@@ -131,6 +156,8 @@ const RecordPage = () => {
             )}
           </div>
         </div>
+
+        {/* Progress Bar */}
         <div className="w-full flex flex-col items-center mb-24">
           <div className="w-[66%] max-w-[390px]">
             <Progress
