@@ -33,12 +33,6 @@ export function LoginTabs() {
     setShowPassword(!showPassword);
   };
 
-  // handle if user likes to stay logged in:
-  const handleStayLoggedIn = () => {
-    setStayLoggedIn(!stayLoggedIn);
-  };
-  // console.log({ stayLoggedIn });
-
   // update LoginData:
   const handleChange = (e) => {
     setLoginData({ ...loginData, [e.target.id]: e.target.value });
@@ -89,7 +83,7 @@ export function LoginTabs() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password, stayLoggedIn }),
         credentials: "include",
       });
 
@@ -163,7 +157,7 @@ export function LoginTabs() {
             </CardContent>
 
             <CardFooter className="flex flex-col items-start">
-              <CheckboxStayLoggedIn ontoggle={handleStayLoggedIn} />
+              <CheckboxStayLoggedIn setStayLoggedIn={setStayLoggedIn} />
 
               <Button type="submit">Login</Button>
             </CardFooter>

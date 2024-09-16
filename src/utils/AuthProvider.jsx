@@ -13,10 +13,10 @@ const AuthProvider = ({ children }) => {
         const res = await fetch(`${baseURL}${pathURL}verifyCookie`, {
           credentials: "include",
         });
-        setIsLoggedIn(res.ok ? true : false);
-      } catch (error) {
+        const data = await res.json();
+        setIsLoggedIn(data.isValid ? true : false);
+      } catch (err) {
         setIsLoggedIn(false);
-        console.error(error);
       }
     };
     verifyCookie();
