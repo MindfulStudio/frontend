@@ -16,7 +16,11 @@ import EmotionsProvider from "./EmotionsProvider";
 import TagProvider from "./TagProvider";
 import RecordProgressProvider from "./RecordProgressProvider";
 import UserProvider from "./UserProvider";
+
 import CheckinProvider from "./CheckinProvider";
+
+import MetricsProvider from "./MetricsProvider";
+
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -98,11 +102,13 @@ const Router = () => {
       <EmotionsProvider>
         <TagProvider>
           <RecordProgressProvider>
-            <CheckinProvider>
+    <CheckinProvider>
+            <MetricsProvider>
               <RouterProvider router={router}>
                 <Layout />
               </RouterProvider>
-            </CheckinProvider>
+            </MetricsProvider>
+</CheckinProvider>
           </RecordProgressProvider>
         </TagProvider>
       </EmotionsProvider>
