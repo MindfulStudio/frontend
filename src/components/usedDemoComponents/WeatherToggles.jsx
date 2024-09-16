@@ -34,12 +34,12 @@ export function WeatherToggles() {
     >
       <ToggleGroupItem
         value="sonnig"
-        aria-label="Sunny"
+        aria-label="sonnig"
         className={`${
-          selectedWeather === "sunny" ? "bg-black" : "bg-white"
+          selectedWeather === "sonnig" ? "bg-black" : "bg-white"
         } p-2 rounded-md`}
       >
-        {selectedWeather === "sunny" ? (
+        {selectedWeather === "sonnig" ? (
           <SunnyWhite className="h-8 w-8" />
         ) : (
           <SunnyBlack className="h-8 w-8" />
@@ -48,12 +48,12 @@ export function WeatherToggles() {
 
       <ToggleGroupItem
         value="regnerisch"
-        aria-label="Rainy"
+        aria-label="regnerisch"
         className={`${
-          selectedWeather === "rainy" ? "bg-black" : "bg-white"
+          selectedWeather === "regnerisch" ? "bg-black" : "bg-white"
         } p-2 rounded-md`}
       >
-        {selectedWeather === "rainy" ? (
+        {selectedWeather === "regnerisch" ? (
           <RainyWhite className="h-8 w-8" />
         ) : (
           <RainyBlack className="h-8 w-8" />
@@ -62,12 +62,12 @@ export function WeatherToggles() {
 
       <ToggleGroupItem
         value="bewölkt"
-        aria-label="Cloudy"
+        aria-label="bewölkt"
         className={`${
-          selectedWeather === "cloudy" ? "bg-black" : "bg-white"
+          selectedWeather === "bewölkt" ? "bg-black" : "bg-white"
         } p-2 rounded-md`}
       >
-        {selectedWeather === "cloudy" ? (
+        {selectedWeather === "bewölkt" ? (
           <CloudyWhite className="h-8 w-8" />
         ) : (
           <CloudyBlack className="h-8 w-8" />
@@ -76,12 +76,12 @@ export function WeatherToggles() {
 
       <ToggleGroupItem
         value="stürmisch"
-        aria-label="Stormy"
+        aria-label="stürmisch"
         className={`${
-          selectedWeather === "stormy" ? "bg-black" : "bg-white"
+          selectedWeather === "stürmisch" ? "bg-black" : "bg-white"
         } p-2 rounded-md`}
       >
-        {selectedWeather === "stormy" ? (
+        {selectedWeather === "stürmisch" ? (
           <StormyWhite className="h-8 w-8" />
         ) : (
           <StormyBlack className="h-8 w-8" />
@@ -90,12 +90,12 @@ export function WeatherToggles() {
 
       <ToggleGroupItem
         value="windig"
-        aria-label="Windy"
+        aria-label="windig"
         className={`${
-          selectedWeather === "windy" ? "bg-black" : "bg-white"
+          selectedWeather === "windig" ? "bg-black" : "bg-white"
         } p-2 rounded-md`}
       >
-        {selectedWeather === "windy" ? (
+        {selectedWeather === "windig" ? (
           <WindyWhite className="h-8 w-8" />
         ) : (
           <WindyBlack className="h-8 w-8" />
@@ -104,12 +104,12 @@ export function WeatherToggles() {
 
       <ToggleGroupItem
         value="schneit"
-        aria-label="Snowy"
+        aria-label="schneit"
         className={`${
-          selectedWeather === "snowy" ? "bg-black" : "bg-white"
+          selectedWeather === "schneit" ? "bg-black" : "bg-white"
         } p-2 rounded-md`}
       >
-        {selectedWeather === "snowy" ? (
+        {selectedWeather === "schneit" ? (
           <SnowWhite className="h-8 w-8" />
         ) : (
           <SnowBlack className="h-8 w-8" />
