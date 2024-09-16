@@ -19,7 +19,11 @@ const StatisticOne = () => {
       <div>
         <p className="w-[300px] text-start pt-5 max-h-[350px]">Zeitpunkt:</p>
         {/* TODO: MetricsOneRadialChart dynamisch machen und dann hier mit map für jeden erfassten Zeitpunkt komponente rendern */}
-        <MetricsOneRadialChart checkIns={"1 von 3"} chartTitle={"Vormittag"}/>
+        <MetricsOneRadialChart
+          checkIns={"1 von 3"}
+          chartTitle={"Vormittag"}
+          endAngle={80} // hier muss dynamischer Wert berechnet werden => 360 = 100%
+        />
       </div>
     </div>
   );

@@ -29,7 +29,11 @@ const chartConfig = {
 
 // TODO: Größe anpassen => verkleinern
 
-export default function MetricsOneRadialChart({ chartTitle, checkIns }) {
+export default function MetricsOneRadialChart({
+  chartTitle,
+  checkIns,
+  endAngle,
+}) {
   return (
     <Card className="flex flex-col border-none shadow-none w-[200px] h-[200px]">
       <CardContent className="flex-1 pb-0">
@@ -42,7 +46,7 @@ export default function MetricsOneRadialChart({ chartTitle, checkIns }) {
           <RadialBarChart
             data={chartData}
             startAngle={0}
-            endAngle={108} // muss dynamisch werden - 360 = 100 %
+            endAngle={endAngle} //{108} // muss dynamisch werden - 360 = 100 %
             innerRadius={49} // {80}
             outerRadius={73} // {110}
           >
