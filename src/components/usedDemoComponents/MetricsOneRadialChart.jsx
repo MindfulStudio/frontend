@@ -11,9 +11,9 @@ import { ChartContainer } from "@/components/ui/chart";
 
 // static-data:
 // TODO: Werte dynmisch machen und als props
-const chartData = [
-  { percent: "value", percentage: 30, fill: "var(--color-value)" }, // fill kommt von chartConfig - color
-];
+// const chartData = [
+//   { percent: "value", percentage: 30, fill: "var(--color-value)" }, // fill kommt von chartConfig - color
+// ];
 
 // former TypeScript-part:
 // chart-configuration:
@@ -33,15 +33,23 @@ export default function MetricsOneRadialChart({
   chartTitle,
   checkIns,
   endAngle,
+  percentage,
 }) {
+  const chartData = [
+    {
+      percentage: percentage,
+      fill: "var(--color-value)",
+    },
+  ];
+
   return (
-    <Card className="flex flex-col border-none shadow-none w-[200px] h-[200px]">
+    <Card className="flex flex-col border-none shadow-none w-[165px] h-[165px]">
       <CardContent className="flex-1 pb-0">
         <ChartContainer
           config={chartConfig}
-          className="mx-auto aspect-square max-h-[150px]"
+          className="mx-auto aspect-square max-h-[130px]"
         >
-          <p className="text-md text-center">{chartTitle}</p>
+          <p className="font-bold text-sm text-center">{chartTitle}</p>
           {/* radial chart (black - depict percentage) */}
           <RadialBarChart
             data={chartData}
@@ -80,8 +88,9 @@ export default function MetricsOneRadialChart({
                           y={viewBox.cy}
                           className="fill-foreground text-3xl font-bold"
                         >
-                          {chartData[0].percentage.toLocaleString() + "%"}
+                          {`${percentage}%`}
                         </tspan>
+
                         {/* check-ins */}
                         {/* TODO: Wert für check-ins muss dynamisch werden */}
                         <tspan
