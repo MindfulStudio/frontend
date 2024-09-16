@@ -17,6 +17,11 @@ import TagProvider from "./TagProvider";
 import RecordProgressProvider from "./RecordProgressProvider";
 import UserProvider from "./UserProvider";
 
+import CheckinProvider from "./CheckinProvider";
+
+import MetricsProvider from "./MetricsProvider";
+
+
 const Router = () => {
   const router = createBrowserRouter([
     // pages without layout (navBar)
@@ -97,9 +102,13 @@ const Router = () => {
       <EmotionsProvider>
         <TagProvider>
           <RecordProgressProvider>
-            <RouterProvider router={router}>
-              <Layout />
-            </RouterProvider>
+    <CheckinProvider>
+            <MetricsProvider>
+              <RouterProvider router={router}>
+                <Layout />
+              </RouterProvider>
+            </MetricsProvider>
+</CheckinProvider>
           </RecordProgressProvider>
         </TagProvider>
       </EmotionsProvider>
