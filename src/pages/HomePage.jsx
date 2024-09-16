@@ -1,9 +1,19 @@
 import HighlightText from "@/components/typo/HighlightText";
 import { Button } from "@/components/ui/button";
-import { NavLink } from "react-router-dom";
+import { NavLink, redirect, useNavigate } from "react-router-dom";
 import Element from "../assets/elements/floralElement.svg";
+import { useAuthContext } from "@/utils/AuthProvider";
+import { useEffect } from "react";
 
 const HomePage = () => {
+  const { isLoggedIn } = useAuthContext();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    //redirect to dashborad if logged in
+    if (isLoggedIn) navigate("/dashboard");
+  }, [isLoggedIn]);
+
   // TODO: style anpassen
   return (
     <main className="flex flex-col items-center w-full h-screen">
