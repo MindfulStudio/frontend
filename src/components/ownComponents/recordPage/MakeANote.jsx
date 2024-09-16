@@ -1,10 +1,11 @@
 import UserFeedbackText from "@/components/typo/UserFeedbackText";
 import { Textarea } from "@/components/ui/textarea";
-import { useState } from "react";
+
+import { useCheckinContext } from "@/utils/CheckinProvider";
 
 const MakeANote = () => {
-  const [showNoteInfo, setShowNoteInfo] = useState(false);
-  const [comment, setComment] = useState("");
+  const { showNoteInfo, setShowNoteInfo, comment, setComment } =
+    useCheckinContext();
 
   // show/hide UserFeedBackText
   const handleInfo = () => {

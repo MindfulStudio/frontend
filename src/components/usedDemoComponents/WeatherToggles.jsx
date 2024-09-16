@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 import StormyBlack from "/src/assets/icons/cloud-lightning-svgrepo-com-b.svg";
@@ -15,12 +14,14 @@ import CloudyWhite from "/src/assets/icons/sun-cloudy-svgrepo-com-1.svg";
 import SunnyWhite from "/src/assets/icons/sun-svgrepo-com-2.svg";
 import SnowWhite from "/src/assets/icons/snow-svgrepo-com-3.svg";
 
-export function ToggleGroupWeatherData() {
-  const [selectedWeather, setSelectedWeather] = useState("");
+import { useCheckinContext } from "@/utils/CheckinProvider";
 
-  const handleWeatherChange = (value) => {
-    setSelectedWeather(value);
-    console.log("Selected Weather:", selectedWeather);
+export function WeatherToggles() {
+  const { selectedWeather, setSelectedWeather } = useCheckinContext();
+
+  const handleWeatherChange = (weather) => {
+    setSelectedWeather(weather);
+    console.log("Selected Weather:", weather); // for debugging
   };
 
   return (
@@ -32,7 +33,7 @@ export function ToggleGroupWeatherData() {
       className="flex space-x-2"
     >
       <ToggleGroupItem
-        value="sunny"
+        value="sonnig"
         aria-label="Sunny"
         className={`${
           selectedWeather === "sunny" ? "bg-black" : "bg-white"
@@ -46,7 +47,7 @@ export function ToggleGroupWeatherData() {
       </ToggleGroupItem>
 
       <ToggleGroupItem
-        value="rainy"
+        value="regnerisch"
         aria-label="Rainy"
         className={`${
           selectedWeather === "rainy" ? "bg-black" : "bg-white"
@@ -60,7 +61,7 @@ export function ToggleGroupWeatherData() {
       </ToggleGroupItem>
 
       <ToggleGroupItem
-        value="cloudy"
+        value="bewölkt"
         aria-label="Cloudy"
         className={`${
           selectedWeather === "cloudy" ? "bg-black" : "bg-white"
@@ -74,7 +75,7 @@ export function ToggleGroupWeatherData() {
       </ToggleGroupItem>
 
       <ToggleGroupItem
-        value="stormy"
+        value="stürmisch"
         aria-label="Stormy"
         className={`${
           selectedWeather === "stormy" ? "bg-black" : "bg-white"
@@ -88,7 +89,7 @@ export function ToggleGroupWeatherData() {
       </ToggleGroupItem>
 
       <ToggleGroupItem
-        value="windy"
+        value="windig"
         aria-label="Windy"
         className={`${
           selectedWeather === "windy" ? "bg-black" : "bg-white"
@@ -102,7 +103,7 @@ export function ToggleGroupWeatherData() {
       </ToggleGroupItem>
 
       <ToggleGroupItem
-        value="snowy"
+        value="schneit"
         aria-label="Snowy"
         className={`${
           selectedWeather === "snowy" ? "bg-black" : "bg-white"
