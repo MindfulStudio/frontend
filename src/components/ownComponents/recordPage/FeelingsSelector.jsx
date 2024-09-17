@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import Delete from "/src/assets/icons/delete-2-svgrepo-com.svg";
 
 //++ import EmotionsProvider
 import { useEmotionsContext } from "@/utils/EmotionsProvider";
@@ -14,6 +16,7 @@ const FeelingsSelector = () => {
     customFeelings,
     selectedFamily,
     selectedFeeling,
+    handleDeleteCustomFeeling,
   } = useEmotionsContext();
 
   useEffect(() => {
@@ -46,17 +49,27 @@ const FeelingsSelector = () => {
           (
             feeling // if there are no custom feelings, we map through an empty array, which means, that nothing is displayed
           ) => (
-            <li
-              key={feeling.id}
-              onClick={() => handleFeelingSelect(feeling, false)} // we need to pass false, to indicate that this is a custom feeling
-              className={`cursor-pointer  p-2 hover:bg-selected-subemotion hover:rotate-on-hover text-md ${
-                selectedFeeling?.id === feeling.id //selectedFeeling? means that we check if selectedFeeling is not null or undefined and then we check if the id of the selected feeling matches the id of the current feeling in the map
-                  ? "bg-selected-subemotion"
-                  : ""
-              }`}
-            >
-              {feeling.name}
-            </li>
+            <div className="flex items-center gap-0.1">
+              <li
+                key={feeling.id}
+                onClick={() => handleFeelingSelect(feeling, false)} // we need to pass false, to indicate that this is a custom feeling
+                className={`cursor-pointer  p-2 hover:bg-selected-subemotion hover:rotate-on-hover text-md ${
+                  selectedFeeling?.id === feeling.id //selectedFeeling? means that we check if selectedFeeling is not null or undefined and then we check if the id of the selected feeling matches the id of the current feeling in the map
+                    ? "bg-selected-subemotion"
+                    : ""
+                }`}
+              >
+                {feeling.name}
+              </li>
+              <Button
+                variant="ghost"
+                size="icon"
+                className=" w-5 h-5 relative rounded-full hover:bg-gray-300"
+                onClick={() => handleDeleteCustomFeeling(/* feeling.id? */)}
+              >
+                <Delete className="w-4 h-4 absolute" />
+              </Button>
+            </div>
           )
         )}
       </ul>

@@ -205,9 +205,9 @@ const TagProvider = ({ children }) => {
         handleAddCustomTag,
         newTag,
         setNewTag,
-
         tagError,
         setTagError,
+        handleDeleteCustomTag,
       }}
     >
       {children}
