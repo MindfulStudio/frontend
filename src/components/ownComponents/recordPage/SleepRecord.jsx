@@ -1,6 +1,7 @@
 import { Slider } from "@/components/ui/slider";
 import { useCheckinContext } from "@/utils/CheckinProvider";
 import { useEffect, useState } from "react";
+import UserFeedbackText from "@/components/typo/UserFeedbackText";
 
 // Helper functions:
 
@@ -65,6 +66,13 @@ const SleepRecord = () => {
         onValueChange={handleSliderChange}
         disabled={sleepingHoursRecorded}
       />
+
+      {sleepingHoursRecorded && (
+        <UserFeedbackText
+          content="Du kannst diese Angabe pro Tag nur einmal machen."
+          type="info"
+        />
+      )}
     </div>
   );
 };
