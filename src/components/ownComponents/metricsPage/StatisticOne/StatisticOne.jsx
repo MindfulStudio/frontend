@@ -4,10 +4,8 @@ import SelectFeelingsInStatisticOne from "./SelectFeelingsInStatisticOne";
 import MetricsOneRadialChart from "@/components/usedDemoComponents/MetricsOneRadialChart";
 
 const StatisticOne = () => {
-  // import from EmotionsContext:
   const { feelingsFamilies } = useEmotionsContext();
-  // import from mreticsContext:
-  const { selectedFeelingsFamily, setSelectedFeelingsFamily } =
+  const { selectedFeelingsFamily, setSelectedFeelingsFamily, statisticsByFamily } =
     useMetricsContext();
 
   // console.log({ feelingsFamilies });

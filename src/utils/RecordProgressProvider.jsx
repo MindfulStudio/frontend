@@ -22,6 +22,10 @@ const RecordProgressProvider = ({ children }) => {
     }
   };
 
+  const resetCheckinStep = () => {
+    setCheckinStep(1);
+  };
+
   return (
     <RecordProgressContext.Provider
       value={{
@@ -29,6 +33,7 @@ const RecordProgressProvider = ({ children }) => {
         totalCheckinSteps,
         nextCheckinStep,
         previousCheckinStep,
+        resetCheckinStep,
       }}
     >
       {children}

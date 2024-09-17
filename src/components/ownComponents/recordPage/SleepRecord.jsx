@@ -1,60 +1,63 @@
-import React from "react";
-import { useState, useEffect, useContext } from "react";
-
-// TODO: change time unit from am/pm to units used in germany
-
+import { Slider } from "@/components/ui/slider";
 import { useCheckinContext } from "@/utils/CheckinProvider";
+import { useEffect, useState } from "react";
+
+/////// Helper functions: ///////
+
+// convert slider value (0-23) to German hours (17 Uhr - 16 Uhr)
+const sliderToHours = (value) => (value + 17) % 24;
+
+// Calculate sleep duration
+const calculateSleepDuration = (start, end) => {
+  const startHour = sliderToHours(start);
+  const endHour = sliderToHours(end);
+  return endHour >= startHour ? endHour - startHour : 24 - startHour + endHour;
+};
+
+/////// Main component: ///////
 
 const SleepRecord = () => {
+  // States:
   const {
-    sleepStart,
-    setSleepStart,
-    sleepEnd,
-    setSleepEnd,
     sleepingHours,
     setSleepingHours,
+    sleepingHoursRecorded,
+    fetchSleepingHours,
   } = useCheckinContext();
+  const [range, setRange] = useState([6, 15]); // default: 23 to 9 (internally plus 17 hours)
 
+  // Fetch and use today's sleeping hours if available
   useEffect(() => {
-    if (sleepStart && sleepEnd) {
-      const start = new Date(`1970-01-01T${sleepStart}`);
-      const end = new Date(`1970-01-01T${sleepEnd}`);
-      const duration = Math.abs(end - start);
+    fetchSleepingHours();
+  }, []);
 
-      const hours = Math.floor(duration / 1000 / 60 / 60);
-      const minutes = Math.floor((duration % (1000 * 60 * 60)) / (1000 * 60));
-      /* 
-      setSleepingHours(`${hours} Stunden ${minutes} Minuten`); */
-      // sleepinghours should be a number, i.e. 7.5
-      setSleepingHours(hours + minutes / 60);
-    } else {
-      setSleepingHours("");
-    }
-  }, [sleepStart, sleepEnd]);
-
-  // second useEffect to check if the changes of sleepingHours are correct (for debugging); can be deleted later
-  useEffect(() => {
-    console.log("Schlaf:" + sleepingHours); // for debugging
-  }, [sleepingHours]);
+  //   Function handle slider change
+  const handleSliderChange = (newRange) => {
+    setRange(newRange);
+    const sleepingRange = calculateSleepDuration(newRange[0], newRange[1]);
+    setSleepingHours(sleepingRange);
+  };
 
   return (
     <div>
+      {!sleepingHoursRecorded && (
+        <p>
+          Von {sliderToHours(range[0])} Uhr bis {sliderToHours(range[1])} Uhr
+        </p>
+      )}
       <p>
-        Ich habe von
-        <input
-          type="time"
-          value={sleepStart}
-          onChange={(e) => setSleepStart(e.target.value)}
-        />
-        bis
-        <input
-          type="time"
-          value={sleepEnd}
-          onChange={(e) => setSleepEnd(e.target.value)}
-        />
-        geschlafen.
+        {!sleepingHoursRecorded && `(`}
+        {sleepingHours} Stunden{!sleepingHoursRecorded && `)`}
       </p>
-      {sleepingHours && <p>Schlafzeit: {sleepingHours}</p>}
+      {!sleepingHoursRecorded && (
+        <Slider
+          min={0} // After converting: 17:00 Uhr
+          max={22} // After converting: 16:00 Uhr
+          step={1}
+          value={range}
+          onValueChange={handleSliderChange}
+        />
+      )}
     </div>
   );
 };

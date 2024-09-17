@@ -3,7 +3,7 @@
     "id": 1,
     "category": "wann",
     "name": "Standard-Tag",
-    "singleStandardTags": ["morgens", "mittags", "abends"]
+    "singleStandardTags": ["morgens", "mittags", "nachmittags", "abends"]
   },
   {
     "id": 2,
