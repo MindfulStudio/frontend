@@ -8,7 +8,8 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 export function MetricsPageTabs() {
-  const { metricsOneStatus, previousMetricsOneStep } = useMetricsContext();
+  const { metricsOneStatus, previousMetricsOneStep, getAllCheckins } =
+    useMetricsContext();
 
   const [showArrow, setShowArrow] = useState(false);
 
@@ -21,9 +22,9 @@ export function MetricsPageTabs() {
       navigate("/dashboard");
     }
   };
-
   // show/hide arrow:
   useEffect(() => {
+    getAllCheckins();
     if (metricsOneStatus > 1) {
       setShowArrow(true);
     } else {

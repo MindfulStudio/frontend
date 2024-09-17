@@ -1,22 +1,31 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useUserContext } from "./UserProvider";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { Button } from "@/components/ui/button";
 import defaultTags from "../data/standardTags.json";
 import { useEmotionsContext } from "./EmotionsProvider";
+
+// --------------------------- Icon Component Imports ---------------------------
+import DeleteWhite from "/src/assets/icons/delete-2-svgrepo-com-white.svg";
+import Delete from "/src/assets/icons/delete-2-svgrepo-com.svg";
+
+// --------------------------- TagProvider -------------------------------------
 
 const TagContext = createContext();
 
 const TagProvider = ({ children }) => {
-  // Local States:
+  // ----------------------------  Local States:----------------------------------
   const [standardTags, setStandardTags] = useState(defaultTags);
   const [selectedTags, setSelectedTags] = useState([]); // currently selected tags
   const [newTag, setNewTag] = useState({ name: "", category: "" });
   const [tagError, setTagError] = useState({ message: "", category: "" });
 
-  // States from UserProvider:
+  // -------------------------- States from UserProvider --------------------------
+
   const { customTags, setCustomTags } = useUserContext();
   const { selectedFeeling } = useEmotionsContext();
 
+  // -------------------------- Side Effects --------------------------------------
   // Reset everything when a new feeling is selected:
   useEffect(() => {
     if (selectedFeeling) {
@@ -26,7 +35,10 @@ const TagProvider = ({ children }) => {
     }
   }, [selectedFeeling]);
 
-  // Handle selecting/deselecting tags
+  // -------------------------- Functions ----------------------------------------
+
+  // A) Handle selecting/deselecting tags:
+
   const handleTagToggle = (tag) => {
     setSelectedTags((prevSelectedTags) => {
       // prevSelectedTags is the previous state of the selectedTags array
@@ -43,6 +55,16 @@ const TagProvider = ({ children }) => {
       return [...prevSelectedTags, tag]; // if the tag is not in the array, add it to the array
     });
   };
+
+  //TODO: B) handleDeleteCustomTag:
+  //NOTICE: Implement the soft delete function (only) for custom tags
+
+  const handleDeleteCustomTag = (tagId, category) => {
+    // This function will be implemented later
+    console.log(`Delete tag with id ${tagId} from category ${category}`);
+  };
+
+  // C) renderTags function:
 
   // The renderTags function takes a category as a parameter (e.g. “when”, “where”) and searches the standardTags array to find the matching object with the desired category. As soon as the matching object has been found, it renders the singleStandardTags as li elements
   const renderTagListbyCategory = (category) => {
@@ -74,21 +96,31 @@ const TagProvider = ({ children }) => {
             </ToggleGroupItem>
           ))}
         </ToggleGroup>
-        <ToggleGroup type="multiple" className="flex flex-wrap gap-3">
+        <ToggleGroup type="multiple" className="flex flex-wrap gap-3 mt-3">
           {categoryTagsCustom?.map((tag, index) => (
-            <ToggleGroupItem
-              key={index}
-              value={tag.name}
-              aria-label={tag.name}
-              className={`cursor-pointer p-2 border ${
-                selectedTags.some((t) => t.name === tag.name)
-                  ? "bg-selected-subemotion"
-                  : ""
-              } `}
-              onClick={() => handleTagToggle(tag)}
-            >
-              {tag.name}
-            </ToggleGroupItem>
+            <div key={index} className="flex items-center gap-1">
+              <ToggleGroupItem
+                key={index}
+                value={tag.name}
+                aria-label={tag.name}
+                className={`cursor-pointer p-2 border ${
+                  selectedTags.some((t) => t.name === tag.name)
+                    ? "bg-selected-subemotion"
+                    : ""
+                } `}
+                onClick={() => handleTagToggle(tag)}
+              >
+                {tag.name}
+              </ToggleGroupItem>
+              <Button
+                variant="ghost"
+                size="icon"
+                className=" w-5 h-5 relative rounded-full hover:bg-gray-300"
+                onClick={() => handleDeleteCustomTag(tag.id, category)}
+              >
+                <Delete className="w-4 h-4 absolute" />
+              </Button>
+            </div>
           ))}
         </ToggleGroup>
       </div>
@@ -98,7 +130,7 @@ const TagProvider = ({ children }) => {
     );
   };
 
-  // --------------------- Handle Add Custom Tags ------------------------
+  // D) Handle Add Custom Tags:
 
   const handleAddCustomTag = (newTag, category) => {
     // CHECKS FOR VALID INPUT:
@@ -173,9 +205,9 @@ const TagProvider = ({ children }) => {
         handleAddCustomTag,
         newTag,
         setNewTag,
-
         tagError,
         setTagError,
+        handleDeleteCustomTag,
       }}
     >
       {children}

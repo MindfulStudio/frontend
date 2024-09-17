@@ -15,9 +15,6 @@ const SelectFeelingsInStatisticOne = () => {
   const { selectedFeelingsFamily, setSelectedFeelingsFamily } =
     useMetricsContext();
 
-  console.log({ feelingsFamilies });
-  console.log({ selectedFeelingsFamily });
-
   // select FeelingsFamily:
   const handleSelectFeelingsFamily = (familyId) => {
     try {
@@ -58,8 +55,7 @@ const SelectFeelingsInStatisticOne = () => {
             ? "opacity-100"
             : "opacity-50"
         }`}
-        onClick={() => handleSelectFeelingsFamily(feelingsFamilies[4].id)}
-      >
+        onClick={() => handleSelectFeelingsFamily(feelingsFamilies[4].id)}>
         <div className="flex flex-col items-center">
           <IlluGemischteGefühle className=" w-[33.2px] h-[47.8px]" />
           <div className="transform -translate-x-1/6 whitespace-nowrap">
@@ -80,8 +76,7 @@ const SelectFeelingsInStatisticOne = () => {
             ? "opacity-100"
             : "opacity-50"
         }`}
-        onClick={() => handleSelectFeelingsFamily(feelingsFamilies[3].id)}
-      >
+        onClick={() => handleSelectFeelingsFamily(feelingsFamilies[3].id)}>
         <IlluTrauer className="flex-shrink-0 w-[24.7px] h-[61px] ml-3" />
         <HighlightText highlighttext="Trauer" fontsize="text-sm ml-3" />
       </button>
@@ -93,8 +88,7 @@ const SelectFeelingsInStatisticOne = () => {
             ? "opacity-100"
             : "opacity-50"
         }`}
-        onClick={() => handleSelectFeelingsFamily(feelingsFamilies[2].id)}
-      >
+        onClick={() => handleSelectFeelingsFamily(feelingsFamilies[2].id)}>
         <IlluEntspannung className=" w-[112.2px] h-[19.6px] " />
         <HighlightText highlighttext="Entspannung" fontsize="text-sm" />
       </button>
@@ -106,8 +100,7 @@ const SelectFeelingsInStatisticOne = () => {
             ? "opacity-100"
             : "opacity-50"
         }`}
-        onClick={() => handleSelectFeelingsFamily(feelingsFamilies[1].id)}
-      >
+        onClick={() => handleSelectFeelingsFamily(feelingsFamilies[1].id)}>
         <IlluFreude className="flex-shrink-0 w-[49px] h-[61.5px]" />
         <HighlightText highlighttext="Freude" fontsize="text-sm" />
       </button>
