@@ -25,7 +25,7 @@ const SleepActivityWeather = () => {
           <ActivitySwitch />
         </div>
         <p>Das Wetter ist...</p>
-        <div className="w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[423px/3] overflow-y-scroll">
+        <div className="w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[423px/3] overflow-x-scroll">
           {/* Weather */}
           <WeatherToggles />
         </div>
