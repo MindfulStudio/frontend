@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useUserContext } from "./UserProvider";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { Button } from "@/components/ui/button";
 import defaultTags from "../data/standardTags.json";
 import { useEmotionsContext } from "./EmotionsProvider";
 
@@ -44,6 +45,12 @@ const TagProvider = ({ children }) => {
     });
   };
 
+  //TODO: Implement the soft delete function (only) for custom tags
+  const handleDeleteCustomTag = (tagId, category) => {
+    // This function will be implemented later
+    console.log(`Delete tag with id ${tagId} from category ${category}`);
+  };
+
   // The renderTags function takes a category as a parameter (e.g. “when”, “where”) and searches the standardTags array to find the matching object with the desired category. As soon as the matching object has been found, it renders the singleStandardTags as li elements
   const renderTagListbyCategory = (category) => {
     const categoryTags = standardTags.find((tag) => tag.category === category);
@@ -76,19 +83,29 @@ const TagProvider = ({ children }) => {
         </ToggleGroup>
         <ToggleGroup type="multiple" className="flex flex-wrap gap-3">
           {categoryTagsCustom?.map((tag, index) => (
-            <ToggleGroupItem
-              key={index}
-              value={tag.name}
-              aria-label={tag.name}
-              className={`cursor-pointer p-2 border ${
-                selectedTags.some((t) => t.name === tag.name)
-                  ? "bg-selected-subemotion"
-                  : ""
-              } `}
-              onClick={() => handleTagToggle(tag)}
-            >
-              {tag.name}
-            </ToggleGroupItem>
+            <div>
+              <ToggleGroupItem
+                key={index}
+                value={tag.name}
+                aria-label={tag.name}
+                className={`cursor-pointer p-2 border ${
+                  selectedTags.some((t) => t.name === tag.name)
+                    ? "bg-selected-subemotion"
+                    : ""
+                } `}
+                onClick={() => handleTagToggle(tag)}
+              >
+                {tag.name}
+              </ToggleGroupItem>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="m-1"
+                onClick={() => handleDeleteCustomTag(tag.id, category)}
+              >
+                delete
+              </Button>
+            </div>
           ))}
         </ToggleGroup>
       </div>
