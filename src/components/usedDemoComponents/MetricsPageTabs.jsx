@@ -35,7 +35,7 @@ export function MetricsPageTabs() {
     <main>
       {showArrow && (
         <button onClick={handleNavigateBack}>
-          <ArrowLeftIcon className="absolute top-1/2 left-8" />
+          <ArrowLeftIcon className="absolute top-1/2 left-3" />
         </button>
       )}
 

@@ -16,6 +16,9 @@ import ProfileImageIcon from "/src/components/ownComponents/navMenu/ProfileImage
 
 // NOTICE: Component NavMenubar.jsx warsch. löschen
 
+const baseURL = import.meta.env.VITE_baseURL;
+const basePathOne = import.meta.env.VITE_basePathOne;
+
 export const NavMenu = () => {
   // routes:
   const routes = [
@@ -57,7 +60,16 @@ export const NavMenu = () => {
   ];
 
   // logout
-  const handleLogout = async () => {}; // muss noch implementiert werden
+  const handleLogout = async () => {
+    try {
+      await fetch(`${baseURL}${basePathOne}/logout`, {
+        method: "POST",
+        credentials: "include",
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     // container nav-bar:
@@ -91,8 +103,7 @@ export const NavMenu = () => {
         <NavLink
           to={"/"}
           onClick={handleLogout}
-          className="w-[57px] h-[61px] items-center px-[12px] flex justify-center gap-[7.798px] flex-shrink-0 aria-[current=page]:bg-white rounded-md"
-        >
+          className="w-[57px] h-[61px] items-center px-[12px] flex justify-center gap-[7.798px] flex-shrink-0 aria-[current=page]:bg-white rounded-md">
           {/* handle logout muss noch richtig implementiert werden */}
 
           {/* container nav-link element */}

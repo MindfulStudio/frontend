@@ -25,96 +25,72 @@ export function WeatherToggles() {
   };
 
   return (
-    <ToggleGroup
-      type="single"
-      value={selectedWeather}
-      onValueChange={handleWeatherChange}
-      aria-label="Select weather"
-      className="flex space-x-2"
-    >
-      <ToggleGroupItem
-        value="sonnig"
-        aria-label="Sunny"
-        className={`${
-          selectedWeather === "sunny" ? "bg-black" : "bg-white"
-        } p-2 rounded-md`}
+    <section className="flex flex-col items-center justify-center">
+      <ToggleGroup
+        type="single"
+        size="weather"
+        value={selectedWeather}
+        onValueChange={handleWeatherChange}
+        aria-label="Select weather"
+        className="grid grid-cols-3 gap-6"
       >
-        {selectedWeather === "sunny" ? (
-          <SunnyWhite className="h-8 w-8" />
-        ) : (
-          <SunnyBlack className="h-8 w-8" />
-        )}
-      </ToggleGroupItem>
+        <ToggleGroupItem
+          value="sonnig"
+          aria-label="sonnig"
 
-      <ToggleGroupItem
-        value="regnerisch"
-        aria-label="Rainy"
-        className={`${
-          selectedWeather === "rainy" ? "bg-black" : "bg-white"
-        } p-2 rounded-md`}
-      >
-        {selectedWeather === "rainy" ? (
-          <RainyWhite className="h-8 w-8" />
-        ) : (
-          <RainyBlack className="h-8 w-8" />
-        )}
-      </ToggleGroupItem>
+          /*  className={`${selectedWeather === "sonnig" ? "bg-black" : "bg-white"}`} */
+        >
+          {selectedWeather === "sonnig" ? (
+            <SunnyWhite className="h-8 w-8" />
+          ) : (
+            <SunnyBlack className="h-8 w-8" />
+          )}
+        </ToggleGroupItem>
 
-      <ToggleGroupItem
-        value="bewölkt"
-        aria-label="Cloudy"
-        className={`${
-          selectedWeather === "cloudy" ? "bg-black" : "bg-white"
-        } p-2 rounded-md`}
-      >
-        {selectedWeather === "cloudy" ? (
-          <CloudyWhite className="h-8 w-8" />
-        ) : (
-          <CloudyBlack className="h-8 w-8" />
-        )}
-      </ToggleGroupItem>
+        <ToggleGroupItem value="regnerisch" aria-label="regnerisch">
+          {selectedWeather === "regnerisch" ? (
+            <RainyWhite className="h-8 w-8" />
+          ) : (
+            <RainyBlack className="h-8 w-8" />
+          )}
+        </ToggleGroupItem>
 
-      <ToggleGroupItem
-        value="stürmisch"
-        aria-label="Stormy"
-        className={`${
-          selectedWeather === "stormy" ? "bg-black" : "bg-white"
-        } p-2 rounded-md`}
-      >
-        {selectedWeather === "stormy" ? (
-          <StormyWhite className="h-8 w-8" />
-        ) : (
-          <StormyBlack className="h-8 w-8" />
-        )}
-      </ToggleGroupItem>
+        <ToggleGroupItem value="bewölkt" aria-label="bewölkt">
+          {selectedWeather === "bewölkt" ? (
+            <CloudyWhite className="h-8 w-8" />
+          ) : (
+            <CloudyBlack className="h-8 w-8" />
+          )}
+        </ToggleGroupItem>
 
-      <ToggleGroupItem
-        value="windig"
-        aria-label="Windy"
-        className={`${
-          selectedWeather === "windy" ? "bg-black" : "bg-white"
-        } p-2 rounded-md`}
-      >
-        {selectedWeather === "windy" ? (
-          <WindyWhite className="h-8 w-8" />
-        ) : (
-          <WindyBlack className="h-8 w-8" />
-        )}
-      </ToggleGroupItem>
+        <ToggleGroupItem value="stürmisch" aria-label="stürmisch">
+          {selectedWeather === "stürmisch" ? (
+            <StormyWhite className="h-8 w-8" />
+          ) : (
+            <StormyBlack className="h-8 w-8" />
+          )}
+        </ToggleGroupItem>
 
-      <ToggleGroupItem
-        value="schneit"
-        aria-label="Snowy"
-        className={`${
-          selectedWeather === "snowy" ? "bg-black" : "bg-white"
-        } p-2 rounded-md`}
-      >
-        {selectedWeather === "snowy" ? (
-          <SnowWhite className="h-8 w-8" />
-        ) : (
-          <SnowBlack className="h-8 w-8" />
-        )}
-      </ToggleGroupItem>
-    </ToggleGroup>
+        <ToggleGroupItem value="windig" aria-label="windig">
+          {selectedWeather === "windig" ? (
+            <WindyWhite className="h-8 w-8" />
+          ) : (
+            <WindyBlack className="h-8 w-8" />
+          )}
+        </ToggleGroupItem>
+
+        <ToggleGroupItem
+          value="schneit"
+          aria-label="schneit"
+          /* className={`${selectedWeather === "schneit" ? "bg-black" : "bg-white"}`} */
+        >
+          {selectedWeather === "schneit" ? (
+            <SnowWhite className="h-8 w-8" />
+          ) : (
+            <SnowBlack className="h-8 w-8" />
+          )}
+        </ToggleGroupItem>
+      </ToggleGroup>
+    </section>
   );
 }

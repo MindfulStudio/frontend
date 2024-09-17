@@ -1,5 +1,6 @@
 import { InputAndButtonForCustomTag } from "@/components/ownComponents/recordPage/InputAndButtonForCustomTag.jsx";
 import UserFeedbackText from "@/components/typo/UserFeedbackText";
+import { Card } from "@/components/ui/card";
 import { useEmotionsContext } from "@/utils/EmotionsProvider";
 import { useTagContext } from "@/utils/TagProvider";
 
@@ -16,11 +17,7 @@ const TagsContext = () => {
           <span className="font-bold">{selectedFeeling?.name}</span> in
           Verbindung stehen?
         </h2>
-        <div
-          className="w-[290px] bg-white p-[22px] text-center mt-16 h-[423px] overflow-y-scroll"
-          /*           style={{ zIndex: 10 }}
-           */
-        >
+        <Card className="w-[290px] bg-white p-[22px] text-center mt-16 h-[423px] overflow-y-scroll">
           {renderTagListbyCategory("was")}
 
           {/* Add custom tags */}
@@ -28,7 +25,7 @@ const TagsContext = () => {
           {tagError?.category === "was" && (
             <UserFeedbackText content={tagError.message} type="error" />
           )}
-        </div>
+        </Card>
       </section>
     </div>
   );

@@ -156,19 +156,30 @@ const EmotionsProvider = ({ children }) => {
     // if we do not clear the input field, the user might think, that the feeling was not added, because the input field is still filled etc.
   };
 
+  //TODO: B) handleDeleteCustomFeeling:
+  //NOTICE: Implement the soft delete function (only) for custom feelings
+
+  const handleDeleteCustomFeeling = (/* parameter */) => {
+    // ....
+    console.log("Delete custom feeling" /* + corresponding parameter */);
+  };
+
   return (
     <EmotionsContext.Provider
       value={{
         feelingsFamilies,
         selectedFamily,
+        setSelectedFamily,
         subFeelings,
         selectedFeeling,
+        setSelectedFeeling,
         customFeelings,
         newFeeling,
         setNewFeeling,
         handleFamilySelect,
         handleFeelingSelect,
         handleAddCustomFeeling,
+        handleDeleteCustomFeeling,
       }}
     >
       {children}
