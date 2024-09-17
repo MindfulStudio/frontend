@@ -1,7 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { useUserContext } from "./UserProvider";
 import defaultEmotions from "../data/emotions.json";
-import { set } from "date-fns";
 
 const EmotionsContext = createContext();
 
