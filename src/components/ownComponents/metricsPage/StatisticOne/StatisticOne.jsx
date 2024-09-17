@@ -9,8 +9,6 @@ const StatisticOne = () => {
     useMetricsContext();
   const { statisticsByFamily } = useMetricsContext();
 
-  console.log(statisticsByFamily);
-
   return (
     <div className="flex flex-col items-center">
       <SelectFeelingsInStatisticOne />

@@ -13,7 +13,7 @@ const MetricsProvider = ({ children }) => {
   const [selectedFeelingsFamily, setSelectedFeelingsFamily] = useState(null);
 
   // useState für Anzahl check-ins
-  const [checkIn, setCheckIn] = useState(null);
+  const [checkIn, setCheckIn] = useState(0);
 
   // statistics by family
   const [statisticsByFamily, setStatisticsByFamily] = useState([]);
@@ -68,9 +68,10 @@ const MetricsProvider = ({ children }) => {
   useEffect(() => {
     if (Number(checkIn) >= 7) {
       setShowMetrics(true);
+      // fetch is not necessary if there are less than 7 check-ins
       if (selectedFeelingsFamily) getStatisticsByFamily();
     }
-  }, [selectedFeelingsFamily]);
+  }, [selectedFeelingsFamily, checkIn]);
 
   return (
     <MetricsContext.Provider
