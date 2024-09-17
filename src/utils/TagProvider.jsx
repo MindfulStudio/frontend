@@ -5,6 +5,9 @@ import { Button } from "@/components/ui/button";
 import defaultTags from "../data/standardTags.json";
 import { useEmotionsContext } from "./EmotionsProvider";
 
+import DeleteWhite from "/src/assets/icons/delete-2-svgrepo-com-white.svg";
+import Delete from "/src/assets/icons/delete-2-svgrepo-com.svg";
+
 const TagContext = createContext();
 
 const TagProvider = ({ children }) => {
@@ -81,9 +84,9 @@ const TagProvider = ({ children }) => {
             </ToggleGroupItem>
           ))}
         </ToggleGroup>
-        <ToggleGroup type="multiple" className="flex flex-wrap gap-3">
+        <ToggleGroup type="multiple" className="flex flex-wrap gap-3 mt-3">
           {categoryTagsCustom?.map((tag, index) => (
-            <div>
+            <div key={index} className="flex items-center gap-1">
               <ToggleGroupItem
                 key={index}
                 value={tag.name}
@@ -100,10 +103,10 @@ const TagProvider = ({ children }) => {
               <Button
                 variant="ghost"
                 size="icon"
-                className="m-1"
+                className=" w-5 h-5 relative rounded-full hover:bg-gray-300"
                 onClick={() => handleDeleteCustomTag(tag.id, category)}
               >
-                delete
+                <Delete className="w-4 h-4 absolute" />
               </Button>
             </div>
           ))}
