@@ -21,7 +21,6 @@ import { useEmotionsContext } from "@/utils/EmotionsProvider";
 import { useRecordProgressContext } from "@/utils/RecordProgressProvider";
 import { useTagContext } from "@/utils/TagProvider";
 import { useCheckinContext } from "@/utils/CheckinProvider";
-import { Card } from "@/components/ui/card";
 
 const RecordPage = () => {
   // ------------------------------- States from Context ------------------------
@@ -34,6 +33,7 @@ const RecordPage = () => {
     totalCheckinSteps,
     nextCheckinStep,
     previousCheckinStep,
+    resetCheckinStep,
   } = useRecordProgressContext();
 
   const navigateBackToDashboard = useNavigate();
@@ -67,6 +67,7 @@ const RecordPage = () => {
 
   const handleBackToDashboard = () => {
     if (checkinStep === 1) {
+      resetCheckinStep(); // reset the checkin step if the user goes back to the dashboard
       // if the user is on the first step, the left arrow can be used to navigate back to the dashboard
       navigateBackToDashboard("/dashboard");
     } else {
@@ -96,6 +97,7 @@ const RecordPage = () => {
     try {
       await handleCheckinSubmit();
       console.log("Check-in successful");
+      resetCheckinStep(); // reset the checkin step after successful submission
       navigateBackToDashboard("/dashboard");
     } catch (error) {
       console.error("Error during check-in submission:", error);
