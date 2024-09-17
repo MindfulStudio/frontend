@@ -4,14 +4,13 @@ import SelectFeelingsInStatisticOne from "./SelectFeelingsInStatisticOne";
 import MetricsOneRadialChart from "@/components/usedDemoComponents/MetricsOneRadialChart";
 
 const StatisticOne = () => {
-  // import from EmotionsContext:
   const { feelingsFamilies } = useEmotionsContext();
-  // import from mreticsContext:
   const { selectedFeelingsFamily, setSelectedFeelingsFamily } =
     useMetricsContext();
+  const { statisticsByFamily } = useMetricsContext();
 
-  console.log({ feelingsFamilies });
-  console.log({ selectedFeelingsFamily });
+  console.log(statisticsByFamily);
+
   return (
     <div className="flex flex-col items-center">
       <SelectFeelingsInStatisticOne />
