@@ -75,14 +75,27 @@ const StatisticOne = () => {
             Ort:
           </p>
           {/* TODO: MetricsOneRadialChart dynamisch machen und dann hier mit map für jeden erfassten Zeitpunkt komponente rendern */}
-          <div className="flex flex-row justify-evenly py-2">
-            <MetricsOneRadialChart
-              checkIns={"1 von 3"}
-              chartTitle={"Vormittag"}
-              endAngle={118} // hier muss dynamischer Wert berechnet werden => 360 = 100%
-              percentage={30}
-            />
-          </div>
+          <ul>
+            {/* map through all checkin-values and display statistic: */}
+            {fakeDataStatsticOne[0].checkIns
+              .filter((feelingsfamily) => feelingsfamily.category === "Ort")
+              .map((checkIn) => (
+                <li>
+                  <div className="flex flex-row justify-evenly py-2">
+                    <MetricsOneRadialChart
+                      checkIns={`${checkIn.count} von ${fakeDataStatsticOne[0].total}`}
+                      chartTitle={checkIn.name}
+                      endAngle={118} // hier muss dynamischer Wert berechnet werden => 360 = 100%
+                      percentage={(
+                        (
+                          `${checkIn.count}` / `${fakeDataStatsticOne[0].total}`
+                        ).toFixed(10) * 100
+                      ).toFixed(0)}
+                    />
+                  </div>
+                </li>
+              ))}
+          </ul>
         </div>
 
         {/* Mit wem */}
@@ -91,14 +104,27 @@ const StatisticOne = () => {
             Mit wem:
           </p>
           {/* TODO: MetricsOneRadialChart dynamisch machen und dann hier mit map für jeden erfassten Zeitpunkt komponente rendern */}
-          <div className="flex flex-row justify-evenly py-2">
-            <MetricsOneRadialChart
-              checkIns={"1 von 3"}
-              chartTitle={"Vormittag"}
-              endAngle={118} // hier muss dynamischer Wert berechnet werden => 360 = 100%
-              percentage={30}
-            />
-          </div>
+          <ul>
+            {/* map through all checkin-values and display statistic: */}
+            {fakeDataStatsticOne[0].checkIns
+              .filter((feelingsfamily) => feelingsfamily.category === "Mit wem")
+              .map((checkIn) => (
+                <li>
+                  <div className="flex flex-row justify-evenly py-2">
+                    <MetricsOneRadialChart
+                      checkIns={`${checkIn.count} von ${fakeDataStatsticOne[0].total}`}
+                      chartTitle={checkIn.name}
+                      endAngle={118} // hier muss dynamischer Wert berechnet werden => 360 = 100%
+                      percentage={(
+                        (
+                          `${checkIn.count}` / `${fakeDataStatsticOne[0].total}`
+                        ).toFixed(10) * 100
+                      ).toFixed(0)}
+                    />
+                  </div>
+                </li>
+              ))}
+          </ul>
         </div>
 
         {/* Kontext */}
@@ -107,14 +133,27 @@ const StatisticOne = () => {
             Kontext:
           </p>
           {/* TODO: MetricsOneRadialChart dynamisch machen und dann hier mit map für jeden erfassten Zeitpunkt komponente rendern */}
-          <div className="flex flex-row justify-evenly py-2">
-            <MetricsOneRadialChart
-              checkIns={"1 von 3"}
-              chartTitle={"Vormittag"}
-              endAngle={118} // hier muss dynamischer Wert berechnet werden => 360 = 100%
-              percentage={30}
-            />
-          </div>
+          <ul>
+            {/* map through all checkin-values and display statistic: */}
+            {fakeDataStatsticOne[0].checkIns
+              .filter((feelingsfamily) => feelingsfamily.category === "Kontext")
+              .map((checkIn) => (
+                <li>
+                  <div className="flex flex-row justify-evenly py-2">
+                    <MetricsOneRadialChart
+                      checkIns={`${checkIn.count} von ${fakeDataStatsticOne[0].total}`}
+                      chartTitle={checkIn.name}
+                      endAngle={118} // hier muss dynamischer Wert berechnet werden => 360 = 100%
+                      percentage={(
+                        (
+                          `${checkIn.count}` / `${fakeDataStatsticOne[0].total}`
+                        ).toFixed(10) * 100
+                      ).toFixed(0)}
+                    />
+                  </div>
+                </li>
+              ))}
+          </ul>
         </div>
       </div>
     </div>
