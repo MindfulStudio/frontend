@@ -5,9 +5,8 @@ import MetricsOneRadialChart from "@/components/usedDemoComponents/MetricsOneRad
 
 const StatisticOne = () => {
   const { feelingsFamilies } = useEmotionsContext();
-  const { selectedFeelingsFamily, setSelectedFeelingsFamily } =
+  const { selectedFeelingsFamily, setSelectedFeelingsFamily, statisticsByFamily } =
     useMetricsContext();
-  const { statisticsByFamily } = useMetricsContext();
 
   return (
     <div className="flex flex-col items-center">
