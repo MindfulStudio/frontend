@@ -17,6 +17,7 @@ const SleepActivityWeather = () => {
       <section className="mt-16">
         <p>Deine Schlafzeit</p>
         <div className="w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[423px/3] overflow-y-scroll">
+          {/* <SleepRecord /> */}
           <SleepRecord />
         </div>
         <p>Körperliche Bewegung:</p>
