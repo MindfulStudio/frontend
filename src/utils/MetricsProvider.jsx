@@ -20,6 +20,30 @@ const MetricsProvider = ({ children }) => {
   // ----------------------------------- Values---------------------------------
   const maxMetricsOneStatus = 2;
 
+  // ----------------------------------- Function -  fetch getStatisticsByTag ---------------------------------
+  const getStatisticsByTag = async (tagName) => {
+    const baseURL = import.meta.env.VITE_baseURL;
+    const path = import.meta.env.VITE_basePathThree;
+    try {
+      const res = await fetch(`${baseURL}${path}stats/tag?tag=${tagName}`, {
+        credentials: "include",
+      });
+      const data = await res.json();
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // Fetch function for fetching statistics by tag
+  const fetchStatsByTag = async (tagName) => {
+    const data = await getStatisticsByTag(tagName);
+    if (data && data.data && data.data.stats) {
+      console.log("data.data.stats:", data.data.stats); // debugging
+      // TODO: transform the data to the format needed for the statistic
+    }
+  };
+
   // ----------------------------------- Function -  previous metrics status ---------------------------------
 
   const previousMetricsOneStep = () => {
@@ -47,7 +71,8 @@ const MetricsProvider = ({ children }) => {
         setCheckIn,
         showMetrics,
         setShowMetrics,
-        previousMetricsOneStep
+        previousMetricsOneStep,
+        fetchStatsByTag,
       }}
     >
       {children}
