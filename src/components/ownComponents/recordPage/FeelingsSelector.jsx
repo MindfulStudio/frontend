@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Card } from "@/components/ui/card";
 
 //++ import EmotionsProvider
 import { useEmotionsContext } from "@/utils/EmotionsProvider";
@@ -21,7 +22,7 @@ const FeelingsSelector = () => {
   }, [selectedFamily, setNewFeeling]);
 
   return (
-    <div className="w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[423px] overflow-y-scroll">
+    <Card className="w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[423px] overflow-y-scroll">
       <ul className="flex flex-wrap gap-3 justify-center list-none p-0">
         {/* map through all the subemotions and display them in a list: */}
         {subFeelings.map((feeling) => (
@@ -76,7 +77,7 @@ const FeelingsSelector = () => {
           style={{ width: `${newFeeling.length + 1}ch` }}
         />
       </div>
-    </div>
+    </Card>
   );
 };
 

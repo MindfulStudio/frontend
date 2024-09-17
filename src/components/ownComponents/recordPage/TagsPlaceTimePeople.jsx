@@ -2,6 +2,7 @@ import { useTagContext } from "@/utils/TagProvider";
 import { useEmotionsContext } from "@/utils/EmotionsProvider";
 import InputAndButtonForCustomTag from "./InputAndButtonForCustomTag";
 import UserFeedbackText from "@/components/typo/UserFeedbackText";
+import { Card } from "@/components/ui/card";
 
 const TagsPlaceTimePeople = () => {
   // States from Providers:
@@ -19,36 +20,36 @@ const TagsPlaceTimePeople = () => {
           Wann hast du dich{" "}
           <span className="font-bold">{selectedFeeling?.name}</span> gefühlt?
         </h2>
-        <div className="w-[290px] bg-white p-[22px] text-center  mt-5 mb-7 h-[141px] overflow-y-scroll">
+        <Card className="w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[141px] overflow-y-scroll">
           <ul className="flex flex-wrap gap-3 justify-center list-none p-0">
             {renderTagListbyCategory("wann")}
           </ul>
           <InputAndButtonForCustomTag category={"wann"} />
           {tagError?.category === "wann" && (
             <UserFeedbackText content={tagError.message} type="error" />
-          )}{" "}
-        </div>
+          )}
+        </Card>
 
         <p>
           Wo hast du dich
           <span className="font-bold"> {selectedFeeling?.name}</span> gefühlt?
         </p>
-        <div className="w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[141px] overflow-y-scroll">
+        <Card className="w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[141px] overflow-y-scroll">
           <ul className="flex flex-wrap gap-3 justify-center list-none p-0">
             {renderTagListbyCategory("wo")}
           </ul>
           <InputAndButtonForCustomTag category={"wo"} />
           {tagError?.category === "wo" && (
             <UserFeedbackText content={tagError.message} type="error" />
-          )}{" "}
-        </div>
+          )}
+        </Card>
 
         <p>
           Mit wem hast du dich
           <span className="font-bold"> {selectedFeeling?.name} </span>
           gefühlt?
         </p>
-        <div className="w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[141px] overflow-y-scroll">
+        <Card className="w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[141px] overflow-y-scroll">
           <ul className="flex flex-wrap gap-3 justify-center list-none p-0">
             {renderTagListbyCategory("mitWem")}
           </ul>
@@ -56,7 +57,7 @@ const TagsPlaceTimePeople = () => {
           {tagError?.category === "mitWem" && (
             <UserFeedbackText content={tagError.message} type="error" />
           )}
-        </div>
+        </Card>
       </section>
     </div>
   );
