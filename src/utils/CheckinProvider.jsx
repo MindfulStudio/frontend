@@ -13,30 +13,16 @@ export const CheckinProvider = ({ children }) => {
     comment: "",
     config: {},
   });
-  // Final structure of checkinData for POST-request (Example):
-  // {
-  //   emotion: { family: "Freude", name: "begeistert" },
-  //   tags: [
-  //     { category: "mitWem", name: "Hund", isDefault: false },
-  //     { category: "wann", name: "morgens", isDefault: true },
-  //   ],
-  //   comment: "blabla",
-  //   config: { sleepingHours: 7, physicalActivity: true, weather: "sonnig" },
-  // };
 
   // States for MakeANote.jsx
   const [showNoteInfo, setShowNoteInfo] = useState(false);
   const [comment, setComment] = useState("");
 
-  // States for SleepActivityWeather.jsx + Subcompontens
-  const [sleepStart, setSleepStart] = useState(""); // not send to the backend
-  const [sleepEnd, setSleepEnd] = useState(""); // not send to the backend
-  const [sleepingHours, setSleepingHours] = useState("");
-  // sleepStart & sleepEnd? -> SleepRecord.jsx
-
+  // States for SleepActivityWeather.jsx + Subcomponents
+  const [sleepingHours, setSleepingHours] = useState(9);
+  const [sleepingHoursRecorded, setSleepingHoursRecorded] = useState(false);
   const [isActive, setIsActive] = useState(false);
   // switchId? -> ActivitySwitch.jsx
-
   const [selectedWeather, setSelectedWeather] = useState("");
 
   // States from other Providers
@@ -53,6 +39,36 @@ export const CheckinProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const getCheckinsFromToday = async () => {
+    const baseURL = import.meta.env.VITE_baseURL;
+    const path = import.meta.env.VITE_basePathThree;
+    try {
+      const res = await fetch(`${baseURL}${path}checkins/today`, {
+        credentials: "include",
+      });
+      const data = await res.json();
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // Fetch function for fetching today's sleepingHours if available
+  const fetchSleepingHours = async () => {
+    try {
+      const checkins = await getCheckinsFromToday();
+      if (checkins && checkins.data[0]) {
+        // set SleepingHours to value of today's first checkin
+        const hours = checkins.data[0].config.sleepingHours;
+        setSleepingHours(hours);
+        setSleepingHoursRecorded(true);
+      }
+    } catch (error) {
+      console.error("Error fetching sleeping hours:", error);
+    }
+  };
+
+  // Fetch function for submitting the checkin
   const handleCheckinSubmit = async () => {
     setIsLoading(true);
     setError(null);
@@ -136,12 +152,10 @@ export const CheckinProvider = ({ children }) => {
         setShowNoteInfo,
         comment,
         setComment,
-        sleepStart,
-        setSleepStart,
-        sleepEnd,
-        setSleepEnd,
         sleepingHours,
         setSleepingHours,
+        sleepingHoursRecorded,
+        fetchSleepingHours,
         isActive,
         setIsActive,
         selectedWeather,
