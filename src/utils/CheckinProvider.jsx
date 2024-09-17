@@ -26,8 +26,14 @@ export const CheckinProvider = ({ children }) => {
   const [selectedWeather, setSelectedWeather] = useState("");
 
   // States from other Providers
-  const { selectedFamily, selectedFeeling } = useEmotionsContext();
-  const { selectedTags } = useTagContext();
+  const {
+    selectedFamily,
+    selectedFeeling,
+    setSelectedFamily,
+    setSelectedFeeling,
+  } = useEmotionsContext();
+
+  const { selectedTags, setSelectedTags } = useTagContext();
 
   // useful states for future featurs like loading spinner or error handling when submitting the checkin
   const [isLoading, setIsLoading] = useState(false);
@@ -108,7 +114,26 @@ export const CheckinProvider = ({ children }) => {
 
       const data = await response.json();
       console.log("Check-in successful:", data); // debugging
+
+      // Reset all states after successful submission
+      setCheckinData({
+        emotion: {},
+        tags: [],
+        comment: "",
+        config: {},
+      });
+      setComment("");
+      setSleepingHours("");
+      setIsActive(false);
+      setSelectedWeather("");
+      setSelectedFamily(null);
+      setSelectedFeeling(null);
+      setSelectedTags([]);
+
       setIsLoading(false);
+
+      console.log("checkindata cleared:", checkinData); // debugging
+
       return data;
     } catch (error) {
       console.error("Error during check-in submission:", error);

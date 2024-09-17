@@ -6,6 +6,7 @@
 import { WeatherToggles } from "@/components/usedDemoComponents/WeatherToggles";
 import { ActivitySwitch } from "@/components/usedDemoComponents/ActivitySwitch";
 import SleepRecord from "./SleepRecord";
+import { Card } from "@/components/ui/card";
 
 //TODO: Fix Styling
 
@@ -16,20 +17,19 @@ const SleepActivityWeather = () => {
     <div className="flex flex-col items-center">
       <section className="mt-16">
         <p>Deine Schlafzeit</p>
-        <div className="w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[423px/3] overflow-y-scroll">
-          {/* <SleepRecord /> */}
+        <Card className="w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[423px/3]">
           <SleepRecord />
-        </div>
+        </Card>
         <p>Körperliche Bewegung:</p>
-        <div className="w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[423px/3] overflow-y-scroll">
+        <Card className="w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[423px/3]">
           {/* Switch */}
           <ActivitySwitch />
-        </div>
+        </Card>
         <p>Das Wetter ist...</p>
-        <div className="w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[423px/3] overflow-x-scroll">
+        <Card className="w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[423px/3]">
           {/* Weather */}
           <WeatherToggles />
-        </div>
+        </Card>
       </section>
     </div>
   );

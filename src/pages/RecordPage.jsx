@@ -33,6 +33,7 @@ const RecordPage = () => {
     totalCheckinSteps,
     nextCheckinStep,
     previousCheckinStep,
+    resetCheckinStep,
   } = useRecordProgressContext();
 
   const navigateBackToDashboard = useNavigate();
@@ -66,6 +67,7 @@ const RecordPage = () => {
 
   const handleBackToDashboard = () => {
     if (checkinStep === 1) {
+      resetCheckinStep(); // reset the checkin step if the user goes back to the dashboard
       // if the user is on the first step, the left arrow can be used to navigate back to the dashboard
       navigateBackToDashboard("/dashboard");
     } else {
@@ -95,6 +97,7 @@ const RecordPage = () => {
     try {
       await handleCheckinSubmit();
       console.log("Check-in successful");
+      resetCheckinStep(); // reset the checkin step after successful submission
       navigateBackToDashboard("/dashboard");
     } catch (error) {
       console.error("Error during check-in submission:", error);
@@ -106,6 +109,7 @@ const RecordPage = () => {
     <main className="pt-[95px] px-[50px] flex flex-col items-center justify-between min-h-screen">
       <div className="w-full max-w-4xl flex-grow flex flex-col">
         {/* Render the current Subcomponent based on the Progress: */}
+
         <div className="flex-grow relative">
           {renderCheckinStepComponent()}
           <div className="absolute inset-y-0 left-0 flex items-center -ml-7">
@@ -165,7 +169,7 @@ const RecordPage = () => {
               className="w-full mb-4"
             />
             <div className="text-center text-sm text-gray-500">
-              Step {checkinStep} of {totalCheckinSteps}
+              Schritt {checkinStep} von {totalCheckinSteps}
             </div>
           </div>
         </div>
