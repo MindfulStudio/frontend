@@ -29,7 +29,7 @@ const RecordPage = () => {
   const { fetchConfigData } = useUserContext();
   const { feelingsFamilies, selectedFeeling } = useEmotionsContext();
   const { selectedTags } = useTagContext();
-  const { handleCheckinSubmit, isLoading, error, sleepingHours } =
+  const { handleCheckinSubmit, isLoading, error, sleepingHours, checkinData } =
     useCheckinContext();
   const {
     checkinStep,
@@ -46,7 +46,7 @@ const RecordPage = () => {
   const [selectedTagCategories, setSelectedTagCategories] = useState(null);
   const [isSubmitClicked, setIsSubmitClicked] = useState(false); // to change the button color after submit
 
-  //  // --------------------------- Fetching & setting config ----------------------------
+  // --------------------------- Fetching & setting config ----------------------------
   useEffect(() => {
     const getConfig = async () => {
       try {
@@ -128,8 +128,8 @@ const RecordPage = () => {
   // Function E) Handle Cancel checkin process somewhere during the checkin:
   const handleCancelProcess = () => {
     resetCheckinStep(); // reset the checkin step if the user cancels the checkin
-    // empty the checkinData object
-    console.log(checkinData);
+    console.log(checkinData); // debugging: empty the checkinData object
+
     navigateBackToDashboard("/dashboard"); // Leitet den Benutzer auf die Startseite weiter
   };
 
