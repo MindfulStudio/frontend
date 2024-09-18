@@ -5,6 +5,7 @@ import UserFeedbackText from "@/components/typo/UserFeedbackText";
 import { Card } from "@/components/ui/card";
 import { useEffect, useState } from "react";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
 const TagsPlaceTimePeople = () => {
   // States from Providers:
@@ -34,7 +35,11 @@ const TagsPlaceTimePeople = () => {
             <span className="font-bold"> {selectedFeeling?.name} </span>{" "}
             gefühlt?
           </p>
-          <Badge className="inline" variant="secondary">
+          <Badge
+            className="inline"
+            variant="secondary"
+            onClick={() => handleBadgeClick("wann")}
+          >
             wichtig
           </Badge>
         </div>
@@ -105,6 +110,19 @@ const TagsPlaceTimePeople = () => {
           )}
         </Card>
       </section>
+
+      {/* Badge Info Popup */}
+      {showBadgeInfo && (
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white border rounded p-4 shadow-lg">
+          <p>{showBadgeInfo}</p>
+          <Button
+            className="mt-2 px-4 py-2 bg-blue-500 text-white rounded"
+            onClick={() => setShowBadgeInfo(null)}
+          >
+            Schließen
+          </Button>
+        </div>
+      )}
     </div>
   );
 };
