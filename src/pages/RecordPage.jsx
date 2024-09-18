@@ -22,17 +22,19 @@ import { useEmotionsContext } from "@/utils/EmotionsProvider";
 import { useRecordProgressContext } from "@/utils/RecordProgressProvider";
 import { useTagContext } from "@/utils/TagProvider";
 import { useCheckinContext } from "@/utils/CheckinProvider";
+import { useUserContext } from "../utils/UserProvider";
 
 const RecordPage = () => {
   // ------------------------------- States from Context ------------------------
+  const { fetchConfigData } = useUserContext();
   const { feelingsFamilies, selectedFeeling } = useEmotionsContext();
   const { selectedTags } = useTagContext();
-
-  const { handleCheckinSubmit, isLoading, error, checkinData, setCheckinData } =
+  const { handleCheckinSubmit, isLoading, error, sleepingHours } =
     useCheckinContext();
   const {
     checkinStep,
     totalCheckinSteps,
+    setTotalCheckinSteps,
     nextCheckinStep,
     previousCheckinStep,
     resetCheckinStep,
@@ -43,6 +45,23 @@ const RecordPage = () => {
   // ------------------------------- Local States -------------------------------
   const [selectedTagCategories, setSelectedTagCategories] = useState(null);
   const [isSubmitClicked, setIsSubmitClicked] = useState(false); // to change the button color after submit
+
+  //  // --------------------------- Fetching & setting config ----------------------------
+  useEffect(() => {
+    const getConfig = async () => {
+      try {
+        const configData = await fetchConfigData();
+        const { sleepingHours, physicalActivity, weather } = configData;
+        if (configData && !sleepingHours && !physicalActivity && !weather) {
+          setTotalCheckinSteps(4);
+          setSleepingHours(null);
+        } else setTotalCheckinSteps(5);
+      } catch (error) {
+        console.error("Error fetching config data:", error);
+      }
+    };
+    getConfig();
+  }, []);
 
   // ------------------------------- Functions --------------------------------------------------------------------------
 
