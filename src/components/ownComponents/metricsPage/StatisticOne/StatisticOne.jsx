@@ -25,7 +25,6 @@ const StatisticOne = () => {
 
     return { valuePercentage, ValueEndAngle };
   };
-  // TODO: was wenn keine Angaben für Family
 
   return (
     <div className="flex flex-col items-center">
