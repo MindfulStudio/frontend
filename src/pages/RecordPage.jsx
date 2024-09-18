@@ -157,23 +157,25 @@ const RecordPage = () => {
                 <ArrowRight className="w-6 h-6" />
               </Button>
             ) : (
+              /* changed the Submit Button Conditional Style Logic, due to confusing issue: reduced its handling to one state, not to two anymore */
               <Button
                 variant="arrow"
                 onClick={onCheckinSubmit}
                 disabled={isLoading}
                 className={`p-2 rounded-full ${
-                  isSubmitClicked || isLoading
-                    ? "bg-black"
-                    : "bg-gray-200 hover:bg-black"
-                } disabled:cursor-not-allowed transition-colors duration-200`}
+                  isLoading ? "bg-black" : "bg-gray-200 hover:bg-black"
+                } disabled:cursor-not-allowed transition-colors duration-200 group`}
+                /* Fixed Issue: The "group" class is a special utility class in Tailwind CSS that styles an element based on the state of its parent. It's useful for creating hover effects that affect child elements when the parent is hovered over. */
               >
-                {/* conditional styling of the submit button */}
-                {isLoading ? (
+                {isLoading ? ( // if the data is loading, show the loading symbol
                   <LoadingSymbolWhite className="w-6 h-6" />
-                ) : isSubmitClicked ? (
-                  <SaveSymbolWhite className="w-6 h-6" />
                 ) : (
-                  <SaveSymbol className="w-6 h-6" />
+                  <>
+                    <SaveSymbol className="w-6 h-6 group-hover:hidden" />{" "}
+                    {/* if the data is not loading, show the save symbol */}
+                    <SaveSymbolWhite className="w-6 h-6 hidden group-hover:block" />{" "}
+                    {/* if the data is not loading, show the save symbol */}
+                  </>
                 )}
               </Button>
             )}
