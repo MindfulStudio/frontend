@@ -13,6 +13,7 @@ const Slider = forwardRef(({ className, ...props }, ref) => (
     )}
     {...props}
   >
+    {/* Detailed styles for new slider utility classes (i.e. slider-track, etc.) in tailwind-config file */}
     <SliderPrimitive.Track className="slider-track">
       <SliderPrimitive.Range className="slider-range" />
     </SliderPrimitive.Track>
