@@ -28,8 +28,9 @@ const SleepRecord = () => {
 
   // Fetch and use today's sleeping hours if available
   useEffect(() => {
+    setSleepingHours(9);
     fetchSleepingHours();
-  }, [fetchSleepingHours]);
+  }, []);
 
   // Set the range based on recorded sleeping hours
   useEffect(() => {

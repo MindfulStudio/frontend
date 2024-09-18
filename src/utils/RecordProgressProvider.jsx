@@ -8,7 +8,7 @@ export const useRecordProgressContext = () => {
 
 const RecordProgressProvider = ({ children }) => {
   const [checkinStep, setCheckinStep] = useState(1);
-  const totalCheckinSteps = 5;
+  const [totalCheckinSteps, setTotalCheckinSteps] = useState(5);
 
   const nextCheckinStep = () => {
     if (checkinStep < totalCheckinSteps) {
@@ -31,6 +31,7 @@ const RecordProgressProvider = ({ children }) => {
       value={{
         checkinStep,
         totalCheckinSteps,
+        setTotalCheckinSteps,
         nextCheckinStep,
         previousCheckinStep,
         resetCheckinStep,
