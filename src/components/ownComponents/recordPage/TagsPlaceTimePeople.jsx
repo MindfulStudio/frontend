@@ -3,11 +3,17 @@ import { useEmotionsContext } from "@/utils/EmotionsProvider";
 import InputAndButtonForCustomTag from "./InputAndButtonForCustomTag";
 import UserFeedbackText from "@/components/typo/UserFeedbackText";
 import { Card } from "@/components/ui/card";
+import { useEffect, useState } from "react";
 
 const TagsPlaceTimePeople = () => {
   // States from Providers:
   const { selectedFeeling } = useEmotionsContext();
-  const { renderTagListbyCategory, tagError } = useTagContext();
+  const { renderTagListbyCategory, tagError, selectedTags } = useTagContext();
+
+  // Check if the user has choosen tags for each category
+  const hasChoosenTags = (category) => {
+    return selectedTags.some((tag) => tag.category === category);
+  };
 
   return (
     <div className="flex flex-col items-center">
@@ -20,7 +26,11 @@ const TagsPlaceTimePeople = () => {
           Wann hast du dich{" "}
           <span className="font-bold">{selectedFeeling?.name}</span> gefühlt?
         </h2>
-        <Card className="w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[141px] overflow-y-scroll">
+        <Card
+          className={`w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[141px] overflow-y-scroll  ${
+            !hasChoosenTags("wann") ? "animate-wobble" : ""
+          }`}
+        >
           <ul className="flex flex-wrap gap-3 justify-center list-none p-0">
             {renderTagListbyCategory("wann")}
           </ul>
@@ -34,7 +44,11 @@ const TagsPlaceTimePeople = () => {
           Wo hast du dich
           <span className="font-bold"> {selectedFeeling?.name}</span> gefühlt?
         </p>
-        <Card className="w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[141px] overflow-y-scroll">
+        <Card
+          className={`w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[141px] overflow-y-scroll ${
+            !hasChoosenTags("wo") ? "animate-wobble" : ""
+          }`}
+        >
           <ul className="flex flex-wrap gap-3 justify-center list-none p-0">
             {renderTagListbyCategory("wo")}
           </ul>
@@ -49,7 +63,11 @@ const TagsPlaceTimePeople = () => {
           <span className="font-bold"> {selectedFeeling?.name} </span>
           gefühlt?
         </p>
-        <Card className="w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[141px] overflow-y-scroll">
+        <Card
+          className={`w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[141px] overflow-y-scroll  ${
+            !hasChoosenTags("mitWem") ? "animate-wobble" : ""
+          }`}
+        >
           <ul className="flex flex-wrap gap-3 justify-center list-none p-0">
             {renderTagListbyCategory("mitWem")}
           </ul>

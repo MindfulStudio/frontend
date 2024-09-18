@@ -8,6 +8,8 @@ export const useRecordProgressContext = () => {
 
 const RecordProgressProvider = ({ children }) => {
   const [checkinStep, setCheckinStep] = useState(1);
+  const { triggerAnimation, setTriggerAnimation } = useState(false);
+
   const totalCheckinSteps = 5;
 
   const nextCheckinStep = () => {

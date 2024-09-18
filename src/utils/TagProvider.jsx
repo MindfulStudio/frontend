@@ -72,11 +72,8 @@ const TagProvider = ({ children }) => {
               key={index}
               value={tag}
               aria-label={tag}
-              className={`cursor-pointer p-2 border ${
-                selectedTags.some((t) => t.name === tag)
-                  ? "bg-selected-subemotion"
-                  : ""
-              } `}
+              className={`cursor-pointer p-2 border`}
+              data-state={selectedTags.some((t) => t.name === tag) ? "on" : ""}
               onClick={() =>
                 handleTagToggle({
                   name: tag,
@@ -96,11 +93,10 @@ const TagProvider = ({ children }) => {
                 key={index}
                 value={tag.name}
                 aria-label={tag.name}
-                className={`cursor-pointer p-2 border ${
-                  selectedTags.some((t) => t.name === tag.name)
-                    ? "bg-selected-subemotion"
-                    : ""
-                } `}
+                className={`cursor-pointer p-2 border `}
+                data-state={
+                  selectedTags.some((t) => t.name === tag.name) ? "on" : ""
+                }
                 onClick={() => handleTagToggle(tag)}
               >
                 {tag.name}
