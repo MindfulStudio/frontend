@@ -4,6 +4,7 @@ import { ActivitySwitch } from "@/components/usedDemoComponents/ActivitySwitch";
 import SleepRecord from "./SleepRecord";
 import { Card } from "@/components/ui/card";
 import { useUserContext } from "../../../utils/UserProvider";
+import { Badge } from "@/components/ui/badge";
 
 //TODO: Fix Styling
 
@@ -16,16 +17,26 @@ const SleepActivityWeather = () => {
       <section className="mt-16">
         {config && config.sleepingHours && (
           <div>
-            <p>Deine Schlafzeit</p>
-            <Card className="w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[423px/3]">
+            <p>
+              Schlafzeit{" "}
+              <span>
+                <Badge variant="secondary">optional</Badge>
+              </span>
+            </p>
+            <Card className="w-[290px] bg-white p-[22px] mt-4 mb-7 h-[423px/3] flex flex-col justify-center relative ">
               <SleepRecord />
             </Card>
           </div>
         )}
         {config && config.physicalActivity && (
           <div>
-            <p>Körperliche Bewegung:</p>
-            <Card className="w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[423px/3]">
+            <p>
+              Körperliche Aktivität{" "}
+              <span>
+                <Badge variant="secondary">optional</Badge>
+              </span>
+            </p>
+            <Card className="w-[290px] bg-white p-[22px] mt-4 mb-7 h-[423px/3] flex flex-col justify-center relative ">
               {/* Switch */}
               <ActivitySwitch />
             </Card>
@@ -33,8 +44,13 @@ const SleepActivityWeather = () => {
         )}
         {config && config.weather && (
           <div>
-            <p>Das Wetter ist...</p>
-            <Card className="w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[423px/3]">
+            <p>
+              Wetter{" "}
+              <span>
+                <Badge variant="secondary">optional</Badge>
+              </span>
+            </p>
+            <Card className="w-[290px] bg-white p-[22px] mt-4 mb-7 h-[423px/3] flex flex-col justify-center relative ">
               {/* Weather */}
               <WeatherToggles />
             </Card>

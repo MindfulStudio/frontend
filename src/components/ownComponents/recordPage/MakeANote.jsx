@@ -1,6 +1,7 @@
 import UserFeedbackText from "@/components/typo/UserFeedbackText";
 import { Card } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
+import { Badge } from "@/components/ui/badge";
 
 import { useCheckinContext } from "@/utils/CheckinProvider";
 
@@ -21,7 +22,12 @@ const MakeANote = () => {
   return (
     <div className="flex flex-col items-center w-full max-w-[390px] mx-auto">
       <section className="mt-16 flex flex-col items-center text-center">
-        <p>Möchtest du noch etwas zu deinem Gefühl notieren?</p>
+        <p>
+          Möchtest du noch etwas zu deinem Gefühl notieren?
+          <span>
+            <Badge variant="secondary">optional</Badge>
+          </span>
+        </p>
 
         <Card className="w-[290px] bg-white p-[22px] text-center mt-16 h-[423px]">
           <Textarea

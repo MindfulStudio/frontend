@@ -202,7 +202,7 @@ const RecordPage = () => {
         </div>
 
         {/* Progress Bar */}
-        <div className="w-full flex flex-col items-center mb-24">
+        <div className="w-full flex flex-col items-center mb-16">
           <div className="w-[66%] max-w-[390px]">
             <Progress
               value={(checkinStep / totalCheckinSteps) * 100}

@@ -51,13 +51,13 @@ const SleepRecord = () => {
   };
 
   return (
-    <div>
+    <div className=" mt-1 mb-1">
       {!sleepingHoursRecorded && (
         <p>
           Von {sliderToHours(range[0])} Uhr bis {sliderToHours(range[1])} Uhr
         </p>
       )}
-      <p className="p-2">{sleepingHours} Stunden</p>
+      <p className="pb-3">{sleepingHours} Stunden</p>
 
       <Slider
         min={0} // After converting: 17:00 Uhr

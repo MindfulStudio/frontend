@@ -4,6 +4,7 @@ import InputAndButtonForCustomTag from "./InputAndButtonForCustomTag";
 import UserFeedbackText from "@/components/typo/UserFeedbackText";
 import { Card } from "@/components/ui/card";
 import { useEffect, useState } from "react";
+import { Badge } from "@/components/ui/badge";
 
 const TagsPlaceTimePeople = () => {
   // States from Providers:
@@ -18,14 +19,15 @@ const TagsPlaceTimePeople = () => {
   return (
     <div className="flex flex-col items-center">
       {/* <h2> {selectedFamily}</h2> for debugging*/}
-      <section
-        className="mt-16 flex flex-col items-center"
-        style={{ zIndex: 10 }}
-      >
-        <h2>
-          Wann hast du dich{" "}
-          <span className="font-bold">{selectedFeeling?.name}</span> gefühlt?
-        </h2>
+      <section className="mt-16 flex flex-col items-center">
+        <p className="text-center">
+          Wann hast du dich
+          <span className="font-bold"> {selectedFeeling?.name} </span> gefühlt?
+          <span>
+            <Badge variant="secondary">wichtig</Badge>
+          </span>{" "}
+        </p>
+
         <Card
           className={`w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[141px] overflow-y-scroll  ${
             !hasChoosenTags("wann") ? "animate-wobble" : ""
@@ -40,10 +42,14 @@ const TagsPlaceTimePeople = () => {
           )}
         </Card>
 
-        <p>
+        <p className="text-center">
           Wo hast du dich
           <span className="font-bold"> {selectedFeeling?.name}</span> gefühlt?
+          <span>
+            <Badge variant="secondary">wichtig</Badge>
+          </span>{" "}
         </p>
+
         <Card
           className={`w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[141px] overflow-y-scroll ${
             !hasChoosenTags("wo") ? "animate-wobble" : ""
@@ -58,11 +64,15 @@ const TagsPlaceTimePeople = () => {
           )}
         </Card>
 
-        <p>
+        <p className="text-center">
           Mit wem hast du dich
           <span className="font-bold"> {selectedFeeling?.name} </span>
           gefühlt?
+          <span>
+            <Badge variant="secondary">wichtig</Badge>
+          </span>
         </p>
+
         <Card
           className={`w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[141px] overflow-y-scroll  ${
             !hasChoosenTags("mitWem") ? "animate-wobble" : ""
