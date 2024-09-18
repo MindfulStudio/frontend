@@ -118,6 +118,28 @@
   }
 }
 
+@layer components {
+  /* Add new styles for the Slider component */
+  .slider-track {
+    @apply relative h-2 w-full grow overflow-hidden rounded-full bg-secondary;
+  }
+  .slider-track[data-disabled] {
+    @apply opacity-30;
+  }
+  .slider-range {
+    @apply absolute h-full bg-primary;
+  }
+  .slider-range[data-disabled] {
+    @apply opacity-30;
+  }
+  .slider-thumb {
+    @apply block h-5 w-5 rounded-full border-2 border-primary bg-background ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none;
+  }
+  .slider-thumb[data-disabled] {
+    @apply opacity-30 bg-slate-200 border-muted;
+  }
+}
+
 /* By using @apply, we ensure that the same styles are consistently applied across multiple elements. If we need to change a style, we can update it in one place (in our CSS variables or utility classes), and it will reflect across all elements using @apply */
 
 /* Instead of using the universal selector (*), we can target specific elements where we want for example the border-border utility to be applied:
