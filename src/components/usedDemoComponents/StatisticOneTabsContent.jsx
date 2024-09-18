@@ -9,7 +9,6 @@ import StatisticOne from "../ownComponents/metricsPage/StatisticOne/StatisticOne
 
 import { useMetricsContext } from "@/utils/MetricsProvider";
 import MessageCheckInsM1 from "../ownComponents/metricsPage/StatisticOne/MessageCheckInsM1";
-import { useNavigate } from "react-router-dom";
 
 const StatisticOneTabsContent = () => {
   // import from useEmotionsContext:
@@ -17,15 +16,9 @@ const StatisticOneTabsContent = () => {
 
   const {
     metricsOneStatus,
-    setMetricsOneStatus,
-    maxMetricsOneStatus,
-    checkIn,
-    setCheckIn,
-    showMetrics,
-    setShowMetrics,
+    showMetricsOne,
   } = useMetricsContext();
 
-  
   const renderMetricsOne = () => {
     switch (metricsOneStatus) {
       case 1:
@@ -41,7 +34,7 @@ const StatisticOneTabsContent = () => {
     <TabsContent value="account">
       <Card className="max-w-[350px]">
         {/* <StatisticOneCardHeader /> */}
-        {!showMetrics && (
+        {!showMetricsOne && (
           <CardHeader>
             <MessageCheckInsM1 />
           </CardHeader>

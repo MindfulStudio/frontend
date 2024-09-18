@@ -38,7 +38,7 @@ const StatisticOne = () => {
   // NOTICE: category fehlt in fetch!
   console.log({ statisticsByFamily });
 
-  // NOTICE: vielleicht in MetricsProvider auslagenr - wird auch in StatisticTwo benötigt
+  // NOTICE: vielleicht in MetricsProvider auslagern - wird auch in StatisticTwo benötigt
   const caluclatePercentageAndEndAngle = (totalCount, singleCount) => {
     const valuePercentage = (
       (singleCount / totalCount).toFixed(10) * 100

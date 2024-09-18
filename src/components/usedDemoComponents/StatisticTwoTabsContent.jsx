@@ -12,37 +12,47 @@ import MessageCheckInsM2 from "../ownComponents/metricsPage/StatisticTwo/Message
 import MessageMetricsM2 from "../ownComponents/metricsPage/StatisticTwo/MessageMetricsM2";
 import { useEffect, useState } from "react";
 import { useMetricsContext } from "../../utils/MetricsProvider";
+import SelectTag from "../ownComponents/metricsPage/StatisticTwo/SelectTag";
 
 const StatisticTwoTabsContent = () => {
-  // useState für Anzahl check-ins des Tages:
-  const [checkIn, setCheckIn] = useState(null); // fake-State zum testen
-  //  getAllCheckIns
-  // Funktion/State zur Überprüfung, ob mehr als 7 check-ins vorhanden sind - CardDescription & CardContent wird entschrechend eingblendet
-  const [showMetrics, setShowMetrics] = useState(false);
-  const { fetchStatsByTag } = useMetricsContext();
+  const {
+    fetchStatsByTag,
+    showMetricsTwo,
+    maxMetricsTwoStatus,
+    metricsTwoStatus,
+    setMetricsTwoStatus,
+  } = useMetricsContext();
 
   useEffect(() => {
-    if (Number(checkIn) >= 7) {
-      setShowMetrics(true);
-    }
-
     fetchStatsByTag("morgens");
     // TODO: insert a state variable from MetricsProvider here as a parameter (instead of "morgens")
   }, []);
 
+  const renderMetricsTwo = () => {
+    switch (metricsTwoStatus) {
+      case 1:
+        return <SelectTag />;
+      case 2:
+        return <StatisticTwo />;
+      default:
+        return <SelectTag />;
+    }
+  };
+
   return (
     <TabsContent value="password">
-      <Card>
-        <CardHeader>
-          {/* <CardTitle>Statistic Two</CardTitle> */}
+      <Card className="max-w-[350px]">
+        {/* CardDescription: */}
+        {!showMetricsTwo && (
+          <CardHeader>
+            <MessageCheckInsM2 />
+          </CardHeader>
+        )}
 
-          {/* CardDescription: */}
-          {showMetrics ? <MessageMetricsM2 /> : <MessageCheckInsM2 />}
-        </CardHeader>
         <CardContent className="space-y-2">
           {/* component für auswahl tag */}
-
           {/* component  für Anzeige Statistik*/}
+          {renderMetricsTwo()}
         </CardContent>
         {/* CardFooter brauchen wir wahrscheinlich nicht */}
         {/* <CardFooter><Button>Save password</Button></CardFooter> */}
