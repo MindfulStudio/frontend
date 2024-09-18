@@ -11,6 +11,10 @@ const EmotionsProvider = ({ children }) => {
   const [subFeelings, setSubFeelings] = useState([]);
   const [selectedFeeling, setSelectedFeeling] = useState(null);
 
+  const [newFeelingError, setNewFeelingError] = useState({
+    message: "",
+  });
+
   // get custom feelings from UserProvider:
   const { customFeelings, setCustomFeelings } = useUserContext();
 
@@ -109,6 +113,13 @@ const EmotionsProvider = ({ children }) => {
     if (!regex.test(newFeeling)) {
       // TODO: Implement User Feedback in the UI
       console.log("Invalid input:", newFeeling);
+
+      // set an error message for the input field
+
+      setNewFeelingError({
+        message: "Bitte gib nur Buchstaben ohne Leerzeichen ein.",
+      });
+
       return;
     }
 
@@ -173,6 +184,8 @@ const EmotionsProvider = ({ children }) => {
         handleFamilySelect,
         handleFeelingSelect,
         handleAddCustomFeeling,
+        newFeelingError,
+        setNewFeelingError,
       }}
     >
       {children}

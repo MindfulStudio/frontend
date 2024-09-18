@@ -3,6 +3,8 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Delete from "/src/assets/icons/delete-2-svgrepo-com.svg";
 
+import UserFeedbackText from "@/components/typo/UserFeedbackText";
+
 //++ import EmotionsProvider
 import { useEmotionsContext } from "@/utils/EmotionsProvider";
 import { useUserContext } from "../../../utils/UserProvider";
@@ -17,6 +19,8 @@ const FeelingsSelector = () => {
     customFeelings,
     selectedFamily,
     selectedFeeling,
+    newFeelingError,
+    setNewFeelingError,
   } = useEmotionsContext();
   const { handleDeactivateCustom } = useUserContext();
 
@@ -93,6 +97,11 @@ const FeelingsSelector = () => {
           className=" p-3 rounded-sm border"
           style={{ width: `${newFeeling.length + 1}ch` }}
         />
+
+        {/* Show error message if the user tries to add a custom feeling that already exists */}
+        {newFeelingError && newFeelingError.message && (
+          <UserFeedbackText content={newFeelingError.message} type="error" />
+        )}
       </div>
     </Card>
   );

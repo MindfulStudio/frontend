@@ -139,7 +139,7 @@ const TagProvider = ({ children }) => {
       // TODO: Implement User Feedback in the UI
       console.log("Invalid input:", newTag.name);
       setTagError({
-        message: "Das Stichwort darf nur Buchstaben enthalten.",
+        message: "Bitte gib nur Buchstaben ohne Leerzeichen ein.",
         category,
       });
       return;
@@ -150,7 +150,7 @@ const TagProvider = ({ children }) => {
       // TODO: Implement User Feedback in the UI
       console.log("Invalid length:", newTag.name);
       setTagError({
-        message: "Das Stichwort muss zwischen 3 und 18 Zeichen lang sein.",
+        message: "Dein Wort darf 3 bis 18 Zeichen lang sein.",
         category,
       });
       return;
@@ -163,7 +163,10 @@ const TagProvider = ({ children }) => {
     );
     if (isDuplicate) {
       console.log("Tag already exists:", newTag.name);
-      setTagError({ message: "Dieses Stichwort existiert bereits.", category });
+      setTagError({
+        message: "Dieses Wort existiert bereits.",
+        category,
+      });
       // TODO: Implement User Feedback in the UI
       return; // early exit if the Tag already exists
     }
