@@ -17,7 +17,7 @@ const SelectFeelingsFamily = () => {
   const { feelingsFamilies } = useEmotionsContext();
   // import from useMetricsContext:
   const {
-    showMetrics,
+    showMetricsOne,
     metricsOneStatus,
     setMetricsOneStatus,
     maxMetricsOneStatus,
@@ -44,7 +44,7 @@ const SelectFeelingsFamily = () => {
 
   return (
     <div>
-      {showMetrics && (
+      {showMetricsOne && (
         <div>
           <CardHeader>
             <MessageMetricsM1 />
@@ -53,7 +53,8 @@ const SelectFeelingsFamily = () => {
             {/* Anspannung */}
             <button
               className="flex flex-col items-start row-span-2 col-span-2 justify-end"
-              onClick={() => handleLoadStatisticsOne(feelingsFamilies[0].id)}>
+              onClick={() => handleLoadStatisticsOne(feelingsFamilies[0].id)}
+            >
               <div className="flex flex-col items-center">
                 <IlluAnspannung className="flex-shrink-0" />
                 <HighlightText highlighttext="Anspannung" fontsize="text-md" />
@@ -62,7 +63,8 @@ const SelectFeelingsFamily = () => {
             {/* Freude */}
             <button
               className="flex flex-col items-center row-span-2 justify-start"
-              onClick={() => handleLoadStatisticsOne(feelingsFamilies[1].id)}>
+              onClick={() => handleLoadStatisticsOne(feelingsFamilies[1].id)}
+            >
               <IlluFreude className="flex-shrink-0" />
               <HighlightText highlighttext="Freude" fontsize="text-md" />
             </button>
@@ -70,7 +72,8 @@ const SelectFeelingsFamily = () => {
             {/* Entspannung */}
             <button
               className="flex flex-col items-center row-span-2 col-span-3 justify-center pl-7"
-              onClick={() => handleLoadStatisticsOne(feelingsFamilies[2].id)}>
+              onClick={() => handleLoadStatisticsOne(feelingsFamilies[2].id)}
+            >
               <IlluEntspannung className="flex-shrink-0" />
               <HighlightText highlighttext="Entspannung" fontsize="text-md" />
             </button>
@@ -78,7 +81,8 @@ const SelectFeelingsFamily = () => {
             {/* gemischte Gefühle */}
             <button
               className="items-start justify-start col-span-2 row-span-2 pb-10"
-              onClick={() => handleLoadStatisticsOne(feelingsFamilies[4].id)}>
+              onClick={() => handleLoadStatisticsOne(feelingsFamilies[4].id)}
+            >
               <div className="flex flex-col items-center">
                 <IlluGemischteGefühle className="flex-shrink-0" />
                 <HighlightText
@@ -91,7 +95,8 @@ const SelectFeelingsFamily = () => {
             {/* Trauer */}
             <button
               className="flex flex-col items-center  justify-end row-span-2"
-              onClick={() => handleLoadStatisticsOne(feelingsFamilies[3].id)}>
+              onClick={() => handleLoadStatisticsOne(feelingsFamilies[3].id)}
+            >
               <IlluTrauer className="flex-shrink-0" />
               <HighlightText highlighttext="Trauer" fontsize="text-md" />
             </button>

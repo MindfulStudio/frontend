@@ -8,15 +8,21 @@ const MetricsProvider = ({ children }) => {
   // ----------------------------------- States---------------------------------
 
   const [metricsOneStatus, setMetricsOneStatus] = useState(1);
+  const [metricsTwoStatus, setMetricsTwoStatus] = useState(1);
+  const [disableTag, setDisableTag] = useState(false);
 
   // selected feelingsFamily
   const [selectedFeelingsFamily, setSelectedFeelingsFamily] = useState(null);
+  // select tag:
+  const [selectedTag, setSelectTag] = useState(null);
 
   // useState für Anzahl check-ins
   const [checkIn, setCheckIn] = useState(0);
 
   // statistics by family
   const [statisticsByFamily, setStatisticsByFamily] = useState([]);
+  // statistics by Tag:
+  const [statisticsByTag, setStatisticsByTag] = useState([]);
 
   // get total of check ins
   const getAllCheckins = async () => {
@@ -51,10 +57,14 @@ const MetricsProvider = ({ children }) => {
   };
 
   // Funktion/State zur Überprüfung, ob mehr als 7 check-ins vorhanden sind - CardDescription & CardContent wird entschrechend eingblendet
-  const [showMetrics, setShowMetrics] = useState(false);
+  // StatisticOne
+  const [showMetricsOne, setShowMetricsOne] = useState(false);
+  // StatisticTwo
+  const [showMetricsTwo, setShowMetricsTwo] = useState(false);
 
   // ----------------------------------- Values---------------------------------
   const maxMetricsOneStatus = 2;
+  const maxMetricsTwoStatus = 2;
 
   // ----------------------------------- Function -  fetch getStatisticsByTag ---------------------------------
   const getStatisticsByTag = async (tagName) => {
@@ -65,6 +75,7 @@ const MetricsProvider = ({ children }) => {
         credentials: "include",
       });
       const data = await res.json();
+      setStatisticsByTag(data.data);
       return data;
     } catch (error) {
       console.error(error);
@@ -82,20 +93,38 @@ const MetricsProvider = ({ children }) => {
 
   // ----------------------------------- Function -  previous metrics status ---------------------------------
 
+  // StatisticOne
   const previousMetricsOneStep = () => {
     if (metricsOneStatus > 1) {
       setMetricsOneStatus((prevStatus) => prevStatus - 1);
     }
   };
 
+  // StatisticTwo
+  const previousMetricsTwoStep = () => {
+    if (metricsTwoStatus > 1) {
+      setMetricsTwoStatus((prevStatus) => prevStatus - 1);
+    }
+  };
+
   // ----------------------------------- Function - check if >= 7 check-ins available ---------------------------------
+  //  StatisticOne:
   useEffect(() => {
     if (Number(checkIn) >= 7) {
-      setShowMetrics(true);
+      setShowMetricsOne(true);
       // fetch is not necessary if there are less than 7 check-ins
       if (selectedFeelingsFamily) getStatisticsByFamily();
     }
   }, [selectedFeelingsFamily, checkIn]);
+
+  // StatisticTwo:
+  useEffect(() => {
+    if (Number(checkIn) >= 7) {
+      setShowMetricsTwo(true);
+      // fetch is not necessary if there are less than 7 check-ins
+      if (selectedTag) getStatisticsByTag();
+    }
+  }, [selectedTag, checkIn]);
 
   return (
     <MetricsContext.Provider
@@ -110,10 +139,22 @@ const MetricsProvider = ({ children }) => {
         setStatisticsByFamily,
         checkIn,
         setCheckIn,
-        showMetrics,
-        setShowMetrics,
+        showMetricsOne,
+        setShowMetricsOne,
         previousMetricsOneStep,
         fetchStatsByTag,
+        maxMetricsTwoStatus,
+        metricsTwoStatus,
+        setMetricsTwoStatus,
+        previousMetricsTwoStep,
+        showMetricsTwo,
+        setShowMetricsTwo,
+        selectedTag,
+        setSelectTag,
+        statisticsByTag,
+        setStatisticsByTag,
+        disableTag,
+        setDisableTag,
       }}
     >
       {children}
