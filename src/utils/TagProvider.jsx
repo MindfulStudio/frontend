@@ -22,7 +22,8 @@ const TagProvider = ({ children }) => {
 
   // -------------------------- States from UserProvider --------------------------
 
-  const { customTags, setCustomTags } = useUserContext();
+  const { customTags, setCustomTags, handleDeactivateCustom } =
+    useUserContext();
   const { selectedFeeling } = useEmotionsContext();
 
   // -------------------------- Side Effects --------------------------------------
@@ -56,15 +57,7 @@ const TagProvider = ({ children }) => {
     });
   };
 
-  //TODO: B) handleDeleteCustomTag:
-  //NOTICE: Implement the soft delete function (only) for custom tags
-
-  const handleDeleteCustomTag = (tagId, category) => {
-    // This function will be implemented later
-    console.log(`Delete tag with id ${tagId} from category ${category}`);
-  };
-
-  // C) renderTags function:
+  // B) renderTags function:
 
   // The renderTags function takes a category as a parameter (e.g. “when”, “where”) and searches the standardTags array to find the matching object with the desired category. As soon as the matching object has been found, it renders the singleStandardTags as li elements
   const renderTagListbyCategory = (category) => {
@@ -112,14 +105,16 @@ const TagProvider = ({ children }) => {
               >
                 {tag.name}
               </ToggleGroupItem>
-              <Button
-                variant="ghost"
-                size="icon"
-                className=" w-5 h-5 relative rounded-full hover:bg-gray-300"
-                onClick={() => handleDeleteCustomTag(tag.id, category)}
-              >
-                <Delete className="w-4 h-4 absolute" />
-              </Button>
+              {tag && !tag.isNew && (
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className=" w-5 h-5 relative rounded-full hover:bg-gray-300"
+                  onClick={() => handleDeactivateCustom(tag.name, "tag")}
+                >
+                  <Delete className="w-4 h-4 absolute" />
+                </Button>
+              )}
             </div>
           ))}
         </ToggleGroup>
@@ -130,7 +125,7 @@ const TagProvider = ({ children }) => {
     );
   };
 
-  // D) Handle Add Custom Tags:
+  // C) Handle Add Custom Tags:
 
   const handleAddCustomTag = (newTag, category) => {
     // CHECKS FOR VALID INPUT:
@@ -182,6 +177,7 @@ const TagProvider = ({ children }) => {
       id: Date.now(), //TODO: Assigning an unique and useful id; For the Standard-SubTags, it is the index of the array, because this array won´t change. But for the custom Tags, we might need a different approach? I suggest Date.now() for now, but we should discuss this to find a better solution.
       name: newTag.name,
       isDefault: false,
+      isNew: true,
       category,
     };
 
@@ -191,6 +187,7 @@ const TagProvider = ({ children }) => {
     };
 
     setCustomTags(updatedCustomTags); // add the new Tag to the existing array of custom Tags;
+    handleTagToggle(customTagsObject); // select the new Tag after adding it
     console.log("New custom Tag added:", newTag.name);
     setNewTag({ name: "", category: "" }); // clear the input field for a good UX
   };
@@ -207,7 +204,6 @@ const TagProvider = ({ children }) => {
         setNewTag,
         tagError,
         setTagError,
-        handleDeleteCustomTag,
       }}
     >
       {children}
