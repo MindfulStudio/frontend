@@ -29,8 +29,14 @@ const RecordPage = () => {
   const { fetchConfigData } = useUserContext();
   const { feelingsFamilies, selectedFeeling } = useEmotionsContext();
   const { selectedTags } = useTagContext();
-  const { handleCheckinSubmit, isLoading, error, sleepingHours, checkinData } =
-    useCheckinContext();
+  const {
+    handleCheckinSubmit,
+    isLoading,
+    error,
+    sleepingHours,
+    checkinData,
+    setSleepingHours,
+  } = useCheckinContext();
   const {
     checkinStep,
     totalCheckinSteps,
@@ -129,7 +135,6 @@ const RecordPage = () => {
   const handleCancelProcess = () => {
     resetCheckinStep(); // reset the checkin step if the user cancels the checkin
     console.log(checkinData); // debugging: empty the checkinData object
-
     navigateBackToDashboard("/dashboard"); // Leitet den Benutzer auf die Startseite weiter
   };
 

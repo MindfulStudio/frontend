@@ -14,6 +14,8 @@ const DashboardPage = () => {
   return (
     // max-breite für main?
     <main className="pt-[109px] px-[50px] flex flex-col items-center">
+      {/* if checkin was submitted before, show userfeedback */}
+
       <GreetingComponent />
       <FeelingsFamilyComponent />
     </main>

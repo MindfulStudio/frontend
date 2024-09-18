@@ -17,12 +17,10 @@ const SleepActivityWeather = () => {
       <section className="mt-16">
         {config && config.sleepingHours && (
           <div>
-            <p>
-              Schlafzeit{" "}
-              <span>
-                <Badge variant="secondary">optional</Badge>
-              </span>
-            </p>
+            <p className="inline">Schlafzeit</p>
+            <Badge className="inline" variant="secondary">
+              optional
+            </Badge>
             <Card className="w-[290px] bg-white p-[22px] mt-4 mb-7 h-[423px/3] flex flex-col justify-center relative ">
               <SleepRecord />
             </Card>
@@ -30,12 +28,11 @@ const SleepActivityWeather = () => {
         )}
         {config && config.physicalActivity && (
           <div>
-            <p>
-              Körperliche Aktivität{" "}
-              <span>
-                <Badge variant="secondary">optional</Badge>
-              </span>
-            </p>
+            <p className="inline">Körperliche Aktivität</p>
+            <Badge className="inline" variant="secondary">
+              optional
+            </Badge>
+
             <Card className="w-[290px] bg-white p-[22px] mt-4 mb-7 h-[423px/3] flex flex-col justify-center relative ">
               {/* Switch */}
               <ActivitySwitch />
@@ -44,12 +41,11 @@ const SleepActivityWeather = () => {
         )}
         {config && config.weather && (
           <div>
-            <p>
-              Wetter{" "}
-              <span>
-                <Badge variant="secondary">optional</Badge>
-              </span>
-            </p>
+            <p className="inline">Wetter</p>
+            <Badge className="inline" variant="secondary">
+              optional
+            </Badge>
+
             <Card className="w-[290px] bg-white p-[22px] mt-4 mb-7 h-[423px/3] flex flex-col justify-center relative ">
               {/* Weather */}
               <WeatherToggles />

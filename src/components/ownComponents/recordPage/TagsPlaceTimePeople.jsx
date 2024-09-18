@@ -11,22 +11,33 @@ const TagsPlaceTimePeople = () => {
   const { selectedFeeling } = useEmotionsContext();
   const { renderTagListbyCategory, tagError, selectedTags } = useTagContext();
 
+  // State for badge info popup
+  const [showBadgeInfo, setShowBadgeInfo] = useState(null);
+
   // Check if the user has choosen tags for each category
   const hasChoosenTags = (category) => {
     return selectedTags.some((tag) => tag.category === category);
+  };
+
+  // Handler for showing badge info
+  const handleBadgeClick = (category) => {
+    setShowBadgeInfo(category);
   };
 
   return (
     <div className="flex flex-col items-center">
       {/* <h2> {selectedFamily}</h2> for debugging*/}
       <section className="mt-16 flex flex-col items-center">
-        <p className="text-center">
-          Wann hast du dich
-          <span className="font-bold"> {selectedFeeling?.name} </span> gefühlt?
-          <span>
-            <Badge variant="secondary">wichtig</Badge>
-          </span>{" "}
-        </p>
+        <div className="text-center">
+          <p className="inline">
+            Wann hast du dich
+            <span className="font-bold"> {selectedFeeling?.name} </span>{" "}
+            gefühlt?
+          </p>
+          <Badge className="inline" variant="secondary">
+            wichtig
+          </Badge>
+        </div>
 
         <Card
           className={`w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[141px] overflow-y-scroll  ${
@@ -42,13 +53,16 @@ const TagsPlaceTimePeople = () => {
           )}
         </Card>
 
-        <p className="text-center">
-          Wo hast du dich
-          <span className="font-bold"> {selectedFeeling?.name}</span> gefühlt?
-          <span>
-            <Badge variant="secondary">wichtig</Badge>
-          </span>{" "}
-        </p>
+        <div className="text-center">
+          <p className="inline">
+            Wo hast du dich
+            <span className="font-bold"> {selectedFeeling?.name} </span>{" "}
+            gefühlt?
+          </p>
+          <Badge className="inline" variant="secondary">
+            wichtig
+          </Badge>
+        </div>
 
         <Card
           className={`w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[141px] overflow-y-scroll ${
@@ -64,14 +78,16 @@ const TagsPlaceTimePeople = () => {
           )}
         </Card>
 
-        <p className="text-center">
-          Mit wem hast du dich
-          <span className="font-bold"> {selectedFeeling?.name} </span>
-          gefühlt?
-          <span>
-            <Badge variant="secondary">wichtig</Badge>
-          </span>
-        </p>
+        <div className="text-center">
+          <p className="inline">
+            Mit wem hast du dich
+            <span className="font-bold"> {selectedFeeling?.name} </span>{" "}
+            gefühlt?
+          </p>
+          <Badge className="inline" variant="secondary">
+            wichtig
+          </Badge>
+        </div>
 
         <Card
           className={`w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[141px] overflow-y-scroll  ${

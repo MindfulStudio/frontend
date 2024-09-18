@@ -13,14 +13,16 @@ const TagsContext = () => {
   return (
     <div className="flex flex-col items-center">
       <section className="mt-16 flex flex-col items-center">
-        <p className="text-center">
-          Womit könnte dein Gefühl{" "}
-          <span className="font-bold">{selectedFeeling?.name}</span> in
-          Verbindung stehen?
-          <span>
-            <Badge variant="secondary">optional</Badge>
-          </span>
-        </p>
+        <div className="text-center">
+          <p className="inline">
+            Womit könnte dein Gefühl
+            <span className="font-bold"> {selectedFeeling?.name} </span> in
+            Verbindung stehen?
+          </p>
+          <Badge className="inline" variant="secondary">
+            wichtig
+          </Badge>
+        </div>
         <Card className="w-[290px] bg-white p-[22px] text-center mt-16 h-[423px] overflow-y-scroll">
           {renderTagListbyCategory("was")}
 

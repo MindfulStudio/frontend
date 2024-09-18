@@ -22,12 +22,14 @@ const MakeANote = () => {
   return (
     <div className="flex flex-col items-center w-full max-w-[390px] mx-auto">
       <section className="mt-16 flex flex-col items-center text-center">
-        <p>
-          Möchtest du noch etwas zu deinem Gefühl notieren?
-          <span>
-            <Badge variant="secondary">optional</Badge>
-          </span>
-        </p>
+        <div className="text-center">
+          <p className="inline">
+            Möchtest du noch etwas zu deinem Gefühl notieren?
+          </p>
+          <Badge className="inline" variant="secondary">
+            wichtig
+          </Badge>
+        </div>
 
         <Card className="w-[290px] bg-white p-[22px] text-center mt-16 h-[423px]">
           <Textarea
