@@ -8,6 +8,32 @@ const UserProvider = ({ children }) => {
   // States for customs:
   const [customFeelings, setCustomFeelings] = useState([]);
   const [customTags, setCustomTags] = useState([]);
+  const [config, setConfig] = useState({});
+
+  // ---------------------USERDATA: Fetching (for Config)------------------------
+
+  const fetchConfigData = async () => {
+    const baseURL = import.meta.env.VITE_baseURL;
+    const pathURL = import.meta.env.VITE_basePathTwo;
+    try {
+      const response = await fetch(`${baseURL}${pathURL}`, {
+        method: "GET",
+        credentials: "include",
+      });
+      const data = await response.json();
+      // In case of userNotFound error:
+      if (!response.ok) {
+        throw new Error(
+          "Ein unerwarteter Fehler ist aufgetreten. Bitte neu einloggen."
+        );
+      }
+      setConfig(data.data.config);
+      return data.data.config;
+    } catch (error) {
+      // In case of any other server errors:
+      console.log(error || "Ein unerwarteter Serverfehler ist aufgetreten.");
+    }
+  };
 
   // ---------------------CUSTOMS: Fetching & preparation------------------------
 
@@ -58,7 +84,6 @@ const UserProvider = ({ children }) => {
       return;
     } catch (error) {
       // In case of any other server errors:
-      console.log(error);
       console.log(error || "Ein unerwarteter Serverfehler ist aufgetreten.");
     }
   };
@@ -104,7 +129,9 @@ const UserProvider = ({ children }) => {
         setCustomTags,
         customFeelings,
         setCustomFeelings,
+        config,
         fetchAllCustoms,
+        fetchConfigData,
         handleDeactivateCustom,
       }}
     >

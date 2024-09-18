@@ -19,7 +19,7 @@ export const CheckinProvider = ({ children }) => {
   const [comment, setComment] = useState("");
 
   // States for SleepActivityWeather.jsx + Subcomponents
-  const [sleepingHours, setSleepingHours] = useState(9);
+  const [sleepingHours, setSleepingHours] = useState(null);
   const [sleepingHoursRecorded, setSleepingHoursRecorded] = useState(false);
   const [isActive, setIsActive] = useState(false);
   // switchId? -> ActivitySwitch.jsx

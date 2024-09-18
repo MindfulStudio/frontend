@@ -34,7 +34,6 @@ const SelectFeelingsFamily = () => {
       if (metricsOneStatus <= maxMetricsOneStatus) {
         setMetricsOneStatus((prevStat) => prevStat + 1);
       }
-
       // save selected familyId:
       setSelectedFeelingsFamily(familyId);
     } catch (error) {

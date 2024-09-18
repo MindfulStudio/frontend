@@ -153,8 +153,6 @@ const MetricsProvider = ({ children }) => {
         setSelectTag,
         statisticsByTag,
         setStatisticsByTag,
-        disableTag,
-        setDisableTag,
       }}
     >
       {children}
