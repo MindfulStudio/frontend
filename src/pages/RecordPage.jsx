@@ -8,6 +8,7 @@ import ArrowRight from "/src/assets/icons/arrow-right-svgrepo-com.svg";
 import SaveSymbol from "/src/assets/icons/save-2-svgrepo-com.svg";
 import SaveSymbolWhite from "/src/assets/icons/save-2-svgrepo-com-white.svg";
 import LoadingSymbolWhite from "/src/assets/icons/upload-3-svgrepo-com.svg";
+import Home from "/src/assets/icons/home-4-svgrepo-com.svg";
 
 // --------------------------- Subcomponent Imports ---------------------------
 import CheckInFeelingDisplay from "@/components/ownComponents/recordPage/CheckInFeelingDisplay.jsx";
@@ -27,7 +28,8 @@ const RecordPage = () => {
   const { feelingsFamilies, selectedFeeling } = useEmotionsContext();
   const { selectedTags } = useTagContext();
 
-  const { handleCheckinSubmit, isLoading, error } = useCheckinContext();
+  const { handleCheckinSubmit, isLoading, error, checkinData, setCheckinData } =
+    useCheckinContext();
   const {
     checkinStep,
     totalCheckinSteps,
@@ -104,9 +106,26 @@ const RecordPage = () => {
     }
   };
 
-  // ------------------------------- Render --------------------------------------------------------------------------
+  // Function E) Handle Cancel checkin process somewhere during the checkin:
+  const handleCancelProcess = () => {
+    resetCheckinStep(); // reset the checkin step if the user cancels the checkin
+    // empty the checkinData object
+    console.log(checkinData);
+    navigateBackToDashboard("/dashboard"); // Leitet den Benutzer auf die Startseite weiter
+  };
+
+  // ------------------------------- Render -----------------------------------------------------
   return (
     <main className="pt-[95px] px-[50px] flex flex-col items-center justify-between min-h-screen">
+      {/* Cancel Checkin on the top left */}
+      <Button
+        onClick={handleCancelProcess}
+        className="absolute top-5 left-5 p-2 rounded-full bg-gray-200 hover:bg-gray-300"
+        aria-label="Abbrechen und zurück zum Dashboard"
+      >
+        <Home className="w-6 h-6" />
+      </Button>
+
       <div className="w-full max-w-4xl flex-grow flex flex-col">
         {/* Render the current Subcomponent based on the Progress: */}
 
