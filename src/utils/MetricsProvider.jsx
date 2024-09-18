@@ -27,7 +27,7 @@ const MetricsProvider = ({ children }) => {
 
       if (!res.ok) throw new Error("Error fetching check-ins");
       const data = await res.json();
-      setCheckIn(data.length);
+      setCheckIn(data.data.length);
     } catch (error) {
       console.error(error);
     }
@@ -44,7 +44,7 @@ const MetricsProvider = ({ children }) => {
       );
       if (!res.ok) throw new Error("Error fetching statistics by family");
       const data = await res.json();
-      setStatisticsByFamily(data);
+      setStatisticsByFamily(data.data);
     } catch (error) {
       console.error(error);
     }

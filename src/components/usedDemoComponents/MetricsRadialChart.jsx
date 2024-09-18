@@ -9,11 +9,6 @@ import {
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { ChartContainer } from "@/components/ui/chart";
 
-// static-data:
-// TODO: Werte dynmisch machen und als props
-// const chartData = [
-//   { percent: "value", percentage: 30, fill: "var(--color-value)" }, // fill kommt von chartConfig - color
-// ];
 
 // former TypeScript-part:
 // chart-configuration:
@@ -27,9 +22,8 @@ const chartConfig = {
   },
 };
 
-// TODO: Größe anpassen => verkleinern
 
-export default function MetricsOneRadialChart({
+export default function MetricsRadialChart({
   chartTitle,
   checkIns,
   endAngle,
@@ -43,8 +37,8 @@ export default function MetricsOneRadialChart({
   ];
 
   return (
-    <Card className="flex flex-col border-none shadow-none w-[165px] h-[165px]">
-      <CardContent className="flex-1 pb-0">
+    <Card className="flex flex-col border-none shadow-none w-[110px] h-[140px]">
+      <CardContent className="flex-1 pl-0 pr-0 pb-0">
         <ChartContainer
           config={chartConfig}
           className="mx-auto aspect-square max-h-[130px]"

@@ -149,8 +149,24 @@ module.exports = {
               transitionDuration: "0.2s",
             },
           },
+          // Add new utilities for the Slider component
+          ".slider-track": {
+            "&[data-disabled]": {
+              opacity: "1",
+            },
+          },
+          ".slider-range": {
+            "&[data-disabled]": {
+              opacity: "0.5",
+            },
+          },
+          ".slider-thumb": {
+            "&[data-disabled]": {
+              opacity: "0.5",
+            },
+          },
         },
-        ["responsive", "hover"]
+        ["responsive", "hover", "focus", "disabled"]
       );
     },
   ],
