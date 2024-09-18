@@ -137,6 +137,7 @@ const EmotionsProvider = ({ children }) => {
     const customFeelingsObject = {
       id: Date.now(), //TODO: Assigning an unique and useful id; For the Standard-Subfeelings, it is the index of the array, because this array won´t change. But for the custom feelings, we might need a different approach? I suggest Date.now() for now, but we should discuss this to find a better solution.
       name: newFeeling,
+      isNew: true,
       isDefault: false, // this is a custom feeling, so it is not a default feeling
     };
 
@@ -149,19 +150,12 @@ const EmotionsProvider = ({ children }) => {
     };
 
     setCustomFeelings(updatedCustomFeelings); // add the new feeling to the existing array of custom feelings;
+    handleFeelingSelect(customFeelingsObject, false); // select the new custom feeling
 
     console.log("New custom feeling added:", newFeeling);
 
     setNewFeeling(""); // this clears the input field;
     // if we do not clear the input field, the user might think, that the feeling was not added, because the input field is still filled etc.
-  };
-
-  //TODO: B) handleDeleteCustomFeeling:
-  //NOTICE: Implement the soft delete function (only) for custom feelings
-
-  const handleDeleteCustomFeeling = (/* parameter */) => {
-    // ....
-    console.log("Delete custom feeling" /* + corresponding parameter */);
   };
 
   return (
@@ -179,7 +173,6 @@ const EmotionsProvider = ({ children }) => {
         handleFamilySelect,
         handleFeelingSelect,
         handleAddCustomFeeling,
-        handleDeleteCustomFeeling,
       }}
     >
       {children}

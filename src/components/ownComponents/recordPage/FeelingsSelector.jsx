@@ -5,6 +5,7 @@ import Delete from "/src/assets/icons/delete-2-svgrepo-com.svg";
 
 //++ import EmotionsProvider
 import { useEmotionsContext } from "@/utils/EmotionsProvider";
+import { useUserContext } from "../../../utils/UserProvider";
 
 const FeelingsSelector = () => {
   const {
@@ -16,8 +17,8 @@ const FeelingsSelector = () => {
     customFeelings,
     selectedFamily,
     selectedFeeling,
-    handleDeleteCustomFeeling,
   } = useEmotionsContext();
+  const { handleDeactivateCustom } = useUserContext();
 
   useEffect(() => {
     setNewFeeling(""); // Reset "newFeeling" when "selectedFamily" changes (e.g. when the user types a new feeling, but then changes the family; this way the input field is cleared)
@@ -49,9 +50,8 @@ const FeelingsSelector = () => {
           (
             feeling // if there are no custom feelings, we map through an empty array, which means, that nothing is displayed
           ) => (
-            <div className="flex items-center gap-0.1">
+            <div key={feeling.id} className="flex items-center gap-0.1">
               <li
-                key={feeling.id}
                 onClick={() => handleFeelingSelect(feeling, false)} // we need to pass false, to indicate that this is a custom feeling
                 className={`cursor-pointer  p-2 hover:bg-selected-subemotion hover:rotate-on-hover text-md ${
                   selectedFeeling?.id === feeling.id //selectedFeeling? means that we check if selectedFeeling is not null or undefined and then we check if the id of the selected feeling matches the id of the current feeling in the map
@@ -61,14 +61,18 @@ const FeelingsSelector = () => {
               >
                 {feeling.name}
               </li>
-              <Button
-                variant="ghost"
-                size="icon"
-                className=" w-5 h-5 relative rounded-full hover:bg-gray-300"
-                onClick={() => handleDeleteCustomFeeling(/* feeling.id? */)}
-              >
-                <Delete className="w-4 h-4 absolute" />
-              </Button>
+              {feeling && !feeling.isNew && (
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className=" w-5 h-5 relative rounded-full hover:bg-gray-300"
+                  onClick={() =>
+                    handleDeactivateCustom(feeling.name, "emotion")
+                  }
+                >
+                  <Delete className="w-4 h-4 absolute" />
+                </Button>
+              )}
             </div>
           )
         )}
