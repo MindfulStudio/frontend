@@ -166,8 +166,7 @@ export const CheckinProvider = ({ children }) => {
         handleCheckinSubmit,
         isLoading,
         error,
-      }}
-    >
+      }}>
       {children}
     </CheckinContext.Provider>
   );
