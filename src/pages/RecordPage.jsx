@@ -160,8 +160,7 @@ const RecordPage = () => {
             <Button
               variant="arrow"
               onClick={handleBackToDashboard}
-              className="p-2 rounded-full bg-gray-200 hover:bg-gray-300"
-            >
+              className="p-2 rounded-full bg-gray-200 hover:bg-gray-300">
               <ArrowLeft className="w-6 h-6" />
             </Button>
           </div>
@@ -176,8 +175,7 @@ const RecordPage = () => {
                   !selectedFeeling ||
                   (checkinStep === 2 && selectedTagCategories.length < 3)
                 }
-                className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:bg-gray-100 disabled:cursor-not-allowed"
-              >
+                className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:bg-gray-100 disabled:cursor-not-allowed">
                 <ArrowRight className="w-6 h-6" />
               </Button>
             ) : (
@@ -187,11 +185,13 @@ const RecordPage = () => {
                 onClick={onCheckinSubmit}
                 disabled={isLoading}
                 className={`p-2 rounded-full ${
+
                   isLoading ? "bg-black" : "bg-gray-200 hover:bg-black"
                 } disabled:cursor-not-allowed transition-colors duration-200 group`}
                 /* Fixed Issue: The "group" class is a special utility class in Tailwind CSS that styles an element based on the state of its parent. It's useful for creating hover effects that affect child elements when the parent is hovered over. */
               >
                 {isLoading ? ( // if the data is loading, show the loading symbol
+
                   <LoadingSymbolWhite className="w-6 h-6" />
                 ) : (
                   <>

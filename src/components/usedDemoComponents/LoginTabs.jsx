@@ -16,6 +16,7 @@ import EyeClosedIcon from "/src/assets/icons/eye-close-svgrepo-com.svg";
 import { CheckboxStayLoggedIn } from "./CheckboxStayLoggedIN";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../../utils/AuthProvider";
 
 export function LoginTabs() {
   // userData from login:
@@ -23,9 +24,9 @@ export function LoginTabs() {
   const [showPassword, setShowPassword] = useState(false);
   // NOTICE: vielleicht auch in provider?
   const [error, setError] = useState(null);
-  // NOTICE: soll das noch mitgeschickt werden beim fetchen?:
   const [stayLoggedIn, setStayLoggedIn] = useState(false);
-  // useNavigate:
+
+  const { setIsLoggedIn } = useAuthContext();
   const navigate = useNavigate();
 
   // show/hide password
@@ -93,11 +94,15 @@ export function LoginTabs() {
         handleError(data);
         throw new Error(error);
       }
+
+      setIsLoggedIn(true);
+
       if (data.data.isConfigured) {
         navigate("/dashboard");
       } else {
         navigate("/konfiguration");
       }
+
       return data;
     } catch (error) {
       if (error.name === "TypeError") {

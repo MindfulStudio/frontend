@@ -21,6 +21,7 @@ import AuthProvider from "./AuthProvider";
 import CheckinProvider from "./CheckinProvider";
 
 import MetricsProvider from "./MetricsProvider";
+import PrivateRoute from "./PrivateRoute";
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -43,7 +44,11 @@ const Router = () => {
         },
         {
           path: "/recordfeeling",
-          element: <RecordPage />,
+          element: (
+            <PrivateRoute>
+              <RecordPage />
+            </PrivateRoute>
+          ),
         },
       ],
     },
@@ -67,15 +72,27 @@ const Router = () => {
         },
         {
           path: "/konfiguration",
-          element: <ConfigPage />,
+          element: (
+            <PrivateRoute>
+              <ConfigPage />
+            </PrivateRoute>
+          ),
         },
         {
           path: "/meineDaten",
-          element: <UserDataPage />,
+          element: (
+            <PrivateRoute>
+              <UserDataPage />
+            </PrivateRoute>
+          ),
         },
         {
           path: "/dashboard",
-          element: <DashboardPage />,
+          element: (
+            <PrivateRoute>
+              <DashboardPage />
+            </PrivateRoute>
+          ),
         },
         /*  {
           path: "/emotionalesWohlbefindenErfassen", // vielleicht auch noch einmal Namen ändern?
@@ -83,38 +100,49 @@ const Router = () => {
         }, */
         {
           path: "/meineStatistiken",
-          element: <MetricsPage />,
+          element: (
+            <PrivateRoute>
+              <MetricsPage />
+            </PrivateRoute>
+          ),
         },
         {
           path: "/meinJournal",
-          element: <JournalPage />,
+          element: (
+            <PrivateRoute>
+              <JournalPage />
+            </PrivateRoute>
+          ),
         },
         {
           path: "/Info",
-          element: <InfoPage />,
+          element: (
+            <PrivateRoute>
+              <InfoPage />
+            </PrivateRoute>
+          ),
         },
       ],
     },
   ]);
   return (
     <AuthProvider>
-    <UserProvider>
-      <EmotionsProvider>
-        <TagProvider>
-          <RecordProgressProvider>
-            <CheckinProvider>
-              <MetricsProvider>
-                <RouterProvider router={router}>
-                  <Layout />
-                </RouterProvider>
-              </MetricsProvider>
-            </CheckinProvider>
-          </RecordProgressProvider>
-        </TagProvider>
-      </EmotionsProvider>
-    </UserProvider>
-</AuthProvider>
-
+      <UserProvider>
+        <EmotionsProvider>
+          <TagProvider>
+            <RecordProgressProvider>
+              <CheckinProvider>
+                <MetricsProvider>
+                  <RouterProvider router={router}>
+                    <Layout />
+                  </RouterProvider>
+                </MetricsProvider>
+              </CheckinProvider>
+            </RecordProgressProvider>
+          </TagProvider>
+        </EmotionsProvider>
+      </UserProvider>
+    </AuthProvider>
   );
 };
 
