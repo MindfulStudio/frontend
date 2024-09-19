@@ -1,6 +1,6 @@
 import HighlightText from "@/components/typo/HighlightText";
 import { Button } from "@/components/ui/button";
-import { NavLink, redirect, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Element from "../assets/elements/floralElement.svg";
 import { useAuthContext } from "@/utils/AuthProvider";
 import { useEffect } from "react";
