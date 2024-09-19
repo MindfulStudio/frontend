@@ -11,6 +11,10 @@ const EmotionsProvider = ({ children }) => {
   const [subFeelings, setSubFeelings] = useState([]);
   const [selectedFeeling, setSelectedFeeling] = useState(null);
 
+  const [newFeelingError, setNewFeelingError] = useState({
+    message: "",
+  });
+
   // get custom feelings from UserProvider:
   const { customFeelings, setCustomFeelings } = useUserContext();
 
@@ -74,6 +78,8 @@ const EmotionsProvider = ({ children }) => {
       setSubFeelings([]); // Reset sub-feelings when no family is selected
     }
     setSelectedFeeling(null); // reset the selected feeling when a new family is selected; this is not the same as !selectedFamilyData
+
+    setNewFeelingError({ message: "" }); // reset the new feeling error message when a new family is selected
   }; // end of the function handleFamilySelect
 
   // --------------------- Handle subfeeling Selection ------------------------
@@ -107,8 +113,10 @@ const EmotionsProvider = ({ children }) => {
     // only allow letters
     const regex = /^[a-zA-ZäöüÄÖÜß]+$/;
     if (!regex.test(newFeeling)) {
-      // TODO: Implement User Feedback in the UI
       console.log("Invalid input:", newFeeling);
+      setNewFeelingError({
+        message: "Bitte gib nur Buchstaben ohne Leerzeichen ein.",
+      });
       return;
     }
 
@@ -116,6 +124,9 @@ const EmotionsProvider = ({ children }) => {
     if (newFeeling.length < 3 || newFeeling.length > 18) {
       // TODO: Implement User Feedback in the UI
       console.log("Invalid length:", newFeeling);
+      setNewFeelingError({
+        message: "Dein Gefühl darf zwischen 3 und 18 Zeichen lang sein.",
+      });
       return;
     }
 
@@ -126,7 +137,9 @@ const EmotionsProvider = ({ children }) => {
     );
     if (isDuplicate) {
       console.log("Feeling already exists:", newFeeling);
-      // TODO: Implement User Feedback in the UI
+      setNewFeelingError({
+        message: "Dieses Gefühl existiert bereits.",
+      });
       return; // early exit if the feeling already exists
     }
 
@@ -173,6 +186,8 @@ const EmotionsProvider = ({ children }) => {
         handleFamilySelect,
         handleFeelingSelect,
         handleAddCustomFeeling,
+        newFeelingError,
+        setNewFeelingError,
       }}
     >
       {children}

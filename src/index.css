@@ -140,6 +140,33 @@
   }
 }
 
+@layer utilities {
+  /* wobble animation */
+  @keyframes wobble {
+    0% {
+      transform: translateX(0%);
+    }
+    20% {
+      transform: translateX(-5%) rotate(-1deg);
+    }
+    40% {
+      transform: translateX(4%) rotate(0.5deg);
+    }
+    60% {
+      transform: translateX(-3%) rotate(-0.5deg);
+    }
+    80% {
+      transform: translateX(2%) rotate(0.25deg);
+    }
+    100% {
+      transform: translateX(0%);
+    }
+  }
+
+  .animate-wobble {
+    animation: wobble 0.8s ease-in-out;
+  }
+}
 /* By using @apply, we ensure that the same styles are consistently applied across multiple elements. If we need to change a style, we can update it in one place (in our CSS variables or utility classes), and it will reflect across all elements using @apply */
 
 /* Instead of using the universal selector (*), we can target specific elements where we want for example the border-border utility to be applied:
