@@ -20,7 +20,7 @@ const TagsContext = () => {
             Verbindung stehen?
           </p>
           <Badge className="inline" variant="secondary">
-            wichtig
+            optional
           </Badge>
         </div>
         <Card className="w-[290px] bg-white p-[22px] text-center mt-16 h-[423px] overflow-y-scroll">
