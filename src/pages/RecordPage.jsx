@@ -8,6 +8,7 @@ import ArrowRight from "/src/assets/icons/arrow-right-svgrepo-com.svg";
 import SaveSymbol from "/src/assets/icons/save-2-svgrepo-com.svg";
 import SaveSymbolWhite from "/src/assets/icons/save-2-svgrepo-com-white.svg";
 import LoadingSymbolWhite from "/src/assets/icons/upload-3-svgrepo-com.svg";
+import Home from "/src/assets/icons/home-4-svgrepo-com.svg";
 
 // --------------------------- Subcomponent Imports ---------------------------
 import CheckInFeelingDisplay from "@/components/ownComponents/recordPage/CheckInFeelingDisplay.jsx";
@@ -28,8 +29,14 @@ const RecordPage = () => {
   const { fetchConfigData } = useUserContext();
   const { feelingsFamilies, selectedFeeling } = useEmotionsContext();
   const { selectedTags } = useTagContext();
-  const { handleCheckinSubmit, isLoading, error, sleepingHours } =
-    useCheckinContext();
+  const {
+    handleCheckinSubmit,
+    isLoading,
+    error,
+    sleepingHours,
+    checkinData,
+    setSleepingHours,
+  } = useCheckinContext();
   const {
     checkinStep,
     totalCheckinSteps,
@@ -45,7 +52,7 @@ const RecordPage = () => {
   const [selectedTagCategories, setSelectedTagCategories] = useState(null);
   const [isSubmitClicked, setIsSubmitClicked] = useState(false); // to change the button color after submit
 
-  //  // --------------------------- Fetching & setting config ----------------------------
+  // --------------------------- Fetching & setting config ----------------------------
   useEffect(() => {
     const getConfig = async () => {
       try {
@@ -124,9 +131,25 @@ const RecordPage = () => {
     }
   };
 
-  // ------------------------------- Render --------------------------------------------------------------------------
+  // Function E) Handle Cancel checkin process somewhere during the checkin:
+  const handleCancelProcess = () => {
+    resetCheckinStep(); // reset the checkin step if the user cancels the checkin
+    console.log(checkinData); // debugging: empty the checkinData object
+    navigateBackToDashboard("/dashboard"); // Leitet den Benutzer auf die Startseite weiter
+  };
+
+  // ------------------------------- Render -----------------------------------------------------
   return (
     <main className="pt-[95px] px-[50px] flex flex-col items-center justify-between min-h-screen">
+      {/* Cancel Checkin on the top left */}
+      <Button
+        onClick={handleCancelProcess}
+        className="absolute top-5 left-5 p-2 rounded-full bg-gray-200 hover:bg-gray-300"
+        aria-label="Abbrechen und zurück zum Dashboard"
+      >
+        <Home className="w-6 h-6" />
+      </Button>
+
       <div className="w-full max-w-4xl flex-grow flex flex-col">
         {/* Render the current Subcomponent based on the Progress: */}
 
@@ -156,22 +179,27 @@ const RecordPage = () => {
                 <ArrowRight className="w-6 h-6" />
               </Button>
             ) : (
+              /* changed the Submit Button Conditional Style Logic, due to confusing issue: reduced its handling to one state, not to two anymore */
               <Button
                 variant="arrow"
                 onClick={onCheckinSubmit}
                 disabled={isLoading}
                 className={`p-2 rounded-full ${
-                  isSubmitClicked || isLoading
-                    ? "bg-black"
-                    : "bg-gray-200 hover:bg-black"
-                } disabled:cursor-not-allowed transition-colors duration-200`}>
-                {/* conditional styling of the submit button */}
-                {isLoading ? (
+
+                  isLoading ? "bg-black" : "bg-gray-200 hover:bg-black"
+                } disabled:cursor-not-allowed transition-colors duration-200 group`}
+                /* Fixed Issue: The "group" class is a special utility class in Tailwind CSS that styles an element based on the state of its parent. It's useful for creating hover effects that affect child elements when the parent is hovered over. */
+              >
+                {isLoading ? ( // if the data is loading, show the loading symbol
+
                   <LoadingSymbolWhite className="w-6 h-6" />
-                ) : isSubmitClicked ? (
-                  <SaveSymbolWhite className="w-6 h-6" />
                 ) : (
-                  <SaveSymbol className="w-6 h-6" />
+                  <>
+                    <SaveSymbol className="w-6 h-6 group-hover:hidden" />{" "}
+                    {/* if the data is not loading, show the save symbol */}
+                    <SaveSymbolWhite className="w-6 h-6 hidden group-hover:block" />{" "}
+                    {/* if the data is not loading, show the save symbol */}
+                  </>
                 )}
               </Button>
             )}
@@ -179,7 +207,7 @@ const RecordPage = () => {
         </div>
 
         {/* Progress Bar */}
-        <div className="w-full flex flex-col items-center mb-24">
+        <div className="w-full flex flex-col items-center mb-16">
           <div className="w-[66%] max-w-[390px]">
             <Progress
               value={(checkinStep / totalCheckinSteps) * 100}

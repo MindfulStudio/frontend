@@ -1,7 +1,8 @@
 import { useTagContext } from "@/utils/TagProvider";
 
 export const InputAndButtonForCustomTag = ({ category }) => {
-  const { handleAddCustomTag, newTag, setNewTag, tagError, setTagError } = useTagContext();
+  const { handleAddCustomTag, newTag, setNewTag, tagError, setTagError } =
+    useTagContext();
 
   return (
     <div className="mt-4">
@@ -22,7 +23,7 @@ export const InputAndButtonForCustomTag = ({ category }) => {
           setTagError(null);
           setNewTag({ name: e.target.value, category: category });
         }}
-        className="rounded-sm border"
+        className="rounded-sm border mb-2"
       />
     </div>
   );

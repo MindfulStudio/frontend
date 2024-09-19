@@ -25,7 +25,7 @@ export function WeatherToggles() {
   };
 
   return (
-    <section className="flex flex-col items-center justify-center">
+    <section className="flex flex-col items-center justify-center mt-4 mb-4">
       <ToggleGroup
         type="single"
         size="weather"

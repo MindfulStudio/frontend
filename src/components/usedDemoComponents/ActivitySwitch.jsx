@@ -14,14 +14,16 @@ export function ActivitySwitch({}) {
   };
 
   return (
-    <div className="flex items-center justify-center space-x-2">
+    <div className="flex items-center justify-center space-x-2 mt-1 mb-1">
       <Switch
         id={switchId}
         checked={isActive}
         onCheckedChange={() => handleSwitchChange(!isActive)}
       />
 
-      <Label htmlFor={switchId}>{isActive ? "Ja" : "Nein"}</Label>
+      <Label /* className="text-md" */ htmlFor={switchId}>
+        {isActive ? "Ja" : "Nein"}
+      </Label>
     </div>
   );
 }
