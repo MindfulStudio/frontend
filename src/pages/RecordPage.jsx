@@ -137,8 +137,7 @@ const RecordPage = () => {
             <Button
               variant="arrow"
               onClick={handleBackToDashboard}
-              className="p-2 rounded-full bg-gray-200 hover:bg-gray-300"
-            >
+              className="p-2 rounded-full bg-gray-200 hover:bg-gray-300">
               <ArrowLeft className="w-6 h-6" />
             </Button>
           </div>
@@ -153,8 +152,7 @@ const RecordPage = () => {
                   !selectedFeeling ||
                   (checkinStep === 2 && selectedTagCategories.length < 3)
                 }
-                className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:bg-gray-100 disabled:cursor-not-allowed"
-              >
+                className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:bg-gray-100 disabled:cursor-not-allowed">
                 <ArrowRight className="w-6 h-6" />
               </Button>
             ) : (
@@ -166,8 +164,7 @@ const RecordPage = () => {
                   isSubmitClicked || isLoading
                     ? "bg-black"
                     : "bg-gray-200 hover:bg-black"
-                } disabled:cursor-not-allowed transition-colors duration-200`}
-              >
+                } disabled:cursor-not-allowed transition-colors duration-200`}>
                 {/* conditional styling of the submit button */}
                 {isLoading ? (
                   <LoadingSymbolWhite className="w-6 h-6" />
