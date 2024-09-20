@@ -14,6 +14,16 @@ export const CheckinProvider = ({ children }) => {
     config: {},
   });
 
+  // State to store the feedback message and its type (success or error)
+  const [checkinUserFeedback, setCheckinUserFeedback] = useState({
+    message: "",
+    type: "",
+  });
+
+  // useful states for future featurs like loading spinner or error handling when submitting the checkin
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+
   // States for MakeANote.jsx
   const [showNoteInfo, setShowNoteInfo] = useState(false);
   const [comment, setComment] = useState("");
@@ -25,7 +35,7 @@ export const CheckinProvider = ({ children }) => {
   // switchId? -> ActivitySwitch.jsx
   const [selectedWeather, setSelectedWeather] = useState("");
 
-  // State for badge info popup
+  // State for badge info popup ("wichtig"/"optional" badges)
   const [showBadgeInfo, setShowBadgeInfo] = useState(null);
 
   // States from other Providers
@@ -37,10 +47,6 @@ export const CheckinProvider = ({ children }) => {
   } = useEmotionsContext();
 
   const { selectedTags, setSelectedTags } = useTagContext();
-
-  // useful states for future featurs like loading spinner or error handling when submitting the checkin
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
 
   const getCheckinsFromToday = async () => {
     const baseURL = import.meta.env.VITE_baseURL;
@@ -111,11 +117,16 @@ export const CheckinProvider = ({ children }) => {
 
       if (!response.ok) {
         const errorData = await response.json(); // Try to get detailed error message from backend;
-        console.error("Error details from backend:", errorData); //
+        console.error("Error details from backend:", errorData);
         throw new Error(errorData.message || "Failed to submit check-in");
       }
 
       const data = await response.json();
+      // After successful submission, show success feedback and reset states
+      setCheckinUserFeedback({
+        message: "Check-in successfully submitted!",
+        type: "info",
+      });
       console.log("Check-in successful:", data); // debugging
 
       // Reset all states after successful submission
@@ -141,6 +152,7 @@ export const CheckinProvider = ({ children }) => {
     } catch (error) {
       console.error("Error during check-in submission:", error);
       setError(error.message);
+      setCheckinUserFeedback({ message: error.message, type: "error" });
       setIsLoading(false);
       throw error;
     }
@@ -177,6 +189,8 @@ export const CheckinProvider = ({ children }) => {
         showBadgeInfo,
         setShowBadgeInfo,
         handleBadgeClick,
+        checkinUserFeedback,
+        setCheckinUserFeedback,
       }}
     >
       {children}
