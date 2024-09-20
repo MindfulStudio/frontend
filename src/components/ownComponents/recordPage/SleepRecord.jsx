@@ -1,7 +1,11 @@
-import { Slider } from "@/components/ui/slider";
-import { useCheckinContext } from "@/utils/CheckinProvider";
 import { useEffect, useState } from "react";
+
+// import Provider
+import { useCheckinContext } from "@/utils/CheckinProvider";
+
+// import Components
 import UserFeedbackText from "@/components/typo/UserFeedbackText";
+import { Slider } from "@/components/ui/slider";
 
 // Helper functions:
 
@@ -24,7 +28,7 @@ const SleepRecord = () => {
     fetchSleepingHours,
   } = useCheckinContext();
 
-  const [range, setRange] = useState([6, 15]); // Default range: 23:00 - 16:00
+  const [range, setRange] = useState([6, 15]);
 
   // Fetch and use today's sleeping hours if available
   useEffect(() => {

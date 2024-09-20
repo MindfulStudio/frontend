@@ -1,14 +1,26 @@
+// import Provider
+import { useCheckinContext } from "@/utils/CheckinProvider";
+import { useEmotionsContext } from "@/utils/EmotionsProvider";
+import { useTagContext } from "@/utils/TagProvider";
+
+// import Components
 import { InputAndButtonForCustomTag } from "@/components/ownComponents/recordPage/InputAndButtonForCustomTag.jsx";
 import UserFeedbackText from "@/components/typo/UserFeedbackText";
 import { Card } from "@/components/ui/card";
-import { useEmotionsContext } from "@/utils/EmotionsProvider";
-import { useTagContext } from "@/utils/TagProvider";
 import { Badge } from "@/components/ui/badge";
+import { BadgeInfoPopup } from "./BadgeInfoPopup";
+
+const badgeInfoMessages = {
+  womit:
+    "Wozu wird diese Information gespeichert? \n Diese Angabe hilft, über die Umstände deiner Gefühle zu reflektieren.",
+};
 
 const TagsContext = () => {
   // States from Providers:
   const { selectedFeeling } = useEmotionsContext();
   const { renderTagListbyCategory, tagError } = useTagContext();
+  const { showBadgeInfo, setShowBadgeInfo, handleBadgeClick } =
+    useCheckinContext();
 
   return (
     <div className="flex flex-col items-center">
@@ -19,7 +31,11 @@ const TagsContext = () => {
             <span className="font-bold"> {selectedFeeling?.name} </span> in
             Verbindung stehen?
           </p>
-          <Badge className="inline" variant="secondary">
+          <Badge
+            className="inline"
+            variant="secondary"
+            onClick={() => handleBadgeClick("womit")}
+          >
             optional
           </Badge>
         </div>
@@ -33,6 +49,13 @@ const TagsContext = () => {
           )}
         </Card>
       </section>
+
+      {showBadgeInfo && (
+        <BadgeInfoPopup
+          message={badgeInfoMessages[showBadgeInfo]}
+          onClose={() => setShowBadgeInfo(null)}
+        />
+      )}
     </div>
   );
 };

@@ -1,18 +1,26 @@
+// import Provider
+import { useCheckinContext } from "@/utils/CheckinProvider";
+
+// import Components
 import UserFeedbackText from "@/components/typo/UserFeedbackText";
 import { Card } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
+import BadgeInfoPopup from "./BadgeInfoPopup";
 
-import { useCheckinContext } from "@/utils/CheckinProvider";
+const badgeInfoMessages = {
+  comment:
+    "Hier kannst du einen persönlichen Eintrag hinterlassen! \n Deine Notiz wird gespeichert und du kannst sie jederzeit im Journal nachlesen. Du findest das Journal in der Hauptnavigation.",
+};
 
 const MakeANote = () => {
-  const { showNoteInfo, setShowNoteInfo, comment, setComment } =
-    useCheckinContext();
-
-  // show/hide UserFeedBackText
-  const handleInfo = () => {
-    setShowNoteInfo(!showNoteInfo);
-  };
+  const {
+    comment,
+    setComment,
+    showBadgeInfo,
+    setShowBadgeInfo,
+    handleBadgeClick,
+  } = useCheckinContext();
 
   const handleUserComment = (e) => {
     setComment(e.target.value);
@@ -26,30 +34,31 @@ const MakeANote = () => {
           <p className="inline">
             Möchtest du noch etwas zu deinem Gefühl notieren?
           </p>
-          <Badge className="inline" variant="secondary">
-            wichtig
+          <Badge
+            className="inline"
+            variant="secondary"
+            onClick={() => handleBadgeClick("comment")}
+          >
+            optional
           </Badge>
         </div>
 
         <Card className="w-[290px] bg-white p-[22px] text-center mt-16 h-[423px]">
           <Textarea
-            placeholder="Hier ist Platz für deine Notiz."
+            className="text-md"
+            placeholder={`Das Gefühl sagt mir...\nIch wünsche mir ...\nIch denke ... \n`}
             value={comment}
             onChange={handleUserComment}
           />
-          {showNoteInfo ? (
-            <UserFeedbackText
-              content="Im Journal kannst du deine Notiz jederzeit nachlesen. Du findest es in der Hauptnavigation."
-              type="info"
-              onClick={handleInfo} // Hide the text on click
-            />
-          ) : (
-            <button className=" underline mt-4 text-sm" onClick={handleInfo}>
-              Wo finde ich meine Notizen später wieder?
-            </button>
-          )}
         </Card>
       </section>
+
+      {showBadgeInfo && (
+        <BadgeInfoPopup
+          message={badgeInfoMessages[showBadgeInfo]}
+          onClose={() => setShowBadgeInfo(null)}
+        />
+      )}
     </div>
   );
 };

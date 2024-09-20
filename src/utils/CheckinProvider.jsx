@@ -25,6 +25,9 @@ export const CheckinProvider = ({ children }) => {
   // switchId? -> ActivitySwitch.jsx
   const [selectedWeather, setSelectedWeather] = useState("");
 
+  // State for badge info popup
+  const [showBadgeInfo, setShowBadgeInfo] = useState(null);
+
   // States from other Providers
   const {
     selectedFamily,
@@ -143,6 +146,11 @@ export const CheckinProvider = ({ children }) => {
     }
   };
 
+  // Handler for showing badge info
+  const handleBadgeClick = (category) => {
+    setShowBadgeInfo(category);
+  };
+
   return (
     <CheckinContext.Provider
       value={{
@@ -166,7 +174,11 @@ export const CheckinProvider = ({ children }) => {
         handleCheckinSubmit,
         isLoading,
         error,
-      }}>
+        showBadgeInfo,
+        setShowBadgeInfo,
+        handleBadgeClick,
+      }}
+    >
       {children}
     </CheckinContext.Provider>
   );
