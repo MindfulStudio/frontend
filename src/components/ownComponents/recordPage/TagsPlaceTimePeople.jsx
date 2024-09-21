@@ -1,127 +1,84 @@
+// import Providers:
 import { useTagContext } from "@/utils/TagProvider";
 import { useEmotionsContext } from "@/utils/EmotionsProvider";
+import { useCheckinContext } from "../../../utils/CheckinProvider";
+
+// import Components:
 import InputAndButtonForCustomTag from "./InputAndButtonForCustomTag";
 import UserFeedbackText from "@/components/typo/UserFeedbackText";
+import { BadgeInfoPopup } from "./BadgeInfoPopup";
 import { Card } from "@/components/ui/card";
-import { useEffect, useState } from "react";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+
+const badgeInfoMessages = {
+  wann: "Wozu wird diese Information gespeichert? \n Wir werten diese Angabe für dich aus, um zeitliche Muster deiner Gefühle zu erkennen.",
+  wo: "Wozu wird diese Information gespeichert? \n Diese Einordnung hilft, Einflüsse gewisser Orte auf deine Gefühle zu erkennen.",
+  mitWem:
+    "Wozu wird diese Information gespeichert? \n Diese Angabe wird ausgewertet, um den Einfluss von Beziehungen und sozialer Kontakte auf deine Gefühlswelt zu erkennen.",
+};
 
 const TagsPlaceTimePeople = () => {
   // States from Providers:
   const { selectedFeeling } = useEmotionsContext();
+
   const { renderTagListbyCategory, tagError, selectedTags } = useTagContext();
 
-  // State for badge info popup
-  const [showBadgeInfo, setShowBadgeInfo] = useState(null);
+  const { showBadgeInfo, setShowBadgeInfo, handleBadgeClick } =
+    useCheckinContext();
 
   // Check if the user has choosen tags for each category
   const hasChoosenTags = (category) => {
     return selectedTags.some((tag) => tag.category === category);
   };
 
-  // Handler for showing badge info
-  const handleBadgeClick = (category) => {
-    setShowBadgeInfo(category);
-  };
+  // Function to render the category section (wann, wo, mitWem)
+  const renderCategorySection = (category, displayCategory) => (
+    <>
+      <div className="text-center">
+        <p className="inline">
+          {displayCategory} hast du dich
+          <span className="font-bold"> {selectedFeeling?.name} </span> gefühlt?
+        </p>
+        <Badge
+          className="inline"
+          variant="secondary"
+          onClick={() => handleBadgeClick(category)}
+        >
+          wichtig
+        </Badge>
+      </div>
 
+      <Card
+        className={`w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[141px] overflow-y-scroll ${
+          !hasChoosenTags(category) ? "animate-wobble" : ""
+        }`}
+      >
+        <ul className="flex flex-wrap gap-3 justify-center list-none p-0">
+          {renderTagListbyCategory(category)}
+        </ul>
+        <InputAndButtonForCustomTag category={category} />
+        {tagError?.category === category && (
+          <UserFeedbackText content={tagError.message} type="error" />
+        )}
+      </Card>
+    </>
+  );
+
+  // Rendered JSX
   return (
     <div className="flex flex-col items-center">
-      {/* <h2> {selectedFamily}</h2> for debugging*/}
       <section className="mt-16 flex flex-col items-center">
-        <div className="text-center">
-          <p className="inline">
-            Wann hast du dich
-            <span className="font-bold"> {selectedFeeling?.name} </span>{" "}
-            gefühlt?
-          </p>
-          <Badge
-            className="inline"
-            variant="secondary"
-            onClick={() => handleBadgeClick("wann")}
-          >
-            wichtig
-          </Badge>
-        </div>
-
-        <Card
-          className={`w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[141px] overflow-y-scroll  ${
-            !hasChoosenTags("wann") ? "animate-wobble" : ""
-          }`}
-        >
-          <ul className="flex flex-wrap gap-3 justify-center list-none p-0">
-            {renderTagListbyCategory("wann")}
-          </ul>
-          <InputAndButtonForCustomTag category={"wann"} />
-          {tagError?.category === "wann" && (
-            <UserFeedbackText content={tagError.message} type="error" />
-          )}
-        </Card>
-
-        <div className="text-center">
-          <p className="inline">
-            Wo hast du dich
-            <span className="font-bold"> {selectedFeeling?.name} </span>{" "}
-            gefühlt?
-          </p>
-          <Badge className="inline" variant="secondary">
-            wichtig
-          </Badge>
-        </div>
-
-        <Card
-          className={`w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[141px] overflow-y-scroll ${
-            !hasChoosenTags("wo") ? "animate-wobble" : ""
-          }`}
-        >
-          <ul className="flex flex-wrap gap-3 justify-center list-none p-0">
-            {renderTagListbyCategory("wo")}
-          </ul>
-          <InputAndButtonForCustomTag category={"wo"} />
-          {tagError?.category === "wo" && (
-            <UserFeedbackText content={tagError.message} type="error" />
-          )}
-        </Card>
-
-        <div className="text-center">
-          <p className="inline">
-            Mit wem hast du dich
-            <span className="font-bold"> {selectedFeeling?.name} </span>{" "}
-            gefühlt?
-          </p>
-          <Badge className="inline" variant="secondary">
-            wichtig
-          </Badge>
-        </div>
-
-        <Card
-          className={`w-[290px] bg-white p-[22px] text-center mt-5 mb-7 h-[141px] overflow-y-scroll  ${
-            !hasChoosenTags("mitWem") ? "animate-wobble" : ""
-          }`}
-        >
-          <ul className="flex flex-wrap gap-3 justify-center list-none p-0">
-            {renderTagListbyCategory("mitWem")}
-          </ul>
-
-          <InputAndButtonForCustomTag category={"mitWem"} />
-
-          {tagError?.category === "mitWem" && (
-            <UserFeedbackText content={tagError.message} type="error" />
-          )}
-        </Card>
+        {renderCategorySection("wann", "Wann")}{" "}
+        {/* category, displayCategory */}
+        {renderCategorySection("wo", "Wo")}
+        {renderCategorySection("mitWem", "Mit wem")}
       </section>
 
-      {/* Badge Info Popup */}
       {showBadgeInfo && (
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white border rounded p-4 shadow-lg">
-          <p>{showBadgeInfo}</p>
-          <Button
-            className="mt-2 px-4 py-2 bg-blue-500 text-white rounded"
-            onClick={() => setShowBadgeInfo(null)}
-          >
-            Schließen
-          </Button>
-        </div>
+        <BadgeInfoPopup
+          message={badgeInfoMessages[showBadgeInfo]}
+          onClose={() => setShowBadgeInfo(null)}
+        />
       )}
     </div>
   );
