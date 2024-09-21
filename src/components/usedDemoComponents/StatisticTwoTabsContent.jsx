@@ -14,6 +14,8 @@ import { useEffect, useState } from "react";
 import { useMetricsContext } from "../../utils/MetricsProvider";
 import SelectTag from "../ownComponents/metricsPage/StatisticTwo/SelectTag";
 
+import StatisticTwo from "../ownComponents/metricsPage/StatisticTwo/StatisticTwo.jsx";
+
 const StatisticTwoTabsContent = () => {
   const {
     fetchStatsByTag,
@@ -22,11 +24,6 @@ const StatisticTwoTabsContent = () => {
     metricsTwoStatus,
     setMetricsTwoStatus,
   } = useMetricsContext();
-
-  useEffect(() => {
-    fetchStatsByTag("morgens");
-    // TODO: insert a state variable from MetricsProvider here as a parameter (instead of "morgens")
-  }, []);
 
   const renderMetricsTwo = () => {
     switch (metricsTwoStatus) {

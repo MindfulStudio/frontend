@@ -56,7 +56,7 @@ const TagProvider = ({ children }) => {
       return [...prevSelectedTags, tag]; // if the tag is not in the array, add it to the array
     });
   };
-
+  console.log({ selectedTags });
   // B) renderTags function:
 
   // The renderTags function takes a category as a parameter (e.g. “when”, “where”) and searches the standardTags array to find the matching object with the desired category. As soon as the matching object has been found, it renders the singleStandardTags as li elements
