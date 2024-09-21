@@ -6,23 +6,43 @@ const basePathThree = import.meta.env.VITE_basePathThree;
 
 const MetricsProvider = ({ children }) => {
   // ----------------------------------- States---------------------------------
-
+ // statisticOne
   const [metricsOneStatus, setMetricsOneStatus] = useState(1);
+   // statisticTwo
   const [metricsTwoStatus, setMetricsTwoStatus] = useState(1);
+   // statisticTwo
   const [disableTag, setDisableTag] = useState(false);
 
-  // selected feelingsFamily
+  // selected feelingsFamily - statisticOne
   const [selectedFeelingsFamily, setSelectedFeelingsFamily] = useState(null);
-  // select tag:
+  // select tag - statisticTwo:
   const [selectedTag, setSelectTag] = useState(null);
 
-  // useState für Anzahl check-ins
+  // useState für Anzahl check-ins - statisticOne &  // statisticTWo
   const [checkIn, setCheckIn] = useState(0);
 
-  // statistics by family
+  // statistics by family - statisticOne
   const [statisticsByFamily, setStatisticsByFamily] = useState([]);
-  // statistics by Tag:
+  // statistics by Tag - statisticTwo:
   const [statisticsByTag, setStatisticsByTag] = useState([]);
+
+  // State zur Überprüfung, ob mehr als 7 check-ins vorhanden sind - CardDescription & CardContent wird entschrechend eingblendet
+  // StatisticOne
+  const [showMetricsOne, setShowMetricsOne] = useState(false);
+  // StatisticTwo
+  const [showMetricsTwo, setShowMetricsTwo] = useState(false);
+
+  // show arrow to navigate back:
+  const [showArrow, setShowArrow] = useState(false);
+
+
+  // ----------------------------------- Values---------------------------------
+  // statisticOne
+  const maxMetricsOneStatus = 2;
+   // statisticTwo
+  const maxMetricsTwoStatus = 2;
+
+   // ----------------------------------- Function -  fetch getAllCheckins---------------------------------
 
   // get total of check ins
   const getAllCheckins = async () => {
@@ -38,6 +58,8 @@ const MetricsProvider = ({ children }) => {
       console.error(error);
     }
   };
+
+   // ----------------------------------- Function -  fetch getStatisticsByFamily ---------------------------------
 
   // get statistics by emotion family
   const getStatisticsByFamily = async () => {
@@ -56,15 +78,6 @@ const MetricsProvider = ({ children }) => {
     }
   };
 
-  // Funktion/State zur Überprüfung, ob mehr als 7 check-ins vorhanden sind - CardDescription & CardContent wird entschrechend eingblendet
-  // StatisticOne
-  const [showMetricsOne, setShowMetricsOne] = useState(false);
-  // StatisticTwo
-  const [showMetricsTwo, setShowMetricsTwo] = useState(false);
-
-  // ----------------------------------- Values---------------------------------
-  const maxMetricsOneStatus = 2;
-  const maxMetricsTwoStatus = 2;
 
   // ----------------------------------- Function -  fetch getStatisticsByTag ---------------------------------
   const getStatisticsByTag = async (tagName) => {
@@ -153,6 +166,7 @@ const MetricsProvider = ({ children }) => {
         setSelectTag,
         statisticsByTag,
         setStatisticsByTag,
+        showArrow, setShowArrow
       }}
     >
       {children}

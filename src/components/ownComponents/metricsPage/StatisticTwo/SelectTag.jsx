@@ -14,10 +14,13 @@ const SelectTag = () => {
     statisticsByTag,
     disableTag,
     setDisableTag,
+    setMetricsTwoStatus
   } = useMetricsContext();
   const { renderTagListbyCategory, tagError } = useTagContext();
 
   // TODO: ausgewähltes Tag in setSelectedTag speichern
+ 
+ 
   // TODO: wenn ein Tag ausgewählt wurde, ist auswahl aller anderen tags disabled
   // TODO: trigger StatisticTwo
   // TODO: build statisticTwo
