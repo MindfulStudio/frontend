@@ -51,7 +51,6 @@ const MetricsProvider = ({ children }) => {
   const { customTags, setCustomTags, handleDeactivateCustom } =
     useUserContext();
 
-
   // ----------------------------------- Values---------------------------------
   // statisticOne
   const maxMetricsOneStatus = 2;
@@ -267,7 +266,6 @@ const MetricsProvider = ({ children }) => {
         showArrow,
         setShowArrow,
         renderTagListbyCategoryMetrics,
-
       }}
     >
       {children}

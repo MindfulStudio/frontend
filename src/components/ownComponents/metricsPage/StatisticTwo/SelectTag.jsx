@@ -13,7 +13,6 @@ const SelectTag = () => {
     statisticsByTag,
     disableTag,
     setDisableTag,
-
     setMetricsTwoStatus,
     fetchStatsByTag,
     renderTagListbyCategoryMetrics,
@@ -22,7 +21,6 @@ const SelectTag = () => {
   const { renderTagListbyCategory, tagError } = useTagContext();
 
   // TODO: ausgewähltes Tag in setSelectedTag speichern
-
 
   // console.log({ selectedTag });
 
