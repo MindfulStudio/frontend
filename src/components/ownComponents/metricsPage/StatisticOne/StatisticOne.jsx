@@ -15,7 +15,8 @@ const StatisticOne = () => {
 
   console.log({ statisticsByFamily });
 
-  // chekc if statisticsByFamily available
+  // check if statisticsByFamily available
+
   if (!statisticsByFamily || !statisticsByFamily.stats) {
     return (
       <UserFeedbackText
@@ -25,7 +26,8 @@ const StatisticOne = () => {
     );
   }
 
-  // NOTICE: vielleicht in MetricsProvider auslagenr - wird auch in StatisticTwo benötigt
+  // NOTICE: vielleicht in MetricsProvider auslagern - wird auch in StatisticTwo benötigt
+
   const caluclatePercentageAndEndAngle = (totalCount, singleCount) => {
     const valuePercentage = (
       (singleCount / totalCount).toFixed(10) * 100
