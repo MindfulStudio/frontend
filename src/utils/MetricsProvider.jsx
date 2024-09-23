@@ -11,11 +11,13 @@ const basePathThree = import.meta.env.VITE_basePathThree;
 
 const MetricsProvider = ({ children }) => {
   // ----------------------------------- States---------------------------------
+
   // statisticOne
   const [metricsOneStatus, setMetricsOneStatus] = useState(1);
   // statisticTwo
   const [metricsTwoStatus, setMetricsTwoStatus] = useState(1);
   // statisticTwo
+
   const [disableTag, setDisableTag] = useState(false);
 
   // selected feelingsFamily - statisticOne
@@ -40,6 +42,7 @@ const MetricsProvider = ({ children }) => {
   // show arrow to navigate back:
   const [showArrow, setShowArrow] = useState(false);
 
+
   // StatisticTwo - defaultTags
   const [standardTags, setStandardTags] = useState(defaultTags);
 
@@ -48,13 +51,16 @@ const MetricsProvider = ({ children }) => {
   const { customTags, setCustomTags, handleDeactivateCustom } =
     useUserContext();
 
+
   // ----------------------------------- Values---------------------------------
   // statisticOne
   const maxMetricsOneStatus = 2;
+
   // statisticTwo
   const maxMetricsTwoStatus = 2;
 
   // ----------------------------------- Function - fetch getAllCheckins---------------------------------
+
   // get total of check ins
   const getAllCheckins = async () => {
     try {
@@ -71,6 +77,7 @@ const MetricsProvider = ({ children }) => {
   };
 
   // ----------------------------------- Function -  fetch getStatisticsByFamily ---------------------------------
+
 
   // get statistics by emotion family
   const getStatisticsByFamily = async () => {
@@ -260,6 +267,7 @@ const MetricsProvider = ({ children }) => {
         showArrow,
         setShowArrow,
         renderTagListbyCategoryMetrics,
+
       }}
     >
       {children}
