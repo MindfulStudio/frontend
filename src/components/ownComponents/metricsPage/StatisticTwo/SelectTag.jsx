@@ -16,12 +16,14 @@ const SelectTag = () => {
     setMetricsTwoStatus,
     fetchStatsByTag,
     renderTagListbyCategoryMetrics,
+
   } = useMetricsContext();
   const { renderTagListbyCategory, tagError } = useTagContext();
 
   // TODO: ausgewähltes Tag in setSelectedTag speichern
 
   // console.log({ selectedTag });
+
   // TODO: wenn ein Tag ausgewählt wurde, ist auswahl aller anderen tags disabled
   // TODO: trigger StatisticTwo
 

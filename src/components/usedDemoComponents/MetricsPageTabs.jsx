@@ -8,6 +8,7 @@ export function MetricsPageTabs() {
   const {
     setMetricsOneStatus,
     setMetricsTwoStatus,
+    metricsOneStatus,
     previousMetricsOneStep,
     getAllCheckins,
     showArrow,

@@ -34,6 +34,7 @@ const MetricsPage = () => {
 
   // show/hide arrow:
   // statisticOne
+
   useEffect(() => {
     getAllCheckins();
     if (metricsOneStatus > 1) {
@@ -54,6 +55,7 @@ const MetricsPage = () => {
       setMetricsTwoStatus(1);
     }
   }, [metricsTwoStatus]);
+
 
   return (
     <main className="flex flex-col items-center w-full h-screen pt-[109px]">
