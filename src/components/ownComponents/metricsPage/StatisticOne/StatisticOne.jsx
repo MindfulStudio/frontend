@@ -15,6 +15,16 @@ const StatisticOne = () => {
 
   console.log({ statisticsByFamily });
 
+  // chekc if statisticsByFamily available
+  if (!statisticsByFamily || !statisticsByFamily.stats) {
+    return (
+      <UserFeedbackText
+        type="info"
+        content="Statistiken sind momentan nicht verfügbar"
+      />
+    );
+  }
+
   // NOTICE: vielleicht in MetricsProvider auslagenr - wird auch in StatisticTwo benötigt
   const caluclatePercentageAndEndAngle = (totalCount, singleCount) => {
     const valuePercentage = (
@@ -59,7 +69,8 @@ const StatisticOne = () => {
                     );
 
                   return (
-                    <li>
+                    <li key={stat.name}>
+                      {/* vllt. noch besseren key finden */}
                       <div className="flex flex-row justify-evenly py-2">
                         <MetricsRadialChart
                           checkIns={`${stat.count} von ${statisticsByFamily.checkinsTotal}`}

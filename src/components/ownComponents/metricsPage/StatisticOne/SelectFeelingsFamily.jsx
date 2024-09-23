@@ -21,7 +21,6 @@ const SelectFeelingsFamily = () => {
     metricsOneStatus,
     setMetricsOneStatus,
     maxMetricsOneStatus,
-    selectedFeelingsFamily,
     setSelectedFeelingsFamily,
   } = useMetricsContext();
 
