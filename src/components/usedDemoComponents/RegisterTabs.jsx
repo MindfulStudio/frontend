@@ -311,6 +311,7 @@ export function RegisterTabs() {
                 success={success}
                 ontoggle={() => setAGBChecked((val) => !val)}
               />
+
               {/* show server error message here */}
               {warning && <UserFeedbackText content={warning} type={"info"} />}
               {/* show success message here */}
@@ -340,7 +341,8 @@ export function RegisterTabs() {
             <CardFooter>
               <Button
                 disabled={!activeButton || success || !reCaptchaChecked}
-                type="submit">
+                type="submit"
+              >
                 Registrieren
               </Button>
             </CardFooter>

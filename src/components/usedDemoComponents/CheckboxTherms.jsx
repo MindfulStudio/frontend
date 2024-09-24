@@ -3,11 +3,10 @@
 import { Checkbox } from "@/components/ui/checkbox";
 import { RegisterPopover } from "./RegisterPopover";
 import { useState } from "react";
+import agb from "@/legal/Agb.jsx";
+import datenschutzrichtlinie from "@/legal/Datenschutzrichtlinie.jsx";
 
 export function CheckboxTherms({ ontoggle, success }) {
-  // AGB aus json => TODO: json: AGB
-  const agb = "Es gibt noch keine AGB.";
-
   const [acceptAGB, setAcceptAGB] = useState(false);
 
   const handleAcceptAGB = () => {
@@ -25,8 +24,16 @@ export function CheckboxTherms({ ontoggle, success }) {
       />
       <label
         htmlFor="terms"
-        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-        <RegisterPopover title={"AGB akzeptieren"} textPopover={agb} />
+        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+      >
+        Ich akzeptiere die{" "}
+        <RegisterPopover title={"AGB"} contentPopover={agb} /> und willige in
+        die Verarbeitung meiner Daten gemäß{" "}
+        <RegisterPopover
+          title={"Datenschutzrichtlinie"}
+          contentPopover={datenschutzrichtlinie}
+        />{" "}
+        ein.
       </label>
     </div>
   );
