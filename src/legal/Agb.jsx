@@ -6,10 +6,10 @@ const agb = (
     <h2 className="text-sm font-bold mt-2">1. Geltungsbereich</h2>
     <p className="text-sm mb-2">
       Willkommen bei der App gemischteGefühle. Diese Allgemeinen
-      Geschäftsbedingungen (AGB) regeln die Nutzung der App „gemischteGefühle“,
-      die von Studio Mindful betrieben wird. Die Nutzung der App ist
-      nicht-kommerziell und kostenlos. Mit der Nutzung der App stimmst du diesen
-      AGB zu.
+      Geschäftsbedingungen (AGB) regeln die Nutzung der App{" "}
+      <em>gemischteGefühle</em>, die von <em>Studio Mindful</em> betrieben wird.
+      Die Nutzung der App ist nicht-kommerziell und kostenlos. Mit der Nutzung
+      der App stimmst du diesen AGB zu.
     </p>
     <h2 className="text-sm font-semibold mt-2">2. Haftungsausschluss</h2>
     <p className="text-sm">
@@ -17,8 +17,8 @@ const agb = (
       einer Testphase. Dies bedeutet, dass einige Funktionen möglicherweise
       nicht wie erwartet funktionieren und Sicherheitslücken auftreten können.
       Wir können derzeit nicht für die Sicherheit des Servers garantieren und
-      empfehlen Nutzenden, sorgfältig abzuwägen, welche sensiblen Daten sie in
-      der App eingeben.
+      empfehlen Nutzer:innen, sorgfältig abzuwägen, welche sensiblen Daten sie
+      in der App eingeben.
     </p>
     <p className="text-sm mb-2">
       Die Nutzung der App erfolgt auf eigene Verantwortung. Die Betreibenden der
@@ -34,11 +34,9 @@ const agb = (
     </p>
     <h2 className="text-sm font-semibold mt-2">4. Datenschutz</h2>
     <p className="text-sm mb-2">
-      Die App ist DSGVO-konform, jedoch sollten Sie sich bewusst sein, dass wir
-      keine absolute Sicherheit für Ihre Daten garantieren können. Die
-      eingegebenen Daten können in unserer Datenbank gespeichert werden, jedoch
-      nur zu Testzwecken. Nutzer:innen sollten darauf achten, keine sensiblen
-      oder persönlichen Daten einzugeben.
+      Die App ist DSGVO-konform, jedoch solltest du dir bewusst sein, dass wir
+      keine absolute Sicherheit für deine Daten garantieren können. Bitte achte
+      darauf, keine sensiblen oder persönlichen Daten einzugeben.
     </p>
     <h2 className="text-sm font-semibold mt-2">
       5. Einwilligung zur Datenverarbeitung

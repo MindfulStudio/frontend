@@ -18,10 +18,12 @@ const datenschutzrichtlinie = (
       fiktive Daten zu verwenden, um deine Privatsphäre zu schützen.
     </p>
     <p className="text-sm mb-2">
-      Es werden nur die von dir direkt angegebenen Daten wie E-Mail-Adresse und
-      Benutzername gespeichert. Die einzigen zusätzlich gespeicherten indirekten
-      Daten sind die Zeitpunkte deiner Check-ins, die für die zeitliche
-      Einordnung der Einträge benötigt werden.
+      Es werden grundsätzlich nur von dir direkt angegebene Daten wie
+      E-Mail-Adresse und Username oder deine Angaben zu Emotionen und
+      Kontextinformationen gespeichert. Außerdem werden Informationen, die für
+      den Registrierungs- und Loginprozess benötigt werden, sowie die Zeitpunkte
+      deiner Check-ins gespeichert, weil sie für die zeitliche Einordnung
+      wichtig sind.
     </p>
     <p className="text-sm mb-2">
       Bei Fragen zur Datenspeicherung oder zur Verarbeitung deiner Daten kannst
@@ -44,7 +46,8 @@ const datenschutzrichtlinie = (
     </p>
     <p className="text-sm mb-2">
       Du hast das Recht, deine Einwilligung jederzeit zu widerrufen, indem du
-      uns kontaktierst.
+      uns kontaktierst. Außerdem kannst du deine Daten auch selbständig löschen,
+      indem du in dein Profil gehst und dort dein Konto löschst.
     </p>
   </div>
 );
