@@ -1,0 +1,67 @@
+[
+  {
+    "id": 1,
+    "category": "wann",
+    "name": "Standard-Tag",
+    "singleStandardTags": ["morgens", "mittags", "nachmittags", "abends"]
+  },
+  {
+    "id": 2,
+    "category": "wo",
+    "name": "Standard-Tag",
+    "singleStandardTags": [
+      "daheim",
+      "Arbeit",
+      "unterwegs",
+      "im Urlaub",
+      "im Auto",
+      "im Park"
+    ]
+  },
+  {
+    "id": 3,
+    "category": "mitWem",
+    "name": "Standard-Tag",
+    "singleStandardTags": [
+      "alleine",
+      "Partner:in",
+      "Freund:innen",
+      "Familie",
+      "Kolleg:innen"
+    ]
+  },
+  {
+    "id": 4,
+    "category": "was",
+    "name": "Standard-Tag",
+    "singleStandardTags": [
+      "essen",
+      "trinken",
+      "lesen",
+      "fernsehen",
+      "spazieren",
+      "Sport",
+      "Musik hören",
+      "Musik machen",
+      "kochen",
+      "backen",
+      "putzen",
+      "lernen",
+      "meditieren",
+      "tanzen",
+      "basteln",
+      "malen",
+      "schreiben",
+      "telefonieren",
+      "shoppen",
+      "gärtnern",
+      "fotografieren",
+      "filmen",
+      "schwimmen",
+      "streiten",
+      "Allergie",
+      "Kopfschmerzen",
+      "Stress"
+    ]
+  }
+]
