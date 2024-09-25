@@ -23,16 +23,16 @@ const DashboardPage = () => {
     if (checkinUserFeedback.message) {
       const timer = setTimeout(
         () => setCheckinUserFeedback({ message: "", type: "" }),
-        10000
-      ); // 6 seconds
+        3000
+      ); // 4 seconds
       return () => clearTimeout(timer); // Cleanup
     }
   }, [checkinUserFeedback]);
 
   return (
-    <div className="flex flex-col min-h-screen justify-center">
+    <div className="flex flex-col justify-center">
       {checkinUserFeedback.message && (
-        <div className="fixed inset-0 flex justify-center items-start z-50 mt-5">
+        <div className="fixed inset-0 flex justify-center items-start z-50 mt-5 pointer-events-none">
           <UserFeedbackText
             content={checkinUserFeedback.message}
             type={checkinUserFeedback.type}
