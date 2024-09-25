@@ -1,7 +1,6 @@
 import PageTitle from "@/components/typo/PageTitle";
 import HighlightText from "@/components/typo/HighlightText";
 import UserFeedbackText from "@/components/typo/UserFeedbackText";
-import AnimatedFeelings from "@/components/ownComponents/errorPage/AnimatedFeelings.jsx";
 
 const ErrorPage = () => {
   return (
@@ -13,8 +12,6 @@ const ErrorPage = () => {
       <p>Everything will be fine.</p>
       <p className="font-highlight pb-5">Just go back to Home.</p>
       <p className="font-bold">müde</p>
-
-      <AnimatedFeelings />
 
       <HighlightText highlighttext="I´m a big Highlight!" fontsize="text-lg" />
       <HighlightText
