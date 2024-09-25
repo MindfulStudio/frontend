@@ -53,6 +53,7 @@ export function ConfigTabs() {
       });
 
       const data = await response.json();
+      console.log(data);
 
       // In case of userNotFound error:
       if (!response.ok) {
@@ -65,9 +66,10 @@ export function ConfigTabs() {
         navigate("/dashboard");
       }
       return data;
-    } catch {
+    } catch (error) {
       // In case of any other server errors:
       setError({ message: "Ein unerwarteter Serverfehler ist aufgetreten." });
+      console.log(error);
     }
   };
 
