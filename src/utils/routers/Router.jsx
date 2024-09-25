@@ -12,16 +12,16 @@ import DashboardPage from "../../pages/DashboardPage";
 import UserDataPage from "../../pages/UserDataPage";
 import InfoPage from "../../pages/InfoPage";
 // Providers
-import EmotionsProvider from "../EmotionsProvider";
+import EmotionsProvider from "../contexts/EmotionsProvider";
 import TagProvider from "../TagProvider";
-import RecordProgressProvider from "../RecordProgressProvider";
-import UserProvider from "../UserProvider";
+import RecordProgressProvider from "../contexts/RecordProgressProvider";
+import UserProvider from "../contexts/UserProvider";
 import AuthProvider from "../AuthProvider";
 
-import CheckinProvider from "../CheckinProvider";
+import CheckinProvider from "../contexts/CheckinProvider";
 
 import MetricsProvider from "../MetricsProvider";
-import PrivateRoute from "../routers/PrivateRoute";
+import PrivateRoute from "./PrivateRoute";
 
 const Router = () => {
   const router = createBrowserRouter([

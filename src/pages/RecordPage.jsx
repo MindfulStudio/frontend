@@ -21,18 +21,18 @@ import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 
 // --------------------------- Context Imports ----------------------------------
-import { useEmotionsContext } from "@/utils/EmotionsProvider";
-import { useRecordProgressContext } from "@/utils/RecordProgressProvider";
+import { useEmotionsContext } from "@/utils/contexts/EmotionsProvider";
+import { useRecordProgressContext } from "@/utils/contexts/RecordProgressProvider";
 import { useTagContext } from "@/utils/TagProvider";
-import { useCheckinContext } from "@/utils/CheckinProvider";
-import { useUserContext } from "../utils/UserProvider";
+import { useCheckinContext } from "@/utils/contexts/CheckinProvider";
+import { useUserContext } from "../utils/contexts/UserProvider";
 
 const RecordPage = () => {
   // -------------------------------For Navigation ------------------------------
   const navigateBackToDashboard = useNavigate();
 
   // ------------------------------- States from Contexts -----------------------
-  const { fetchConfigData } = useUserContext();
+  const { loadConfigData } = useUserContext();
 
   const { feelingsFamilies, selectedFeeling } = useEmotionsContext();
 
@@ -57,7 +57,7 @@ const RecordPage = () => {
   useEffect(() => {
     const getConfig = async () => {
       try {
-        const configData = await fetchConfigData();
+        const configData = await loadConfigData();
         const { sleepingHours, physicalActivity, weather } = configData;
         if (configData && !sleepingHours && !physicalActivity && !weather) {
           setTotalCheckinSteps(4);

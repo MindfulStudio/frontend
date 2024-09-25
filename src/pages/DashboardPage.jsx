@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 
 // --------------------------- Context Imports ----------------------------------
-import { useUserContext } from "@/utils/UserProvider";
-import { useCheckinContext } from "@/utils/CheckinProvider";
+import { useCheckinContext } from "@/utils/contexts/CheckinProvider";
+import { useUserContext } from "../utils/contexts/UserProvider";
 
 // --------------------------- Component Imports ----------------------------------
 import FeelingsFamilyComponent from "@/components/ownComponents/dashboardPage/FeelingsFamilyComponent";
@@ -11,13 +11,13 @@ import UserFeedbackText from "@/components/typo/UserFeedbackText";
 
 const DashboardPage = () => {
   // ------------------------------- States from Contexts -----------------------
-  const { fetchAllCustoms } = useUserContext();
+  const { loadAllCustoms } = useUserContext();
   const { setCheckinUserFeedback, checkinUserFeedback } = useCheckinContext(); // checkinUserFeedback depends on the success of a previous checkin
 
   // ------------------------------- Fetching customs ---------------------------
   useEffect(() => {
-    fetchAllCustoms();
-  }, [fetchAllCustoms]);
+    loadAllCustoms();
+  }, [loadAllCustoms]);
 
   // -------------------------  Timer to clear userfeedback ---------------------
   useEffect(() => {

@@ -1,9 +1,9 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { useUserContext } from "./UserProvider";
+import { useUserContext } from "./contexts/UserProvider";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Button } from "@/components/ui/button";
 import defaultTags from "../data/standardTags.json";
-import { useEmotionsContext } from "./EmotionsProvider";
+import { useEmotionsContext } from "./contexts/EmotionsProvider";
 
 // --------------------------- Icon Component Imports ---------------------------
 import DeleteWhite from "/src/assets/icons/delete-2-svgrepo-com-white.svg";
@@ -56,7 +56,7 @@ const TagProvider = ({ children }) => {
       return [...prevSelectedTags, tag]; // if the tag is not in the array, add it to the array
     });
   };
-  console.log({ selectedTags });
+  // console.log({ selectedTags });
   // B) renderTags function:
 
   // The renderTags function takes a category as a parameter (e.g. “when”, “where”) and searches the standardTags array to find the matching object with the desired category. As soon as the matching object has been found, it renders the singleStandardTags as li elements

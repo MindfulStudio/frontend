@@ -7,7 +7,7 @@ import IlluFreude from "/src/assets/feelingsFamilies/Vector_Freude.svg";
 import IlluGemischteGefühle from "/src/assets/feelingsFamilies/Vector_gemGefühle.svg";
 import IlluTrauer from "/src/assets/feelingsFamilies/Vector_Trauer.svg";
 // contect providers:
-import { useEmotionsContext } from "@/utils/EmotionsProvider";
+import { useEmotionsContext } from "@/utils/contexts/EmotionsProvider";
 import { useMetricsContext } from "@/utils/MetricsProvider";
 
 // ------------------------------- SelectFeelingsInStatisticOne Component -------------------------------

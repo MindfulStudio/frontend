@@ -11,8 +11,8 @@ import { Button } from "@/components/ui/button";
 import UserFeedbackText from "@/components/typo/UserFeedbackText";
 
 // --------------------------- Context Imports ----------------------------------
-import { useEmotionsContext } from "@/utils/EmotionsProvider";
-import { useUserContext } from "../../../utils/UserProvider";
+import { useEmotionsContext } from "@/utils/contexts/EmotionsProvider";
+import { useUserContext } from "../../../utils/contexts/UserProvider";
 
 const FeelingsSelector = () => {
   // ------------------------------- States from Contexts -----------------------
@@ -21,7 +21,7 @@ const FeelingsSelector = () => {
     handleFeelingSelect,
     newFeeling,
     setNewFeeling,
-    handleAddCustomFeeling,
+    onAddCustomFeeling,
     customFeelings,
     selectedFamily,
     selectedFeeling,
@@ -94,7 +94,7 @@ const FeelingsSelector = () => {
       {/* Add custom feeling */}
       <div className="mt-4">
         <button
-          onClick={() => handleAddCustomFeeling(newFeeling)}
+          onClick={() => onAddCustomFeeling(newFeeling)}
           className="w-10 h-10 border rounded-full"
         >
           +

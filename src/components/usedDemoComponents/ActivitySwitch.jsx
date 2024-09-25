@@ -1,7 +1,7 @@
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 
-import { useCheckinContext } from "@/utils/CheckinProvider";
+import { useCheckinContext } from "@/utils/contexts/CheckinProvider";
 
 export function ActivitySwitch({}) {
   const switchId = "activityswitch";
