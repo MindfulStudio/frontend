@@ -16,10 +16,8 @@ import EmotionsProvider from "../EmotionsProvider";
 import TagProvider from "../TagProvider";
 import RecordProgressProvider from "../RecordProgressProvider";
 import UserProvider from "../UserProvider";
-import AuthProvider from "../AuthProvider";
-
+import AuthProvider from "../contexts/AuthProvider";
 import CheckinProvider from "../CheckinProvider";
-
 import MetricsProvider from "../MetricsProvider";
 import PrivateRoute from "../routers/PrivateRoute";
 
