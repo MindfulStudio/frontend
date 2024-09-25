@@ -1,27 +1,27 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import Layout from "../layout/Layout";
-import ConfigPage from "../pages/ConfigPage";
-import ErrorPage from "../pages/ErrorPage";
-import HomePage from "../pages/HomePage";
-import JournalPage from "../pages/JournalPage";
-import LoginPage from "../pages/LoginPage";
-import MetricsPage from "../pages/MetricsPage";
-import RecordPage from "../pages/RecordPage";
-import RegisterPage from "../pages/RegisterPage";
-import DashboardPage from "../pages/DashboardPage";
-import UserDataPage from "../pages/UserDataPage";
-import InfoPage from "../pages/InfoPage";
+import Layout from "../../layout/Layout";
+import ConfigPage from "../../pages/ConfigPage";
+import ErrorPage from "../../pages/ErrorPage";
+import HomePage from "../../pages/HomePage";
+import JournalPage from "../../pages/JournalPage";
+import LoginPage from "../../pages/LoginPage";
+import MetricsPage from "../../pages/MetricsPage";
+import RecordPage from "../../pages/RecordPage";
+import RegisterPage from "../../pages/RegisterPage";
+import DashboardPage from "../../pages/DashboardPage";
+import UserDataPage from "../../pages/UserDataPage";
+import InfoPage from "../../pages/InfoPage";
 // Providers
-import EmotionsProvider from "./EmotionsProvider";
-import TagProvider from "./TagProvider";
-import RecordProgressProvider from "./RecordProgressProvider";
-import UserProvider from "./UserProvider";
-import AuthProvider from "./AuthProvider";
+import EmotionsProvider from "../EmotionsProvider";
+import TagProvider from "../TagProvider";
+import RecordProgressProvider from "../RecordProgressProvider";
+import UserProvider from "../UserProvider";
+import AuthProvider from "../AuthProvider";
 
-import CheckinProvider from "./CheckinProvider";
+import CheckinProvider from "../CheckinProvider";
 
-import MetricsProvider from "./MetricsProvider";
-import PrivateRoute from "./PrivateRoute";
+import MetricsProvider from "../MetricsProvider";
+import PrivateRoute from "../routers/PrivateRoute";
 
 const Router = () => {
   const router = createBrowserRouter([
