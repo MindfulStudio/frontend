@@ -20,6 +20,7 @@ const CheckInFeelingDisplay = () => {
     selectedFamily, //! id of the selected family
   } = useEmotionsContext();
 
+  // ------------------------------- Render --------------------------------------
   return (
     <div className="flex flex-col items-center">
       <div className="flex flex-row gap-[182px]">
