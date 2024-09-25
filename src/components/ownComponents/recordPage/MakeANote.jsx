@@ -1,9 +1,6 @@
 // -------------- import Context ------------------------------------------
 import { useCheckinContext } from "@/utils/CheckinProvider";
 
-// -------------------- import Typo Components ----------------------------
-import UserFeedbackText from "@/components/typo/UserFeedbackText";
-
 // ----------------------- import shadcn Components ----------------------
 import { Card } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
