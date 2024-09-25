@@ -1,19 +1,16 @@
-import { useMetricsContext } from "@/utils/MetricsProvider";
-import { useEffect } from "react";
+// ------------------------------- importing components, hooks and context -------------------------------
+// components:
 import MetricsRadialChart from "../../../usedDemoComponents/MetricsRadialChart";
 import UserFeedbackText from "/src/components/typo/UserFeedbackText";
+// hooks:
+import { useEffect } from "react";
+// components providers:
+import { useMetricsContext } from "@/utils/MetricsProvider";
 
+// ------------------------------- StatisticTwo Component -------------------------------
 const StatisticTwo = () => {
-  const {
-    showMetricsTwo,
-    selectedTag,
-    setSelectTag,
-    statisticsByTag,
-    disableTag,
-    setDisableTag,
-    setMetricsTwoStatus,
-    fetchStatsByTag,
-  } = useMetricsContext();
+  // destructure values from MetricsContext
+  const { selectedTag, statisticsByTag, fetchStatsByTag } = useMetricsContext();
 
   // TODO: info, dass nur eine Option auswählbar
 
@@ -75,10 +72,10 @@ const StatisticTwo = () => {
                 );
 
               return (
-                <li key={stat.name}>
+                <li key={stat.name} className="">
                   {/* vllt. besseren key finden */}
                   {/* TODO: hinzufügen (dynamisch) von icons für die einzelnen gefühle */}
-                  <div className="flex flex-row justify-evenly py-2">
+                  <div className="flex flex-row justify-evenly">
                     <MetricsRadialChart
                       checkIns={`${stat.count} von ${statisticsByTag.total}`}
                       chartTitle={stat.name}
