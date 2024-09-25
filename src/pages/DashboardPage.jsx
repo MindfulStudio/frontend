@@ -10,29 +10,32 @@ import GreetingComponent from "@/components/ownComponents/dashboardPage/Greeting
 import UserFeedbackText from "@/components/typo/UserFeedbackText";
 
 const DashboardPage = () => {
+  // ------------------------------- States from Contexts -----------------------
   const { fetchAllCustoms } = useUserContext();
   const { setCheckinUserFeedback, checkinUserFeedback } = useCheckinContext(); // checkinUserFeedback depends on the success of a previous checkin
 
-  // fetch customs from backend when the component is mounted:
+  // ------------------------------- Fetching customs ---------------------------
   useEffect(() => {
     fetchAllCustoms();
   }, [fetchAllCustoms]);
 
-  // Timer to clear userfeedback after a few seconds
+  // -------------------------  Timer to clear userfeedback ---------------------
   useEffect(() => {
     if (checkinUserFeedback.message) {
       const timer = setTimeout(
         () => setCheckinUserFeedback({ message: "", type: "" }),
-        10000
-      ); // 6 seconds
+        3000
+      ); // 4 seconds
       return () => clearTimeout(timer); // Cleanup
     }
   }, [checkinUserFeedback]);
 
+  // ------------------------------- Render -------------------------------------
   return (
-    <div className="flex flex-col min-h-screen justify-center">
+    <div className="flex flex-col justify-center">
+      {/* User feedback */}
       {checkinUserFeedback.message && (
-        <div className="fixed inset-0 flex justify-center items-start z-50 mt-5">
+        <div className="fixed inset-0 flex justify-center items-start z-50 mt-5 pointer-events-none">
           <UserFeedbackText
             content={checkinUserFeedback.message}
             type={checkinUserFeedback.type}
@@ -41,6 +44,7 @@ const DashboardPage = () => {
         </div>
       )}
 
+      {/* Main content */}
       <main className="flex-grow pt-[109px] px-[50px] flex flex-col items-center">
         <GreetingComponent />
         <FeelingsFamilyComponent />

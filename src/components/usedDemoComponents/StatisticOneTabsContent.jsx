@@ -1,52 +1,55 @@
+// ------------------------------- importing components and context -------------------------------
+// components:
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-
 import { TabsContent } from "@/components/ui/tabs";
 import SelectFeelingsFamily from "../ownComponents/metricsPage/StatisticOne/SelectFeelingsFamily";
 import StatisticOne from "../ownComponents/metricsPage/StatisticOne/StatisticOne";
-
-// import EmotionsProvider:
-// import { useEmotionsContext } from "@/utils/EmotionsProvider";
-
-import { useMetricsContext } from "@/utils/MetricsProvider";
 import MessageCheckInsM1 from "../ownComponents/metricsPage/StatisticOne/MessageCheckInsM1";
+// context providers:
+import { useMetricsContext } from "@/utils/MetricsProvider";
 
+// ------------------------------- MetricsPageTabs Component -------------------------------
+// this components handles the content ot the StatisticOne-tab
+// it displays either a selection for feelings family or the actual statistics, depending on the state (metricsOneStatus)
 const StatisticOneTabsContent = () => {
-  // import from useEmotionsContext:
-  // const { feelingsFamilies } = useEmotionsContext();
-
+  // destructure values from MetricsContext
   const {
-    metricsOneStatus,
-    showMetricsOne,
+    metricsOneStatus, // tracks current status of metricsOne - used to switch between components
+    showMetricsOne, // boolean to determine if the metrics content should be displayed
   } = useMetricsContext();
 
+  // NOTICE: maybe refactore logic renderMetricsOne?
+  // ------------------------------- Function rendering components -------------------------------
+  // logic to render different components based on current metricsOneStatus
   const renderMetricsOne = () => {
     switch (metricsOneStatus) {
       case 1:
-        return <SelectFeelingsFamily />;
+        return <SelectFeelingsFamily />; // step 1: shows feelings family selection
       case 2:
-        return <StatisticOne />;
+        return <StatisticOne />; // step 2: shows the statistics
       default:
-        return <SelectFeelingsFamily />;
+        return <SelectFeelingsFamily />; // default: showse feelings family selection
     }
   };
 
+    // ------------------------------- Return JSX -------------------------------
+    // render the tab content for StatisticsOne, including a card to display messages or metrics
   return (
     <TabsContent value="account">
       <Card className="max-w-[350px]">
-        {/* <StatisticOneCardHeader /> */}
+
+        {/* displays a message in the header, if showMEtricsOne if false (not enough check-ins) */}
         {!showMetricsOne && (
           <CardHeader>
-            <MessageCheckInsM1 />
+            <MessageCheckInsM1 /> 
           </CardHeader>
         )}
 
+{/* display the appropriate content based on MetricsOneStaus */}
         <CardContent className="space-y-2">
-          {/* component für auswahl gefühlsfamilie */}
-          {/* component  für Anzeige Statistik*/}
+          {/* render either the feelings familys selection or the statistics */}
           {renderMetricsOne()}
         </CardContent>
-        {/* CardFooter brauchen wir wahrscheinlich nicht */}
-        {/* <CardFooter></CardFooter> */}
       </Card>
     </TabsContent>
   );

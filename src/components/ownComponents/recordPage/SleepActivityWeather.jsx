@@ -1,14 +1,16 @@
-// import Providers
+// ---------------------- import Context ---------------------------------------
 import { useCheckinContext } from "../../../utils/CheckinProvider";
 import { useUserContext } from "../../../utils/UserProvider";
 
-// import subcomponents
+// ----------------------- import Components -------------------------------------
+import SleepRecord from "./SleepRecord";
+import { BadgeInfoPopup } from "./BadgeInfoPopup";
+
+// ---------------------- import shadcn Components --------------------------------
 import { WeatherToggles } from "@/components/usedDemoComponents/WeatherToggles";
 import { ActivitySwitch } from "@/components/usedDemoComponents/ActivitySwitch";
-import SleepRecord from "./SleepRecord";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { BadgeInfoPopup } from "./BadgeInfoPopup";
 
 const badgeInfoMessages = {
   sleep:
@@ -20,13 +22,13 @@ const badgeInfoMessages = {
 };
 
 const SleepActivityWeather = () => {
-  // get States from UserProvider:
+  // ------------------------------- States from Contexts -----------------------
   const { config } = useUserContext();
 
-  // get States from CheckinProvider:
   const { showBadgeInfo, setShowBadgeInfo, handleBadgeClick } =
     useCheckinContext();
 
+  // ------------------------------- Render --------------------------------------
   return (
     <div className="flex flex-col items-center">
       <section className="mt-16">

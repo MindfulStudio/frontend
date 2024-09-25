@@ -9,7 +9,6 @@ import {
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { ChartContainer } from "@/components/ui/chart";
 
-
 // former TypeScript-part:
 // chart-configuration:
 const chartConfig = {
@@ -21,7 +20,6 @@ const chartConfig = {
     color: "black",
   },
 };
-
 
 export default function MetricsRadialChart({
   chartTitle,
@@ -37,13 +35,15 @@ export default function MetricsRadialChart({
   ];
 
   return (
-    <Card className="flex flex-col border-none shadow-none w-[110px] h-[140px]">
-      <CardContent className="flex-1 pl-0 pr-0 pb-0">
+    <Card className="flex flex-col border-none shadow-none w-[110px] h-[140px] mb-5 mr-5">
+      <CardContent className="flex flex-col justify-center items-center pl-0 pr-0 pb-0">
         <ChartContainer
           config={chartConfig}
-          className="mx-auto aspect-square max-h-[130px]"
+          className=" mx-auto aspect-square max-h-[130px]"
         >
-          <p className="font-bold text-sm text-center">{chartTitle}</p>
+          <p className="font-bold text-sm text-center w-[122px] ">
+            {chartTitle}
+          </p>
           {/* radial chart (black - depict percentage) */}
           <RadialBarChart
             data={chartData}

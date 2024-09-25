@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 
-// import Provider
+// --------------------------- Context Imports ----------------------------------
 import { useCheckinContext } from "@/utils/CheckinProvider";
 
-// import Components
+// --------------------------- Typo Component Imports ----------------------------
 import UserFeedbackText from "@/components/typo/UserFeedbackText";
+
+// --------------------------- Shadcn Component Imports --------------------------
 import { Slider } from "@/components/ui/slider";
 
-// Helper functions:
+// --------------------------- ------- Functions ---------------------------------
 
 // convert slider value (0-23) to German hours (17 Uhr - 16 Uhr)
 const sliderToHours = (value) => (value + 17) % 24;
@@ -21,6 +23,7 @@ const calculateSleepDuration = (start, end) => {
 };
 
 const SleepRecord = () => {
+  // --------------------------- States from Contexts --------------------------
   const {
     sleepingHours,
     setSleepingHours,
@@ -28,6 +31,7 @@ const SleepRecord = () => {
     fetchSleepingHours,
   } = useCheckinContext();
 
+  // --------------------- Local States ----------------------------------------
   const [range, setRange] = useState([6, 15]);
 
   // Fetch and use today's sleeping hours if available
@@ -54,6 +58,7 @@ const SleepRecord = () => {
     }
   };
 
+  // ------------------------------- Render --------------------------------------
   return (
     <div className=" mt-1 mb-1">
       {!sleepingHoursRecorded && (

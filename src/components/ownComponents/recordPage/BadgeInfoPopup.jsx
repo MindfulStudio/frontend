@@ -2,7 +2,8 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
 export const BadgeInfoPopup = ({ message, onClose }) => {
-  // Helper function to add a line break after the \n mark in the badge info message
+  // ------------------- Helper functions -----------------------------
+  // add a line break after the \n mark in the badge info message
   const renderBadgeInfoContent = (message) => {
     return message.split("\n").map((line, index) => (
       <p key={index} className={index === 0 ? "font-bold mb-2" : ""}>
@@ -11,7 +12,7 @@ export const BadgeInfoPopup = ({ message, onClose }) => {
     ));
   };
 
-  // Rendered JSX
+  // ------------------- Render ---------------------------------------
   return (
     <Card
       className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-primary/90 rounded p-4 shadow-lg text-sm text-white text-center group"

@@ -1,38 +1,41 @@
-import { useMetricsContext } from "@/utils/MetricsProvider";
-import { useEffect } from "react";
+// ------------------------------- importing components, hooks and context -------------------------------
+// components:
 import MetricsRadialChart from "../../../usedDemoComponents/MetricsRadialChart";
 import UserFeedbackText from "/src/components/typo/UserFeedbackText";
+// hooks:
+import { useEffect } from "react";
+// components providers:
+import { useMetricsContext } from "@/utils/MetricsProvider";
 
+// ------------------------------- StatisticTwo Component -------------------------------
 const StatisticTwo = () => {
-  const {
-    showMetricsTwo,
-    selectedTag,
-    setSelectTag,
-    statisticsByTag,
-    disableTag,
-    setDisableTag,
-    setMetricsTwoStatus,
-    fetchStatsByTag,
-  } = useMetricsContext();
+  // destructure values from MetricsContext
+  const { selectedTag, statisticsByTag, fetchStatsByTag } = useMetricsContext();
 
   // TODO: info, dass nur eine Option auswählbar
 
+  // ------------------------------- useEffect fetch statistics -------------------------------
+  // fetching statistic data based on selected tag when component mounts
   useEffect(() => {
     fetchStatsByTag(selectedTag.name);
   }, []);
 
+  // ------------------------------- helper function for caluculations -------------------------------
+  // function to calculate percentage and end angle for the radial chart
+  // this will be used to set the percentage and angle dynamically for eacht metrics
   // NOTICE: vielleicht in MetricsProvider auslagern - wird auch in StatisticTwo benötigt
   const caluclatePercentageAndEndAngle = (totalCount, singleCount) => {
     const valuePercentage = (
       (singleCount / totalCount).toFixed(10) * 100
     ).toFixed(0);
     const ValueEndAngle =
-      ((singleCount / totalCount).toFixed(10) * 100).toFixed(0) * 3.6;
+      ((singleCount / totalCount).toFixed(10) * 100).toFixed(0) * 3.6; // 360° for 100%
 
     return { valuePercentage, ValueEndAngle };
   };
 
-  // check if statisticsByTag available
+  // ------------------------------- user feedback -------------------------------
+  // if statistcs data is not available, display a user feedback message
   if (!statisticsByTag || !statisticsByTag.stats) {
     return (
       <UserFeedbackText
@@ -41,7 +44,8 @@ const StatisticTwo = () => {
       />
     );
   }
-
+  
+  // ------------------------------- Return JSX -------------------------------
   return (
     <div className="flex flex-col items-center">
       {/* selected tag */}
@@ -75,10 +79,10 @@ const StatisticTwo = () => {
                 );
 
               return (
-                <li key={stat.name}>
+                <li key={stat.name} className="">
                   {/* vllt. besseren key finden */}
                   {/* TODO: hinzufügen (dynamisch) von icons für die einzelnen gefühle */}
-                  <div className="flex flex-row justify-evenly py-2">
+                  <div className="flex flex-row justify-evenly">
                     <MetricsRadialChart
                       checkIns={`${stat.count} von ${statisticsByTag.total}`}
                       chartTitle={stat.name}

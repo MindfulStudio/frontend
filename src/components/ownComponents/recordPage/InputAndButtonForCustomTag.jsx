@@ -1,9 +1,12 @@
+// -------------------- import Context --------------------------------
 import { useTagContext } from "@/utils/TagProvider";
 
 export const InputAndButtonForCustomTag = ({ category }) => {
-  const { handleAddCustomTag, newTag, setNewTag, tagError, setTagError } =
+  // ------------------------------- States from Contexts -----------------------
+  const { handleAddCustomTag, newTag, setNewTag, setTagError } =
     useTagContext();
 
+  // ------------------------------- Render --------------------------------------
   return (
     <div className="mt-4">
       <button
