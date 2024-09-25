@@ -106,7 +106,9 @@ export const CheckinProvider = ({ children }) => {
     console.log("newCheckinData:", newCheckinData); // debugging
 
     try {
-      const response = await fetch("http://localhost:3000/user/checkins", {
+      const baseURL = import.meta.env.VITE_baseURL;
+      const basePathThree = import.meta.env.VITE_basePathThree;
+      const response = await fetch(`${baseURL}${basePathThree}checkins`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
