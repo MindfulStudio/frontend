@@ -1,13 +1,12 @@
-// ------------------------------- importing components and Context -------------------------------
+// ------------------------------- importing components and context -------------------------------
 // components:
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import StatisticOneTabsContent from "./StatisticOneTabsContent";
 import StatisticTwoTabsContent from "./StatisticTwoTabsContent";
-// context:
+// context providers:
 import { useMetricsContext } from "@/utils/MetricsProvider";
 
 // ------------------------------- MetricsPageTabs Component -------------------------------
-
 export function MetricsPageTabs() {
   // destructure values and functions from MetricsContext
   const { setMetricsOneStatus, setMetricsTwoStatus } = useMetricsContext();

@@ -10,7 +10,6 @@ import { useMetricsContext } from "@/utils/MetricsProvider";
 
 // ------------------------------- Metrics Page Component -------------------------------
 // Main component for displaying metrics and handling navigation
-
 const MetricsPage = () => {
   // destructure values and functions from MetricsContext
   const {
@@ -71,7 +70,6 @@ const MetricsPage = () => {
   }, [metricsTwoStatus]);
 
   // ------------------------------- Return JSX -------------------------------
-
   return (
     <main className="flex flex-col items-center w-full h-screen pt-[109px]">
       {showArrow && (
