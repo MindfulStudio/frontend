@@ -1,11 +1,12 @@
-// ------------------------------- importing components and hooks -------------------------------
+// ------------------------------- importing components, hooks and context -------------------------------
 // components:
 import { MetricsPageTabs } from "@/components/usedDemoComponents/MetricsPageTabs";
 import ArrowLeftIcon from "/src/assets/icons/arrow-left-svgrepo-com.svg";
 // hooks:
 import { useNavigate } from "react-router-dom";
-import { useMetricsContext } from "@/utils/MetricsProvider";
 import { useEffect } from "react";
+// context:
+import { useMetricsContext } from "@/utils/MetricsProvider";
 
 // ------------------------------- Metrics Page Component -------------------------------
 // Main component for displaying metrics and handling navigation
