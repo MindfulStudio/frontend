@@ -1,3 +1,4 @@
+// ---------------------------- Icon Imports ----------------------------------
 import HighlightText from "@/components/typo/HighlightText";
 import IlluAnspannung from "/src/assets/feelingsFamilies/Vector_Anspannung.svg";
 import IlluEntspannung from "/src/assets/feelingsFamilies/Vector_Entspannung.svg";
@@ -5,12 +6,14 @@ import IlluFreude from "/src/assets/feelingsFamilies/Vector_Freude.svg";
 import IlluGemischteGefühle from "/src/assets/feelingsFamilies/Vector_gemGefühle.svg";
 import IlluTrauer from "/src/assets/feelingsFamilies/Vector_Trauer.svg";
 
+// --------------------------- Component Imports --------------------------------
 import FeelingsSelector from "./FeelingsSelector.jsx";
 
-//++ import EmotionsProvider
+// --------------------------- Context Imports ----------------------------------
 import { useEmotionsContext } from "@/utils/EmotionsProvider";
 
 const CheckInFeelingDisplay = () => {
+  // ------------------------------- States from Contexts -----------------------
   const {
     feelingsFamilies, //!array of emotionfamily-objects with id and name properties
     handleFamilySelect,
