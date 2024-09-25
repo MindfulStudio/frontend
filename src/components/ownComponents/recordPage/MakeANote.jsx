@@ -1,11 +1,15 @@
-// import Provider
+// -------------- import Context ------------------------------------------
 import { useCheckinContext } from "@/utils/CheckinProvider";
 
-// import Components
+// -------------------- import Typo Components ----------------------------
 import UserFeedbackText from "@/components/typo/UserFeedbackText";
+
+// ----------------------- import shadcn Components ----------------------
 import { Card } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
+
+// ----------------------- import Components --------------------------
 import BadgeInfoPopup from "./BadgeInfoPopup";
 
 const badgeInfoMessages = {
@@ -14,6 +18,7 @@ const badgeInfoMessages = {
 };
 
 const MakeANote = () => {
+  // ------------------------------- States from Contexts -----------------------
   const {
     comment,
     setComment,
@@ -22,10 +27,13 @@ const MakeANote = () => {
     handleBadgeClick,
   } = useCheckinContext();
 
+  // ------------------------------- Functions -----------------------------
   const handleUserComment = (e) => {
     setComment(e.target.value);
     console.log(comment);
   };
+
+  // ------------------------------- Render --------------------------------------
 
   return (
     <div className="flex flex-col items-center w-full max-w-[390px] mx-auto">
