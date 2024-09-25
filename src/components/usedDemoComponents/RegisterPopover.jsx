@@ -10,17 +10,17 @@ export function RegisterPopover({
   title,
   titlePopover,
   descriptionPopover,
-  textPopover,
+  contentPopover,
 }) {
   return (
     <Popover>
       <PopoverTrigger asChild>
         {/* title => content of the button that opens the popover */}
-        <Button variant="link" className="pl-0">
+        <Button variant="link" className="pl-0 pr-0">
           {title}
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-80 ">
+      <PopoverContent className="w-80 max-h-96 overflow-auto p-4">
         <div className="grid gap-4">
           <div>
             {/* titlePopover =>  heading popover*/}
@@ -30,8 +30,8 @@ export function RegisterPopover({
               {descriptionPopover}
             </p>
 
-            {/* textPopover => small text / tags / single feelings displayed in popover */}
-            <div className="text-sm">{textPopover}</div>
+            {/* contentPopover => small text / tags / single feelings displayed in popover */}
+            {contentPopover}
           </div>
         </div>
       </PopoverContent>
