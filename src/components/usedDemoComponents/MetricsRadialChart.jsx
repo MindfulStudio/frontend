@@ -35,7 +35,7 @@ export default function MetricsRadialChart({
   ];
 
   return (
-    <Card className="flex flex-col border-none shadow-none w-[110px] h-[140px] mb-5 mr-6">
+    <Card className="flex flex-col border-none shadow-none w-[110px] h-[140px] mb-5 mr-5">
       <CardContent className="flex flex-col justify-center items-center pl-0 pr-0 pb-0">
         <ChartContainer
           config={chartConfig}
