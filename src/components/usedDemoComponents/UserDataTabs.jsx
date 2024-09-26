@@ -11,6 +11,8 @@ import UserFeedbackText from "../typo/UserFeedbackText";
 import EyeOpenIcon from "/src/assets/icons/eye-svgrepo-com.svg";
 import EyeClosedIcon from "/src/assets/icons/eye-close-svgrepo-com.svg";
 
+import Delete from "/src/assets/icons/delete-2-svgrepo-com.svg";
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ConfigSwitch } from "./ConfigSwitch";
 import { Label } from "../ui/label";
@@ -20,9 +22,14 @@ import { useNavigate } from "react-router-dom";
 
 import { deleteUser } from "../../utils/services/deleteUser.js";
 
+import { useAuthContext } from "../../utils/contexts/AuthProvider.jsx";
+
 export function UserDataTabs() {
   // TODO: Logik für "Passwort vergessen" implementieren (Bonus)
   // TODO: Logik für "Email"-Änderung implementieren (Bonus) => hier wäre verification-Email nötig
+
+  // States from Context
+  const { setIsLoggedIn, setIsLoggedOut } = useAuthContext();
 
   // show/hide old password
   const [showOldPassword, setShowOldPassword] = useState(false);
@@ -164,7 +171,7 @@ export function UserDataTabs() {
   };
 
   // For Navigation after userdelete
-  const navigateBackToHome = useNavigate();
+  /* const navigateBackToHome = useNavigate(); */
 
   // function: handle user deletion
   const handleDeleteUser = async () => {
@@ -174,7 +181,9 @@ export function UserDataTabs() {
 
       if (deleteResult) {
         console.log("Benutzerprofil erfolgreich gelöscht");
-        navigateBackToHome("/");
+        setIsLoggedIn(false);
+        setIsLoggedOut(true);
+        /* navigateBackToHome("/"); */
       }
     }
   };
@@ -266,14 +275,19 @@ export function UserDataTabs() {
                 <UserFeedbackText content={error.message} type="error" />
               )}
             </CardContent>
-            <CardFooter>
+            <CardFooter className="flex justify-between">
               <Button type="submit" disabled={!isChanged || valError}>
                 aktualisieren
               </Button>
 
               {/* User delete  */}
-              <Button type="button" onClick={handleDeleteUser}>
-                Profil löschen
+              <Button
+                variant="secondary"
+                type="button"
+                onClick={handleDeleteUser}
+              >
+                <p>Profil löschen</p>
+                <Delete className="h-5 w-5 ml-1" />
               </Button>
             </CardFooter>
           </form>
