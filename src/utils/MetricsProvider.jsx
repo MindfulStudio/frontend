@@ -7,7 +7,7 @@ import { getAllCheckins } from "./services/getAllCheckins";
 import { getStatisticsByFamily } from "./services/getStatisticsByFamily";
 import { getStatisticsByTag } from "./services/getStatisticsByTag";
 import { renderTagListbyCategoryMetrics } from "./helpers/renderTagListbyCategoryMetrics";
-import { handleTagToggle } from "./helpers/handleTagToggle";
+import { handleTagToggleMetric } from "./helpers/handleTagToggleMetric";
 
 const MetricsContext = createContext();
 
@@ -52,7 +52,6 @@ const MetricsProvider = ({ children }) => {
   // ----------------------------------- Values---------------------------------
   // statisticOne
   const maxMetricsOneStatus = 2;
-
   // statisticTwo
   const maxMetricsTwoStatus = 2;
 
@@ -137,7 +136,7 @@ const MetricsProvider = ({ children }) => {
 
   // ----------------------------------- Function - handle selcting/deselecting tags ---------------------------------
   const selectTag = (tag) =>
-    handleTagToggle(tag, setSelectTag, handleLoadStatisitcsTwo);
+    handleTagToggleMetric(tag, setSelectTag, handleLoadStatisitcsTwo);
 
   // ----------------------------------- Function - render tags ---------------------------------
 

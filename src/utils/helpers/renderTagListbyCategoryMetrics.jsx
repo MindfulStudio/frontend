@@ -5,7 +5,7 @@ export const renderTagListbyCategoryMetrics = (
   standardTags,
   customTags,
   selectedTag,
-  handleTagToggle
+  handleTagToggleMetric
 ) => {
   const categoryTags = standardTags.find((tag) => tag.category === category);
   const categoryTagsCustom = customTags[category];
@@ -21,7 +21,7 @@ export const renderTagListbyCategoryMetrics = (
             className={`cursor-pointer p-2 border`}
             data-state={selectedTag?.name === tag ? "on" : ""}
             onClick={() =>
-              handleTagToggle({
+              handleTagToggleMetric({
                 name: tag,
                 isDefault: true,
                 category: category,

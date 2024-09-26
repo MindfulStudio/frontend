@@ -1,4 +1,4 @@
-export const handleTagToggle = (tag, 
+export const handleTagToggleMetric = (tag, 
     setSelectTag, 
     handleLoadStatisitcsTwo) => {
     setSelectTag((prevSelectedTag) => {
