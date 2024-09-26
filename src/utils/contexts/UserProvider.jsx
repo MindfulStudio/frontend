@@ -55,8 +55,7 @@ const UserProvider = ({ children }) => {
         loadAllCustoms,
         loadConfigData,
         handleDeactivateCustom,
-      }}
-    >
+      }}>
       {children}
     </UserContext.Provider>
   );

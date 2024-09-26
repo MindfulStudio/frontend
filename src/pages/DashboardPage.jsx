@@ -17,7 +17,7 @@ const DashboardPage = () => {
   // ------------------------------- Fetching customs ---------------------------
   useEffect(() => {
     loadAllCustoms();
-  }, [loadAllCustoms]);
+  }, []);
 
   // -------------------------  Timer to clear userfeedback ---------------------
   useEffect(() => {
