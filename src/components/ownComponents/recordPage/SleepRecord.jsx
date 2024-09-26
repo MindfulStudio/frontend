@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 // --------------------------- Context Imports ----------------------------------
-import { useCheckinContext } from "@/utils/CheckinProvider";
+import { useCheckinContext } from "@/utils/contexts/CheckinProvider";
 
 // --------------------------- Typo Component Imports ----------------------------
 import UserFeedbackText from "@/components/typo/UserFeedbackText";
@@ -28,7 +28,7 @@ const SleepRecord = () => {
     sleepingHours,
     setSleepingHours,
     sleepingHoursRecorded,
-    fetchSleepingHours,
+    handleGetSleepingHours,
   } = useCheckinContext();
 
   // --------------------- Local States ----------------------------------------
@@ -37,7 +37,7 @@ const SleepRecord = () => {
   // Fetch and use today's sleeping hours if available
   useEffect(() => {
     setSleepingHours(9);
-    fetchSleepingHours();
+    handleGetSleepingHours();
   }, []);
 
   // Set the range based on recorded sleeping hours

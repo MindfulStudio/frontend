@@ -1,6 +1,6 @@
 // ---------------------- import Context ---------------------------------------
-import { useCheckinContext } from "../../../utils/CheckinProvider";
-import { useUserContext } from "../../../utils/UserProvider";
+import { useCheckinContext } from "../../../utils/contexts/CheckinProvider";
+import { useUserContext } from "../../../utils/contexts/UserProvider";
 
 // ----------------------- import Components -------------------------------------
 import SleepRecord from "./SleepRecord";

@@ -16,7 +16,7 @@ import EyeClosedIcon from "/src/assets/icons/eye-close-svgrepo-com.svg";
 import { CheckboxStayLoggedIn } from "./CheckboxStayLoggedIN";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuthContext } from "../../utils/AuthProvider";
+import { useAuthContext } from "../../utils/contexts/AuthProvider";
 
 export function LoginTabs() {
   // userData from login:

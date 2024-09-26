@@ -1,14 +1,13 @@
-// import { useEmotionsContext } from "@/utils/EmotionsProvider";
 import { useEffect, useState } from "react";
 import { PopoverDots } from "@/components/usedDemoComponents/Popover";
 import { Slice } from "lucide-react";
+import { getCheckinsFromToday } from "../../../utils/services/getCheckinsFromToday";
 
 // TODO: popover weite und position
 
 const GreetingComponent = () => {
   const baseURL = import.meta.env.VITE_baseURL;
   const basePathTwo = import.meta.env.VITE_basePathTwo;
-  const basePathThree = import.meta.env.VITE_basePathThree;
 
   const [username, setUsername] = useState(null);
   const [emotionsFromToday, setEmotionsFromToday] = useState(null);
@@ -21,17 +20,6 @@ const GreetingComponent = () => {
   const getUserData = async () => {
     try {
       const res = await fetch(`${baseURL}${basePathTwo}`, {
-        credentials: "include",
-      });
-      const data = await res.json();
-      return data;
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  const getCheckinsFromToday = async () => {
-    try {
-      const res = await fetch(`${baseURL}${basePathThree}checkins/today`, {
         credentials: "include",
       });
       const data = await res.json();
