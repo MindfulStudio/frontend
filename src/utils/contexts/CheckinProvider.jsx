@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import { useEmotionsContext } from "./EmotionsProvider";
-import { useTagContext } from "../TagProvider.jsx";
+import { useTagContext } from "./TagProvider.jsx";
 import { postCheckin } from "../services/postCheckin.js";
 import { getSleepingHours } from "../helpers/getSleepingHours.js";
 

@@ -23,7 +23,7 @@ import { Button } from "@/components/ui/button";
 // --------------------------- Context Imports ----------------------------------
 import { useEmotionsContext } from "@/utils/contexts/EmotionsProvider";
 import { useRecordProgressContext } from "@/utils/contexts/RecordProgressProvider";
-import { useTagContext } from "@/utils/TagProvider";
+import { useTagContext } from "@/utils/contexts/TagProvider";
 import { useCheckinContext } from "@/utils/contexts/CheckinProvider";
 import { useUserContext } from "../utils/contexts/UserProvider";
 

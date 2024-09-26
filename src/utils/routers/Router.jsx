@@ -13,7 +13,7 @@ import UserDataPage from "../../pages/UserDataPage";
 import InfoPage from "../../pages/InfoPage";
 // Providers
 import EmotionsProvider from "../contexts/EmotionsProvider";
-import TagProvider from "../TagProvider";
+import TagProvider from "../contexts/TagProvider";
 
 import RecordProgressProvider from "../contexts/RecordProgressProvider";
 import UserProvider from "../contexts/UserProvider";

@@ -1,10 +1,9 @@
 // -------------------- import Context --------------------------------
-import { useTagContext } from "@/utils/TagProvider";
+import { useTagContext } from "@/utils/contexts/TagProvider";
 
 export const InputAndButtonForCustomTag = ({ category }) => {
   // ------------------------------- States from Contexts -----------------------
-  const { handleAddCustomTag, newTag, setNewTag, setTagError } =
-    useTagContext();
+  const { onAddCustomTag, newTag, setNewTag, setTagError } = useTagContext();
 
   // ------------------------------- Render --------------------------------------
   return (
@@ -12,7 +11,7 @@ export const InputAndButtonForCustomTag = ({ category }) => {
       <button
         onClick={() => {
           if (category === newTag.category) {
-            handleAddCustomTag(newTag, category);
+            onAddCustomTag(newTag, category);
           }
         }}
         className="w-7 h-7 border rounded-full"

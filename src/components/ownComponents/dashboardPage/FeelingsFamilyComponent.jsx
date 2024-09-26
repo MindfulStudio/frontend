@@ -23,7 +23,6 @@ const FeelingsFamilyComponent = () => {
   const handleNavigateToRecordPage = (familyId) => {
     try {
       onFamilySelect(familyId);
-      console.log("onFamilySelect called");
       navigate("/recordfeeling");
     } catch (error) {
       navigate("/error");
