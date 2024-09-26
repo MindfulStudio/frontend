@@ -10,13 +10,13 @@ import IlluTrauer from "/src/assets/feelingsFamilies/Vector_Trauer.svg";
 import FeelingsSelector from "./FeelingsSelector.jsx";
 
 // --------------------------- Context Imports ----------------------------------
-import { useEmotionsContext } from "@/utils/EmotionsProvider";
+import { useEmotionsContext } from "@/utils/contexts/EmotionsProvider";
 
 const CheckInFeelingDisplay = () => {
   // ------------------------------- States from Contexts -----------------------
   const {
     feelingsFamilies, //!array of emotionfamily-objects with id and name properties
-    handleFamilySelect,
+    onFamilySelect,
     selectedFamily, //! id of the selected family
   } = useEmotionsContext();
 
@@ -31,7 +31,7 @@ const CheckInFeelingDisplay = () => {
               ? "opacity-100"
               : "opacity-50"
           }`}
-          onClick={() => handleFamilySelect(feelingsFamilies[0].id)}
+          onClick={() => onFamilySelect(feelingsFamilies[0].id)}
         >
           <div className="flex flex-col items-center">
             <IlluAnspannung className=" w-[56.5px] h-[57.6px]" />
@@ -46,7 +46,7 @@ const CheckInFeelingDisplay = () => {
               ? "opacity-100"
               : "opacity-50"
           }`}
-          onClick={() => handleFamilySelect(feelingsFamilies[1].id)}
+          onClick={() => onFamilySelect(feelingsFamilies[1].id)}
         >
           <IlluFreude className="flex-shrink-0 w-[49px] h-[61.5px]" />
           <HighlightText highlighttext="Freude" fontsize="text-sm" />
@@ -65,7 +65,7 @@ const CheckInFeelingDisplay = () => {
               ? "opacity-100"
               : "opacity-50"
           }`}
-          onClick={() => handleFamilySelect(feelingsFamilies[4].id)}
+          onClick={() => onFamilySelect(feelingsFamilies[4].id)}
         >
           <div className="flex flex-col items-center">
             <IlluGemischteGefühle className=" w-[33.2px] h-[47.8px]" />
@@ -86,7 +86,7 @@ const CheckInFeelingDisplay = () => {
               ? "opacity-100"
               : "opacity-50"
           }`}
-          onClick={() => handleFamilySelect(feelingsFamilies[2].id)}
+          onClick={() => onFamilySelect(feelingsFamilies[2].id)}
         >
           <IlluEntspannung className=" w-[112.2px] h-[19.6px] " />
           <HighlightText highlighttext="Entspannung" fontsize="text-sm" />
@@ -99,7 +99,7 @@ const CheckInFeelingDisplay = () => {
               ? "opacity-100"
               : "opacity-50"
           }`}
-          onClick={() => handleFamilySelect(feelingsFamilies[3].id)}
+          onClick={() => onFamilySelect(feelingsFamilies[3].id)}
         >
           <IlluTrauer className="flex-shrink-0 w-[24.7px] h-[61px] ml-3" />
           <HighlightText highlighttext="Trauer" fontsize="text-sm ml-3" />

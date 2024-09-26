@@ -1,18 +1,15 @@
 import { createContext, useContext, useState } from "react";
 import { useEmotionsContext } from "./EmotionsProvider";
-import { useTagContext } from "./TagProvider";
+import { useTagContext } from "../TagProvider.jsx";
+import { postCheckin } from "../services/postCheckin.js";
+import { getSleepingHours } from "../helpers/getSleepingHours.js";
 
 const CheckinContext = createContext();
 
 export const useCheckinContext = () => useContext(CheckinContext);
 
 export const CheckinProvider = ({ children }) => {
-  const [checkinData, setCheckinData] = useState({
-    emotion: {},
-    tags: [],
-    comment: "",
-    config: {},
-  });
+  const [checkinData, setCheckinData] = useState({});
 
   // State to store the feedback message and its type (success or error)
   const [checkinUserFeedback, setCheckinUserFeedback] = useState({
@@ -48,36 +45,12 @@ export const CheckinProvider = ({ children }) => {
 
   const { selectedTags, setSelectedTags } = useTagContext();
 
-  const getCheckinsFromToday = async () => {
-    const baseURL = import.meta.env.VITE_baseURL;
-    const path = import.meta.env.VITE_basePathThree;
-    try {
-      const res = await fetch(`${baseURL}${path}checkins/today`, {
-        credentials: "include",
-      });
-      const data = await res.json();
-      return data;
-    } catch (error) {
-      console.error(error);
-    }
+  // Access fetch function for fetching today's sleepingHours if available
+  const handleGetSleepingHours = () => {
+    getSleepingHours(setSleepingHours, setSleepingHoursRecorded);
   };
 
-  // Fetch function for fetching today's sleepingHours if available
-  const fetchSleepingHours = async () => {
-    try {
-      const checkins = await getCheckinsFromToday();
-      if (checkins && checkins.data[0]) {
-        // set SleepingHours to value of today's first checkin
-        const hours = checkins.data[0].config.sleepingHours;
-        setSleepingHours(hours);
-        setSleepingHoursRecorded(true);
-      }
-    } catch (error) {
-      console.error("Error fetching sleeping hours:", error);
-    }
-  };
-
-  // Fetch function for submitting the checkin
+  // Function for submitting the checkin
   const handleCheckinSubmit = async () => {
     setIsLoading(true);
     setError(null);
@@ -103,41 +76,16 @@ export const CheckinProvider = ({ children }) => {
 
     setCheckinData(newCheckinData);
 
-    console.log("newCheckinData:", newCheckinData); // debugging
-
     try {
-      const baseURL = import.meta.env.VITE_baseURL;
-      const basePathThree = import.meta.env.VITE_basePathThree;
-      const response = await fetch(`${baseURL}${basePathThree}checkins`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newCheckinData),
-        credentials: "include", // Send cookies
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json(); // Try to get detailed error message from backend;
-        console.error("Error details from backend:", errorData);
-        throw new Error(errorData.message || "Failed to submit check-in");
-      }
-
-      const data = await response.json();
+      await postCheckin(newCheckinData);
       // After successful submission, show success feedback and reset states
       setCheckinUserFeedback({
         message: "Check-in successfully submitted!",
         type: "info",
       });
-      console.log("Check-in successful:", data); // debugging
 
       // Reset all states after successful submission
-      setCheckinData({
-        emotion: {},
-        tags: [],
-        comment: "",
-        config: {},
-      });
+      setCheckinData({});
       setComment("");
       setSleepingHours("");
       setIsActive(false);
@@ -145,14 +93,9 @@ export const CheckinProvider = ({ children }) => {
       setSelectedFamily(null);
       setSelectedFeeling(null);
       setSelectedTags([]);
-
       setIsLoading(false);
-
-      console.log("checkindata cleared:", checkinData); // debugging
-
-      return data;
     } catch (error) {
-      console.error("Error during check-in submission:", error);
+      console.log("error", error.message);
       setError(error.message);
       setCheckinUserFeedback({ message: error.message, type: "error" });
       setIsLoading(false);
@@ -177,7 +120,7 @@ export const CheckinProvider = ({ children }) => {
         sleepingHours,
         setSleepingHours,
         sleepingHoursRecorded,
-        fetchSleepingHours,
+        handleGetSleepingHours,
         isActive,
         setIsActive,
         selectedWeather,

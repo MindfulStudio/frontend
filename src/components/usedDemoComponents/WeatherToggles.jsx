@@ -14,7 +14,7 @@ import CloudyWhite from "/src/assets/icons/sun-cloudy-svgrepo-com-1.svg";
 import SunnyWhite from "/src/assets/icons/sun-svgrepo-com-2.svg";
 import SnowWhite from "/src/assets/icons/snow-svgrepo-com-3.svg";
 
-import { useCheckinContext } from "@/utils/CheckinProvider";
+import { useCheckinContext } from "@/utils/contexts/CheckinProvider";
 
 export function WeatherToggles() {
   const { selectedWeather, setSelectedWeather } = useCheckinContext();

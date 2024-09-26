@@ -12,18 +12,18 @@ import IlluTrauer from "/src/assets/feelingsFamilies/Vector_Trauer.svg";
 - usennavigate hook für navigation
 */
 
-import { useEmotionsContext } from "@/utils/EmotionsProvider";
+import { useEmotionsContext } from "@/utils/contexts/EmotionsProvider";
 import { useNavigate } from "react-router-dom";
 
 const FeelingsFamilyComponent = () => {
-  const { feelingsFamilies, handleFamilySelect, selectedFamily } =
+  const { feelingsFamilies, onFamilySelect, selectedFamily } =
     useEmotionsContext();
   const navigate = useNavigate();
 
   const handleNavigateToRecordPage = (familyId) => {
     try {
-      handleFamilySelect(familyId);
-      console.log("handleFamilySelect called");
+      onFamilySelect(familyId);
+      console.log("onFamilySelect called");
       navigate("/recordfeeling");
     } catch (error) {
       navigate("/error");

@@ -1,10 +1,7 @@
 import { createContext, useContext, useState } from "react";
 
 const RecordProgressContext = createContext();
-
-export const useRecordProgressContext = () => {
-  return useContext(RecordProgressContext);
-};
+export const useRecordProgressContext = () => useContext(RecordProgressContext);
 
 const RecordProgressProvider = ({ children }) => {
   const [checkinStep, setCheckinStep] = useState(1);

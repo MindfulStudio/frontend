@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import defaultTags from "../data/standardTags.json";
-import { useUserContext } from "./UserProvider";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { useUserContext } from "./contexts/UserProvider";
 // import { Button } from "@/components/ui/button";
 // import Delete from "/src/assets/icons/delete-2-svgrepo-com.svg";
 
@@ -42,7 +42,6 @@ const MetricsProvider = ({ children }) => {
   // show arrow to navigate back:
   const [showArrow, setShowArrow] = useState(false);
 
-
   // StatisticTwo - defaultTags
   const [standardTags, setStandardTags] = useState(defaultTags);
 
@@ -76,7 +75,6 @@ const MetricsProvider = ({ children }) => {
   };
 
   // ----------------------------------- Function -  fetch getStatisticsByFamily ---------------------------------
-
 
   // get statistics by emotion family
   const getStatisticsByFamily = async () => {
@@ -182,7 +180,7 @@ const MetricsProvider = ({ children }) => {
       }
     });
   };
-  console.log({ selectedTag });
+  // console.log({ selectedTag });
 
   // ----------------------------------- Function - render tags ---------------------------------
 

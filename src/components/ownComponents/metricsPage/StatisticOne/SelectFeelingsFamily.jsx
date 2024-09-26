@@ -10,7 +10,7 @@ import { CardHeader } from "@/components/ui/card";
 import MessageMetricsM1 from "./MessageMetricsM1";
 
 // context providers:
-import { useEmotionsContext } from "@/utils/EmotionsProvider";
+import { useEmotionsContext } from "@/utils/contexts/EmotionsProvider";
 import { useMetricsContext } from "@/utils/MetricsProvider";
 
 // ------------------------------- SelectFeelingsFamily Component -------------------------------

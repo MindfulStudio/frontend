@@ -1,6 +1,6 @@
 // import Provider
-import { useCheckinContext } from "@/utils/CheckinProvider";
-import { useEmotionsContext } from "@/utils/EmotionsProvider";
+import { useCheckinContext } from "@/utils/contexts/CheckinProvider";
+import { useEmotionsContext } from "@/utils/contexts/EmotionsProvider";
 import { useTagContext } from "@/utils/TagProvider";
 
 // import Components

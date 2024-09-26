@@ -1,5 +1,5 @@
 // -------------- import Context ------------------------------------------
-import { useCheckinContext } from "@/utils/CheckinProvider";
+import { useCheckinContext } from "@/utils/contexts/CheckinProvider";
 
 // ----------------------- import shadcn Components ----------------------
 import { Card } from "@/components/ui/card";

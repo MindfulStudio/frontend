@@ -1,7 +1,7 @@
 // import Providers:
 import { useTagContext } from "@/utils/TagProvider";
-import { useEmotionsContext } from "@/utils/EmotionsProvider";
-import { useCheckinContext } from "../../../utils/CheckinProvider";
+import { useEmotionsContext } from "@/utils/contexts/EmotionsProvider";
+import { useCheckinContext } from "../../../utils/contexts/CheckinProvider";
 
 // import Components:
 import InputAndButtonForCustomTag from "./InputAndButtonForCustomTag";
