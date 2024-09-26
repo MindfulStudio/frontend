@@ -16,6 +16,9 @@ import { ConfigSwitch } from "./ConfigSwitch";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { deleteUser } from "../../utils/services/deleteUser.js";
 
 export function UserDataTabs() {
   // TODO: Logik für "Passwort vergessen" implementieren (Bonus)
@@ -160,6 +163,22 @@ export function UserDataTabs() {
     }
   };
 
+  // For Navigation after userdelete
+  const navigateBackToHome = useNavigate();
+
+  // function: handle user deletion
+  const handleDeleteUser = async () => {
+    // TODO: explicit UI for delete confirm dialog, not window
+    if (window.confirm("Möchtest du dein Profil wirklich löschen?")) {
+      const deleteResult = await deleteUser(setError);
+
+      if (deleteResult) {
+        console.log("Benutzerprofil erfolgreich gelöscht");
+        navigateBackToHome("/");
+      }
+    }
+  };
+
   return (
     <Tabs defaultValue="account" className="w-[350px]">
       <TabsList className="grid w-full grid-cols-2">
@@ -250,6 +269,11 @@ export function UserDataTabs() {
             <CardFooter>
               <Button type="submit" disabled={!isChanged || valError}>
                 aktualisieren
+              </Button>
+
+              {/* User delete  */}
+              <Button type="button" onClick={handleDeleteUser}>
+                Profil löschen
               </Button>
             </CardFooter>
           </form>
