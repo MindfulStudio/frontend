@@ -2,8 +2,8 @@ import HighlightText from "@/components/typo/HighlightText";
 import { Button } from "@/components/ui/button";
 import { NavLink, useNavigate } from "react-router-dom";
 import Element from "../assets/elements/floralElement.svg";
-import { useAuthContext } from "@/utils/AuthProvider";
 import { useEffect } from "react";
+import { useAuthContext } from "../utils/contexts/AuthProvider";
 
 const HomePage = () => {
   const { isLoggedIn } = useAuthContext();

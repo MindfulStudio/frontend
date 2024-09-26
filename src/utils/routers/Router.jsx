@@ -14,11 +14,11 @@ import InfoPage from "../../pages/InfoPage";
 // Providers
 import EmotionsProvider from "../contexts/EmotionsProvider";
 import TagProvider from "../TagProvider";
+
 import RecordProgressProvider from "../contexts/RecordProgressProvider";
 import UserProvider from "../contexts/UserProvider";
-import AuthProvider from "../AuthProvider";
-
 import CheckinProvider from "../contexts/CheckinProvider";
+import AuthProvider from "../contexts/AuthProvider";
 
 import MetricsProvider from "../MetricsProvider";
 import PrivateRoute from "./PrivateRoute";
