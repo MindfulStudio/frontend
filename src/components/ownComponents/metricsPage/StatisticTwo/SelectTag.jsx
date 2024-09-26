@@ -1,6 +1,6 @@
 import { CardHeader } from "@/components/ui/card";
 import { useMetricsContext } from "@/utils/MetricsProvider";
-import { useTagContext } from "@/utils/TagProvider";
+import { useTagContext } from "@/utils/contexts/TagProvider";
 import MessageMetricsM2 from "./MessageMetricsM2";
 import UserFeedbackText from "@/components/typo/UserFeedbackText";
 import { useEffect, useState } from "react";
@@ -18,7 +18,7 @@ const SelectTag = () => {
     renderTagListbyCategoryMetrics,
 
   } = useMetricsContext();
-  const { renderTagListbyCategory, tagError } = useTagContext();
+  const { tagError } = useTagContext();
 
   // TODO: ausgewähltes Tag in setSelectedTag speichern
 

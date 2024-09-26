@@ -9,7 +9,6 @@ export const handleFamilySelect = (
   setSelectedFeeling,
   setNewFeelingError
 ) => {
-  console.log("test2");
   setSelectedFamily(familyId);
 
   // Find the corresponding emotions family object in the data array, based on id:

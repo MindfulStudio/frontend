@@ -1,7 +1,7 @@
 // import Provider
 import { useCheckinContext } from "@/utils/contexts/CheckinProvider";
 import { useEmotionsContext } from "@/utils/contexts/EmotionsProvider";
-import { useTagContext } from "@/utils/TagProvider";
+import { useTagContext } from "@/utils/contexts/TagProvider";
 
 // import Components
 import { InputAndButtonForCustomTag } from "@/components/ownComponents/recordPage/InputAndButtonForCustomTag.jsx";
@@ -9,6 +9,7 @@ import UserFeedbackText from "@/components/typo/UserFeedbackText";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { BadgeInfoPopup } from "./BadgeInfoPopup";
+import { RenderTagListbyCategory } from "./RenderTagListByCategory";
 
 const badgeInfoMessages = {
   womit:
@@ -18,7 +19,7 @@ const badgeInfoMessages = {
 const TagsContext = () => {
   // States from Providers:
   const { selectedFeeling } = useEmotionsContext();
-  const { renderTagListbyCategory, tagError } = useTagContext();
+  const { tagError } = useTagContext();
   const { showBadgeInfo, setShowBadgeInfo, handleBadgeClick } =
     useCheckinContext();
 
@@ -40,7 +41,7 @@ const TagsContext = () => {
           </Badge>
         </div>
         <Card className="w-[290px] bg-white p-[22px] text-center mt-16 h-[423px] overflow-y-scroll">
-          {renderTagListbyCategory("was")}
+          {RenderTagListbyCategory("was")}
 
           {/* Add custom tags */}
           <InputAndButtonForCustomTag category={"was"} />

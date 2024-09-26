@@ -1,5 +1,5 @@
 // import Providers:
-import { useTagContext } from "@/utils/TagProvider";
+import { useTagContext } from "@/utils/contexts/TagProvider";
 import { useEmotionsContext } from "@/utils/contexts/EmotionsProvider";
 import { useCheckinContext } from "../../../utils/contexts/CheckinProvider";
 
@@ -9,6 +9,7 @@ import UserFeedbackText from "@/components/typo/UserFeedbackText";
 import { BadgeInfoPopup } from "./BadgeInfoPopup";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { RenderTagListbyCategory } from "./RenderTagListByCategory";
 
 const badgeInfoMessages = {
   wann: "Wozu wird diese Information gespeichert? \n Wir werten diese Angabe für dich aus, um zeitliche Muster deiner Gefühle zu erkennen.",
@@ -21,7 +22,7 @@ const TagsPlaceTimePeople = () => {
   // States from Providers:
   const { selectedFeeling } = useEmotionsContext();
 
-  const { renderTagListbyCategory, tagError, selectedTags } = useTagContext();
+  const { tagError, selectedTags } = useTagContext();
 
   const { showBadgeInfo, setShowBadgeInfo, handleBadgeClick } =
     useCheckinContext();
@@ -54,7 +55,7 @@ const TagsPlaceTimePeople = () => {
         }`}
       >
         <ul className="flex flex-wrap gap-3 justify-center list-none p-0">
-          {renderTagListbyCategory(category)}
+          {RenderTagListbyCategory(category)}
         </ul>
         <InputAndButtonForCustomTag category={category} />
         {tagError?.category === category && (
