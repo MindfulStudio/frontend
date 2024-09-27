@@ -208,7 +208,7 @@ export function UserDataTabs() {
               {/* profile-image */}
               <div className="space-y-1  w-24 h-24 rounded-full">
                 <img
-                  src="/public/profileImages/profileImgOne.png"
+                  src="/profileImages/profileImgOne.png"
                   alt="profile Image"
                 />
               </div>
