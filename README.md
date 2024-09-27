@@ -1,4 +1,8 @@
-# Mental Health Application (Working Title)
+# gemischteGefühle - Mental Health Application
+
+
+<details>
+<summary > Description (English) </summary>
 
 ## 📖 Description
 
@@ -50,13 +54,13 @@ To be added.
 
 [Barış Balcı](https://github.com/barisbalcimusic), [hannahnier](https://github.com/hannahnier), [luisePkt](https://github.com/luisePkt), [Nadja Probst](https://github.com/nadjascodejourney)
 
----
 
-## 📄 [Zur deutschen Version](#deutsche-version)
+</details>
 
----
 
-# Deutsche Version
+<details>
+<summary > Beschreibung (Deutsch) </summary>
+
 
 ## 📖 Beschreibung
 
@@ -104,6 +108,8 @@ Für Anregungen und Feedback gerne direkt hier über GitHub melden.
 
 Wird noch ergänzt.
 
+
 ## 📧 Kontakt
 
 [Barış Balcı](https://github.com/barisbalcimusic), [hannahnier](https://github.com/hannahnier), [luisePkt](https://github.com/luisePkt), [Nadja Probst](https://github.com/nadjascodejourney)
+</details>
