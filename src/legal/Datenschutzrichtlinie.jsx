@@ -29,13 +29,13 @@ const datenschutzrichtlinie = (
       Bei Fragen zur Datenspeicherung oder zur Verarbeitung deiner Daten kannst
       du dich jederzeit an uns wenden:
     </p>
-    <p className="text-sm font-bold mb-2">
+    <p className="text-sm font-bold mb-2 italic">
       <a href="mailto:gemischtegefuehle.app@gmail.com">
         gemischtegefuehle.app@gmail.com
       </a>{" "}
     </p>
     <h2 className="text-sm mb-2">Oder kontaktier uns auf GitHub:</h2>
-    <p className="text-sm font-bold mb-2">
+    <p className="text-sm font-bold mb-2 ml-4">
       <a href="https://github.com/barisbalcimusic">Barış Balcı</a>
       <br />
       <a href="https://github.com/hannahnier">hannahnier</a>
