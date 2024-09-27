@@ -16,7 +16,7 @@ const MetricsPage = () => {
     metricsOneStatus,
     metricsTwoStatus,
     previousMetricsOneStep,
-    getAllCheckins,
+    loadCheckinsTotal,
     showArrow,
     setShowArrow,
     setMetricsTwoStatus,
@@ -47,7 +47,7 @@ const MetricsPage = () => {
   // fetch all check-ins and adjust visibility of the arrow based on metricsOneStatus
   // if metricsOneStatus >1, show the arrow, otherwise hide it and reset metriceOneStatus to 1
   useEffect(() => {
-    getAllCheckins();
+    loadCheckinsTotal();
     if (metricsOneStatus > 1) {
       setShowArrow(true);
     } else {
@@ -60,7 +60,7 @@ const MetricsPage = () => {
   // similiar as logic for metrics one, but applied to metricsTwoStatus
   // show or hide the arrow based in metricsTwoStatus and reset the value if needed
   useEffect(() => {
-    getAllCheckins();
+    loadCheckinsTotal();
     if (metricsTwoStatus > 1) {
       setShowArrow(true);
     } else {

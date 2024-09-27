@@ -1,6 +1,6 @@
 import { CardHeader } from "@/components/ui/card";
 import { useMetricsContext } from "@/utils/MetricsProvider";
-import { useTagContext } from "@/utils/TagProvider";
+import { useTagContext } from "@/utils/contexts/TagProvider";
 import MessageMetricsM2 from "./MessageMetricsM2";
 import UserFeedbackText from "@/components/typo/UserFeedbackText";
 import { useEffect, useState } from "react";
@@ -8,17 +8,10 @@ import { useEffect, useState } from "react";
 const SelectTag = () => {
   const {
     showMetricsTwo,
-    selectedTag,
-    setSelectTag,
-    statisticsByTag,
-    disableTag,
-    setDisableTag,
-    setMetricsTwoStatus,
-    fetchStatsByTag,
-    renderTagListbyCategoryMetrics,
 
+    renderTagList,
   } = useMetricsContext();
-  const { renderTagListbyCategory, tagError } = useTagContext();
+  const { tagError } = useTagContext();
 
   // TODO: ausgewähltes Tag in setSelectedTag speichern
 
@@ -42,7 +35,7 @@ const SelectTag = () => {
             <p className="pb-2">Zeitpunkt:</p>
             <div className="overflow-auto max-h-60 bg-white p-2">
               <ul className="flex flex-wrap gap-3 justify-center list-none p-0">
-                {renderTagListbyCategoryMetrics("wann")}
+                {renderTagList("wann")}
               </ul>
               {tagError?.category === "wann" && (
                 <UserFeedbackText content={tagError.message} type="error" />
@@ -53,7 +46,7 @@ const SelectTag = () => {
             <p className="pb-2">Ort:</p>
             <div className="overflow-auto max-h-60  bg-white p-2">
               <ul className="flex flex-wrap gap-3 justify-center list-none p-0">
-                {renderTagListbyCategoryMetrics("wo")}
+                {renderTagList("wo")}
               </ul>
               {tagError?.category === "wo" && (
                 <UserFeedbackText content={tagError.message} type="error" />
@@ -64,7 +57,7 @@ const SelectTag = () => {
             <p className="pb-2">Mit wem:</p>
             <div className="overflow-auto max-h-60  bg-white p-2">
               <ul className="flex flex-wrap gap-3 justify-center list-none p-0">
-                {renderTagListbyCategoryMetrics("mitWem")}
+                {renderTagList("mitWem")}
               </ul>
               {tagError?.category === "mitWem" && (
                 <UserFeedbackText content={tagError.message} type="error" />
@@ -75,7 +68,7 @@ const SelectTag = () => {
             <p className="pb-2">Kontext:</p>
             <div className="overflow-auto max-h-60  bg-white p-2">
               <ul className="flex flex-wrap gap-3 justify-center list-none p-0">
-                {renderTagListbyCategoryMetrics("was")}
+                {renderTagList("was")}
               </ul>
               {tagError?.category === "was" && (
                 <UserFeedbackText content={tagError.message} type="error" />

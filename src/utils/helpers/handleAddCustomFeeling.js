@@ -1,6 +1,7 @@
 export const handleAddCustomFeeling = (
   newFeeling,
   customFeelings,
+  defaultEmotions,
   selectedFamily,
   setCustomFeelings,
   handleFeelingSelect,
@@ -27,7 +28,6 @@ export const handleAddCustomFeeling = (
 
   // allowed length of the feeling
   if (newFeeling.length < 3 || newFeeling.length > 18) {
-    // TODO: Implement User Feedback in the UI
     setNewFeelingError({
       message: "Dein Gefühl darf zwischen 3 und 18 Zeichen lang sein.",
     });
@@ -35,11 +35,20 @@ export const handleAddCustomFeeling = (
   }
 
   // Check for duplicates within the customfeelings for the selected family
-  // TODO: Refactor Logic for checking if the new feeling is already in the database and prevent duplicates, also check for not allowed characters etc.
-  const isDuplicate = (customFeelings[selectedFamily] || []).some(
-    (feeling) => feeling.name.toLowerCase() === newFeeling.toLowerCase()
-  );
-  if (isDuplicate) {
+
+  const isDuplicateToCustomEmotions = (
+    customFeelings[selectedFamily] || []
+  ).some((feeling) => feeling.name.toLowerCase() === newFeeling.toLowerCase());
+
+  const isDuplicateToStandardEmotions = defaultEmotions.some((emotionsList) => {
+    return (
+      emotionsList.singleEmotions.some((name) => {
+        return name.toLowerCase() === newFeeling.toLowerCase();
+      }) && emotionsList.emotionFamily === selectedFamily
+    );
+  });
+
+  if (isDuplicateToStandardEmotions || isDuplicateToCustomEmotions) {
     setNewFeelingError({
       message: "Dieses Gefühl existiert bereits.",
     });
@@ -48,7 +57,7 @@ export const handleAddCustomFeeling = (
 
   // Create a new custom feeling object
   const customFeelingsObject = {
-    id: Date.now(), //TODO: Assigning an unique and useful id; For the Standard-Subfeelings, it is the index of the array, because this array won´t change. But for the custom feelings, we might need a different approach? I suggest Date.now() for now, but we should discuss this to find a better solution.
+    id: Date.now(), //TODO: find a better solution for assigning a unique id
     name: newFeeling,
     isNew: true,
     isDefault: false, // custom feeling
@@ -64,6 +73,6 @@ export const handleAddCustomFeeling = (
 
   setCustomFeelings(updatedCustomFeelings); // add the new feeling to existing list
   handleFeelingSelect(customFeelingsObject, false); // select the new custom feeling
-
   setNewFeeling(""); // clear input field for UX
+  setNewFeelingError({ message: "" }); // clear error message
 };

@@ -18,7 +18,7 @@ import StatisticTwo from "../ownComponents/metricsPage/StatisticTwo/StatisticTwo
 
 const StatisticTwoTabsContent = () => {
   const {
-    fetchStatsByTag,
+    loadStatisticsByTag,
     showMetricsTwo,
     maxMetricsTwoStatus,
     metricsTwoStatus,

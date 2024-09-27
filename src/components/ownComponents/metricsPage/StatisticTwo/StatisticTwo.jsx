@@ -10,14 +10,15 @@ import { useMetricsContext } from "@/utils/MetricsProvider";
 // ------------------------------- StatisticTwo Component -------------------------------
 const StatisticTwo = () => {
   // destructure values from MetricsContext
-  const { selectedTag, statisticsByTag, fetchStatsByTag } = useMetricsContext();
+  const { selectedTag, statisticsByTag, loadStatisticsByTag } =
+    useMetricsContext();
 
   // TODO: info, dass nur eine Option auswählbar
 
   // ------------------------------- useEffect fetch statistics -------------------------------
   // fetching statistic data based on selected tag when component mounts
   useEffect(() => {
-    fetchStatsByTag(selectedTag.name);
+    loadStatisticsByTag(selectedTag.name);
   }, []);
 
   // ------------------------------- helper function for caluculations -------------------------------
@@ -44,7 +45,7 @@ const StatisticTwo = () => {
       />
     );
   }
-  
+
   // ------------------------------- Return JSX -------------------------------
   return (
     <div className="flex flex-col items-center">

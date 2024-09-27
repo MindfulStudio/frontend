@@ -54,6 +54,7 @@ const EmotionsProvider = ({ children }) => {
     handleAddCustomFeeling(
       newFeeling,
       customFeelings,
+      defaultEmotions,
       selectedFamily,
       setCustomFeelings,
       handleFeelingSelect,
