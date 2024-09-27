@@ -20,7 +20,7 @@ export function RegisterPopover({
           {title}
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-80 max-h-96 overflow-auto p-4">
+      <PopoverContent className="w-80 max-h-96 overflow-auto p-4 z-[300]">
         <div className="grid gap-4">
           <div>
             {/* titlePopover =>  heading popover*/}
