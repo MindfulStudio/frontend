@@ -1,3 +1,16 @@
+import { useEffect, useState } from "react";
+
+// ----------------------------- Import Icons ----------------------------------
+import EyeOpenIcon from "/src/assets/icons/eye-svgrepo-com.svg";
+import EyeClosedIcon from "/src/assets/icons/eye-close-svgrepo-com.svg";
+import Delete from "/src/assets/icons/delete-2-svgrepo-com.svg";
+
+// ---------------------------- Import Components -------------------------------
+import UserFeedbackText from "../typo/UserFeedbackText";
+import { DeleteConfirmationDialog } from "./DeleteConfirmDialog.jsx";
+import { ConfigSwitch } from "./ConfigSwitch";
+
+// ---------------------------- Import Shadcn UI Components -------------------------------
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -7,21 +20,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import UserFeedbackText from "../typo/UserFeedbackText";
-import EyeOpenIcon from "/src/assets/icons/eye-svgrepo-com.svg";
-import EyeClosedIcon from "/src/assets/icons/eye-close-svgrepo-com.svg";
-
-import Delete from "/src/assets/icons/delete-2-svgrepo-com.svg";
-
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ConfigSwitch } from "./ConfigSwitch";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
+// ---------------------------- Import Services -------------------------------
 import { deleteUser } from "../../utils/services/deleteUser.js";
 
+// ---------------------------- Import Contexts -------------------------------
 import { useAuthContext } from "../../utils/contexts/AuthProvider.jsx";
 
 export function UserDataTabs() {
@@ -31,18 +37,15 @@ export function UserDataTabs() {
   // States from Context
   const { setIsLoggedIn, setIsLoggedOut } = useAuthContext();
 
-  // show/hide old password
-  const [showOldPassword, setShowOldPassword] = useState(false);
-  // show/hide new password
-  const [showNewPassword, setShowNewPassword] = useState(false);
-
   // Local states:
+  const [showOldPassword, setShowOldPassword] = useState(false); // show/hide old password
+  const [showNewPassword, setShowNewPassword] = useState(false); // show/hide new password
   const [error, setError] = useState(null);
   const [valError, setValError] = useState(null);
   const [info, setInfo] = useState(null);
   const [isChanged, setIsChanged] = useState(false);
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 
-  // create state for userData:
   const [userData, setUserData] = useState({
     username: "",
     email: "",
@@ -71,7 +74,7 @@ export function UserDataTabs() {
         if (!response.ok) {
           setError({
             message:
-              "Ein unerwarteter Fehler ist aufgetreten. Bitte loggen Sie sich neu ein.",
+              "Ein unerwarteter Fehler ist aufgetreten. Bitte logge dich neu ein.",
           });
           return;
         } else {
@@ -157,7 +160,7 @@ export function UserDataTabs() {
       if (!response.ok) {
         setError({
           message:
-            "Ein unerwarteter Fehler ist aufgetreten. Bitte loggen Sie sich neu ein.",
+            "Ein unerwarteter Fehler ist aufgetreten. Bitte logge dich neu ein.",
         });
         return;
       } else {
@@ -170,29 +173,28 @@ export function UserDataTabs() {
     }
   };
 
-  // For Navigation after userdelete
-  /* const navigateBackToHome = useNavigate(); */
-
-  // function: handle user deletion
+  // DELETE PROFILE
+  // function a): show delete confirmation dialog
+  const showDeleteConfirmAlert = () => {
+    setIsDeleteDialogOpen(true); // open delete dialog
+  };
+  // function b): handle user deletion
   const handleDeleteUser = async () => {
-    // TODO: explicit UI for delete confirm dialog, not window
-    if (window.confirm("Möchtest du dein Profil wirklich löschen?")) {
-      const deleteResult = await deleteUser(setError);
+    const deleteResult = await deleteUser(setError);
 
-      if (deleteResult) {
-        console.log("Benutzerprofil erfolgreich gelöscht");
-        setIsLoggedIn(false);
-        setIsLoggedOut(true);
-        /* navigateBackToHome("/"); */
-      }
+    if (deleteResult) {
+      console.log("Benutzerprofil erfolgreich gelöscht");
+      setIsLoggedIn(false);
+      setIsLoggedOut(true);
     }
+    setIsDeleteDialogOpen(false); // close delete dialog
   };
 
   return (
     <Tabs defaultValue="account" className="w-[350px]">
       <TabsList className="grid w-full grid-cols-2">
         <TabsTrigger value="account">Meine Nutzerdaten</TabsTrigger>
-        <TabsTrigger value="password">Mein Password</TabsTrigger>
+        <TabsTrigger value="password">Mein Passwort</TabsTrigger>
       </TabsList>
       {/* userprofile */}
       <TabsContent value="account">
@@ -232,10 +234,10 @@ export function UserDataTabs() {
 
               {/* email */}
               <div className="space-y-1">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">E-Mail</Label>
                 <Input
                   id="email"
-                  placeholder="Email"
+                  placeholder="E-Mail"
                   type="email"
                   onChange={(e) => handleChange(e)}
                   value={userData.email}
@@ -248,7 +250,7 @@ export function UserDataTabs() {
               </CardDescription>
               <div className="space-y-1">
                 <ConfigSwitch
-                  name={"Schlaf"}
+                  name={"Schlafzeit"}
                   id={"sleepingHours"}
                   handleToggle={handleToggle}
                   configData={userData.config}
@@ -256,7 +258,7 @@ export function UserDataTabs() {
               </div>
               <div className="space-y-1">
                 <ConfigSwitch
-                  name={"körperliche Aktivität"}
+                  name={"Körperliche Aktivität"}
                   id={"physicalActivity"}
                   handleToggle={handleToggle}
                   configData={userData.config}
@@ -284,11 +286,18 @@ export function UserDataTabs() {
               <Button
                 variant="secondary"
                 type="button"
-                onClick={handleDeleteUser}
+                onClick={showDeleteConfirmAlert}
               >
                 <p>Profil löschen</p>
                 <Delete className="h-5 w-5 ml-1" />
               </Button>
+
+              {/* Delete confirmation dialog */}
+              <DeleteConfirmationDialog
+                isOpen={isDeleteDialogOpen}
+                onClose={() => setIsDeleteDialogOpen(false)}
+                onConfirm={handleDeleteUser}
+              />
             </CardFooter>
           </form>
         </Card>
@@ -301,8 +310,7 @@ export function UserDataTabs() {
           <CardHeader>
             <CardTitle>Passwort</CardTitle>
             <CardDescription>
-              Ändern Sie hier Ihr Passwort. Nach dem Speichern werden Sie
-              abgemeldet.{" "}
+              Ändere hier dein Passwort. Nach dem Speichern wirst du abgemeldet.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-2 relative">
