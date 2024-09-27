@@ -21,13 +21,13 @@ export function MetricsPageTabs() {
             value="account"
             onClick={() => setMetricsTwoStatus(null)} // vielleicht nicht so gut? => besser 0?
           >
-            Statistic One
+            erlebte Emotionen
           </TabsTrigger>
           <TabsTrigger
             value="password"
             onClick={() => setMetricsOneStatus(null)} // vielleicht nicht so gut? => besser 0?
           >
-            Statistic Two
+            emotionale Auslöser
           </TabsTrigger>
         </TabsList>
 
