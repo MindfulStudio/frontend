@@ -24,12 +24,12 @@ const HomePage = () => {
       </div>
       {/* login */}
       <div className="  pt-[109px] px-[50px] flex flex-col items-center pb-10 w-[400px]">
-        <HighlightText highlighttext={"Welcome"} fontsize="text-lg" />
+        <HighlightText highlighttext={"Willkommen"} fontsize="text-lg" />
         <p className=" pt-3 pb-6">
-          Diese App soll ein Werkzeug sein, um die eigenen Gedanken und Gefühle
-          genauer zu verstehen und die eigenen emotionalen Reaktionen besser zu
-          bewältigen. Mit der Zeit können Sie so ein tieferes Verständnis für
-          sich selbst entwickeln.
+          Diese App möchte dir dabei helfen, deine Gefühle und emotionalen
+          Reaktionen besser zu verstehen und ihre Zusammenhänge zu erforschen.
+          Mit der Zeit kannst du so ein tieferes Verständnis für dich selbst
+          entwickeln.
         </p>
         <Button size={"home"} variant={"homeWhite"} disabled={!cookieConsent}>
           <NavLink to="/anmeldung">Einloggen</NavLink>

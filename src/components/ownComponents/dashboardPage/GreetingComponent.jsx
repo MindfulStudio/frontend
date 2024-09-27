@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { PopoverDots } from "@/components/usedDemoComponents/Popover";
-import { Slice } from "lucide-react";
 import { getCheckinsFromToday } from "../../../utils/services/getCheckinsFromToday";
 
 // TODO: popover weite und position
@@ -13,8 +12,6 @@ const GreetingComponent = () => {
   const [emotionsFromToday, setEmotionsFromToday] = useState(null);
   // state für check-ins an diesem Tag:
   const [checkedIn, setCheckedIn] = useState(false);
-
-  // const { setSelectedFamily } = useEmotionsContext(); //! ist noch aktuell?
 
   // fetch functions
   const getUserData = async () => {
@@ -55,7 +52,7 @@ const GreetingComponent = () => {
   return (
     <div className="w-[293px]">
       {/* greeting */}
-      <h1 className="text-lg font-bold">Hello {username}!</h1>
+      <h1 className="text-lg font-bold">Hi {username}!</h1>
       {/* individual message */}
       {checkedIn ? (
         <div className="pl-1">

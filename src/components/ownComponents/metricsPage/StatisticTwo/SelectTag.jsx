@@ -3,7 +3,6 @@ import { useMetricsContext } from "@/utils/MetricsProvider";
 import { useTagContext } from "@/utils/contexts/TagProvider";
 import MessageMetricsM2 from "./MessageMetricsM2";
 import UserFeedbackText from "@/components/typo/UserFeedbackText";
-import { useEffect, useState } from "react";
 
 const SelectTag = () => {
   const {

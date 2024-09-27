@@ -19,7 +19,7 @@ const datenschutzrichtlinie = (
     </p>
     <p className="text-sm mb-2">
       Es werden grundsätzlich nur von dir direkt angegebene Daten wie
-      E-Mail-Adresse und Username oder deine Angaben zu Emotionen und
+      Email-Adresse und Username oder deine Angaben zu Emotionen und
       Kontextinformationen gespeichert. Außerdem werden Informationen, die für
       den Registrierungs- und Loginprozess benötigt werden, sowie die Zeitpunkte
       deiner Check-ins gespeichert, weil sie für die zeitliche Einordnung
