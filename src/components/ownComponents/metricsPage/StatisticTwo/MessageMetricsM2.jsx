@@ -3,9 +3,9 @@ import { CardDescription } from "@/components/ui/card";
 const MessageMetricsM2 = () => {
   return (
     <CardDescription>
-      Wähle eine der Optionen aus und schau welche Emotionen du damit im
-      Zusammenhang erlebt hast. So erhaltst du Einblicke in dein emotionalen
-      Muster und Verbindungen.
+      Wähle eine der Optionen aus und schau, welche Emotionen du im Zusammenhang
+      damit erlebt hast. So erhältst du Einblicke in deine emotionalen Muster
+      und Verbindungen.
     </CardDescription>
   );
 };

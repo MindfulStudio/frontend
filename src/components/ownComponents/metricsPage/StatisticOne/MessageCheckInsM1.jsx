@@ -7,7 +7,7 @@ const MessageCheckInsM1 = () => {
       <CardDescription className="pb-2">
         In dieser Statistik siehst du wann, wo, mit wem und in welchen
         Zusammenhängen du Emotionen einer bestimmten Gefühlsfamilie erlebt hast.
-        So erhaltst du Einblicke in deine emotionalen Muster und Verbindungen.
+        So erhältst du Einblicke in deine emotionalen Muster und Verbindungen.
       </CardDescription>
       <UserFeedbackText
         content={"Ab 7 check-ins kannst du deine Statistik abrufen."}
