@@ -46,6 +46,10 @@ To be added.
 
 For feedback and suggestions, please contact us directly here on GitHub.
 
+## 🎓 Project Context
+
+This frontend project is part of a collaborative final project completed by [luisePkt](https://github.com/luisePkt), [Nadja Probst](https://github.com/nadjascodejourney), [Barış Balcı](https://github.com/barisbalcimusic), and [hannahnier](https://github.com/hannahnier) at the end of a one-year full-time course in Fullstack Web Development. It operates alongside a [Backend repository](https://github.com/MindfulStudio/backend) to create a comprehensive Browser Application on the subject of Mental Health.
+
 ## 📜 License
 
 To be added.
@@ -103,6 +107,10 @@ Wird noch ergänzt.
 ## 🤝 Beitragende
 
 Für Anregungen und Feedback gerne direkt hier über GitHub melden.
+
+## 🎓 Projektrahmen
+
+Dieses Frontendprojekt ist Teil eines Abschlussprojekts, das von [luisePkt](https://github.com/luisePkt), [Nadja Probst](https://github.com/nadjascodejourney), [Barış Balcı](https://github.com/barisbalcimusic) & [hannahnier](https://github.com/hannahnier) zum Ende einer einjährigen Vollzeit-Weiterbildung im Bereich Fullstack-Webdevelopment entwickelt wurde. Zusammen mit dem dazugehörigen [Backend-Repository](https://github.com/MindfulStudio/backend) ist dabei eine umfassende Browser-App für Mentale Gesundheit entstanden.
 
 ## 📜 Lizenz
 
