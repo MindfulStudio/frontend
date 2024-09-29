@@ -139,82 +139,83 @@ const RecordPage = () => {
 
   // ------------------------------- Render -----------------------------------------
   return (
-    <main className="pt-[95px] px-[50px] flex flex-col items-center justify-between min-h-screen">
-      {/* Cancel Checkin Button on the top left */}
-      <Button
-        onClick={handleCancelProcess}
-        className="absolute top-5 left-5 p-2 rounded-full bg-gray-200 hover:bg-gray-300"
-        aria-label="Abbrechen und zurück zum Dashboard"
-      >
-        <Home className="w-6 h-6" />
-      </Button>
-
-      <div className="w-full max-w-4xl flex-grow flex flex-col">
-        {/* Render the current subcomponent based on the progress: */}
-        <div className="flex-grow relative">
-          {renderCheckinStepComponent()}
-          <div className="absolute inset-y-0 left-0 flex items-center -ml-7">
-            {/* Arrow to the left (back) */}
-            <Button
-              variant="arrow"
-              onClick={handleBackToDashboard}
-              className="p-2 rounded-full bg-gray-200 hover:bg-gray-300"
-            >
-              <ArrowLeft className="w-6 h-6" />
-            </Button>
-          </div>
-
-          {/* Arrow to the right (next) */}
-          <div className="absolute inset-y-0 right-0 flex items-center -mr-7">
-            {checkinStep < totalCheckinSteps ? ( //! if not last step (5), the right arrow can be used to navigate to the next step, otherwise the submit button is displayed
+    <div className="flex flex-col items-center justify-center min-h-screen bg-slate-900 ">
+      <main className="w-[430px] pt-[95px] px-4 md:px-8 lg:px-[50px] flex flex-col items-center justify-between min-h-screen bg-background">
+        <div className="w-[360px] max-w-4xl flex-grow flex flex-col">
+          {/* Cancel Checkin Button on the top left */}
+          <Button
+            onClick={handleCancelProcess}
+            className="absolute top-5 p-2 rounded-full bg-gray-200 hover:bg-gray-300"
+            aria-label="Abbrechen und zurück zum Dashboard"
+          >
+            <Home className="w-6 h-6" />
+          </Button>
+          {/* Render the current subcomponent based on the progress: */}
+          <div className="flex-grow relative">
+            {renderCheckinStepComponent()}
+            <div className="absolute inset-y-0 left-0 flex items-center -ml-7">
+              {/* Arrow to the left (back) */}
               <Button
                 variant="arrow"
-                onClick={nextCheckinStep}
-                disabled={
-                  !selectedFeeling ||
-                  (checkinStep === 2 && selectedTagCategories.length < 3) //! if user has not selected at least 3 tag categories in step 2, the next button is disabled
-                }
-                className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:bg-gray-100 disabled:cursor-not-allowed"
+                onClick={handleBackToDashboard}
+                className="p-2 rounded-full bg-gray-200 hover:bg-gray-300"
               >
-                <ArrowRight className="w-6 h-6" />
+                <ArrowLeft className="w-6 h-6" />
               </Button>
-            ) : (
-              <Button
-                variant="arrow"
-                onClick={onCheckinSubmit}
-                disabled={isLoading} //! disable btn when sending data
-                className={`p-2 rounded-full ${
-                  isLoading ? "bg-black" : "bg-gray-200 hover:bg-black"
-                } disabled:cursor-not-allowed transition-colors duration-200 group`}
-              >
-                {isLoading ? (
-                  <LoadingSymbolWhite className="w-6 h-6" />
-                ) : (
-                  <>
-                    <SaveSymbol className="w-6 h-6 group-hover:hidden" />{" "}
-                    {/* !show black icon when not hovering */}
-                    <SaveSymbolWhite className="w-6 h-6 hidden group-hover:block" />
-                  </>
-                )}
-              </Button>
-            )}
-          </div>
-        </div>
+            </div>
 
-        {/* Progress Bar */}
-        <div className="w-full flex flex-col items-center mb-16">
-          <div className="w-[66%] max-w-[390px]">
-            <Progress
-              value={(checkinStep / totalCheckinSteps) * 100}
-              className="w-full mb-4"
-            />
-            <div className="text-center text-sm text-gray-500">
-              Schritt {checkinStep} von {totalCheckinSteps}
+            {/* Arrow to the right (next) */}
+            <div className="absolute inset-y-0 right-0 flex items-center -mr-7">
+              {checkinStep < totalCheckinSteps ? ( //! if not last step (5), the right arrow can be used to navigate to the next step, otherwise the submit button is displayed
+                <Button
+                  variant="arrow"
+                  onClick={nextCheckinStep}
+                  disabled={
+                    !selectedFeeling ||
+                    (checkinStep === 2 && selectedTagCategories.length < 3) //! if user has not selected at least 3 tag categories in step 2, the next button is disabled
+                  }
+                  className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:bg-gray-100 disabled:cursor-not-allowed"
+                >
+                  <ArrowRight className="w-6 h-6" />
+                </Button>
+              ) : (
+                <Button
+                  variant="arrow"
+                  onClick={onCheckinSubmit}
+                  disabled={isLoading} //! disable btn when sending data
+                  className={`p-2 rounded-full ${
+                    isLoading ? "bg-black" : "bg-gray-200 hover:bg-black"
+                  } disabled:cursor-not-allowed transition-colors duration-200 group`}
+                >
+                  {isLoading ? (
+                    <LoadingSymbolWhite className="w-6 h-6" />
+                  ) : (
+                    <>
+                      <SaveSymbol className="w-6 h-6 group-hover:hidden" />{" "}
+                      {/* !show black icon when not hovering */}
+                      <SaveSymbolWhite className="w-6 h-6 hidden group-hover:block" />
+                    </>
+                  )}
+                </Button>
+              )}
+            </div>
+          </div>
+
+          {/* Progress Bar */}
+          <div className="w-full flex flex-col items-center mb-16">
+            <div className="w-[66%] max-w-[390px]">
+              <Progress
+                value={(checkinStep / totalCheckinSteps) * 100}
+                className="w-full mb-4"
+              />
+              <div className="text-center text-sm text-gray-500">
+                Schritt {checkinStep} von {totalCheckinSteps}
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </div>
   );
 };
 
