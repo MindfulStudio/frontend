@@ -107,18 +107,18 @@ const MetricsProvider = ({ children }) => {
   // ----------------------------------- useEffect - check if >= 7 check-ins available ---------------------------------
   //  StatisticOne:
   useEffect(() => {
-    if (Number(checkIn) >= 7) {
+    if (Number(checkIn) >= 1) {
       setShowMetricsOne(true);
-      // fetch is not necessary if there are less than 7 check-ins
+      // fetch is not necessary if there are less than 1 check-ins
       if (selectedFeelingsFamily) loadStatisticsByFamily();
     }
   }, [selectedFeelingsFamily, checkIn]);
 
   // StatisticTwo:
   useEffect(() => {
-    if (Number(checkIn) >= 7) {
+    if (Number(checkIn) >= 1) {
       setShowMetricsTwo(true);
-      // fetch is not necessary if there are less than 7 check-ins
+      // fetch is not necessary if there are less than 1 check-ins
       if (selectedTag) loadStatisticsByTag();
     }
   }, [selectedTag, checkIn]);
