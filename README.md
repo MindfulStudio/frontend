@@ -2,7 +2,7 @@
 
 
 <details>
-<summary > Description (English) </summary>
+<summary>🇬🇧 English</summary>
 
 ## 📖 Description
 
@@ -17,18 +17,23 @@ This project is a collaboration between [Barış Balcı](https://github.com/bari
 
 ## 🛠 Technologies Used
 
-- **Frontend**: React.js, Vite.js, Shadcn UI ([shadcn UI](https://ui.shadcn.com/)), Tailwind CSS.
+- **Framework:** React.js
+- **Build Tool & Development Server:** Vite
+- **Design:** Figma
+- **UI (Library):** Tailwind CSS
+- **UI:** Shadcn UI ([shadcn UI](https://ui.shadcn.com/)), Recharts
+- **Security:** Google re-Captcha
 
 ## ✨ Features
 
-- Record emotions along with contextual details (when, where, with whom), add personal notes, and optionally track sleep, physical activity, and weather.
-- View statistics of recorded emotions.
-- Diary view with a weekly overview of recorded emotions.
+- Record emotions along with contextual details (when, where, with whom), add personal notes, and optionally track sleep, physical activity, and weather
+- View statistics of recorded emotions
+- Diary view with a weekly overview of recorded emotions (in the planning - coming soon)
 
 ## 🚀 Installation
 
-1. Clone the repository and run `npm install`.
-2. Copy the `.env.example` file, fill it with your data, and rename it to `.env`.
+1. Clone the repository and run `npm install`
+2. Copy the `.env.example` file, fill it with your data, and rename it to `.env`
 
 ## 📱 Usage
 
@@ -36,15 +41,83 @@ The project is primarily intended for mobile use but can also be used on other s
 
 ## 📑 API Documentation
 
-To be added.
+<details>
+  <summary>Authentication Requests</summary>
+  
+### Authentication Requests
+  | **Request**  | **Endpoint**           | **HTTP Method** | **Body**                          | **Status** | **Error Message**                    |
+|----------|--------------------|-------------|-------------------------------|--------|-----------------------------------|
+| Create User  | /auth/register     | POST        | username, email, password     | 201    | missingRegData, passValidation, hashError, verTokenError, alreadyRegistered                    |
+| Login User | /auth/login        | POST        | email, password, stayLoggedIn | 200    | missingCredentials, userNotFound, invalidPassword, userNotVerified, envError, accTokenError               |
+| Logout User| /auth/logout       | POST        |                               | 200    |                                   |
+</details>
+
+<details>
+  <summary>Requests After Successful Authentication</summary>
+  
+  ### Requests After Successful Authentication
+  | **Request**                  | **Endpoint**                   | **HTTP Method** | **Body**                    | **Status** | **Error Message**                  |
+|-------------------------|----------------------------|-------------|-------------------------|--------|---------------------------------|
+| Verify User             | /users/verify              | GET         |                         | 200    | verificationTokenMissing, userNotFoundByToken       |
+| Get User Data           | /users                     | GET         |                         | 200    | userNotFound                   |
+| Update User Data        | /users                     | PATCH       | username                | 200    | userNotFound                   |
+| Delete User             | /users                     | DELETE      |                         | 200    | userNotFound                   |
+| Get All Check-ins       | /users/checkins            | GET         |                         | 200    | userNotFound                   |
+| Get Check-ins from Today| /users/checkins/today      | GET         |                         | 200    | userNotFound                   |
+| Get Single Check-in     | /users/checkins/:checkinId | GET         |                         | 200    | userNotFound, checkinNotFound                   |
+| Create Check-in         | /users/checkins            | POST        | emotion, tags, comment, config | 201    | userNotFound                   |
+| Get All Custom Items    | /users/customs             | GET         |                         | 200    | userNotFound                   |
+| Deactivate Custom Item   | /users/customs             | PATCH       | type, name              | 200    | userNotFound, missingInfo, customNotFound                   |
+| Get Stats by Emotion Family | /users/stats/family      | GET         | family                  | 200    | userNotFound, familyNotFound                   |
+| Get Stats by Tag        | /users/stats/tag           | GET         | tag                     | 200    | userNotFound, tagNotFound                   |
+</details>
+
+<details>
+  <summary>Error Messages</summary>
+  
+  ### Error Messages
+  | **Status** | **Error Message**                       |
+|--------|-------------------------------------|
+| 400    | missingRegData                     |
+| 400    | passValidation                     |
+| 500    | hashError                          |
+| 500    | verTokenError                      |
+| 409    | alreadyRegistered                   |
+| 400    | missingCredentials                 |
+| 404    | userNotFound                       |
+| 401    | invalidPassword                    |
+| 401    | userNotVerified                    |
+| 500    | envError                           |
+| 500    | accTokenError                      |
+| 401    | verificationTokenMissing           |
+| 404    | userNotFoundByToken               |
+</details>
 
 ## 🌐 Environment Variables
 
-To be added.
+Make sure to set the following environment variables before running the application:
+
+| Variable                     | Description                                      |
+|------------------------------|--------------------------------------------------|
+| `VITE_RECAPTCHA_SITE_KEY`    | Your reCAPTCHA site key                          |
+| `VITE_baseURL`               | Base URL for the application (default: `http://localhost:3000/`) |
+| `VITE_basePathOne`           | Base path for authentication routes (default: `auth/`) |
+| `VITE_basePathTwo`           | Base path for user-related routes (default: `users/`) |
+| `VITE_basePathThree`         | Base path for individual user routes (default: `user/`) |
+
+### Note
+
+- **.env.example File:** A `.env.example` file is included in the project, which already contains the prepared variables for your reference.
+- **Security:** Ensure your `.env` file is not included in your version control system (e.g., Git) to protect sensitive data.
+
 
 ## 🤝 Contributing
 
 For feedback and suggestions, please contact us directly here on GitHub.
+
+## 🎓 Project Context
+
+This frontend project is part of a collaborative final project completed by [luisePkt](https://github.com/luisePkt), [Nadja Probst](https://github.com/nadjascodejourney), [Barış Balcı](https://github.com/barisbalcimusic), and [hannahnier](https://github.com/hannahnier) at the end of a one-year full-time course in Fullstack Web Development. It operates alongside a [Backend repository](https://github.com/MindfulStudio/backend) to create a comprehensive Browser Application on the subject of Mental Health.
 
 ## 📜 License
 
@@ -59,7 +132,7 @@ To be added.
 
 
 <details>
-<summary > Beschreibung (Deutsch) </summary>
+<summary>🇩🇪 Deutsch</summary>
 
 
 ## 📖 Beschreibung
@@ -75,18 +148,23 @@ Das Projekt ist eine Gemeinschaftsarbeit von [Barış Balcı](https://github.com
 
 ## 🛠 Verwendete Technologien
 
-- **Frontend**: React.js, Vite.js, Shadcn UI ([shadcn UI](https://ui.shadcn.com/)), Tailwind CSS.
+- **Framework:** React.js
+- **Build Tool & Entwicklungsserver:** Vite
+- **Design:** Figma
+- **UI (Library):** Tailwind CSS
+- **UI:** Shadcn UI ([shadcn UI](https://ui.shadcn.com/)), Recharts
+- **Sicherheit:** Google re-Captcha
 
 ## ✨ Funktionen
 
-- Erfassen von Gefühlen mit den Kontextinformationen (wann, wo, mit wem), hinzufügen einer persönlichen Notiz und optionales Tracking von Schlaf, körperlicher Aktivität und Wetter.
-- Anzeige von Statistiken zu den erfassten Gefühlen.
-- Tagebuchansicht mit einer Wochenübersicht der erfassten Gefühle.
+- Erfassen von Gefühlen mit den Kontextinformationen (wann, wo, mit wem), hinzufügen einer persönlichen Notiz und optionales Tracking von Schlaf, körperlicher Aktivität und Wetter
+- Anzeige von Statistiken zu den erfassten Gefühlen
+- Tagebuchansicht mit einer Wochenübersicht der erfassten Gefühle (in der Planung - kommt bald)
 
 ## 🚀 Installation
 
-1. Klone das Repository und führe `npm install` aus.
-2. Kopiere die `.env.example` Datei, fülle sie mit deinen Daten und benenne sie in `.env` um.
+1. Klone das Repository und führe `npm install` aus
+2. Kopiere die `.env.example` Datei, fülle sie mit deinen Daten und benenne sie in `.env` um
 
 ## 📱 Verwendung
 
@@ -94,15 +172,83 @@ Das Projekt ist hauptsächlich für die Nutzung auf Mobilgeräten gedacht, kann 
 
 ## 📑 API-Dokumentation
 
-Wird noch ergänzt.
+<details>
+  <summary>Anfragen zur Authentifizierung</summary>
+  
+### Anfragen zur Authentifizierung
+  | **Request**  | **Endpoint**           | **HTTP Method** | **Body**                          | **Status** | **Fehlermeldung**                    |
+|----------|--------------------|-------------|-------------------------------|--------|-----------------------------------|
+| Create User  | /auth/register     | POST        | username, email, password     | 201    | missingRegData, passValidation, hashError, verTokenError, alreadyRegistered                    |
+| Login User | /auth/login        | POST        | email, password, stayLoggedIn | 200    | missingCredentials, userNotFound, invalidPassword, userNotVerified, envError, accTokenError               |
+| Logout User| /auth/logout       | POST        |                               | 200    |                                   |
+</details>
+
+<details>
+  <summary>Anfragen nach erfolgreicher Authentifizierung</summary>
+  
+  ### Anfragen nach erfolgreicher Authentifizierung
+  | **Request**                  | **Endpoint**                   | **HTTP Method** | **Body**                    | **Status** | **Fehlermeldung**                  |
+|-------------------------|----------------------------|-------------|-------------------------|--------|---------------------------------|
+| Verify User             | /users/verify              | GET         |                         | 200    | verificationTokenMissing, userNotFoundByToken       |
+| Get User Data           | /users                     | GET         |                         | 200    | userNotFound                   |
+| Update User Data        | /users                     | PATCH       | username                | 200    | userNotFound                   |
+| Delete User             | /users                     | DELETE      |                         | 200    | userNotFound                   |
+| Get All Check-ins       | /users/checkins            | GET         |                         | 200    | userNotFound                   |
+| Get Check-ins from Today| /users/checkins/today      | GET         |                         | 200    | userNotFound                   |
+| Get Single Check-in     | /users/checkins/:checkinId | GET         |                         | 200    | userNotFound, checkinNotFound                   |
+| Create Check-in         | /users/checkins            | POST        | emotion, tags, comment, config | 201    | userNotFound                   |
+| Get All Custom Items    | /users/customs             | GET         |                         | 200    | userNotFound                   |
+| Deactivate Custom Item   | /users/customs             | PATCH       | type, name              | 200    | userNotFound, missingInfo, customNotFound                   |
+| Get Stats by Emotion Family | /users/stats/family      | GET         | family                  | 200    | userNotFound, familyNotFound                   |
+| Get Stats by Tag        | /users/stats/tag           | GET         | tag                     | 200    | userNotFound, tagNotFound                   |
+</details>
+
+<details>
+  <summary>Fehlermeldungen</summary>
+  
+  ### Fehlermeldungen
+  | **Status** | **Fehlermeldung**                       |
+|--------|-------------------------------------|
+| 400    | missingRegData                     |
+| 400    | passValidation                     |
+| 500    | hashError                          |
+| 500    | verTokenError                      |
+| 409    | alreadyRegistered                   |
+| 400    | missingCredentials                 |
+| 404    | userNotFound                       |
+| 401    | invalidPassword                    |
+| 401    | userNotVerified                    |
+| 500    | envError                           |
+| 500    | accTokenError                      |
+| 401    | verificationTokenMissing           |
+| 404    | userNotFoundByToken               |
+</details>
+
 
 ## 🌐 Umgebungsvariablen
 
-Wird noch ergänzt.
+Stelle sicher, dass die folgenden Umgebungsvariablen gesetzt sind, bevor du die Anwendung ausführst:
+
+| Variable                     | Beschreibung                                      |
+|------------------------------|--------------------------------------------------|
+| `VITE_RECAPTCHA_SITE_KEY`    | Dein reCAPTCHA-Website-Schlüssel                  |
+| `VITE_baseURL`               | Basis-URL für die Anwendung (Standard: `http://localhost:3000/`) |
+| `VITE_basePathOne`           | Basis-Pfad für Authentifizierungsrouten (Standard: `auth/`) |
+| `VITE_basePathTwo`           | Basis-Pfad für benutzerspezifische Routen (Standard: `users/`) |
+| `VITE_basePathThree`         | Basis-Pfad für individuelle Benutzerrouten (Standard: `user/`) |
+
+### Hinweise
+
+- **.env.example Datei:** Im Projekt ist eine `.env.example`-Datei enthalten, die bereits die vorbereiteten Variablen zu deiner Referenz enthält.
+- **Sicherheit:** Achte darauf, deine `.env`-Datei nicht in das Versionskontrollsystem (z.B. Git) einzuschließen, um sensible Daten zu schützen.
 
 ## 🤝 Beitragende
 
 Für Anregungen und Feedback gerne direkt hier über GitHub melden.
+
+## 🎓 Projektrahmen
+
+Dieses Frontendprojekt ist Teil eines Abschlussprojekts, das von [luisePkt](https://github.com/luisePkt), [Nadja Probst](https://github.com/nadjascodejourney), [Barış Balcı](https://github.com/barisbalcimusic) & [hannahnier](https://github.com/hannahnier) zum Ende einer einjährigen Vollzeit-Weiterbildung im Bereich Fullstack-Webdevelopment entwickelt wurde. Zusammen mit dem dazugehörigen [Backend-Repository](https://github.com/MindfulStudio/backend) ist dabei eine umfassende Browser-App für Mentale Gesundheit entstanden.
 
 ## 📜 Lizenz
 

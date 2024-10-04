@@ -10,7 +10,7 @@ const MessageCheckInsM1 = () => {
         So erhältst du Einblicke in deine emotionalen Muster und Verbindungen.
       </CardDescription>
       <UserFeedbackText
-        content={"Ab 7 check-ins kannst du deine Statistik abrufen."}
+        content={"Ab einem Gefühlseintrag kannst du deine Statistik abrufen."}
         type={"info"}
       />
     </div>
