@@ -73,15 +73,20 @@ const MetricsPage = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-slate-900">
       <main className="pt-28 flex-grow flex flex-col items-center bg-background w-[430px]">
-        {showArrow && (
-          <button
-            onClick={handleNavigateBack}
-            className="absolute left-[calc((100vw-350px)/4)] top-1/2 transform -translate-y-1/2 -translate-x-1/2"
-          >
-            <ArrowLeftIcon className="rounded-full bg-gray-200 hover:bg-gray-300" />
-          </button>
-        )}
-        <MetricsPageTabs />
+        <div className="flex-grow relative">
+          <div className="absolute inset-y-0 flex items-center ">
+            {showArrow && (
+              <button
+                onClick={handleNavigateBack}
+                className="absolute left-2 top-16 transform -translate-y-1/2 rounded-full bg-gray-200 hover:bg-gray-300"
+              >
+                <ArrowLeftIcon className="rounded-full bg-gray-200 hover:bg-gray-300" />
+              </button>
+            )}
+          </div>
+
+          <MetricsPageTabs />
+        </div>
       </main>
     </div>
   );
