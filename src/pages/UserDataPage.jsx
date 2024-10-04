@@ -1,13 +1,13 @@
 import { UserDataTabs } from "@/components/usedDemoComponents/UserDataTabs";
 
 const UserDataPage = () => {
-
   return (
-    <main className="flex flex-col items-center w-full h-screen pt-[109px]">
-      <UserDataTabs />
-    </main>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-slate-900 ">
+      <main className="flex flex-col items-center w-[430px] h-screen pt-[109px] bg-background">
+        <UserDataTabs />
+      </main>
+    </div>
   );
-
 };
 
 export default UserDataPage;

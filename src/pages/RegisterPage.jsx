@@ -4,9 +4,11 @@ const RegisterPage = () => {
   // TODO: style anpassen
   // NOTICE: vielleicht checkbox und RegsiterTab/LoginTabs dynamisch machen? <= sinnvoll?
   return (
-    <main className="flex flex-col items-center w-full h-screen pt-[109px]">
-      <RegisterTabs />
-    </main>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-slate-900 ">
+      <main className="flex flex-col items-center w-[430px] h-screen pt-[109px] bg-background">
+        <RegisterTabs />
+      </main>
+    </div>
   );
 };
 
