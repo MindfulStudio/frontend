@@ -41,37 +41,39 @@ const UserDataPage = () => {
   };
 
   return (
-    <main className="flex flex-col items-center w-full h-screen pt-[109px]">
-      <Tabs defaultValue="account" className="w-[350px]">
-        <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="account" onClick={clearMessages}>
-            Meine Nutzerdaten
-          </TabsTrigger>
-          <TabsTrigger value="password" onClick={clearMessages}>
-            Mein Passwort
-          </TabsTrigger>
-        </TabsList>
-        <UserDataTabs
-          error={error}
-          setError={setError}
-          info={info}
-          setInfo={setInfo}
-          valError={valError}
-          setValError={setValError}
-          userData={userData}
-          setUserData={setUserData}
-        />
-        <PasswordTabs
-          info={info}
-          setInfo={setInfo}
-          error={error}
-          setError={setError}
-          valError={valError}
-          setValError={setValError}
-          clearMessages={clearMessages}
-        />
-      </Tabs>
-    </main>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-slate-900 ">
+      <main className="flex flex-col items-center w-[430px] h-screen pt-[109px] bg-background">
+        <Tabs defaultValue="account" className="w-[350px]">
+          <TabsList className="grid w-full grid-cols-2">
+            <TabsTrigger value="account" onClick={clearMessages}>
+              Meine Nutzerdaten
+            </TabsTrigger>
+            <TabsTrigger value="password" onClick={clearMessages}>
+              Mein Passwort
+            </TabsTrigger>
+          </TabsList>
+          <UserDataTabs
+            error={error}
+            setError={setError}
+            info={info}
+            setInfo={setInfo}
+            valError={valError}
+            setValError={setValError}
+            userData={userData}
+            setUserData={setUserData}
+          />
+          <PasswordTabs
+            info={info}
+            setInfo={setInfo}
+            error={error}
+            setError={setError}
+            valError={valError}
+            setValError={setValError}
+            clearMessages={clearMessages}
+          />
+        </Tabs>
+      </main>
+    </div>
   );
 };
 

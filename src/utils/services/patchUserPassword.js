@@ -12,7 +12,6 @@ export const patchUserPassword = async (passwords, setError, setInfo) => {
       credentials: "include",
     });
     const data = await response.json();
-    console.log(data);
     // In case of userNotFound error:
     if (!response.ok) {
       if (data.error === "wrongPassword") {
