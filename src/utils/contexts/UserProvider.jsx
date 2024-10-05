@@ -11,6 +11,16 @@ const UserProvider = ({ children }) => {
   const [customFeelings, setCustomFeelings] = useState([]);
   const [customTags, setCustomTags] = useState([]);
   const [config, setConfig] = useState({});
+  const [userData, setUserData] = useState({
+    username: "",
+    email: "",
+    config: {
+      isConfigured: true,
+      sleepingHours: true,
+      physicalActivity: false,
+      weather: false,
+    },
+  });
 
   // ---------------------USERDATA: Fetching (for Config)------------------------
 
@@ -47,6 +57,8 @@ const UserProvider = ({ children }) => {
   return (
     <UserContext.Provider
       value={{
+        userData,
+        setUserData,
         customTags,
         setCustomTags,
         customFeelings,
@@ -55,7 +67,8 @@ const UserProvider = ({ children }) => {
         loadAllCustoms,
         loadConfigData,
         handleDeactivateCustom,
-      }}>
+      }}
+    >
       {children}
     </UserContext.Provider>
   );
