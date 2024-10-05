@@ -10,21 +10,19 @@ const InfoPage = () => {
           <p className="text-sm">
             Mit dieser App kannst du deine Gefühle festhalten und
             nachvollziehen, in welchen Situationen sie auftreten. Erfasse, wann,
-            wo und mit wem du dich wie gefühlt hast. Je nachdem, worauf du den
-            Schwerpunkt setzen möchtest, kannst du auch weitere Angaben
-            einfließen lassen, zum Beispiel zu deinem Schlafpensum, körperlicher
-            Aktivität oder dem Wetter.
+            wo und mit wem du dich so gefühlt hast. Du kannst auch Schlaf, Sport
+            oder Wetter einbeziehen, um ein umfassenderes Bild zu erhalten.
           </p>
         </section>
 
         <section className="mt-5">
-          <h2 className="font-semibold pb-2">Wozu?</h2>
+          <h2 className="font-semibold pb-2">Was ist das Ziel der App?</h2>
           <p className="text-sm">
             Anhand von Auswertungen zu deinen Gefühlen in verschiedenen
             Kontexten kannst du Muster und Zusammenhänge erkennen, die dir
             helfen, deine Emotionen besser zu verstehen und bewusster damit
-            umzugehen. Zusätzlich kannst du deine Einträge mit persönlichen
-            Notizen versehen und sie dir später im Überblick in deinem Journal
+            umzugehen. Dazu kannst deine Einträge auch mit persönlichen Notizen
+            versehen und sie dir in deinem Journal später noch einmal genauer
             ansehen.
           </p>
         </section>
@@ -34,19 +32,21 @@ const InfoPage = () => {
             Wonach sind die Gefühle sortiert?
           </h2>
           <p className="text-sm">
-            Für die Einteilung der Gefühle in Überkategorien nutzen wir das
-            Circumplex-Modell der Emotionen von Russel (1980) mit leichten
-            Modifikationen und einer Erweiterung um die Kategorie gemischte
-            Gefühle.
+            Die Einteilung der Gefühle in Überkategorien basiert grob auf dem
+            Circumplex-Modell der Emotionen von James A. Russell (1980),
+            veröffentlicht in &quot;A Circumplex Model of Affect&quot;. Die
+            Kategorie gemischte Gefühle ist neu. Wenn du für ein Gefühl keinen
+            passenden Begriff findest, kannst du auch ein eigenes Wort dafür
+            eintragen.
           </p>
         </section>
 
         <section className="mt-5">
           <h2 className="font-semibold pb-2">Wichtiger Hinweis</h2>
           <p className="text-sm">
-            Diese App dient dem besseren Verständnis deiner Gefühlswelt und
-            ersetzt keine professionelle Beratung. Bei psychischen Problemen
-            wende dich bitte an eine Expertin.
+            Diese App soll dir helfen, deine Gefühle besser zu verstehen,
+            ersetzt jedoch keine professionelle Beratung. Bei psychischen
+            Problemen such dir bitte professionelle Unterstützung.
           </p>
         </section>
       </div>
