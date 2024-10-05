@@ -29,6 +29,8 @@ import { deleteUser } from "../../utils/services/deleteUser.js";
 
 // ---------------------------- Import Contexts -------------------------------
 import { useAuthContext } from "../../utils/contexts/AuthProvider.jsx";
+import { patchUserData } from "../../utils/services/patchUserData.js";
+import { patchUserPassword } from "../../utils/services/patchUserPassword.js";
 
 export function UserDataTabs() {
   // TODO: Logik für "Passwort vergessen" implementieren (Bonus)
@@ -56,6 +58,18 @@ export function UserDataTabs() {
       weather: false,
     },
   });
+  const [passwords, setPasswords] = useState({
+    currentPassword: "",
+    newPassword: "",
+  });
+
+  // validate password (at input change)
+  useEffect(() => {
+    validatePassword(passwords.newPassword);
+    setError(null);
+    comparePasswords();
+    setInfo(null);
+  }, [passwords.newPassword, passwords.currentPassword]);
 
   // get user data from backend (at mounting)
   useEffect(() => {
@@ -143,34 +157,7 @@ export function UserDataTabs() {
   // submit - send updated userData to backend:
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // fetching userData - PATCH:
-    try {
-      const baseURL = import.meta.env.VITE_baseURL;
-      const pathURL = import.meta.env.VITE_basePathTwo;
-      const response = await fetch(`${baseURL}${pathURL}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userData),
-        credentials: "include",
-      });
-      const data = await response.json();
-      // In case of userNotFound error:
-      if (!response.ok) {
-        setError({
-          message:
-            "Ein unerwarteter Fehler ist aufgetreten. Bitte logge dich neu ein.",
-        });
-        return;
-      } else {
-        setInfo({ message: "Daten erfolgreich aktualisiert." });
-      }
-      return data;
-    } catch {
-      // In case of any other server errors:
-      setError({ message: "Ein unerwarteter Serverfehler ist aufgetreten." });
-    }
+    patchUserData(userData, setError, setInfo);
   };
 
   // DELETE PROFILE
@@ -190,11 +177,62 @@ export function UserDataTabs() {
     setIsDeleteDialogOpen(false); // close delete dialog
   };
 
+  // CHANGE PASSWORD
+  const handlePasswordChange = (e) => {
+    e.preventDefault();
+    setPasswords((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+    comparePasswords();
+  };
+
+  const handlePasswordSubmit = async (e) => {
+    e.preventDefault();
+    clearMessages();
+    patchUserPassword(passwords, setError, setInfo);
+  };
+
+  const validatePassword = (pass) => {
+    const passwordRegex =
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@.#$!%*?&^_])[A-Za-z\d@.#$!%*?&^_]{8,}$/;
+
+    if (!passwordRegex.test(pass)) {
+      setValError({
+        message:
+          "Das Passwort muss mindestens 8 Zeichen lang sein und mindestens einen Buchstaben, eine Zahl sowie ein Sonderzeichen (@.#$!%*?&^_) enthalten.",
+      });
+    } else {
+      setValError(null);
+    }
+  };
+
+  const comparePasswords = () => {
+    if (passwords.currentPassword === passwords.newPassword) {
+      setError({
+        message:
+          "Das neue Passwort muss sich vom aktuellen Passwort unterscheiden.",
+      });
+    } else {
+      setError(null);
+    }
+  };
+
+  // TODO: Neuen Endpoint für Password-Patch schaffen, der das alte Passwort zuerst prüft
+
+  // CLEAR EVERYTHING ON SWITCH TO OTHER TAB
+  const clearMessages = () => {
+    setError(null);
+    setInfo(null);
+    setValError(null);
+  };
+
   return (
     <Tabs defaultValue="account" className="w-[350px]">
       <TabsList className="grid w-full grid-cols-2">
-        <TabsTrigger value="account">Meine Nutzerdaten</TabsTrigger>
-        <TabsTrigger value="password">Mein Passwort</TabsTrigger>
+        <TabsTrigger value="account" onClick={clearMessages}>
+          Meine Nutzerdaten
+        </TabsTrigger>
+        <TabsTrigger value="password" onClick={clearMessages}>
+          Mein Passwort
+        </TabsTrigger>
       </TabsList>
       {/* userprofile */}
       <TabsContent value="account">
@@ -307,47 +345,80 @@ export function UserDataTabs() {
       {/* NOTICE: Es gibt hier noch keine wirkliche Funktionalität - wäre Bonus */}
       <TabsContent value="password">
         <Card>
-          <CardHeader>
-            <CardTitle>Passwort</CardTitle>
-            <CardDescription>
-              Ändere hier dein Passwort. Nach dem Speichern wirst du abgemeldet.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-2 relative">
-            <div className="space-y-1">
-              <Label htmlFor="current">Aktuelles Passwort</Label>
-              <Input id="current" type="password" />
-            </div>
-            {showOldPassword ? (
-              <EyeOpenIcon
-                className="w-5 h-auto absolute right-8 top-8"
-                onClick={handleShowOldPassword}
-              />
-            ) : (
-              <EyeClosedIcon
-                className="w-5 h-auto absolute right-8 top-8"
-                onClick={handleShowOldPassword}
-              />
-            )}
-            <div className="space-y-1">
-              <Label htmlFor="new">Neues Passwort</Label>
-              <Input id="new" type="password" />
-            </div>
-            {showNewPassword ? (
-              <EyeOpenIcon
-                className="w-5 h-auto absolute right-8 top-[107px]"
-                onClick={handleShowNewPassword}
-              />
-            ) : (
-              <EyeClosedIcon
-                className="w-5 h-auto absolute right-8 top-[107px]"
-                onClick={handleShowNewPassword}
-              />
-            )}
-          </CardContent>
-          <CardFooter>
-            <Button type="submit">Passwort speichern</Button>
-          </CardFooter>
+          <form onSubmit={handlePasswordSubmit}>
+            <CardHeader>
+              <CardTitle>Passwort</CardTitle>
+              <CardDescription>
+                Ändere hier dein Passwort. Nach dem Speichern wirst du
+                abgemeldet.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-2 relative">
+              <div className="space-y-1">
+                <Label htmlFor="currentPassword">Aktuelles Passwort</Label>
+                <Input
+                  id="currentPassword"
+                  type={showOldPassword ? "text" : "password"}
+                  value={passwords.currentPassword}
+                  onChange={(e) => handlePasswordChange(e)}
+                />
+              </div>
+              {showOldPassword ? (
+                <EyeOpenIcon
+                  className="w-5 h-auto absolute right-8 top-8"
+                  onClick={handleShowOldPassword}
+                />
+              ) : (
+                <EyeClosedIcon
+                  className="w-5 h-auto absolute right-8 top-8"
+                  onClick={handleShowOldPassword}
+                />
+              )}
+              <div className="space-y-1">
+                <Label htmlFor="newPassword">Neues Passwort</Label>
+                <Input
+                  id="newPassword"
+                  type={showNewPassword ? "text" : "password"}
+                  value={passwords.newPassword}
+                  onChange={(e) => handlePasswordChange(e)}
+                />
+              </div>
+              {showNewPassword ? (
+                <EyeOpenIcon
+                  className="w-5 h-auto absolute right-8 top-[107px]"
+                  onClick={handleShowNewPassword}
+                />
+              ) : (
+                <EyeClosedIcon
+                  className="w-5 h-auto absolute right-8 top-[107px]"
+                  onClick={handleShowNewPassword}
+                />
+              )}
+              {info && <UserFeedbackText content={info.message} type="info" />}
+              {error && (
+                <UserFeedbackText content={error.message} type="error" />
+              )}
+              {valError && (
+                <UserFeedbackText
+                  content={valError.message}
+                  type={"validation"}
+                />
+              )}
+            </CardContent>
+            <CardFooter>
+              <Button
+                type="submit"
+                disabled={
+                  !passwords.currentPassword ||
+                  !passwords.newPassword ||
+                  passwords.currentPassword === passwords.newPassword ||
+                  valError
+                }
+              >
+                Passwort speichern
+              </Button>
+            </CardFooter>
+          </form>
         </Card>
       </TabsContent>
     </Tabs>
