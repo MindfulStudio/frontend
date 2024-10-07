@@ -42,7 +42,7 @@ The project is primarily intended for mobile use but can also be used on other s
 ## 📑 Project Structure
 
 <details>
-  <summary>The main folders and files of the project are organized as follows:
+  <summary>Main folder and files of the project 
 </summary>
   
 ### Overview of the main folders and their purposes:
@@ -93,6 +93,12 @@ All API calls for interacting with the backend are handled via the /src/services
 
 </details>
 
+<details>
+  <summary>API Documentation</summary>
+  The <a href="https://github.com/MindfulStudio/backend/blob/main/README.md#-api-documentation">API documentation</a> can be found in the readme.md of the backend repository.
+</details>
+
+
 ## 🌐 Environment Variables
 
 Make sure to set the following environment variables before running the application:
@@ -121,7 +127,7 @@ This frontend project is part of a collaborative final project completed by [lui
 
 ## 📜 License
 
-To be added.
+This project is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International Public Licence. You may share and adapt the material as long as you give credit, do not use it for commercial purposes, and distribute your modifications under the same terms. Further information can be found in the [licence file](https://github.com/MindfulStudio/frontend/blob/main/LICENSE.md).
 
 ## 📧 Contact
 
@@ -173,7 +179,7 @@ Das Projekt ist hauptsächlich für die Nutzung auf Mobilgeräten gedacht, kann 
 ## 📑 Projektstruktur
 
 <details>
-  <summary>Die Hauptordner und -dateien des Projekts sind wie folgt organisiert:</summary>
+  <summary>Hauptordner und -dateien des Projekts </summary>
   
 ### Übersicht der Hauptordner und deren Funktionen:
 
@@ -223,6 +229,11 @@ Alle API-Aufrufe zur Interaktion mit dem Backend werden über den Ordner /src/se
 
 </details>
 
+<details>
+  <summary>API-Dokumentation</summary>
+  Die <a href="https://github.com/MindfulStudio/backend/blob/main/README.md#-api-dokumentation">API-Dokumentation</a> befindet sich im readme.md des backend Repositorys.
+</details>
+
 
 ## 🌐 Umgebungsvariablen
 
@@ -251,7 +262,8 @@ Dieses Frontendprojekt ist Teil eines Abschlussprojekts, das von [luisePkt](http
 
 ## 📜 Lizenz
 
-Wird noch ergänzt.
+Dieses Projekt ist lizenziert unter der Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International Public License. Du darfst das Material teilen und anpassen, solange du die Urheberrechte nennst, es nicht für kommerzielle Zwecke nutzt und deine Abänderungen unter den gleichen Bedingungen weitergibst. Weitere Informationen findest du in der [Lizenzdatei](https://github.com/MindfulStudio/frontend/blob/main/LICENSE.md).
+
 
 
 ## 📧 Kontakt
