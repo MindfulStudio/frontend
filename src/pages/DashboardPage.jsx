@@ -32,20 +32,20 @@ const DashboardPage = () => {
 
   // ------------------------------- Render -------------------------------------
   return (
-    <div className="flex flex-col justify-center">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-slate-900 ">
       {/* User feedback */}
       {checkinUserFeedback.message && (
         <div className="fixed inset-0 flex justify-center items-start z-50 mt-5 pointer-events-none">
           <UserFeedbackText
             content={checkinUserFeedback.message}
             type={checkinUserFeedback.type}
-            className="w-[290px] text-center bg-white shadow-lg p-4 rounded"
+            className="w-full max-w-sm text-center bg-white shadow-lg p-4 rounded mx-4"
           />
         </div>
       )}
 
       {/* Main content */}
-      <main className="flex-grow pt-[109px] px-[50px] flex flex-col items-center">
+      <main className="flex-grow pt-24 px-4 sm:px-8 md:px-12 flex flex-col items-center bg-background w-[430px]">
         <GreetingComponent />
         <FeelingsFamilyComponent />
       </main>
@@ -54,3 +54,5 @@ const DashboardPage = () => {
 };
 
 export default DashboardPage;
+
+/* className="pt-20 w-[430px] flex flex-col items-center  min-h-screen bg-background" */

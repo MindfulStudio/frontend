@@ -46,7 +46,7 @@ const agb = (
       eingegebenen Daten gemäß unserer Datenschutzrichtlinie verarbeitet werden.
       Die Verarbeitung der Daten erfolgt ausschließlich zu Testzwecken und in
       Übereinstimmung mit den geltenden Datenschutzbestimmungen, insbesondere
-      der DSGVO.
+      der Europäischen Datenschutz-Grundverordnung (DSGVO).
     </p>
     <p className="text-sm mb-2">
       Mit der Nutzung der App akzeptierst du diese Bedingungen.

@@ -1,3 +1,22 @@
+import { useEffect, useState } from "react";
+
+// ----------------------------- Import Icons ----------------------------------
+import Delete from "/src/assets/icons/delete-2-svgrepo-com.svg";
+
+// ---------------------------- Import Components -------------------------------
+import UserFeedbackText from "../typo/UserFeedbackText";
+import { DeleteConfirmationDialog } from "./DeleteConfirmDialog.jsx";
+import { ConfigSwitch } from "./ConfigSwitch";
+
+// ---------------------------- Import Contexts -------------------------------
+import { useAuthContext } from "../../utils/contexts/AuthProvider.jsx";
+import { useUserContext } from "../../utils/contexts/UserProvider.jsx";
+
+// ---------------------------- Import Utils -------------------------------
+import { patchUserData } from "../../utils/services/patchUserData.js";
+import { deleteUser } from "../../utils/services/deleteUser.js";
+
+// ---------------------------- Import Shadcn UI Components -------------------------------
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -7,112 +26,46 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import UserFeedbackText from "../typo/UserFeedbackText";
-import EyeOpenIcon from "/src/assets/icons/eye-svgrepo-com.svg";
-import EyeClosedIcon from "/src/assets/icons/eye-close-svgrepo-com.svg";
-
-import Delete from "/src/assets/icons/delete-2-svgrepo-com.svg";
-
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ConfigSwitch } from "./ConfigSwitch";
+import { TabsContent } from "@/components/ui/tabs";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
-import { deleteUser } from "../../utils/services/deleteUser.js";
-
-import { useAuthContext } from "../../utils/contexts/AuthProvider.jsx";
-
-export function UserDataTabs() {
-  // TODO: Logik für "Passwort vergessen" implementieren (Bonus)
-  // TODO: Logik für "Email"-Änderung implementieren (Bonus) => hier wäre verification-Email nötig
+export function UserDataTabs({
+  error,
+  setError,
+  info,
+  setInfo,
+  valError,
+  setValError,
+}) {
+  // Local states:
+  const [isChanged, setIsChanged] = useState(false);
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 
   // States from Context
   const { setIsLoggedIn, setIsLoggedOut } = useAuthContext();
+  const { userData, setUserData } = useUserContext();
 
-  // show/hide old password
-  const [showOldPassword, setShowOldPassword] = useState(false);
-  // show/hide new password
-  const [showNewPassword, setShowNewPassword] = useState(false);
-
-  // Local states:
-  const [error, setError] = useState(null);
-  const [valError, setValError] = useState(null);
-  const [info, setInfo] = useState(null);
-  const [isChanged, setIsChanged] = useState(false);
-
-  // create state for userData:
-  const [userData, setUserData] = useState({
-    username: "",
-    email: "",
-    config: {
-      isConfigured: true,
-      sleepingHours: true,
-      physicalActivity: false,
-      weather: false,
-    },
-  });
-
-  // get user data from backend (at mounting)
-  useEffect(() => {
-    const getUserData = async () => {
-      // fetching userData - GET:
-      try {
-        const baseURL = import.meta.env.VITE_baseURL;
-        const pathURL = import.meta.env.VITE_basePathTwo;
-        const response = await fetch(`${baseURL}${pathURL}`, {
-          method: "GET",
-          credentials: "include",
-        });
-        const data = await response.json();
-
-        // In case of userNotFound error:
-        if (!response.ok) {
-          setError({
-            message:
-              "Ein unerwarteter Fehler ist aufgetreten. Bitte loggen Sie sich neu ein.",
-          });
-          return;
-        } else {
-          // Set userData to values from database (except "isConfigured")
-          setUserData({
-            ...data.data,
-            config: { ...data.data.config, isConfigured: true },
-          });
-        }
-        return;
-      } catch {
-        // In case of any other server errors:
-        setError({ message: "Ein unerwarteter Serverfehler ist aufgetreten." });
-      }
-    };
-    getUserData();
-  }, []);
-
-  // validation function for username:
-  const validateUsername = () => {
-    const usernameRegex = /^[a-zA-Z0-9_]+$/;
-    if (!usernameRegex.test(userData.username)) {
-      setValError({ message: "Nur Buchstaben und Zahlen sind erlaubt." });
-    } else {
-      setValError(null);
-    }
-  };
+  // SIDE EFFECTS:
 
   // re-validate username on change:
   useEffect(() => {
     validateUsername();
   }, [userData.username]);
 
-  // show/hide old password
-  const handleShowOldPassword = () => {
-    setShowOldPassword(!showOldPassword);
-  };
+  // FUNCTIONS:
 
-  // show/hide new password
-  const handleShowNewPassword = () => {
-    setShowNewPassword(!showNewPassword);
+  // validation function for username:
+  const validateUsername = () => {
+    const usernameRegex = /^[a-zA-Z0-9]{3,12}$/;
+    if (!usernameRegex.test(userData.username)) {
+      setValError({
+        message:
+          "Der Benutzername darf nur Buchstaben und Zahlen enthalten und muss zwischen 3 und 12 Zeichen lang sein.",
+      });
+    } else {
+      setValError(null);
+    }
   };
 
   // toggle config inputs on change:
@@ -140,208 +93,126 @@ export function UserDataTabs() {
   // submit - send updated userData to backend:
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // fetching userData - PATCH:
-    try {
-      const baseURL = import.meta.env.VITE_baseURL;
-      const pathURL = import.meta.env.VITE_basePathTwo;
-      const response = await fetch(`${baseURL}${pathURL}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userData),
-        credentials: "include",
-      });
-      const data = await response.json();
-      // In case of userNotFound error:
-      if (!response.ok) {
-        setError({
-          message:
-            "Ein unerwarteter Fehler ist aufgetreten. Bitte loggen Sie sich neu ein.",
-        });
-        return;
-      } else {
-        setInfo({ message: "Daten erfolgreich aktualisiert." });
-      }
-      return data;
-    } catch {
-      // In case of any other server errors:
-      setError({ message: "Ein unerwarteter Serverfehler ist aufgetreten." });
-    }
+    patchUserData(userData, setError, setInfo);
   };
 
-  // For Navigation after userdelete
-  /* const navigateBackToHome = useNavigate(); */
-
-  // function: handle user deletion
+  // DELETE PROFILE
+  // function a): show delete confirmation dialog
+  const showDeleteConfirmAlert = () => {
+    setIsDeleteDialogOpen(true); // open delete dialog
+  };
+  // function b): handle user deletion
   const handleDeleteUser = async () => {
-    // TODO: explicit UI for delete confirm dialog, not window
-    if (window.confirm("Möchtest du dein Profil wirklich löschen?")) {
-      const deleteResult = await deleteUser(setError);
+    const deleteResult = await deleteUser(setError);
 
-      if (deleteResult) {
-        console.log("Benutzerprofil erfolgreich gelöscht");
-        setIsLoggedIn(false);
-        setIsLoggedOut(true);
-        /* navigateBackToHome("/"); */
-      }
+    if (deleteResult) {
+      console.log("Benutzerprofil erfolgreich gelöscht");
+      setIsLoggedIn(false);
+      setIsLoggedOut(true);
     }
+    setIsDeleteDialogOpen(false); // close delete dialog
   };
 
   return (
-    <Tabs defaultValue="account" className="w-[350px]">
-      <TabsList className="grid w-full grid-cols-2">
-        <TabsTrigger value="account">Meine Nutzerdaten</TabsTrigger>
-        <TabsTrigger value="password">Mein Password</TabsTrigger>
-      </TabsList>
-      {/* userprofile */}
-      <TabsContent value="account">
-        <Card>
-          <form onSubmit={handleSubmit}>
-            <CardHeader>
-              <CardTitle>Meine Nutzerdaten</CardTitle>
-              {/* vielleicht gibt es noch einen besseren Titel? */}
-            </CardHeader>
-            <CardContent className="space-y-2">
-              {/* profile-image */}
-              <div className="space-y-1  w-24 h-24 rounded-full">
-                <img
-                  src="/src/assets/profileImages/profileImgOne.png"
-                  alt="profile Image"
-                />
-              </div>
-
-              {/* username */}
-              <div className="space-y-1">
-                <Label htmlFor="username">Username</Label>
-                <Input
-                  id="username"
-                  placeholder="Username"
-                  type="text"
-                  onChange={(e) => handleChange(e)}
-                  value={userData.username}
-                  required
-                />
-                {valError && (
-                  <UserFeedbackText
-                    content={valError.message}
-                    type={"validation"} // vllt. bei validation noch farben ändern? ist nicht gut zu erkennen
-                  />
-                )}
-              </div>
-
-              {/* email */}
-              <div className="space-y-1">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  placeholder="Email"
-                  type="email"
-                  onChange={(e) => handleChange(e)}
-                  value={userData.email}
-                  disabled // disabled, da bei Passworänderung auch neue Verification-Email notwendig wäre
-                />
-              </div>
-
-              <CardDescription className="pt-2">
-                Was möchtest du noch zusätzlich erfassen?
-              </CardDescription>
-              <div className="space-y-1">
-                <ConfigSwitch
-                  name={"Schlaf"}
-                  id={"sleepingHours"}
-                  handleToggle={handleToggle}
-                  configData={userData.config}
-                />
-              </div>
-              <div className="space-y-1">
-                <ConfigSwitch
-                  name={"körperliche Aktivität"}
-                  id={"physicalActivity"}
-                  handleToggle={handleToggle}
-                  configData={userData.config}
-                />
-              </div>
-              <div className="space-y-1">
-                <ConfigSwitch
-                  name={"Wetter"}
-                  id={"weather"}
-                  handleToggle={handleToggle}
-                  configData={userData.config}
-                />
-              </div>
-              {info && <UserFeedbackText content={info.message} type="info" />}
-              {error && (
-                <UserFeedbackText content={error.message} type="error" />
-              )}
-            </CardContent>
-            <CardFooter className="flex justify-between">
-              <Button type="submit" disabled={!isChanged || valError}>
-                aktualisieren
-              </Button>
-
-              {/* User delete  */}
-              <Button
-                variant="secondary"
-                type="button"
-                onClick={handleDeleteUser}
-              >
-                <p>Profil löschen</p>
-                <Delete className="h-5 w-5 ml-1" />
-              </Button>
-            </CardFooter>
-          </form>
-        </Card>
-      </TabsContent>
-
-      {/* password */}
-      {/* NOTICE: Es gibt hier noch keine wirkliche Funktionalität - wäre Bonus */}
-      <TabsContent value="password">
-        <Card>
+    <TabsContent value="account">
+      <Card>
+        <form onSubmit={handleSubmit}>
           <CardHeader>
-            <CardTitle>Passwort</CardTitle>
-            <CardDescription>
-              Ändern Sie hier Ihr Passwort. Nach dem Speichern werden Sie
-              abgemeldet.{" "}
-            </CardDescription>
+            <CardTitle>Meine Nutzerdaten</CardTitle>
+            {/* vielleicht gibt es noch einen besseren Titel? */}
           </CardHeader>
-          <CardContent className="space-y-2 relative">
-            <div className="space-y-1">
-              <Label htmlFor="current">Aktuelles Passwort</Label>
-              <Input id="current" type="password" />
+          <CardContent className="space-y-2">
+            {/* profile-image */}
+            <div className="space-y-1  w-24 h-24 rounded-full">
+              <img src="/profileImages/profileImgOne.png" alt="profile Image" />
             </div>
-            {showOldPassword ? (
-              <EyeOpenIcon
-                className="w-5 h-auto absolute right-8 top-8"
-                onClick={handleShowOldPassword}
-              />
-            ) : (
-              <EyeClosedIcon
-                className="w-5 h-auto absolute right-8 top-8"
-                onClick={handleShowOldPassword}
-              />
-            )}
+
+            {/* username */}
             <div className="space-y-1">
-              <Label htmlFor="new">Neues Passwort</Label>
-              <Input id="new" type="password" />
+              <Label htmlFor="username">Username</Label>
+              <Input
+                id="username"
+                placeholder="Username"
+                type="text"
+                onChange={(e) => handleChange(e)}
+                value={userData.username}
+                required
+              />
+              {valError && (
+                <UserFeedbackText
+                  content={valError.message}
+                  type={"validation"} // vllt. bei validation noch farben ändern? ist nicht gut zu erkennen
+                />
+              )}
             </div>
-            {showNewPassword ? (
-              <EyeOpenIcon
-                className="w-5 h-auto absolute right-8 top-[107px]"
-                onClick={handleShowNewPassword}
+
+            {/* email */}
+            <div className="space-y-1">
+              <Label htmlFor="email">E-Mail</Label>
+              <Input
+                id="email"
+                placeholder="E-Mail"
+                type="email"
+                onChange={(e) => handleChange(e)}
+                value={userData.email}
+                disabled // disabled, da bei Passworänderung auch neue Verification-Email notwendig wäre
               />
-            ) : (
-              <EyeClosedIcon
-                className="w-5 h-auto absolute right-8 top-[107px]"
-                onClick={handleShowNewPassword}
+            </div>
+
+            <CardDescription className="pt-2">
+              Was möchtest du noch zusätzlich erfassen?
+            </CardDescription>
+            <div className="space-y-1">
+              <ConfigSwitch
+                name={"Schlafzeit"}
+                id={"sleepingHours"}
+                handleToggle={handleToggle}
+                configData={userData.config}
               />
-            )}
+            </div>
+            <div className="space-y-1">
+              <ConfigSwitch
+                name={"Körperliche Aktivität"}
+                id={"physicalActivity"}
+                handleToggle={handleToggle}
+                configData={userData.config}
+              />
+            </div>
+            <div className="space-y-1">
+              <ConfigSwitch
+                name={"Wetter"}
+                id={"weather"}
+                handleToggle={handleToggle}
+                configData={userData.config}
+              />
+            </div>
+            {info && <UserFeedbackText content={info.message} type="info" />}
+            {error && <UserFeedbackText content={error.message} type="error" />}
           </CardContent>
-          <CardFooter>
-            <Button type="submit">Passwort speichern</Button>
+          <CardFooter className="flex justify-between">
+            <Button type="submit" disabled={!isChanged || valError}>
+              aktualisieren
+            </Button>
+
+            {/* User delete  */}
+            <Button
+              variant="secondary"
+              type="button"
+              onClick={showDeleteConfirmAlert}
+            >
+              <p>Profil löschen</p>
+              <Delete className="h-5 w-5 ml-1" />
+            </Button>
+
+            {/* Delete confirmation dialog */}
+            <DeleteConfirmationDialog
+              isOpen={isDeleteDialogOpen}
+              onClose={() => setIsDeleteDialogOpen(false)}
+              onConfirm={handleDeleteUser}
+            />
           </CardFooter>
-        </Card>
-      </TabsContent>
-    </Tabs>
+        </form>
+      </Card>
+    </TabsContent>
   );
 }

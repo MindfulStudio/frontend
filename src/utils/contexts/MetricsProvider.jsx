@@ -1,13 +1,13 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import defaultTags from "../data/standardTags.json";
-import { useUserContext } from "./contexts/UserProvider";
+import defaultTags from "../../data/standardTags.json";
+import { useUserContext } from "./UserProvider";
 
 //-----------
-import { getAllCheckins } from "./services/getAllCheckins";
-import { getStatisticsByFamily } from "./services/getStatisticsByFamily";
-import { getStatisticsByTag } from "./services/getStatisticsByTag";
-import { renderTagListbyCategoryMetrics } from "./helpers/renderTagListbyCategoryMetrics";
-import { handleTagToggleMetric } from "./helpers/handleTagToggleMetric";
+import { getAllCheckins } from "../services/getAllCheckins";
+import { getStatisticsByFamily } from "../services/getStatisticsByFamily";
+import { getStatisticsByTag } from "../services/getStatisticsByTag";
+import { renderTagListbyCategoryMetrics } from "../helpers/renderTagListbyCategoryMetrics";
+import { handleTagToggleMetric } from "../helpers/handleTagToggleMetric";
 
 const MetricsContext = createContext();
 
@@ -107,18 +107,18 @@ const MetricsProvider = ({ children }) => {
   // ----------------------------------- useEffect - check if >= 7 check-ins available ---------------------------------
   //  StatisticOne:
   useEffect(() => {
-    if (Number(checkIn) >= 7) {
+    if (Number(checkIn) >= 1) {
       setShowMetricsOne(true);
-      // fetch is not necessary if there are less than 7 check-ins
+      // fetch is not necessary if there are less than 1 check-ins
       if (selectedFeelingsFamily) loadStatisticsByFamily();
     }
   }, [selectedFeelingsFamily, checkIn]);
 
   // StatisticTwo:
   useEffect(() => {
-    if (Number(checkIn) >= 7) {
+    if (Number(checkIn) >= 1) {
       setShowMetricsTwo(true);
-      // fetch is not necessary if there are less than 7 check-ins
+      // fetch is not necessary if there are less than 1 check-ins
       if (selectedTag) loadStatisticsByTag();
     }
   }, [selectedTag, checkIn]);

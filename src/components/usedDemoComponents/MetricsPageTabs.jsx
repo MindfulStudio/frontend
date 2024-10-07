@@ -4,7 +4,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import StatisticOneTabsContent from "./StatisticOneTabsContent";
 import StatisticTwoTabsContent from "./StatisticTwoTabsContent";
 // context providers:
-import { useMetricsContext } from "@/utils/MetricsProvider";
+import { useMetricsContext } from "../../utils/contexts/MetricsProvider";
 
 // ------------------------------- MetricsPageTabs Component -------------------------------
 export function MetricsPageTabs() {
@@ -21,13 +21,13 @@ export function MetricsPageTabs() {
             value="account"
             onClick={() => setMetricsTwoStatus(null)} // vielleicht nicht so gut? => besser 0?
           >
-            Statistic One
+            erlebte Emotionen
           </TabsTrigger>
           <TabsTrigger
             value="password"
             onClick={() => setMetricsOneStatus(null)} // vielleicht nicht so gut? => besser 0?
           >
-            Statistic Two
+            emotionale Auslöser
           </TabsTrigger>
         </TabsList>
 

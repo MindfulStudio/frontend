@@ -80,7 +80,7 @@ export const CheckinProvider = ({ children }) => {
       await postCheckin(newCheckinData);
       // After successful submission, show success feedback and reset states
       setCheckinUserFeedback({
-        message: "Check-in successfully submitted!",
+        message: "Eintrag erfolgreich gespeichert!",
         type: "info",
       });
 

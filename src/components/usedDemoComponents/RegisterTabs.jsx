@@ -161,12 +161,12 @@ export function RegisterTabs() {
             switch (error.path) {
               case "email":
                 setEmailWarning(
-                  "Die angegebene E-Mail-Adresse hat ein ungültiges Format."
+                  "Die angegebene Email hat ein ungültiges Format."
                 );
                 break;
               case "username":
                 setUsernameWarning(
-                  "Der Benutzername darf nur Buchstaben und Zahlen enthalten und muss zwischen 3 und 12 Zeichen lang sein."
+                  "Der Username darf nur Buchstaben und Zahlen enthalten und muss zwischen 3 und 12 Zeichen lang sein."
                 );
                 break;
               case "password":
@@ -182,9 +182,7 @@ export function RegisterTabs() {
 
         // handle email duplication error separately, since it is not a validation error
         if (errorData.error.code === 11000) {
-          setEmailWarning(
-            "Die angegebene E-Mail-Adresse ist bereits registriert."
-          );
+          setEmailWarning("Die angegebene Email ist bereits registriert.");
           console.log(errorData);
           return;
         }
@@ -319,7 +317,7 @@ export function RegisterTabs() {
                 <>
                   <UserFeedbackText
                     content={
-                      "Vielen Dank für deine Registrierung. Dein Konto wurde erfolgreich erstellt. Um deine Registrierung abzuschließen, überprüfe bitte deine E-Mail-Adresse."
+                      "Vielen Dank für deine Registrierung. Dein Konto wurde erfolgreich erstellt. Um deine Registrierung abzuschließen, überprüfe bitte deine Email-Adresse."
                     }
                     type={"tooltip"}
                   />

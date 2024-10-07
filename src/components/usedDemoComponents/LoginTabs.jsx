@@ -45,10 +45,10 @@ export function LoginTabs() {
   const handleError = (data) => {
     switch (data.error) {
       case "missingCredentials":
-        setError({ message: "Bitte Zugangsdaten vollständig eingeben." });
+        setError({ message: "Bitte gib deine Zugangsdaten vollständig ein." });
         break;
       case "userNotFound":
-        setError({ message: "User nicht gefunden." });
+        setError({ message: "Für diese Email existiert noch kein Konto." });
         break;
       case "invalidPassword":
         setError({ message: "Email oder Passwort falsch." });
@@ -56,7 +56,7 @@ export function LoginTabs() {
       case "userNotVerified":
         setError({
           message:
-            "Dieses Konto wurde noch nicht verifiziert. Zur Verifizierung bitte dem Link in der E-Mail folgen.",
+            "Dein Konto wurde noch nicht verifiziert. Bitte folge zur Verifizierung dem Link in der Email.",
         });
         break;
       default:

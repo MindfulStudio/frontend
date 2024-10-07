@@ -1,5 +1,5 @@
 import { useEmotionsContext } from "@/utils/contexts/EmotionsProvider";
-import { useMetricsContext } from "@/utils/MetricsProvider";
+import { useMetricsContext } from "../../../../utils/contexts/MetricsProvider";
 import SelectFeelingsInStatisticOne from "./SelectFeelingsInStatisticOne";
 // import MetricsRadialChart from "@/components/usedDemoComponents/MetricsRadialChart";
 import MetricsRadialChart from "../../../usedDemoComponents/MetricsRadialChart";
