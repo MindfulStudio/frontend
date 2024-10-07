@@ -1,23 +1,19 @@
-import PageTitle from "@/components/typo/PageTitle";
-import HighlightText from "@/components/typo/HighlightText";
-import UserFeedbackText from "@/components/typo/UserFeedbackText";
-
 const ErrorPage = () => {
   return (
-    <div>
-      <PageTitle pagetitle="ErrorPage" />
-      <h2 className="border-b pt-2 text-lg tracking-tight">
-        404 - Page not found
-      </h2>
-      <p>Everything will be fine.</p>
-      <p className="font-highlight pb-5">Just go back to Home.</p>
-      <p className="font-bold">müde</p>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-slate-900 ">
+      <main className="flex flex-col items-center w-[430px] h-screen pt-[109px] bg-background">
+        <h2 className=" p-2 text-lg text-center">
+          Hoppla! 404 - Seite nicht gefunden
+        </h2>
 
-      <HighlightText highlighttext="I´m a big Highlight!" fontsize="text-lg" />
-      <HighlightText
-        highlighttext="I´m a medium Highlight!"
-        fontsize="text-md"
-      />
+        <h3 className=" p-9 text-md">
+          Diese Seite scheint nicht zu existieren. Vielleicht gab es einen
+          Tippfehler im Link? Oder die Seite wurde verschoben oder gelöscht.
+        </h3>
+        <button className="mt-5 bg-primary text-white px-4 py-2 rounded">
+          Zurück zur Startseite
+        </button>
+      </main>
     </div>
   );
 };
