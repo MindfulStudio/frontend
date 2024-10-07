@@ -20,7 +20,7 @@ import UserProvider from "../contexts/UserProvider";
 import CheckinProvider from "../contexts/CheckinProvider";
 import AuthProvider from "../contexts/AuthProvider";
 
-import MetricsProvider from "../MetricsProvider";
+import MetricsProvider from "../contexts/MetricsProvider";
 import PrivateRoute from "./PrivateRoute";
 
 const Router = () => {

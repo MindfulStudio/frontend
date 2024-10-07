@@ -1,13 +1,13 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import defaultTags from "../data/standardTags.json";
-import { useUserContext } from "./contexts/UserProvider";
+import defaultTags from "../../data/standardTags.json";
+import { useUserContext } from "./UserProvider";
 
 //-----------
-import { getAllCheckins } from "./services/getAllCheckins";
-import { getStatisticsByFamily } from "./services/getStatisticsByFamily";
-import { getStatisticsByTag } from "./services/getStatisticsByTag";
-import { renderTagListbyCategoryMetrics } from "./helpers/renderTagListbyCategoryMetrics";
-import { handleTagToggleMetric } from "./helpers/handleTagToggleMetric";
+import { getAllCheckins } from "../services/getAllCheckins";
+import { getStatisticsByFamily } from "../services/getStatisticsByFamily";
+import { getStatisticsByTag } from "../services/getStatisticsByTag";
+import { renderTagListbyCategoryMetrics } from "../helpers/renderTagListbyCategoryMetrics";
+import { handleTagToggleMetric } from "../helpers/handleTagToggleMetric";
 
 const MetricsContext = createContext();
 

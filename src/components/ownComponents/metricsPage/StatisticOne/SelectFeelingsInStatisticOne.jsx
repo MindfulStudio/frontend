@@ -8,7 +8,7 @@ import IlluGemischteGefühle from "/src/assets/feelingsFamilies/Vector_gemGefüh
 import IlluTrauer from "/src/assets/feelingsFamilies/Vector_Trauer.svg";
 // contect providers:
 import { useEmotionsContext } from "@/utils/contexts/EmotionsProvider";
-import { useMetricsContext } from "@/utils/MetricsProvider";
+import { useMetricsContext } from "../../../../utils/contexts/MetricsProvider";
 
 // ------------------------------- SelectFeelingsInStatisticOne Component -------------------------------
 // this component allows users to select one of the feelings families and highlights the selected option

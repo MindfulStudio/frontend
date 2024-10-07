@@ -1,6 +1,6 @@
-// import { NavMenubar } from "@/components/usedComponents/NavMenubar";
+// import { NavMenubar } from "@/components/usedComponents/navMenu/NavMenubar";
 
-import { NavMenu } from "@/components/ownComponents/NavMenu";
+import { NavMenu } from "@/components/ownComponents/navMenu/NavMenu";
 
 const Navigation = () => {
   return (

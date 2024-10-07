@@ -4,7 +4,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import StatisticOneTabsContent from "./StatisticOneTabsContent";
 import StatisticTwoTabsContent from "./StatisticTwoTabsContent";
 // context providers:
-import { useMetricsContext } from "@/utils/MetricsProvider";
+import { useMetricsContext } from "../../utils/contexts/MetricsProvider";
 
 // ------------------------------- MetricsPageTabs Component -------------------------------
 export function MetricsPageTabs() {
