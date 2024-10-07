@@ -39,58 +39,58 @@ This project is a collaboration between [Barış Balcı](https://github.com/bari
 
 The project is primarily intended for mobile use but can also be used on other screens (PC, Laptop, Tablet).
 
-## 📑 API Documentation
+## 📑 Project Structure
 
 <details>
-  <summary>Authentication Requests</summary>
+  <summary>The main folders and files of the project are organized as follows:
+</summary>
   
-### Authentication Requests
-  | **Request**  | **Endpoint**           | **HTTP Method** | **Body**                          | **Status** | **Error Message**                    |
-|----------|--------------------|-------------|-------------------------------|--------|-----------------------------------|
-| Create User  | /auth/register     | POST        | username, email, password     | 201    | missingRegData, passValidation, hashError, verTokenError, alreadyRegistered                    |
-| Login User | /auth/login        | POST        | email, password, stayLoggedIn | 200    | missingCredentials, userNotFound, invalidPassword, userNotVerified, envError, accTokenError               |
-| Logout User| /auth/logout       | POST        |                               | 200    |                                   |
+### Overview of the main folders and their purposes:
+
+| Folder           | Description                                                         |
+|------------------|---------------------------------------------------------------------|
+| **/components**   | Contains UI components, e.g., navigation menu, dashboard elements   |
+| **/pages**        | Different pages like HomePage, JournalPage, MetricsPage, etc.       |
+| **/services**     | Contains API functions for backend communication                    |
+| **/helpers**     | Contains helper functions                                            |
+| **/utils**        | Context providers and utility functions                             |
+| **/styles**       | Contains all CSS files (e.g., TailwindCSS configurations)           |
 </details>
 
 <details>
-  <summary>Requests After Successful Authentication</summary>
+  <summary>Key Components</summary>
   
-  ### Requests After Successful Authentication
-  | **Request**                  | **Endpoint**                   | **HTTP Method** | **Body**                    | **Status** | **Error Message**                  |
-|-------------------------|----------------------------|-------------|-------------------------|--------|---------------------------------|
-| Verify User             | /users/verify              | GET         |                         | 200    | verificationTokenMissing, userNotFoundByToken       |
-| Get User Data           | /users                     | GET         |                         | 200    | userNotFound                   |
-| Update User Data        | /users                     | PATCH       | username                | 200    | userNotFound                   |
-| Delete User             | /users                     | DELETE      |                         | 200    | userNotFound                   |
-| Get All Check-ins       | /users/checkins            | GET         |                         | 200    | userNotFound                   |
-| Get Check-ins from Today| /users/checkins/today      | GET         |                         | 200    | userNotFound                   |
-| Get Single Check-in     | /users/checkins/:checkinId | GET         |                         | 200    | userNotFound, checkinNotFound                   |
-| Create Check-in         | /users/checkins            | POST        | emotion, tags, comment, config | 201    | userNotFound                   |
-| Get All Custom Items    | /users/customs             | GET         |                         | 200    | userNotFound                   |
-| Deactivate Custom Item   | /users/customs             | PATCH       | type, name              | 200    | userNotFound, missingInfo, customNotFound                   |
-| Get Stats by Emotion Family | /users/stats/family      | GET         | family                  | 200    | userNotFound, familyNotFound                   |
-| Get Stats by Tag        | /users/stats/tag           | GET         | tag                     | 200    | userNotFound, tagNotFound                   |
-</details>
+  ### App.jsx
+  The main `App.jsx` component loads the core layout and navigation. It uses React Router to switch between various pages like the Dashboard, Metrics Page, and Journal.
+  
+  ### Pages
+  The page components are located in /src/pages and represent the main views of the application:
 
-<details>
-  <summary>Error Messages</summary>
-  
-  ### Error Messages
-  | **Status** | **Error Message**                       |
-|--------|-------------------------------------|
-| 400    | missingRegData                     |
-| 400    | passValidation                     |
-| 500    | hashError                          |
-| 500    | verTokenError                      |
-| 409    | alreadyRegistered                   |
-| 400    | missingCredentials                 |
-| 404    | userNotFound                       |
-| 401    | invalidPassword                    |
-| 401    | userNotVerified                    |
-| 500    | envError                           |
-| 500    | accTokenError                      |
-| 401    | verificationTokenMissing           |
-| 404    | userNotFoundByToken               |
+- HomePage.jsx: The homepage of the application, allows the user to login or register.
+- LoginPage.jsx: Login page for users.
+- RegisterPage.jsx: Register page for users.
+- ConfigPage.jsx: Page that queries parameters to be recorded in the future. Only displayed once, after the first login.
+- DashboardPage.jsx: Dashboard for displaying previously checked-in feelings of a day and start for check-in process of the current feeling.
+- MetricsPage.jsx: Page for displaying metrics and statistical analysis.
+- RecordPage.jsx: Page for checking in the current feeling.
+- UserDataPage.jsx: Page for displaying and editing user data.
+- InfoPage.jsx: Page that informs users in more detail about application.
+- JournalPagejsx: Page that is currently being planned and is intended to give users a diary-like overview of recorded feelings, notes etc.
+- ErrorPage: Displays error message in the event of an error.
+
+### Custom Components
+In /src/components/ownComponents you will find custom components that have been built for different pages. Examples:
+
+- navMenu: Contains the navigation elements.
+- dashboardPage: Provides UI components for the dashboard, such as graphs or widgets.
+- metricsPage: Includes UI components for displaying statistical data and analytics.
+
+  ### State Management and Contexts
+The project uses React contexts to manage the global state of the application. These contexts can be found in /src/utils/contexts.
+
+### Backend API Interaction
+All API calls for interacting with the backend are handled via the /src/services folder. It contains functions to load, store, or update data. The API interactions are handled via fetch requests.
+
 </details>
 
 ## 🌐 Environment Variables
@@ -170,58 +170,57 @@ Das Projekt ist eine Gemeinschaftsarbeit von [Barış Balcı](https://github.com
 
 Das Projekt ist hauptsächlich für die Nutzung auf Mobilgeräten gedacht, kann aber auch auf anderen Bildschirmen (PC, Laptop, Tablet) genutzt werden.
 
-## 📑 API-Dokumentation
+## 📑 Projektstruktur
 
 <details>
-  <summary>Anfragen zur Authentifizierung</summary>
+  <summary>Die Hauptordner und -dateien des Projekts sind wie folgt organisiert:</summary>
   
-### Anfragen zur Authentifizierung
-  | **Request**  | **Endpoint**           | **HTTP Method** | **Body**                          | **Status** | **Fehlermeldung**                    |
-|----------|--------------------|-------------|-------------------------------|--------|-----------------------------------|
-| Create User  | /auth/register     | POST        | username, email, password     | 201    | missingRegData, passValidation, hashError, verTokenError, alreadyRegistered                    |
-| Login User | /auth/login        | POST        | email, password, stayLoggedIn | 200    | missingCredentials, userNotFound, invalidPassword, userNotVerified, envError, accTokenError               |
-| Logout User| /auth/logout       | POST        |                               | 200    |                                   |
+### Übersicht der Hauptordner und deren Funktionen:
+
+| Ordner            | Beschreibung                                                         |
+|-------------------|----------------------------------------------------------------------|
+| **/components**    | Enthält UI-Komponenten, z.B. Navigationsmenü, Dashboard-Elemente      |
+| **/pages**         | Verschiedene Seiten wie HomePage, JournalPage, MetricsPage, etc.      |
+| **/services**      | Beinhaltet API-Funktionen zur Kommunikation mit dem Backend          |
+| **/helpers**       | Enthält Hilfsfunktionen                                              |
+| **/utils**         | Kontext-Provider und Utility-Funktionen                              |
+| **/styles**        | Enthält alle CSS-Dateien (z.B. TailwindCSS-Konfigurationen)          |
 </details>
 
 <details>
-  <summary>Anfragen nach erfolgreicher Authentifizierung</summary>
+  <summary>Wichtige Komponenten</summary>
   
-  ### Anfragen nach erfolgreicher Authentifizierung
-  | **Request**                  | **Endpoint**                   | **HTTP Method** | **Body**                    | **Status** | **Fehlermeldung**                  |
-|-------------------------|----------------------------|-------------|-------------------------|--------|---------------------------------|
-| Verify User             | /users/verify              | GET         |                         | 200    | verificationTokenMissing, userNotFoundByToken       |
-| Get User Data           | /users                     | GET         |                         | 200    | userNotFound                   |
-| Update User Data        | /users                     | PATCH       | username                | 200    | userNotFound                   |
-| Delete User             | /users                     | DELETE      |                         | 200    | userNotFound                   |
-| Get All Check-ins       | /users/checkins            | GET         |                         | 200    | userNotFound                   |
-| Get Check-ins from Today| /users/checkins/today      | GET         |                         | 200    | userNotFound                   |
-| Get Single Check-in     | /users/checkins/:checkinId | GET         |                         | 200    | userNotFound, checkinNotFound                   |
-| Create Check-in         | /users/checkins            | POST        | emotion, tags, comment, config | 201    | userNotFound                   |
-| Get All Custom Items    | /users/customs             | GET         |                         | 200    | userNotFound                   |
-| Deactivate Custom Item   | /users/customs             | PATCH       | type, name              | 200    | userNotFound, missingInfo, customNotFound                   |
-| Get Stats by Emotion Family | /users/stats/family      | GET         | family                  | 200    | userNotFound, familyNotFound                   |
-| Get Stats by Tag        | /users/stats/tag           | GET         | tag                     | 200    | userNotFound, tagNotFound                   |
-</details>
+  ### App.jsx
+  Die Hauptkomponente `App.jsx` lädt das Kernlayout und die Navigation. Sie verwendet React Router, um zwischen verschiedenen Seiten wie dem Dashboard, der Metrics-Seite und dem Journal zu wechseln.
+  
+  ### Seiten
+  Die Seitenkomponenten befinden sich im Ordner /src/pages und repräsentieren die Hauptansichten der Anwendung:
 
-<details>
-  <summary>Fehlermeldungen</summary>
-  
-  ### Fehlermeldungen
-  | **Status** | **Fehlermeldung**                       |
-|--------|-------------------------------------|
-| 400    | missingRegData                     |
-| 400    | passValidation                     |
-| 500    | hashError                          |
-| 500    | verTokenError                      |
-| 409    | alreadyRegistered                   |
-| 400    | missingCredentials                 |
-| 404    | userNotFound                       |
-| 401    | invalidPassword                    |
-| 401    | userNotVerified                    |
-| 500    | envError                           |
-| 500    | accTokenError                      |
-| 401    | verificationTokenMissing           |
-| 404    | userNotFoundByToken               |
+- **HomePage.jsx**: Startseite der Anwendung, auf der sich Benutzer anmelden oder registrieren können.
+- **LoginPage.jsx**: Anmeldeseite für Benutzer.
+- **RegisterPage.jsx**: Registrierungsseite für neue Benutzer.
+- **ConfigPage.jsx**: Seite, die Parameter für zukünftige Aufzeichnungen abfragt. Wird nur einmal nach der ersten Anmeldung angezeigt.
+- **DashboardPage.jsx**: Dashboard zur Anzeige der bereits erfassten Gefühle eines Tages und Start des aktuellen Check-in-Prozesses.
+- **MetricsPage.jsx**: Seite zur Anzeige von Metriken und statistischen Analysen.
+- **RecordPage.jsx**: Seite für das Erfassen des aktuellen Gefühls.
+- **UserDataPage.jsx**: Seite zur Anzeige und Bearbeitung von Benutzerdaten.
+- **InfoPage.jsx**: Seite, die Benutzer detaillierter über die Anwendung informiert.
+- **JournalPage.jsx**: Seite, die derzeit geplant ist und Benutzern eine tagebuchähnliche Übersicht über erfasste Gefühle, Notizen etc. bieten soll.
+- **ErrorPage.jsx**: Zeigt eine Fehlermeldung im Falle eines Fehlers an.
+
+### Eigene Komponenten
+Im Ordner /src/components/ownComponents findest du benutzerdefinierte Komponenten, die für verschiedene Seiten erstellt wurden. Beispiele:
+
+- **navMenu**: Enthält die Navigationselemente.
+- **dashboardPage**: Bietet UI-Komponenten für das Dashboard, wie z.B. Diagramme oder Widgets.
+- **metricsPage**: Beinhaltet UI-Komponenten zur Anzeige statistischer Daten und Analysen.
+
+  ### State Management und Kontexte
+Das Projekt verwendet React-Kontexte zur Verwaltung des globalen Zustands der Anwendung. Diese Kontexte befinden sich im Ordner /src/utils/contexts.
+
+### Backend API-Interaktion
+Alle API-Aufrufe zur Interaktion mit dem Backend werden über den Ordner /src/services abgewickelt. Er enthält Funktionen zum Laden, Speichern oder Aktualisieren von Daten. Die API-Interaktionen erfolgen über Fetch-Anfragen.
+
 </details>
 
 
