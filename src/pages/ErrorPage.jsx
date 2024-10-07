@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 const ErrorPage = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-slate-900 ">
@@ -11,7 +13,7 @@ const ErrorPage = () => {
           Tippfehler im Link? Oder die Seite wurde verschoben oder gelöscht.
         </h3>
         <button className="mt-5 bg-primary text-white px-4 py-2 rounded">
-          Zurück zur Startseite
+          <NavLink to="/">Zurück zur Startseite</NavLink>
         </button>
       </main>
     </div>
