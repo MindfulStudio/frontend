@@ -5,7 +5,7 @@ import UserFeedbackText from "/src/components/typo/UserFeedbackText";
 // hooks:
 import { useEffect } from "react";
 // components providers:
-import { useMetricsContext } from "@/utils/MetricsProvider";
+import { useMetricsContext } from "../../../../utils/contexts/MetricsProvider";
 
 // ------------------------------- StatisticTwo Component -------------------------------
 const StatisticTwo = () => {

@@ -11,7 +11,7 @@ import { TabsContent } from "@/components/ui/tabs";
 import MessageCheckInsM2 from "../ownComponents/metricsPage/StatisticTwo/MessageCheckInsM2";
 import MessageMetricsM2 from "../ownComponents/metricsPage/StatisticTwo/MessageMetricsM2";
 import { useEffect, useState } from "react";
-import { useMetricsContext } from "../../utils/MetricsProvider.jsx";
+import { useMetricsContext } from "../../utils/contexts/MetricsProvider.jsx";
 import SelectTag from "../ownComponents/metricsPage/StatisticTwo/SelectTag";
 
 import StatisticTwo from "../ownComponents/metricsPage/StatisticTwo/StatisticTwo.jsx";

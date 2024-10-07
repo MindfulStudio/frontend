@@ -6,7 +6,7 @@ import SelectFeelingsFamily from "../ownComponents/metricsPage/StatisticOne/Sele
 import StatisticOne from "../ownComponents/metricsPage/StatisticOne/StatisticOne";
 import MessageCheckInsM1 from "../ownComponents/metricsPage/StatisticOne/MessageCheckInsM1";
 // context providers:
-import { useMetricsContext } from "@/utils/MetricsProvider";
+import { useMetricsContext } from "../../utils/contexts/MetricsProvider";
 
 // ------------------------------- MetricsPageTabs Component -------------------------------
 // this components handles the content ot the StatisticOne-tab

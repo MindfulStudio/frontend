@@ -6,7 +6,7 @@ import ArrowLeftIcon from "/src/assets/icons/arrow-left-svgrepo-com.svg";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 // context:
-import { useMetricsContext } from "@/utils/MetricsProvider";
+import { useMetricsContext } from "../utils/contexts/MetricsProvider";
 
 // ------------------------------- Metrics Page Component -------------------------------
 // Main component for displaying metrics and handling navigation

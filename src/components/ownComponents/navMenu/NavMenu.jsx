@@ -13,7 +13,7 @@ import JouranlIcon from "/src/assets/icons/diary-svgrepo-com.svg";
 import InfoIcon from "/src/assets/icons/information-svgrepo-com.svg";
 import LogoutIcon from "/src/assets/icons/walk-svgrepo-com.svg";
 import ProfileImageIcon from "/src/components/ownComponents/navMenu/ProfileImageIcon.jsx";
-import { useAuthContext } from "../../utils/contexts/AuthProvider";
+import { useAuthContext } from "../../../utils/contexts/AuthProvider";
 
 // NOTICE: Component NavMenubar.jsx warsch. löschen
 
