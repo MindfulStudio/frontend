@@ -15,7 +15,7 @@ import EyeClosedIcon from "/src/assets/icons/eye-close-svgrepo-com.svg";
 
 import { CheckboxStayLoggedIn } from "./CheckboxStayLoggedIN";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../utils/contexts/AuthProvider";
 
 export function LoginTabs() {
@@ -148,12 +148,11 @@ export function LoginTabs() {
                   />
                 )}
 
-                {/* TODO: Funktionalität für "Passwort vergessen" hinterlegen */}
-                <UserFeedbackText
-                  content={"Passwort vergessen?"}
-                  type="info" // vielleicht type anpassen und UserFeedback mehr als "link" gestalten
-                  // NOTICE: Was soll hier passieren? popover? Neue Seite?
-                />
+                <div className="text-sm text-gray-500">
+                  <NavLink to="/forgotpassword" className="font-medium underline">
+                    Passwort vergessen?
+                  </NavLink>
+                </div>
 
                 {error && (
                   <UserFeedbackText content={error.message} type="error" />
