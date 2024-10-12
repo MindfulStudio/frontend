@@ -15,7 +15,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export function RegisterTabs() {
   const [showPassword, setShowPassword] = useState(false);
@@ -353,12 +353,18 @@ export function RegisterTabs() {
                 />
               )}
             </CardContent>
-            <CardFooter>
+            <CardFooter className="flex flex-col items-start">
               <Button
                 disabled={!activeButton || success || !reCaptchaChecked}
                 type="submit">
                 Registrieren
               </Button>
+              <p className="text-sm mt-2">
+                Du hast bereits ein Konto?{" "}
+                <Link to={"/anmeldung"} className="font-bold">
+                  Login
+                </Link>
+              </p>
             </CardFooter>
           </form>
         </Card>

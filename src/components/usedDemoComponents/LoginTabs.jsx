@@ -15,7 +15,7 @@ import EyeClosedIcon from "/src/assets/icons/eye-close-svgrepo-com.svg";
 
 import { CheckboxStayLoggedIn } from "./CheckboxStayLoggedIN";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../utils/contexts/AuthProvider";
 
 export function LoginTabs() {
@@ -181,8 +181,13 @@ export function LoginTabs() {
 
             <CardFooter className="flex flex-col items-start">
               <CheckboxStayLoggedIn setStayLoggedIn={setStayLoggedIn} />
-
               <Button type="submit">Login</Button>
+              <p className="text-sm mt-2">
+                Du hast kein Konto?{" "}
+                <Link to={"/registrierung"} className="font-bold">
+                  Registrieren
+                </Link>
+              </p>
             </CardFooter>
           </form>
         </Card>
