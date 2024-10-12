@@ -30,6 +30,7 @@ export function RegisterTabs() {
   const [AGBChecked, setAGBChecked] = useState(false);
   const [success, setSuccess] = useState(false);
   const [countdown, setCountdown] = useState(6);
+  const [waitingMessageOn, setWaitingMessageOn] = useState(false);
 
   // states for validation errors coming from server
   const [emailWarning, setEmailWarning] = useState(null);
@@ -140,6 +141,11 @@ export function RegisterTabs() {
 
     const reCaptchaValue = reCaptchaRef.current.getValue();
 
+    // timer for waiting message after 5 seconds:
+    const timer = setTimeout(() => {
+      setWaitingMessageOn(true);
+    }, 5000);
+
     try {
       const baseURL = import.meta.env.VITE_baseURL;
       const pathURL = import.meta.env.VITE_basePathOne;
@@ -205,6 +211,9 @@ export function RegisterTabs() {
       handleServerErrors();
       console.log(error);
       resetReCaptcha();
+    } finally {
+      clearTimeout(timer);
+      setWaitingMessageOn(false);
     }
   };
 
@@ -327,6 +336,14 @@ export function RegisterTabs() {
                   />
                 </>
               )}
+              {waitingMessageOn && (
+                <UserFeedbackText
+                  content={
+                    "Wenn die Wartezeit lang ist, kann es daran liegen, dass der Server aufgrund von Inaktivität aus dem Ruhezustand erwacht. Dies kann bis zu 50 Sekunden dauern. Vielen Dank für deine Geduld."
+                  }
+                  type="info"
+                />
+              )}
               {/* reCAPTCHA */}
               {!success && (
                 <ReCAPTCHA
@@ -339,8 +356,7 @@ export function RegisterTabs() {
             <CardFooter>
               <Button
                 disabled={!activeButton || success || !reCaptchaChecked}
-                type="submit"
-              >
+                type="submit">
                 Registrieren
               </Button>
             </CardFooter>
