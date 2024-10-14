@@ -12,7 +12,7 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent } from "@/components/ui/tabs";
 import { useEffect, useState } from "react";
 
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { forgotPassword } from "../../../utils/services/forgotPassword";
 import UserFeedbackText from "../../typo/UserFeedbackText";
 
@@ -67,9 +67,9 @@ const ForgotPasswordTabs = () => {
 
                 <div className="text-sm text-gray-500">
                   Du kennst dein Passwort?{" "}
-                  <NavLink to="/anmeldung" className="font-medium underline">
+                  <Link to="/anmeldung" className="font-medium underline">
                     Login
-                  </NavLink>
+                  </Link>
                 </div>
                 {error && (
                   <UserFeedbackText content={error.message} type="error" />

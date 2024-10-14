@@ -15,7 +15,7 @@ import EyeClosedIcon from "/src/assets/icons/eye-close-svgrepo-com.svg";
 
 import { CheckboxStayLoggedIn } from "./CheckboxStayLoggedIN";
 import { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../utils/contexts/AuthProvider";
 
 export function LoginTabs() {
@@ -149,9 +149,9 @@ export function LoginTabs() {
                 )}
 
                 <div className="text-sm text-gray-500">
-                  <NavLink to="/forgotpassword" className="font-medium underline">
+                  <Link to="/forgotpassword" className="font-medium underline">
                     Passwort vergessen?
-                  </NavLink>
+                  </Link>
                 </div>
 
                 {error && (
