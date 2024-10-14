@@ -14,7 +14,6 @@ export const resetPassword = async (
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ token, password }),
-      credentials: "include",
     });
     const data = await response.json();
     // In case of userNotFound error:
