@@ -69,6 +69,7 @@ const UserDataPage = () => {
             setError={setError}
             valError={valError}
             setValError={setValError}
+            userData={userData}
             clearMessages={clearMessages}
           />
         </Tabs>
