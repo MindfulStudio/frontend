@@ -15,7 +15,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export function RegisterTabs() {
   const [showPassword, setShowPassword] = useState(false);
@@ -30,6 +30,7 @@ export function RegisterTabs() {
   const [AGBChecked, setAGBChecked] = useState(false);
   const [success, setSuccess] = useState(false);
   const [countdown, setCountdown] = useState(6);
+  const [waitingMessageOn, setWaitingMessageOn] = useState(false);
 
   // states for validation errors coming from server
   const [emailWarning, setEmailWarning] = useState(null);
@@ -140,6 +141,11 @@ export function RegisterTabs() {
 
     const reCaptchaValue = reCaptchaRef.current.getValue();
 
+    // timer for waiting message after 5 seconds:
+    const timer = setTimeout(() => {
+      setWaitingMessageOn(true);
+    }, 5000);
+
     try {
       const baseURL = import.meta.env.VITE_baseURL;
       const pathURL = import.meta.env.VITE_basePathOne;
@@ -205,6 +211,9 @@ export function RegisterTabs() {
       handleServerErrors();
       console.log(error);
       resetReCaptcha();
+    } finally {
+      clearTimeout(timer);
+      setWaitingMessageOn(false);
     }
   };
 
@@ -327,6 +336,14 @@ export function RegisterTabs() {
                   />
                 </>
               )}
+              {waitingMessageOn && (
+                <UserFeedbackText
+                  content={
+                    "Wenn die Wartezeit lang ist, kann es daran liegen, dass der Server aufgrund von Inaktivität aus dem Ruhezustand erwacht. Dies kann bis zu 50 Sekunden dauern. Vielen Dank für deine Geduld."
+                  }
+                  type="info"
+                />
+              )}
               {/* reCAPTCHA */}
               {!success && (
                 <ReCAPTCHA
@@ -336,13 +353,18 @@ export function RegisterTabs() {
                 />
               )}
             </CardContent>
-            <CardFooter>
+            <CardFooter className="flex flex-col items-start">
               <Button
                 disabled={!activeButton || success || !reCaptchaChecked}
-                type="submit"
-              >
+                type="submit">
                 Registrieren
               </Button>
+              <p className="text-sm mt-2">
+                Du hast bereits ein Konto?{" "}
+                <Link to={"/anmeldung"} className="font-bold">
+                  Login
+                </Link>
+              </p>
             </CardFooter>
           </form>
         </Card>

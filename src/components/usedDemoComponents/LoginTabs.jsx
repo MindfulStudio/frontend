@@ -25,6 +25,7 @@ export function LoginTabs() {
   // NOTICE: vielleicht auch in provider?
   const [error, setError] = useState(null);
   const [stayLoggedIn, setStayLoggedIn] = useState(false);
+  const [waitingMessageOn, setWaitingMessageOn] = useState(false);
 
   const { setIsLoggedIn } = useAuthContext();
   const navigate = useNavigate();
@@ -75,6 +76,11 @@ export function LoginTabs() {
       return setError({ message: "Email oder Passwort fehlt." });
     }
 
+    // timer for waiting message after 5 seconds:
+    const timer = setTimeout(() => {
+      setWaitingMessageOn(true);
+    }, 5000);
+
     // fetching loginData - POST:
     try {
       const baseURL = import.meta.env.VITE_baseURL;
@@ -110,6 +116,9 @@ export function LoginTabs() {
           message: "Es konnte keine Verbindung zum Server hergestellt werden.",
         });
       }
+    } finally {
+      clearTimeout(timer);
+      setWaitingMessageOn(false);
     }
   };
 
@@ -157,13 +166,27 @@ export function LoginTabs() {
                 {error && (
                   <UserFeedbackText content={error.message} type="error" />
                 )}
+
+                {waitingMessageOn && (
+                  <UserFeedbackText
+                    content={
+                      "Wenn die Wartezeit lang ist, kann es daran liegen, dass der Server aufgrund von Inaktivität aus dem Ruhezustand erwacht. Dies kann bis zu 50 Sekunden dauern. Vielen Dank für deine Geduld."
+                    }
+                    type="info"
+                  />
+                )}
               </div>
             </CardContent>
 
             <CardFooter className="flex flex-col items-start">
               <CheckboxStayLoggedIn setStayLoggedIn={setStayLoggedIn} />
-
               <Button type="submit">Login</Button>
+              <p className="text-sm mt-2">
+                Du hast kein Konto?{" "}
+                <Link to={"/registrierung"} className="font-bold">
+                  Registrieren
+                </Link>
+              </p>
             </CardFooter>
           </form>
         </Card>
