@@ -157,7 +157,7 @@ export function LoginTabs() {
                   />
                 )}
 
-                <div className="text-sm text-gray-500">
+                <div className="text-sm">
                   <Link to="/forgotpassword" className="font-medium underline">
                     Passwort vergessen?
                   </Link>
@@ -183,7 +183,7 @@ export function LoginTabs() {
               <Button type="submit">Login</Button>
               <p className="text-sm mt-2">
                 Du hast kein Konto?{" "}
-                <Link to={"/registrierung"} className="font-bold">
+                <Link to={"/registrierung"} className="font-medium underline">
                   Registrieren
                 </Link>
               </p>

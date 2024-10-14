@@ -65,7 +65,7 @@ const ForgotPasswordTabs = () => {
                   onChange={handleChange}
                 />
 
-                <div className="text-sm text-gray-500">
+                <div className="text-sm">
                   Du kennst dein Passwort?{" "}
                   <Link to="/anmeldung" className="font-medium underline">
                     Login

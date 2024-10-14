@@ -361,7 +361,7 @@ export function RegisterTabs() {
               </Button>
               <p className="text-sm mt-2">
                 Du hast bereits ein Konto?{" "}
-                <Link to={"/anmeldung"} className="font-bold">
+                <Link to={"/anmeldung"} className="font-medium underline">
                   Login
                 </Link>
               </p>
