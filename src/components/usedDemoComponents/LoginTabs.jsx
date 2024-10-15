@@ -157,12 +157,11 @@ export function LoginTabs() {
                   />
                 )}
 
-                {/* TODO: Funktionalität für "Passwort vergessen" hinterlegen */}
-                <UserFeedbackText
-                  content={"Passwort vergessen?"}
-                  type="info" // vielleicht type anpassen und UserFeedback mehr als "link" gestalten
-                  // NOTICE: Was soll hier passieren? popover? Neue Seite?
-                />
+                <div className="text-sm">
+                  <Link to="/forgotpassword" className="font-medium underline">
+                    Passwort vergessen?
+                  </Link>
+                </div>
 
                 {error && (
                   <UserFeedbackText content={error.message} type="error" />
@@ -184,7 +183,7 @@ export function LoginTabs() {
               <Button type="submit">Login</Button>
               <p className="text-sm mt-2">
                 Du hast kein Konto?{" "}
-                <Link to={"/registrierung"} className="font-bold">
+                <Link to={"/registrierung"} className="font-medium underline">
                   Registrieren
                 </Link>
               </p>

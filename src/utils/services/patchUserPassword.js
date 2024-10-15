@@ -3,7 +3,7 @@ export const patchUserPassword = async (passwords, setError, setInfo) => {
   const pathURL = import.meta.env.VITE_basePathTwo;
 
   try {
-    const response = await fetch(`${baseURL}${pathURL}password`, {
+    const response = await fetch(`${baseURL}${pathURL}updatePassword`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
