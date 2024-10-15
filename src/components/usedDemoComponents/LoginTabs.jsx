@@ -183,7 +183,7 @@ export function LoginTabs() {
                 {loginData.email === testUserAccount && (
                   <UserFeedbackText
                     content={
-                      "Aus Sicherheitsgründen werden in diesem Demo-Modus alle von dir vorgenommenen Einträge und Änderungen bei der Abmeldung automatisch zurückgesetzt. Einige Optionen sind für diesen Account nicht verfügbar (z.B. Passwort ändern)."
+                      "Im Demo-Account (ohne eigene Registrierung) werden alle von dir vorgenommenen Einträge und Änderungen beim Logout automatisch zurückgesetzt. Um die vollumfängliche Funktionalität zu nutzen, lege dir bitte einen eigenen Account an."
                     }
                     type="info"
                   />
