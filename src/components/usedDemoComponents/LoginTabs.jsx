@@ -19,8 +19,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../utils/contexts/AuthProvider";
 
 export function LoginTabs() {
+  // userData for TestUser:
+  const testUserAccount = import.meta.env.VITE_testUserAccount;
+  const testUserPassword = import.meta.env.VITE_testUserPassword;
+
   // userData from login:
-  const [loginData, setLoginData] = useState({ email: "", password: "" });
+  const [loginData, setLoginData] = useState({
+    email: testUserAccount,
+    password: testUserPassword,
+  });
   const [showPassword, setShowPassword] = useState(false);
   // NOTICE: vielleicht auch in provider?
   const [error, setError] = useState(null);
@@ -134,14 +141,20 @@ export function LoginTabs() {
             <CardContent className="space-y-2">
               <div className="space-y-1">
                 <Label htmlFor="email">Email</Label>
-                <Input id="email" placeholder="Email" onChange={handleChange} />
+                <Input
+                  id="email"
+                  placeholder={testUserAccount}
+                  value={loginData.email}
+                  onChange={handleChange}
+                />
               </div>
 
               <div className="space-y-1 relative">
                 <Label htmlFor="password">Passwort</Label>
                 <Input
                   id="password"
-                  placeholder="Passwort"
+                  placeholder={testUserPassword}
+                  value={loginData.password}
                   type={showPassword ? "text" : "password"}
                   onChange={handleChange}
                 />
@@ -166,6 +179,15 @@ export function LoginTabs() {
 
                 {error && (
                   <UserFeedbackText content={error.message} type="error" />
+                )}
+
+                {loginData.email === testUserAccount && (
+                  <UserFeedbackText
+                    content={
+                      "Aus Sicherheitsgründen werden in diesem Demo-Modus alle von dir vorgenommenen Einträge und Änderungen bei der Abmeldung automatisch zurückgesetzt. Einige Optionen sind für diesen Account nicht verfügbar (z.B. Passwort ändern)."
+                    }
+                    type="info"
+                  />
                 )}
 
                 {waitingMessageOn && (
