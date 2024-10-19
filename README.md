@@ -15,6 +15,15 @@ A diary feature provides a weekly view of recorded emotions, allowing users to c
 
 This project is a collaboration between [Barış Balcı](https://github.com/barisbalcimusic), [hannahnier](https://github.com/hannahnier), [luisePkt](https://github.com/luisePkt), [Nadja Probst](https://github.com/nadjascodejourney). The development team does not have a professional background in psychology or related fields, and the application is not intended to replace medical or psychological treatment or advice. For mental health issues, users are encouraged to seek professional help.
 
+## 🔐 Quick Login 
+
+You can use the test account below to explore the application without registering:
+
+- **Email:** gemischtegefuehle.app@gmail.com
+- **Password:** TestUser123!
+
+**Note**: All data tracked with this account will be deleted immediately after each login to ensure a fresh start for every tester.
+
 ## 🛠 Technologies Used
 
 - **Framework:** React.js
