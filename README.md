@@ -161,6 +161,15 @@ Die Anwendung bietet außerdem eine Tagebuchfunktion, die eine Wochenübersicht 
 
 Das Projekt ist eine Gemeinschaftsarbeit von [Barış Balcı](https://github.com/barisbalcimusic), [hannahnier](https://github.com/hannahnier), [luisePkt](https://github.com/luisePkt), [Nadja Probst](https://github.com/nadjascodejourney). Das Entwicklerteam hat keinen fachlichen Hintergrund im Bereich Psychologie oder verwandten Wissenschaften, und die Anwendung ersetzt keine medizinische oder psychologische Beratung. Bei psychischen Problemen raten die Entwickler\*innen, sich professionelle Hilfe zu suchen.
 
+## 🔐 Schnelle Anmeldung
+
+Der untenstehende Test-Account kann genutzt werden, um die Anwendung ohne Registrierung auszuprobieren:
+
+- **E-Mail**: gemischtegefuehle.app@gmail.com
+- **Passwort**: TestUser123!
+
+**Hinweis**: Alle mit diesem Account erfassten Daten werden nach jedem Login sofort gelöscht, um jedem Tester einen frischen Start zu ermöglichen.
+
 ## 🛠 Verwendete Technologien
 
 - **Framework:** React.js
