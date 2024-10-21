@@ -46,6 +46,8 @@ export function UserDataTabs({
   const { setIsLoggedIn, setIsLoggedOut } = useAuthContext();
   const { userData, setUserData } = useUserContext();
 
+  const testUserAccount = import.meta.env.VITE_testUserAccount;
+
   // SIDE EFFECTS:
 
   // re-validate username on change:
@@ -199,6 +201,7 @@ export function UserDataTabs({
               variant="secondary"
               type="button"
               onClick={showDeleteConfirmAlert}
+              disabled={userData.email === testUserAccount}
             >
               <p>Profil löschen</p>
               <Delete className="h-5 w-5 ml-1" />
