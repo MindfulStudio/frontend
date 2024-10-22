@@ -15,8 +15,6 @@ import LogoutIcon from "/src/assets/icons/walk-svgrepo-com.svg";
 import ProfileImageIcon from "/src/components/ownComponents/navMenu/ProfileImageIcon.jsx";
 import { useAuthContext } from "../../../utils/contexts/AuthProvider";
 
-// NOTICE: Component NavMenubar.jsx warsch. löschen
-
 const baseURL = import.meta.env.VITE_baseURL;
 const basePathOne = import.meta.env.VITE_basePathOne;
 
@@ -28,7 +26,7 @@ export const NavMenu = () => {
     {
       id: 1,
       name: "Profil",
-      icon: <ProfileImageIcon className="h-6 w-6" />, // kann noch angepasst werden! => d.h. vllt. ProfileImg random aussuchen oder wenn viel Zeit ist Auswahl zwischen mehreren Bildern geben
+      icon: <ProfileImageIcon className="h-6 w-6" />,
       to: "/meineDaten",
       element: <UserDataPage />,
     },
@@ -78,12 +76,10 @@ export const NavMenu = () => {
 
   return (
     // container nav-bar:
-    <div className="flex h-[60.821px] items-center rounded-md border bg-background gap-[2px] flex-shrink-0 border-none w-[393px] justify-center">
-      {/* creating nav-bar elements with map */}
+    <>
       {routes.map((route) => (
         // container nav-element
         <div key={route.id}>
-          {/* nav-link */}
           <NavLink
             to={route.to}
             className="w-[57px] h-[61px] items-center  px-[12px] flex justify-center gap-[7.798px] flex-shrink-0 aria-[current=page]:bg-white rounded-md" // hover nutzen? => hover:text-[#345995]
@@ -99,18 +95,13 @@ export const NavMenu = () => {
         </div>
       ))}
 
-      {/* logout-"button" in nav-bar */}
-      {/* Wo soll es bei Logout final hingehen? */}
-
       {/* container nav-element */}
       <div className="items-center">
-        {/* nav-link */}
         <NavLink
           to={"/"}
           onClick={handleLogout}
-          className="w-[57px] h-[61px] items-center px-[12px] flex justify-center gap-[7.798px] flex-shrink-0 aria-[current=page]:bg-white rounded-md">
-          {/* handle logout muss noch richtig implementiert werden */}
-
+          className="w-[57px] h-[61px] items-center px-[12px] flex justify-center gap-[7.798px] flex-shrink-0 aria-[current=page]:bg-white rounded-md"
+        >
           {/* container nav-link element */}
           <div className="flex flex-col select-none items-center rounded-sm px-3 py-1.5 outline-none text-[10px] ">
             {/* nav-icon */}
@@ -120,6 +111,6 @@ export const NavMenu = () => {
           </div>
         </NavLink>
       </div>
-    </div>
+    </>
   );
 };

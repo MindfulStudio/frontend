@@ -4,8 +4,7 @@ import { NavMenu } from "@/components/ownComponents/navMenu/NavMenu";
 
 const Navigation = () => {
   return (
-    <nav>
-      {/* <NavMenubar /> */}
+    <nav className="flex items-center border bg-background gap-[2px] border-none mt-4">
       <NavMenu />
     </nav>
   );
