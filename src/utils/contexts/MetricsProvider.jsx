@@ -104,27 +104,21 @@ const MetricsProvider = ({ children }) => {
     }
   };
 
-  // ----------------------------------- useEffect - check if >= 7 check-ins available ---------------------------------
+  // ----------------------------------- useEffect - load statistics ---------------------------------
   //  StatisticOne:
   useEffect(() => {
-    if (Number(checkIn) >= 1) {
-      setShowMetricsOne(true);
-      // fetch is not necessary if there are less than 1 check-ins
-      if (selectedFeelingsFamily) loadStatisticsByFamily();
-    }
+    setShowMetricsOne(true);
+    if (selectedFeelingsFamily) loadStatisticsByFamily();
   }, [selectedFeelingsFamily, checkIn]);
 
   // StatisticTwo:
   useEffect(() => {
-    if (Number(checkIn) >= 1) {
-      setShowMetricsTwo(true);
-      // fetch is not necessary if there are less than 1 check-ins
-      if (selectedTag) loadStatisticsByTag();
-    }
+    setShowMetricsTwo(true);
+    if (selectedTag) loadStatisticsByTag();
   }, [selectedTag, checkIn]);
 
   // ----------------------------------- Function - handle loadStaticsTwo ---------------------------------
-  const handleLoadStatisitcsTwo = () => {
+  const handleLoadStatisticsTwo = () => {
     try {
       if (metricsTwoStatus <= maxMetricsTwoStatus) {
         setMetricsTwoStatus((prevStat) => prevStat + 1);
@@ -136,7 +130,7 @@ const MetricsProvider = ({ children }) => {
 
   // ----------------------------------- Function - handle selcting/deselecting tags ---------------------------------
   const selectTag = (tag) =>
-    handleTagToggleMetric(tag, setSelectTag, handleLoadStatisitcsTwo);
+    handleTagToggleMetric(tag, setSelectTag, handleLoadStatisticsTwo);
 
   // ----------------------------------- Function - render tags ---------------------------------
 
