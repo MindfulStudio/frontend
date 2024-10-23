@@ -2,6 +2,7 @@ export const getStatisticsByFamily = async (
   setStatisticsByFamily,
   selectedFeelingsFamily
 ) => {
+  console.log("fetching statistics by family");
   try {
     const baseURL = import.meta.env.VITE_baseURL;
     const basePathThree = import.meta.env.VITE_basePathThree;
