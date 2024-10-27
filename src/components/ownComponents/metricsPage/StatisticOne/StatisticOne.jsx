@@ -13,8 +13,6 @@ const StatisticOne = () => {
     statisticsByFamily,
   } = useMetricsContext();
 
-  console.log({ statisticsByFamily });
-
   // check if statisticsByFamily available
 
   if (!statisticsByFamily || !statisticsByFamily.stats) {
