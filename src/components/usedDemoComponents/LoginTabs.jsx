@@ -15,16 +15,24 @@ import EyeClosedIcon from "/src/assets/icons/eye-close-svgrepo-com.svg";
 
 import { CheckboxStayLoggedIn } from "./CheckboxStayLoggedIN";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../utils/contexts/AuthProvider";
 
 export function LoginTabs() {
+  // userData for TestUser:
+  const testUserAccount = import.meta.env.VITE_testUserAccount;
+  const testUserPassword = import.meta.env.VITE_testUserPassword;
+
   // userData from login:
-  const [loginData, setLoginData] = useState({ email: "", password: "" });
+  const [loginData, setLoginData] = useState({
+    email: testUserAccount,
+    password: testUserPassword,
+  });
   const [showPassword, setShowPassword] = useState(false);
   // NOTICE: vielleicht auch in provider?
   const [error, setError] = useState(null);
   const [stayLoggedIn, setStayLoggedIn] = useState(false);
+  const [waitingMessageOn, setWaitingMessageOn] = useState(false);
 
   const { setIsLoggedIn } = useAuthContext();
   const navigate = useNavigate();
@@ -75,6 +83,11 @@ export function LoginTabs() {
       return setError({ message: "Email oder Passwort fehlt." });
     }
 
+    // timer for waiting message after 5 seconds:
+    const timer = setTimeout(() => {
+      setWaitingMessageOn(true);
+    }, 5000);
+
     // fetching loginData - POST:
     try {
       const baseURL = import.meta.env.VITE_baseURL;
@@ -110,6 +123,9 @@ export function LoginTabs() {
           message: "Es konnte keine Verbindung zum Server hergestellt werden.",
         });
       }
+    } finally {
+      clearTimeout(timer);
+      setWaitingMessageOn(false);
     }
   };
 
@@ -125,14 +141,20 @@ export function LoginTabs() {
             <CardContent className="space-y-2">
               <div className="space-y-1">
                 <Label htmlFor="email">Email</Label>
-                <Input id="email" placeholder="Email" onChange={handleChange} />
+                <Input
+                  id="email"
+                  placeholder={testUserAccount}
+                  value={loginData.email}
+                  onChange={handleChange}
+                />
               </div>
 
               <div className="space-y-1 relative">
                 <Label htmlFor="password">Passwort</Label>
                 <Input
                   id="password"
-                  placeholder="Passwort"
+                  placeholder={testUserPassword}
+                  value={loginData.password}
                   type={showPassword ? "text" : "password"}
                   onChange={handleChange}
                 />
@@ -148,23 +170,45 @@ export function LoginTabs() {
                   />
                 )}
 
-                {/* TODO: Funktionalität für "Passwort vergessen" hinterlegen */}
-                <UserFeedbackText
-                  content={"Passwort vergessen?"}
-                  type="info" // vielleicht type anpassen und UserFeedback mehr als "link" gestalten
-                  // NOTICE: Was soll hier passieren? popover? Neue Seite?
-                />
+                <div className="text-sm">
+                  <Link to="/forgotpassword" className="font-medium underline">
+                    Passwort vergessen?
+                  </Link>
+                </div>
 
                 {error && (
                   <UserFeedbackText content={error.message} type="error" />
+                )}
+
+                {loginData.email === testUserAccount && (
+                  <UserFeedbackText
+                    content={
+                      "Im Demo-Account (ohne eigene Registrierung) werden alle von dir vorgenommenen Einträge und Änderungen beim Logout automatisch zurückgesetzt. Um die vollumfängliche Funktionalität zu nutzen, lege dir bitte einen eigenen Account an."
+                    }
+                    type="info"
+                  />
+                )}
+
+                {waitingMessageOn && (
+                  <UserFeedbackText
+                    content={
+                      "Wenn die Wartezeit lang ist, kann es daran liegen, dass der Server aufgrund von Inaktivität aus dem Ruhezustand erwacht. Dies kann bis zu 50 Sekunden dauern. Vielen Dank für deine Geduld."
+                    }
+                    type="info"
+                  />
                 )}
               </div>
             </CardContent>
 
             <CardFooter className="flex flex-col items-start">
               <CheckboxStayLoggedIn setStayLoggedIn={setStayLoggedIn} />
-
               <Button type="submit">Login</Button>
+              <p className="text-sm mt-2">
+                Du hast kein Konto?{" "}
+                <Link to={"/registrierung"} className="font-medium underline">
+                  Registrieren
+                </Link>
+              </p>
             </CardFooter>
           </form>
         </Card>

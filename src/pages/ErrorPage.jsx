@@ -1,4 +1,5 @@
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 const ErrorPage = () => {
   return (
@@ -12,9 +13,9 @@ const ErrorPage = () => {
           Diese Seite scheint nicht zu existieren. Vielleicht gab es einen
           Tippfehler im Link? Oder die Seite wurde verschoben oder gelöscht.
         </h3>
-        <button className="mt-5 bg-primary text-white px-4 py-2 rounded">
-          <NavLink to="/">Zurück zur Startseite</NavLink>
-        </button>
+        <Button>
+          <Link to="/">Zurück zur Startseite</Link>
+        </Button>
       </main>
     </div>
   );

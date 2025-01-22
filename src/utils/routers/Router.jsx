@@ -11,16 +11,17 @@ import RegisterPage from "../../pages/RegisterPage";
 import DashboardPage from "../../pages/DashboardPage";
 import UserDataPage from "../../pages/UserDataPage";
 import InfoPage from "../../pages/InfoPage";
+import ForgotPasswordPage from "../../pages/ForgotPasswordPage";
+import ResetPasswordPage from "../../pages/ResetPasswordPage";
 // Providers
 import EmotionsProvider from "../contexts/EmotionsProvider";
 import TagProvider from "../contexts/TagProvider";
-
 import RecordProgressProvider from "../contexts/RecordProgressProvider";
 import UserProvider from "../contexts/UserProvider";
 import CheckinProvider from "../contexts/CheckinProvider";
 import AuthProvider from "../contexts/AuthProvider";
-
 import MetricsProvider from "../contexts/MetricsProvider";
+
 import PrivateRoute from "./PrivateRoute";
 
 const Router = () => {
@@ -41,6 +42,14 @@ const Router = () => {
         {
           path: "/registrierung",
           element: <RegisterPage />,
+        },
+        {
+          path: "/forgotpassword",
+          element: <ForgotPasswordPage />,
+        },
+        {
+          path: "/resetpassword/:token",
+          element: <ResetPasswordPage />,
         },
         {
           path: "/recordfeeling",
@@ -69,6 +78,14 @@ const Router = () => {
         {
           path: "/registrierung",
           element: <RegisterPage />,
+        },
+        {
+          path: "/forgotpassword",
+          element: <ForgotPasswordPage />,
+        },
+        {
+          path: "/resetpassword/:token",
+          element: <ResetPasswordPage />,
         },
         {
           path: "/konfiguration",

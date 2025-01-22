@@ -9,6 +9,7 @@ import UserFeedbackText from "../typo/UserFeedbackText";
 
 // ---------------------------- Import Utils -------------------------------
 import { patchUserPassword } from "../../utils/services/patchUserPassword";
+import { validatePassword } from "../../utils/helpers/validatePassword";
 
 // ---------------------------- Import Shadcn UI Components -------------------------------
 import { Button } from "@/components/ui/button";
@@ -31,6 +32,7 @@ const PasswordTabs = ({
   setError,
   valError,
   setValError,
+  userData,
   clearMessages,
 }) => {
   // Local states:
@@ -48,7 +50,16 @@ const PasswordTabs = ({
     setError(null);
     setInfo(null);
     comparePasswords();
-    if (passwords.newPassword) validatePassword();
+    if (passwords.newPassword)
+      validatePassword(passwords.newPassword, setValError);
+    if (userData.email === "gemischtegefuehle.app@gmail.com") {
+      setValError(null);
+      setError(null);
+      setInfo({
+        message:
+          "Du nutzt einen Testaccount, für den das Passwort nicht geändert werden kann. Bitte lege einen eigenen Account an, wenn du diese Funktionalität testen möchtest.",
+      });
+    }
   }, [passwords.newPassword, passwords.currentPassword]);
 
   //   FUNCTIONS:
@@ -64,20 +75,6 @@ const PasswordTabs = ({
     e.preventDefault();
     clearMessages();
     patchUserPassword(passwords, setError, setInfo);
-  };
-
-  const validatePassword = () => {
-    const passwordRegex =
-      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@.#$!%*?&^_])[A-Za-z\d@.#$!%*?&^_]{8,}$/;
-
-    if (!passwordRegex.test(passwords.newPassword)) {
-      setValError({
-        message:
-          "Das Passwort muss mindestens 8 Zeichen lang sein und mindestens einen Buchstaben, eine Zahl sowie ein Sonderzeichen (@.#$!%*?&^_) enthalten.",
-      });
-    } else {
-      setValError(null);
-    }
   };
 
   const comparePasswords = () => {
@@ -159,7 +156,8 @@ const PasswordTabs = ({
                 !passwords.currentPassword ||
                 !passwords.newPassword ||
                 passwords.currentPassword === passwords.newPassword ||
-                valError
+                valError ||
+                userData.email === "gemischtegefuehle.app@gmail.com"
               }
             >
               Passwort speichern

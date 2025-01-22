@@ -1,6 +1,6 @@
 import HighlightText from "@/components/typo/HighlightText";
 import { Button } from "@/components/ui/button";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Element from "../assets/elements/floralElement.svg";
 import { useEffect } from "react";
 import { useAuthContext } from "../utils/contexts/AuthProvider";
@@ -33,7 +33,7 @@ const HomePage = () => {
             entwickeln.
           </p>
           <Button size={"home"} variant={"homeWhite"} disabled={!cookieConsent}>
-            <NavLink to="/anmeldung">Einloggen</NavLink>
+            <Link to="/anmeldung">Einloggen</Link>
           </Button>
         </div>
 
@@ -47,7 +47,7 @@ const HomePage = () => {
               variant={"homeBlack"}
               disabled={!cookieConsent}
             >
-              <NavLink to="/registrierung">Registrieren</NavLink>
+              <Link to="/registrierung">Registrieren</Link>
             </Button>
             <Element
               className="flex-shrink-0 pt-5

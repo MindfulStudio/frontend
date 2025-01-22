@@ -15,6 +15,15 @@ A diary feature provides a weekly view of recorded emotions, allowing users to c
 
 This project is a collaboration between [Barış Balcı](https://github.com/barisbalcimusic), [hannahnier](https://github.com/hannahnier), [luisePkt](https://github.com/luisePkt), [Nadja Probst](https://github.com/nadjascodejourney). The development team does not have a professional background in psychology or related fields, and the application is not intended to replace medical or psychological treatment or advice. For mental health issues, users are encouraged to seek professional help.
 
+## 🔐 Quick Login 
+
+You can use the test account below to explore the application without registering:
+
+- **Email:** gemischtegefuehle.app@gmail.com
+- **Password:** TestUser123!
+
+**Note**: All data tracked with this account will be deleted immediately after each login to ensure a fresh start for every tester.
+
 ## 🛠 Technologies Used
 
 - **Framework:** React.js
@@ -42,7 +51,7 @@ The project is primarily intended for mobile use but can also be used on other s
 ## 📑 Project Structure
 
 <details>
-  <summary>The main folders and files of the project are organized as follows:
+  <summary>Main folder and files of the project 
 </summary>
   
 ### Overview of the main folders and their purposes:
@@ -93,6 +102,12 @@ All API calls for interacting with the backend are handled via the /src/services
 
 </details>
 
+<details>
+  <summary>API Documentation</summary>
+  The <a href="https://github.com/MindfulStudio/backend/blob/main/README.md#-api-documentation">API documentation</a> can be found in the readme.md of the backend repository.
+</details>
+
+
 ## 🌐 Environment Variables
 
 Make sure to set the following environment variables before running the application:
@@ -121,7 +136,7 @@ This frontend project is part of a collaborative final project completed by [lui
 
 ## 📜 License
 
-To be added.
+This project is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International Public Licence. You may share and adapt the material as long as you give credit, do not use it for commercial purposes, and distribute your modifications under the same terms. Further information can be found in the [licence file](https://github.com/MindfulStudio/frontend/blob/main/LICENSE.md).
 
 ## 📧 Contact
 
@@ -145,6 +160,15 @@ Dieses Projekt ist eine Mental-Health-Anwendung, die es den Nutzern ermöglicht,
 Die Anwendung bietet außerdem eine Tagebuchfunktion, die eine Wochenübersicht der erfassten Gefühle anzeigt. Beim Anklicken eines Gefühls können Notizen und andere Informationen eingesehen werden. Ziel der Anwendung ist es, die eigenen Gefühle besser zu verstehen und einzuordnen, ohne eindeutige Zusammenhänge zu den erfassten Parametern darzustellen.
 
 Das Projekt ist eine Gemeinschaftsarbeit von [Barış Balcı](https://github.com/barisbalcimusic), [hannahnier](https://github.com/hannahnier), [luisePkt](https://github.com/luisePkt), [Nadja Probst](https://github.com/nadjascodejourney). Das Entwicklerteam hat keinen fachlichen Hintergrund im Bereich Psychologie oder verwandten Wissenschaften, und die Anwendung ersetzt keine medizinische oder psychologische Beratung. Bei psychischen Problemen raten die Entwickler\*innen, sich professionelle Hilfe zu suchen.
+
+## 🔐 Schnelle Anmeldung
+
+Der untenstehende Test-Account kann genutzt werden, um die Anwendung ohne Registrierung auszuprobieren:
+
+- **E-Mail**: gemischtegefuehle.app@gmail.com
+- **Passwort**: TestUser123!
+
+**Hinweis**: Alle mit diesem Account erfassten Daten werden nach jedem Login sofort gelöscht, um jedem Tester einen frischen Start zu ermöglichen.
 
 ## 🛠 Verwendete Technologien
 
@@ -173,7 +197,7 @@ Das Projekt ist hauptsächlich für die Nutzung auf Mobilgeräten gedacht, kann 
 ## 📑 Projektstruktur
 
 <details>
-  <summary>Die Hauptordner und -dateien des Projekts sind wie folgt organisiert:</summary>
+  <summary>Hauptordner und -dateien des Projekts </summary>
   
 ### Übersicht der Hauptordner und deren Funktionen:
 
@@ -223,6 +247,11 @@ Alle API-Aufrufe zur Interaktion mit dem Backend werden über den Ordner /src/se
 
 </details>
 
+<details>
+  <summary>API-Dokumentation</summary>
+  Die <a href="https://github.com/MindfulStudio/backend/blob/main/README.md#-api-dokumentation">API-Dokumentation</a> befindet sich im readme.md des backend Repositorys.
+</details>
+
 
 ## 🌐 Umgebungsvariablen
 
@@ -251,7 +280,8 @@ Dieses Frontendprojekt ist Teil eines Abschlussprojekts, das von [luisePkt](http
 
 ## 📜 Lizenz
 
-Wird noch ergänzt.
+Dieses Projekt ist lizenziert unter der Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International Public License. Du darfst das Material teilen und anpassen, solange du die Urheberrechte nennst, es nicht für kommerzielle Zwecke nutzt und deine Abänderungen unter den gleichen Bedingungen weitergibst. Weitere Informationen findest du in der [Lizenzdatei](https://github.com/MindfulStudio/frontend/blob/main/LICENSE.md).
+
 
 
 ## 📧 Kontakt

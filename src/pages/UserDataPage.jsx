@@ -59,8 +59,6 @@ const UserDataPage = () => {
             setInfo={setInfo}
             valError={valError}
             setValError={setValError}
-            userData={userData}
-            setUserData={setUserData}
           />
           <PasswordTabs
             info={info}
@@ -69,6 +67,7 @@ const UserDataPage = () => {
             setError={setError}
             valError={valError}
             setValError={setValError}
+            userData={userData}
             clearMessages={clearMessages}
           />
         </Tabs>
